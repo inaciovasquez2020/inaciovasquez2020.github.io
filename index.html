@@ -4,114 +4,172 @@
   <meta charset="UTF-8">
   <title>Inacio F. Vasquez — Research</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Foundational research in physics, mathematics, and information theory. Unified Rigidity Framework, EntropyDepth, and structural complexity.">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Unified Rigidity Framework — structural research in physics, mathematics, and information theory.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f7f8fa;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+    .layout { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 260px;
+      background: #ffffff;
+      border-right: 1px solid #e5e7eb;
+      padding: 24px 18px;
+    }
+    .sidebar h1 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+    .nav a {
+      display: block;
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+    }
+    .nav a:hover { background: #f0f2f5; }
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+    .card {
+      max-width: 900px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+      padding: 36px;
+      margin-bottom: 32px;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      font-weight: 700;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 6px;
+    }
+    ul { padding-left: 20px; }
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #6b7280;
+    }
+    a { color: #2563eb; }
+  </style>
 </head>
-
 <body>
-  <header>
-    <h1>Inacio F. Vasquez</h1>
-    <p class="subtitle">
-      Founder, Unified Rigidity Framework<br>
-      Independent Researcher in Mathematical Physics &amp; Information Theory
-    </p>
-  </header>
+<div class="layout">
 
-  <section id="vision">
-    <h2>Research Vision</h2>
-    <p>
-      My work focuses on foundational principles in physics, mathematics, and information theory,
-      aiming to formalize how complexity, capacity, and structural constraints govern natural and
-      computational systems. I develop axiomatic and operational frameworks linking quantum mechanics,
-      entropy, locality, and finite information.
-    </p>
-  </section>
+  <aside class="sidebar">
+    <h1>Vasquez Research</h1>
+    <nav class="nav">
+      <a href="#overview">Overview</a>
+      <a href="#vision">Research Vision</a>
+      <a href="#contributions">Contributions</a>
+      <a href="#verification">URF Verification</a>
+      <a href="#repositories">Repositories</a>
+      <a href="#manuscripts">Manuscripts</a>
+    </nav>
+  </aside>
 
-  <section id="contributions">
-    <h2>Core Contributions</h2>
-    <ul>
-      <li><strong>Quantum Foundations.</strong> Operational models of wavefunction collapse, irreversibility, and finite-capacity measurement.</li>
-      <li><strong>Rigidity &amp; Complexity.</strong> Unified Rigidity Framework (URF): locality–capacity–stability axioms.</li>
-      <li><strong>Entropy &amp; Time.</strong> Chronos operator and EntropyDepth bounds.</li>
-      <li><strong>Applied Physics &amp; Biology.</strong> Radiative rigidity and biological friction models.</li>
-    </ul>
-  </section>
+  <main class="main">
 
-  <section id="impact">
-    <h2>Scientific Impact</h2>
-    <ul>
-      <li>Refinement of quantum measurement theory.</li>
-      <li>Structural approaches to computational complexity.</li>
-      <li>Precision nuclear and electroweak modeling.</li>
-      <li>Information-driven biophysics.</li>
-    </ul>
-  </section>
+    <section id="overview" class="card">
+      <h2>Inacio F. Vasquez</h2>
+      <p><strong>Founder, Unified Rigidity Framework</strong><br>
+      Independent Researcher in Mathematical Physics & Information Theory</p>
 
-  <section id="verification">
-    <h2>URF Verification System (Prototype)</h2>
+      <p>
+        Unified Rigidity Framework (URF) is a structural program asserting that
+        finite information capacity enforces rigidity across physical,
+        mathematical, and computational systems. The focus is on invariants,
+        not algorithms: objects that cannot be bypassed by encoding or
+        computational tricks.
+      </p>
+    </section>
 
-    <p>
-      A minimal executable implementation of the Unified Rigidity Framework.
-      This system generates and verifies URF certificates using a deterministic,
-      cryptographically sealed pipeline.
-    </p>
+    <section id="vision" class="card">
+      <h2>Research Vision</h2>
+      <p>
+        My work formalizes how complexity, entropy, locality, and structural
+        constraints govern natural systems. The objective is to derive universal
+        obstructions — spectral gaps, capacity bounds, and rigidity walls —
+        shared by quantum physics, computation, and geometry.
+      </p>
+    </section>
 
-    <p>The prototype provides:</p>
-    <ul>
-      <li>URF spectral gap certificate format (JSON)</li>
-      <li>Schema validation</li>
-      <li>Structural and numerical verification</li>
-      <li>SHA-256 signed proof artifacts</li>
-      <li>Command-line interface (CLI)</li>
-    </ul>
+    <section id="contributions" class="card">
+      <h2>Core Contributions</h2>
+      <ul>
+        <li><strong>Quantum Foundations:</strong> Operational collapse, irreversibility, finite measurement.</li>
+        <li><strong>Rigidity & Complexity:</strong> Unified Rigidity Framework (URF).</li>
+        <li><strong>Entropy & Time:</strong> Chronos operator, EntropyDepth bounds.</li>
+        <li><strong>Applied Physics & Biology:</strong> Radiative rigidity, biological friction.</li>
+      </ul>
+    </section>
 
-    <p>
-      GitHub repository:
-      <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">
-        https://github.com/inaciovasquez2020/urf-core
-      </a>
-    </p>
-
-    <p>Example usage:</p>
-
-    <pre>
+    <section id="verification" class="card">
+      <h2>URF Verification System (Prototype)</h2>
+      <p>
+        Minimal executable implementation of URF. Generates and verifies
+        cryptographically sealed certificates.
+      </p>
+      <ul>
+        <li>Spectral gap certificates (JSON)</li>
+        <li>Schema validation</li>
+        <li>Numerical + structural verification</li>
+        <li>SHA-256 proof sealing</li>
+      </ul>
+      <p>
+        Repository: <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">github.com/inaciovasquez2020/urf-core</a>
+      </p>
+      <pre>
 python urf_cli.py gen-sg --n 10 --eps 0.5 --out demo.json
 python urf_cli.py verify-sg demo.json
-    </pre>
+      </pre>
+    </section>
 
-    <p>
-      The verifier outputs PASS/FAIL, the computed spectral bound,
-      and a cryptographic hash of the certificate.
-    </p>
-  </section>
+    <section id="repositories" class="card">
+      <h2>Research Repositories</h2>
+      <ul>
+        <li><a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">URF Core</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/cycle-local-rigidity" target="_blank">Cycle–Local Rigidity</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/radiative-rigidity" target="_blank">Radiative Rigidity</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/biological-friction-framework" target="_blank">Biological Friction</a></li>
+        <li><a href="https://github.com/inaciovasquez2020" target="_blank">Full GitHub Profile</a></li>
+      </ul>
+    </section>
 
-  <section id="repositories">
-    <h2>Research Repositories</h2>
-    <ul>
-      <li><a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">Unified Rigidity Framework (URF Core)</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/cycle-local-rigidity" target="_blank">Cycle–Local Rigidity</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/terminal-rigidity-witness-erb" target="_blank">Terminal Rigidity Witness (ERB)</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/radiative-rigidity" target="_blank">Radiative Rigidity</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/biological-friction-framework" target="_blank">Biological Friction Framework</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/inaciovasquez.github.io" target="_blank">Research Website Repository</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/inaciovasquez13.github.io" target="_blank">Legacy Website Archive</a></li>
-      <li><a href="https://github.com/inaciovasquez2020" target="_blank">Full GitHub Profile</a></li>
-    </ul>
-  </section>
+    <section id="manuscripts" class="card">
+      <h2>Manuscripts</h2>
+      <p>
+        Active submissions in Foundations of Physics, Journal of Mathematical
+        Physics, Algorithmica, Information & Computation, and related venues.
+      </p>
+    </section>
 
-  <section id="manuscripts">
-    <h2>Manuscripts</h2>
-    <p>
-      Active submissions across theoretical physics, mathematics, and computer science,
-      including Foundations of Physics, Journal of Mathematical Physics,
-      Algorithmica, and Information &amp; Computation.
-    </p>
-  </section>
-
-  <footer>
-    <p>
+    <footer>
       © 2026 Inacio F. Vasquez — Independent Research Program
-    </p>
-  </footer>
+    </footer>
+
+  </main>
+</div>
 </body>
 </html>
