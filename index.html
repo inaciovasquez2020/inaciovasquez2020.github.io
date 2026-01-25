@@ -47,6 +47,44 @@
     </ul>
   </section>
 
+  <section id="verification">
+    <h2>URF Verification System (Prototype)</h2>
+
+    <p>
+      A minimal executable implementation of the Unified Rigidity Framework.
+      This system generates and verifies URF certificates using a deterministic,
+      cryptographically sealed pipeline.
+    </p>
+
+    <p>The prototype provides:</p>
+    <ul>
+      <li>URF spectral gap certificate format (JSON)</li>
+      <li>Schema validation</li>
+      <li>Structural and numerical verification</li>
+      <li>SHA-256 signed proof artifacts</li>
+      <li>Command-line interface (CLI)</li>
+    </ul>
+
+    <p>
+      GitHub repository:
+      <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">
+        https://github.com/inaciovasquez2020/urf-core
+      </a>
+    </p>
+
+    <p>Example usage:</p>
+
+    <pre>
+python urf_cli.py gen-sg --n 10 --eps 0.5 --out demo.json
+python urf_cli.py verify-sg demo.json
+    </pre>
+
+    <p>
+      The verifier outputs PASS/FAIL, the computed spectral bound,
+      and a cryptographic hash of the certificate.
+    </p>
+  </section>
+
   <section id="repositories">
     <h2>Research Repositories</h2>
     <ul>
