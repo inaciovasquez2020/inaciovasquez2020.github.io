@@ -5,9 +5,14 @@
   <title>Inacio F. Vasquez — Research</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Unified Rigidity Framework — structural research in physics, mathematics, and information theory.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- MathJax for correct math rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
   <style>
     * { box-sizing: border-box; }
     body {
@@ -83,9 +88,9 @@
       <a href="#overview">Overview</a>
       <a href="#vision">Research Vision</a>
       <a href="#contributions">Contributions</a>
-      <a href="#verification">URF Verification</a>
+      <a href="#spectral-gap-wall">Spectral Gap Wall</a>
       <a href="#repositories">Repositories</a>
-      <a href="#manuscripts">Manuscripts</a>
+      <a href="#contact">Contact</a>
     </nav>
   </aside>
 
@@ -97,11 +102,9 @@
       Independent Researcher in Mathematical Physics & Information Theory</p>
 
       <p>
-        Unified Rigidity Framework (URF) is a structural program asserting that
-        finite information capacity enforces rigidity across physical,
-        mathematical, and computational systems. The focus is on invariants,
-        not algorithms: objects that cannot be bypassed by encoding or
-        computational tricks.
+        The Unified Rigidity Framework (URF) is a structural research program
+        asserting that finite information capacity enforces rigidity across
+        physical, mathematical, and computational systems.
       </p>
     </section>
 
@@ -118,66 +121,13 @@
     <section id="contributions" class="card">
       <h2>Core Contributions</h2>
       <ul>
-        <li><strong>Quantum Foundations:</strong> Operational collapse, irreversibility, finite measurement.</li>
-        <li><strong>Rigidity & Complexity:</strong> Unified Rigidity Framework (URF).</li>
-        <li><strong>Entropy & Time:</strong> Chronos operator, EntropyDepth bounds.</li>
-        <li><strong>Applied Physics & Biology:</strong> Radiative rigidity, biological friction.</li>
+        <li><strong>Quantum Foundations:</strong> operational collapse and irreversibility.</li>
+        <li><strong>Rigidity & Complexity:</strong> Unified Rigidity Framework.</li>
+        <li><strong>Entropy & Time:</strong> Chronos operator and EntropyDepth.</li>
+        <li><strong>Applied Physics & Biology:</strong> radiative rigidity and biological friction.</li>
       </ul>
     </section>
 
-    <section id="verification" class="card">
-      <h2>URF Verification System (Prototype)</h2>
-      <p>
-        Minimal executable implementation of URF. Generates and verifies
-        cryptographically sealed certificates.
-      </p>
-      <ul>
-        <li>Spectral gap certificates (JSON)</li>
-        <li>Schema validation</li>
-        <li>Numerical + structural verification</li>
-        <li>SHA-256 proof sealing</li>
-      </ul>
-      <p>
-        Repository: <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">github.com/inaciovasquez2020/urf-core</a>
-      </p>
-      <pre>
-python urf_cli.py gen-sg --n 10 --eps 0.5 --out demo.json
-python urf_cli.py verify-sg demo.json
-      </pre>
-    </section>
-
-    <section id="repositories" class="card">
-      <h2>Research Repositories</h2>
-      <ul>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">URF Core</a>
-          — <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/URF-Axioms-Core.pdf" target="_blank">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity" target="_blank">Cycle–Local Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity/blob/main/paper.pdf" target="_blank">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/radiative-rigidity" target="_blank">Radiative Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/radiative-rigidity/blob/main/paper.pdf" target="_blank">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/biological-friction-framework" target="_blank">Biological Friction</a>
-          — <a href="https://github.com/inaciovasquez2020/biological-friction-framework/blob/main/paper.pdf" target="_blank">PDF</a>
-        </li>
-        <li><a href="https://github.com/inaciovasquez2020" target="_blank">Full GitHub Profile</a></li>
-      </ul>
-    </section>
-
-    <section id="manuscripts" class="card">
-      <h2>Manuscripts</h2>
-      <p>
-        Active submissions in Foundations of Physics, Journal of Mathematical
-        Physics, Algorithmica, Information & Computation, and related venues.
-      </p>
-    </section>
-
-    
     <section id="spectral-gap-wall" class="card">
       <h2>Spectral Gap Rigidity Wall (Open Problem)</h2>
       <p>
@@ -194,14 +144,13 @@ python urf_cli.py verify-sg demo.json
 
       <h3>Formal Statement</h3>
       <p>
-        Let L = -Δ + Hess(Φ) be the rigidity operator on the admissible
-        configuration space M, where Φ is the universal rigidity functional.
-        The conjecture is:
+        Let \(L = -\Delta + \mathrm{Hess}(\Phi)\) be the rigidity operator acting
+        on the admissible configuration space \(\mathcal{M}\), where \(\Phi\) is
+        the universal rigidity functional. The conjecture is:
       </p>
 
       <pre>
-Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
-for some ε₀ > 0 independent of system size.
+\[ \mathrm{Spec}(L | \ker(\mathrm{Per})^\perp) \subset [\varepsilon_0, \infty) \]
       </pre>
 
       <h3>Status</h3>
@@ -213,29 +162,25 @@ for some ε₀ > 0 independent of system size.
 
       <h3>How to Attack This Problem</h3>
       <ul>
-        <li>Derive combinatorial lower bounds on local-type growth in cycle-expanders.</li>
+        <li>Derive combinatorial lower bounds on local-type growth in expanders.</li>
         <li>Reduce to known conjectures (mass gap, large sieve, expander mixing).</li>
         <li>Construct explicit counterexamples via covering graphs or lifts.</li>
-        <li>Mechanize small cases in Lean/Coq to detect structural failure modes.</li>
+        <li>Mechanize finite cases in Lean/Coq.</li>
       </ul>
+    </section>
 
-      <h3>Bounty Framing</h3>
+    <section id="repositories" class="card">
+      <h2>Research Repositories</h2>
       <ul>
-        <li>Formal proof of the spectral gap inequality.</li>
-        <li>Construction of a counterexample.</li>
-        <li>Reduction to a known major conjecture.</li>
+        <li><a href="https://github.com/inaciovasquez2020/urf-core" target="_blank">URF Core</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/cycle-local-rigidity" target="_blank">Cycle–Local Rigidity</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/radiative-rigidity" target="_blank">Radiative Rigidity</a></li>
+        <li><a href="https://github.com/inaciovasquez2020/biological-friction-framework" target="_blank">Biological Friction</a></li>
       </ul>
-
-      <p>
-        Solving this closes URF and all derivative rigidity programs.
-      </p>
     </section>
 
     <section id="contact" class="card">
       <h2>Contact / Submissions</h2>
-      <p>
-        For formal discussions, partial results, or replication attempts:
-      </p>
       <ul>
         <li>Email: <a href="mailto:inaciof.vasquez@vasquezresearch.com">inaciof.vasquez@vasquezresearch.com</a></li>
         <li>Issues: <a href="https://github.com/inaciovasquez2020/urf-core/issues" target="_blank">GitHub URF Issues</a></li>
