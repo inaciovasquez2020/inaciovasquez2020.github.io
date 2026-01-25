@@ -165,6 +165,45 @@ python urf_cli.py verify-sg demo.json
       </p>
     </section>
 
+    
+    <section id="spectral-gap-wall" class="card">
+      <h2>Spectral Gap Rigidity Wall (Open Problem)</h2>
+      <p>
+        This is the single unresolved core lemma of the Unified Rigidity Framework.
+        All other components reduce to this object.
+      </p>
+
+      <h3>Formal Statement</h3>
+      <p>
+        Let L = -Δ + Hess(Φ) be the rigidity operator on the admissible
+        configuration space M, where Φ is the universal rigidity functional.
+        The conjecture is:
+      </p>
+
+      <pre>
+Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
+for some ε₀ > 0 independent of system size.
+      </pre>
+
+      <h3>Status</h3>
+      <ul>
+        <li>Proven: trees, bounded treewidth, random lifts.</li>
+        <li>Empirical: dense cycle expanders.</li>
+        <li>Open: deterministic high-cycle overlap graphs.</li>
+      </ul>
+
+      <h3>Bounty Framing</h3>
+      <ul>
+        <li>Formal proof of spectral gap.</li>
+        <li>Explicit counterexample.</li>
+        <li>Reduction to known conjecture.</li>
+      </ul>
+
+      <p>
+        Solving this closes URF and all derivative rigidity programs.
+      </p>
+    </section>
+
     <footer>
       © 2026 Inacio F. Vasquez — Independent Research Program
     </footer>
