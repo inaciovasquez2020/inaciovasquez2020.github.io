@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Inacio F. Vasquez — Research</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Unified Rigidity Framework (URF): rigidity, finite capacity, information locality. Canonical index, repositories, PDFs, and open problems.">
+  <meta name="description" content="Unified Rigidity Framework (URF): rigidity, finite capacity, information locality, spectral gap walls.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,26 +13,27 @@
   <style>
     :root { --bg:#f7f8fa; --card:#ffffff; --ink:#1f2933; --muted:#6b7280; --line:#e5e7eb; --link:#2563eb; }
     * { box-sizing:border-box; }
-    body { margin:0; font-family:Inter, system-ui, -apple-system, sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
-    header { padding:54px 18px 18px; text-align:center; }
+    body { margin:0; font-family:Inter, system-ui, sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
+    header { padding:56px 18px 18px; text-align:center; }
     h1 { margin:0 0 8px; font-size:36px; font-weight:800; letter-spacing:-0.02em; }
     .subtitle { margin:0; color:var(--muted); font-weight:500; }
     .wrap { max-width:920px; margin:0 auto; padding:18px; }
     .grid { display:grid; grid-template-columns:1fr; gap:18px; }
-    @media (min-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
     .card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.04); padding:22px; }
     .card h2 { margin:0 0 10px; font-size:18px; border-bottom:1px solid var(--line); padding-bottom:6px; }
     p { margin:10px 0; }
     a { color:var(--link); text-decoration:none; }
     a:hover { text-decoration:underline; }
     ul { margin:10px 0; padding-left:18px; }
-    .pillrow { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-    .pill { display:inline-block; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:#fbfbfc; font-size:13px; color:#374151; }
-    .kv { display:grid; grid-template-columns: 140px 1fr; gap:10px; font-size:14px; }
-    .k { color:var(--muted); }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; }
+    .pillrow { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
+    .pill {
+      display:inline-block; padding:6px 10px; border:1px solid var(--line);
+      border-radius:999px; background:#fbfbfc; font-size:13px;
+      color:#374151; text-decoration:none;
+    }
+    .pill:hover { background:#f0f2f5; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:13px; }
     footer { text-align:center; color:var(--muted); padding:28px 18px 44px; font-size:13px; }
-    .wide { grid-column: 1 / -1; }
   </style>
 </head>
 <body>
@@ -40,101 +41,94 @@
 <header>
   <h1>Inacio F. Vasquez</h1>
   <p class="subtitle">Independent Researcher — Mathematical Physics &amp; Information Theory</p>
-  <div class="pillrow" style="justify-content:center;">
-    <span class="pill">Unified Rigidity Framework (URF)</span>
-    <span class="pill">Finite Capacity</span>
-    <span class="pill">Information Locality</span>
-    <span class="pill">Spectral Gap Wall</span>
+
+  <!-- Executable navigation pills -->
+  <div class="pillrow">
+    <a class="pill" href="#routing">Unified Rigidity Framework (URF)</a>
+    <a class="pill" href="#about">Finite Capacity</a>
+    <a class="pill" href="#about">Information Locality</a>
+    <a class="pill" href="#core-problem">Spectral Gap Wall</a>
+    <a class="pill" href="#contributions">Contributions</a>
   </div>
 </header>
 
 <div class="wrap">
   <div class="grid">
 
-    <section class="card wide" id="routing">
+    <section class="card" id="routing">
       <h2>Canonical Hub</h2>
       <p>
         The full document index, PDFs, and open-problem interface live here:
-        <strong><a href="https://inaciovasquez2020.github.io/vasquez-index/">Vasquez Index</a></strong>.
       </p>
-      <div class="kv">
-        <div class="k">Index URL</div>
-        <div><a href="https://inaciovasquez2020.github.io/vasquez-index/">inaciovasquez2020.github.io/vasquez-index/</a></div>
-
-        <div class="k">Core open problem</div>
-        <div>
-          <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
-            Spectral Gap Rigidity Wall — Problem Statement (PDF)
+      <p>
+        <strong>
+          <a href="https://inaciovasquez2020.github.io/vasquez-index/">
+            Vasquez Index
           </a>
-        </div>
-      </div>
+        </strong>
+      </p>
+      <p>
+        Core open problem:
+        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
+          Spectral Gap Rigidity Wall — Problem Statement (PDF)
+        </a>
+      </p>
     </section>
 
     <section class="card" id="about">
       <h2>Program Summary</h2>
       <p>
-        URF develops invariant-based obstructions showing when refinement, prediction, or control
-        cannot succeed under finite information and locality constraints, unless external resources are supplied.
+        My research develops invariant-based obstructions showing when refinement,
+        prediction, or control is impossible under finite information and locality,
+        unless external resources are supplied.
       </p>
       <ul>
-        <li>Capacity → rigidity principle (no-free-creation / no-free-storage)</li>
-        <li>Rigidity operators and spectral-gap walls</li>
-        <li>Executable verification artifacts (certificates + hashing)</li>
+        <li>Capacity → rigidity principle</li>
+        <li>No-free-creation / no-free-storage</li>
+        <li>Spectral gap walls as terminal obstructions</li>
+      </ul>
+    </section>
+
+    <section class="card" id="contributions">
+      <h2>Core Contributions</h2>
+      <ul>
+        <li>Unified Rigidity Framework (URF)</li>
+        <li>Chronos / EntropyDepth</li>
+        <li>Radiative Rigidity</li>
+        <li>Operational Collapse</li>
       </ul>
     </section>
 
     <section class="card" id="core-problem">
       <h2>Spectral Gap Rigidity Wall</h2>
       <p>
-        Single unresolved lemma underlying URF closures.
+        Single unresolved lemma underlying all URF closures.
       </p>
       <div class="mono">
         Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
       </div>
-      <p style="margin-top:10px;">
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">Open the problem PDF</a>
-        ·
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/#spectral-gap-wall">View the wall section</a>
-      </p>
-      <div class="pillrow">
-        <span class="pill">Proof</span>
-        <span class="pill">Counterexample</span>
-        <span class="pill">Reduction</span>
-      </div>
-    </section>
-
-    <section class="card wide" id="repos">
-      <h2>Repositories + One-Click PDFs</h2>
-      <ul>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/urf-core" target="_blank" rel="noopener">URF Core</a>
-          — <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/URF-Axioms-Core.pdf" target="_blank" rel="noopener">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity" target="_blank" rel="noopener">Cycle–Local Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity/blob/main/paper.pdf" target="_blank" rel="noopener">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/radiative-rigidity" target="_blank" rel="noopener">Radiative Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/radiative-rigidity/blob/main/paper.pdf" target="_blank" rel="noopener">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/biological-friction-framework" target="_blank" rel="noopener">Biological Friction</a>
-          — <a href="https://github.com/inaciovasquez2020/biological-friction-framework/blob/main/paper.pdf" target="_blank" rel="noopener">PDF</a>
-        </li>
-        <li><a href="https://github.com/inaciovasquez2020" target="_blank" rel="noopener">Full GitHub Profile</a></li>
-      </ul>
-    </section>
-
-    <section class="card" id="verification">
-      <h2>Verification (Executable)</h2>
       <p>
-        Deterministic, cryptographically sealed certificate workflow (prototype) lives in URF Core.
+        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
+          Open the problem PDF
+        </a>
       </p>
+    </section>
+
+    <section class="card" id="repos">
+      <h2>Repositories + PDFs</h2>
       <ul>
-        <li>Schema-validated certificates (JSON)</li>
-        <li>PASS/FAIL verifier</li>
-        <li>SHA-256 sealed artifacts</li>
+        <li>
+          <a href="https://github.com/inaciovasquez2020/urf-core">URF Core</a>
+          — <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/URF-Axioms-Core.pdf">PDF</a>
+        </li>
+        <li>
+          <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity">Cycle–Local Rigidity</a>
+          — <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity/blob/main/paper.pdf">PDF</a>
+        </li>
+        <li>
+          <a href="https://github.com/inaciovasquez2020/radiative-rigidity">Radiative Rigidity</a>
+          — <a href="https://github.com/inaciovasquez2020/radiative-rigidity/blob/main/paper.pdf">PDF</a>
+        </li>
       </ul>
     </section>
 
@@ -142,8 +136,7 @@
       <h2>Contact / Submissions</h2>
       <ul>
         <li>Email: <a href="mailto:inaciof.vasquez@vasquezresearch.com">inaciof.vasquez@vasquezresearch.com</a></li>
-        <li>Issues: <a href="https://github.com/inaciovasquez2020/urf-core/issues" target="_blank" rel="noopener">URF Core GitHub Issues</a></li>
-        <li>Website: <a href="https://vasquezresearch.com" target="_blank" rel="noopener">vasquezresearch.com</a></li>
+        <li>GitHub: <a href="https://github.com/inaciovasquez2020">github.com/inaciovasquez2020</a></li>
       </ul>
     </section>
 
@@ -151,7 +144,8 @@
 </div>
 
 <footer>
-  © 2026 Inacio F. Vasquez — Canonical hub: <a href="https://inaciovasquez2020.github.io/vasquez-index/">Vasquez Index</a>
+  © 2026 Inacio F. Vasquez — Canonical hub:
+  <a href="https://inaciovasquez2020.github.io/vasquez-index/">Vasquez Index</a>
 </footer>
 
 </body>
