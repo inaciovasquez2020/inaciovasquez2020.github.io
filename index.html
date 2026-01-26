@@ -8,32 +8,94 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    :root { --bg:#f7f8fa; --card:#ffffff; --ink:#1f2933; --muted:#6b7280; --line:#e5e7eb; --link:#2563eb; }
+    :root {
+      --bg:#0f172a;
+      --card:#020617;
+      --ink:#e5e7eb;
+      --muted:#9ca3af;
+      --line:#1e293b;
+      --link:#38bdf8;
+      --accent:#a78bfa;
+    }
     * { box-sizing:border-box; }
-    body { margin:0; font-family:Inter, system-ui, sans-serif; background:var(--bg); color:var(--ink); line-height:1.6; }
-    header { padding:56px 18px 18px; text-align:center; }
-    h1 { margin:0 0 8px; font-size:36px; font-weight:800; letter-spacing:-0.02em; }
+    body {
+      margin:0;
+      font-family:Inter, system-ui, sans-serif;
+      background:linear-gradient(180deg,#020617,#0f172a 40%,#020617);
+      color:var(--ink);
+      line-height:1.6;
+    }
+    header {
+      padding:72px 18px 24px;
+      text-align:center;
+    }
+    h1 {
+      margin:0 0 8px;
+      font-size:42px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+      background:linear-gradient(90deg,#38bdf8,#a78bfa);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
     .subtitle { margin:0; color:var(--muted); font-weight:500; }
-    .wrap { max-width:920px; margin:0 auto; padding:18px; }
-    .grid { display:grid; grid-template-columns:1fr; gap:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.04); padding:22px; }
-    .card h2 { margin:0 0 10px; font-size:18px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+    .wrap { max-width:980px; margin:0 auto; padding:18px; }
+    .grid { display:grid; grid-template-columns:1fr; gap:20px; }
+    .card {
+      background:linear-gradient(180deg,#020617,#020617);
+      border:1px solid var(--line);
+      border-radius:14px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.5);
+      padding:24px;
+    }
+    .card h2 {
+      margin:0 0 12px;
+      font-size:19px;
+      border-bottom:1px solid var(--line);
+      padding-bottom:8px;
+      color:#c7d2fe;
+    }
     p { margin:10px 0; }
     a { color:var(--link); text-decoration:none; }
     a:hover { text-decoration:underline; }
     ul { margin:10px 0; padding-left:18px; }
-    .pillrow { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px; }
-    .pill {
-      display:inline-block; padding:6px 10px; border:1px solid var(--line);
-      border-radius:999px; background:#fbfbfc; font-size:13px;
-      color:#374151; text-decoration:none;
+    li { margin:6px 0; }
+    .pillrow {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin-top:14px;
     }
-    .pill:hover { background:#f0f2f5; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:13px; }
-    footer { text-align:center; color:var(--muted); padding:28px 18px 44px; font-size:13px; }
+    .pill {
+      display:inline-block;
+      padding:7px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#020617;
+      font-size:13px;
+      color:#c7d2fe;
+      text-decoration:none;
+    }
+    .pill:hover {
+      background:#020617;
+      border-color:var(--accent);
+      color:var(--accent);
+    }
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size:13px;
+      color:#a5b4fc;
+    }
+    footer {
+      text-align:center;
+      color:var(--muted);
+      padding:36px 18px 56px;
+      font-size:13px;
+    }
   </style>
 </head>
 
@@ -44,11 +106,11 @@
   <p class="subtitle">Independent Researcher — Mathematical Physics &amp; Information Theory</p>
 
   <div class="pillrow">
-    <a class="pill" href="#routing">Unified Rigidity Framework (URF)</a>
+    <a class="pill" href="#routing">URF</a>
     <a class="pill" href="#about">Finite Capacity</a>
     <a class="pill" href="#about">Information Locality</a>
     <a class="pill" href="#core-problem">Spectral Gap Wall</a>
-    <a class="pill" href="#contributions">Contributions</a>
+    <a class="pill" href="#repos">Repositories</a>
   </div>
 </header>
 
@@ -57,7 +119,7 @@
 
     <section class="card" id="routing">
       <h2>Canonical Hub</h2>
-      <p>The full document index, PDFs, and open-problem interface live here:</p>
+      <p>Complete index of manuscripts, certificates, and open problems:</p>
       <p><strong>
         <a href="https://inaciovasquez2020.github.io/vasquez-index/">
           Vasquez Index
@@ -74,12 +136,11 @@
     <section class="card" id="about">
       <h2>Program Summary</h2>
       <p>
-        My research develops invariant-based obstructions showing when refinement,
-        prediction, or control is impossible under finite information and locality,
-        unless external resources are supplied.
+        Research on invariant-based obstructions to refinement, prediction,
+        and control under finite information and locality.
       </p>
       <ul>
-        <li>Capacity → rigidity principle</li>
+        <li>Capacity → Rigidity principle</li>
         <li>No-free-creation / no-free-storage</li>
         <li>Spectral gap walls as terminal obstructions</li>
       </ul>
@@ -88,54 +149,36 @@
     <section class="card" id="significance">
       <h2>Statement of Significance — URF</h2>
       <p>
-        The Unified Rigidity Framework (URF) is a foundational research program in
-        descriptive complexity, algebraic graph theory, and theoretical physics,
-        developing axiomatic constraints on the structural limits of finite
-        information-bearing systems.
+        Unified Rigidity Framework (URF) develops axiomatic limits on
+        finite information-bearing systems across computation and physics.
       </p>
       <p class="mono">
-        (Lean) + (SHA-256) ⇒ certified finite verification artifacts
+        Lean + SHA-256 ⇒ certified finite verification artifacts
       </p>
       <ul>
-        <li><strong>Finite Model Theory.</strong> Unconditional rigidity bounds for
-          (k,Δ,r)-homogeneous bounded-degree graph classes.</li>
-        <li><strong>Foundational Physics.</strong> Operational capacity constraints
-          on complexity production in thermodynamic and gravitational systems.</li>
-        <li><strong>Information Topology.</strong> EntropyDepth bounds on maximal
-          organization under finite capacity.</li>
-      </ul>
-    </section>
-
-    <section class="card" id="contributions">
-      <h2>Core Contributions</h2>
-      <ul>
-        <li>Unified Rigidity Framework (URF)</li>
-        <li>Chronos / EntropyDepth</li>
-        <li>Radiative Rigidity</li>
-        <li>Operational Collapse</li>
+        <li>Finite Model Theory: FOᵏ cycle and locality rigidity</li>
+        <li>Foundational Physics: operational capacity constraints</li>
+        <li>Information Topology: EntropyDepth barriers</li>
       </ul>
     </section>
 
     <section class="card" id="core-problem">
-  <h2>Spectral Gap Rigidity Wall (Open)</h2>
-  <p>
-    Central open lemma underlying all URF closures:
-  </p>
-  <div class="mono">
-    Find conditions under which<br>
-    Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
-  </div>
-  <p>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
-      Problem statement (PDF)
-    </a>
-  </p>
-  <p class="mono">
-    Verified instance: λ_min(QLQ | im(Q)) = 0.2679 &gt; ε₀ = 0.001<br>
-    (SHA-256 certified)
-  </p>
-</section>
-
+      <h2>Spectral Gap Rigidity Wall (Open)</h2>
+      <p>Central open lemma:</p>
+      <div class="mono">
+        Find conditions under which<br>
+        Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
+      </div>
+      <p>
+        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
+          Problem statement (PDF)
+        </a>
+      </p>
+      <p class="mono">
+        Verified instance: λ₁ = 0.2679 &gt; ε₀ = 0.001<br>
+        (URF-SG-BASE-1, SHA-256 certified)
+      </p>
+    </section>
 
     <section class="card" id="repos">
       <h2>Repositories + PDFs</h2>
@@ -152,6 +195,16 @@
           <a href="https://github.com/inaciovasquez2020/radiative-rigidity">Radiative Rigidity</a>
           — <a href="https://github.com/inaciovasquez2020/radiative-rigidity/blob/main/paper.pdf">PDF</a>
         </li>
+        <li>
+          <a href="https://github.com/inaciovasquez2020/biological-friction-framework">
+            Biological Friction Framework
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/inaciovasquez2020/terminal-rigidity-witness-erb">
+            Terminal Rigidity Witness (TRW–ERB)
+          </a>
+        </li>
       </ul>
     </section>
 
@@ -160,6 +213,7 @@
       <ul>
         <li>Email: <a href="mailto:inaciof.vasquez@vasquezresearch.com">inaciof.vasquez@vasquezresearch.com</a></li>
         <li>GitHub: <a href="https://github.com/inaciovasquez2020">github.com/inaciovasquez2020</a></li>
+        <li>ORCID: 0009-0008-8459-3400</li>
       </ul>
     </section>
 
@@ -173,3 +227,4 @@
 
 </body>
 </html>
+
