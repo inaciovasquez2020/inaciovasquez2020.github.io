@@ -2,283 +2,472 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Inacio F. Vasquez — Research</title>
+  <title>Inacio F. Vasquez — Research Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Unified Rigidity Framework (URF): rigidity, finite capacity, information locality, spectral gap walls; executable verification artifacts and minimal Nakamoto consensus reference implementation.">
-
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
     :root {
-      --bg:#0f172a;
-      --card:#020617;
-      --ink:#e5e7eb;
-      --muted:#9ca3af;
-      --line:#1e293b;
-      --link:#38bdf8;
-      --accent:#a78bfa;
+      /* Overleaf-inspired Grey/Professional Palette */
+      --sidebar-bg: #1e2329; /* Dark Slate */
+      --sidebar-text: #cfd3d8;
+      --sidebar-hover: #2c333a;
+      
+      --main-bg: #f4f5f7;     /* Light Grey Canvas */
+      --card-bg: #ffffff;
+      
+      --accent-green: #3f9c35; /* The Classic "New Project" Green */
+      --accent-blue: #0078d4;
+      
+      --text-main: #2f343b;
+      --text-muted: #69707a;
+      --border: #e0e0e0;
     }
-    * { box-sizing:border-box; }
+
+    * { box-sizing: border-box; }
+
     body {
-      margin:0;
-      font-family:Inter, system-ui, sans-serif;
-      background:linear-gradient(180deg,#020617,#0f172a 40%,#020617);
-      color:var(--ink);
-      line-height:1.6;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--main-bg);
+      color: var(--text-main);
+      display: flex;
+      height: 100vh;
+      overflow: hidden; /* App-like feel */
     }
-    header {
-      padding:72px 18px 24px;
-      text-align:center;
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      width: 260px;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px;
+      flex-shrink: 0;
     }
-    h1 {
-      margin:0 0 8px;
-      font-size:42px;
-      font-weight:800;
-      letter-spacing:-0.03em;
-      background:linear-gradient(90deg,#38bdf8,#a78bfa);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
+
+    .brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .subtitle { margin:0; color:var(--muted); font-weight:500; }
-    .wrap { max-width:980px; margin:0 auto; padding:18px; }
-    .grid { display:grid; grid-template-columns:1fr; gap:20px; }
-    .card {
-      background:linear-gradient(180deg,#020617,#020617);
-      border:1px solid var(--line);
-      border-radius:14px;
-      box-shadow:0 10px 28px rgba(0,0,0,0.5);
-      padding:24px;
+
+    .brand i { color: var(--accent-green); }
+
+    .new-project-btn {
+      background: var(--accent-green);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 25px;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .card h2 {
-      margin:0 0 12px;
-      font-size:19px;
-      border-bottom:1px solid var(--line);
-      padding-bottom:8px;
-      color:#c7d2fe;
+    .new-project-btn:hover { background: #3da332; }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 25px;
     }
-    p { margin:10px 0; }
-    a { color:var(--link); text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    ul { margin:10px 0; padding-left:18px; }
-    li { margin:6px 0; }
-    .pillrow {
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-top:14px;
+
+    .nav-header {
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 700;
+      color: #6c757d;
+      margin-bottom: 8px;
+      padding-left: 10px;
     }
-    .pill {
-      display:inline-block;
-      padding:7px 14px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:#020617;
-      font-size:13px;
-      color:#c7d2fe;
-      text-decoration:none;
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--sidebar-text);
+      text-decoration: none;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: background 0.2s;
     }
-    .pill:hover {
-      background:#020617;
-      border-color:var(--accent);
-      color:var(--accent);
+
+    .nav-item:hover, .nav-item.active {
+      background: var(--sidebar-hover);
+      color: white;
     }
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size:13px;
-      color:#a5b4fc;
+
+    /* --- MAIN CONTENT --- */
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
-    footer {
-      text-align:center;
-      color:var(--muted);
-      padding:36px 18px 56px;
-      font-size:13px;
+
+    /* Top Bar */
+    .top-bar {
+      height: 60px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+
+    .search-bar {
+      background: #f1f3f5;
+      border: 1px solid #ced4da;
+      padding: 8px 12px;
+      border-radius: 20px;
+      width: 300px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .avatar {
+      width: 32px;
+      height: 32px;
+      background: #5c6bc0;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Project List Container */
+    .dashboard-container {
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .list-header h2 { margin: 0; font-size: 20px; font-weight: 600; }
+
+    /* The "Table" */
+    .project-table {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .table-head {
+      display: grid;
+      grid-template-columns: 3fr 1fr 1fr 1fr;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fafafa;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 3fr 1fr 1fr 1fr;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.1s;
+    }
+
+    .project-row:last-child { border-bottom: none; }
+    .project-row:hover { background-color: #f7f9fa; }
+
+    /* Cell Content */
+    .title-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .title-main {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .title-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-left: 28px; /* Align with text, not icon */
+      max-width: 90%;
+    }
+
+    .meta-cell { font-size: 13px; color: var(--text-muted); }
+    
+    .action-cell a {
+      color: var(--accent-blue);
+      font-size: 13px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .action-cell a:hover { text-decoration: underline; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      background: #e9ecef;
+      border-radius: 12px;
+      font-size: 11px;
+      color: #495057;
+      margin-left: 8px;
+    }
+    .tag-green { background: #d3f9d8; color: #2b8a3e; }
+    .tag-blue { background: #e7f5ff; color: #1c7ed6; }
+    .tag-purple { background: #f3f0ff; color: #7950f2; }
+
+    /* Math rendering specific */
+    .math-block {
+        margin-top: 5px;
+        background: #f8f9fa;
+        padding: 5px 10px;
+        border-radius: 4px;
+        display: inline-block;
+        border: 1px solid #eee;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar { width: 60px; padding: 20px 10px; }
+      .brand span, .new-project-btn span, .nav-item span, .nav-header { display: none; }
+      .new-project-btn { padding: 10px; }
+      .table-head, .project-row { grid-template-columns: 1fr; gap: 10px; }
+      .meta-cell { display: none; }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Inacio F. Vasquez</h1>
-  <p class="subtitle">Independent Researcher — Mathematical Physics &amp; Information Theory</p>
+  <aside class="sidebar">
+    <div class="brand">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>VASQUEZ LAB</span>
+    </div>
 
-  <div class="pillrow">
-    <a class="pill" href="#routing">URF</a>
-    <a class="pill" href="#about">Finite Capacity</a>
-    <a class="pill" href="#about">Information Locality</a>
-    <a class="pill" href="#core-problem">Spectral Gap Wall</a>
-    <a class="pill" href="#certificates">Certificates</a>
-    <a class="pill" href="#blockchain">Nakamoto Consensus</a>
-    <a class="pill" href="#repos">Repositories</a>
-  </div>
-</header>
+    <a href="mailto:inaciof.vasquez@vasquezresearch.com" class="new-project-btn">
+      <i class="fa-solid fa-plus"></i>
+      <span>New Submission</span>
+    </a>
 
-<div class="wrap">
-  <div class="grid">
+    <div class="nav-group">
+      <div class="nav-header">Research</div>
+      <a href="#" class="nav-item active">
+        <i class="fa-regular fa-folder-open"></i>
+        <span>All Projects</span>
+      </a>
+      <a href="#urf" class="nav-item">
+        <i class="fa-solid fa-network-wired"></i>
+        <span>URF Core</span>
+      </a>
+      <a href="#blockchain" class="nav-item">
+        <i class="fa-brands fa-bitcoin"></i>
+        <span>Consensus</span>
+      </a>
+      <a href="#certs" class="nav-item">
+        <i class="fa-solid fa-certificate"></i>
+        <span>Certificates</span>
+      </a>
+    </div>
 
-    <section class="card" id="routing">
-      <h2>Canonical Hub</h2>
-      <p>Complete index of manuscripts, certificates, and open problems:</p>
-      <p><strong>
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/">
-          Vasquez Index
-        </a>
-      </strong></p>
-      <p>
-        Core open problem:
-        <a href="https://inaciovasquez2020.github.io/urf-core/urf-sg-wall.md">
-  URF Spectral Gap Rigidity Wall (Live)
-</a>
-      </p>
-    </section>
+    <div class="nav-group">
+      <div class="nav-header">External</div>
+      <a href="https://github.com/inaciovasquez2020" class="nav-item">
+        <i class="fa-brands fa-github"></i>
+        <span>GitHub Repos</span>
+      </a>
+      <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-item">
+        <i class="fa-solid fa-globe"></i>
+        <span>Public Index</span>
+      </a>
+    </div>
+  </aside>
 
-    <section class="card" id="about">
-      <h2>Program Summary</h2>
-      <p>
-        Research on invariant-based obstructions to refinement, prediction,
-        and control under finite information and locality.
-      </p>
-      <ul>
-        <li>Capacity → Rigidity principle</li>
-        <li>No-free-creation / no-free-storage</li>
-        <li>Spectral gap walls as terminal obstructions</li>
-        <li>Executable verification artifacts (SHA-256 certified)</li>
-      </ul>
-    </section>
-
-    <section class="card" id="significance">
-      <h2>Statement of Significance — URF</h2>
-      <p>
-        Unified Rigidity Framework (URF) develops axiomatic limits on
-        finite information-bearing systems across computation and physics.
-      </p>
-      <p class="mono">
-        Lean + Python + SHA-256 ⇒ certified finite verification artifacts
-      </p>
-      <ul>
-        <li>Finite Model Theory: FOᵏ cycle and locality rigidity</li>
-        <li>Foundational Physics: operational capacity constraints</li>
-        <li>Information Topology: EntropyDepth barriers</li>
-        <li>Executable consensus kernels (Nakamoto protocol)</li>
-      </ul>
-    </section>
-
-    <section class="card" id="core-problem">
-      <h2>Spectral Gap Rigidity Wall (Single Remaining Core Wall)</h2>
-      <p>Central open lemma:</p>
-      <div class="mono">
-        For all admissible (H, Δ_H, Per):<br>
-        ∃ bounded invertible U such that<br>
-        U Δ_H U⁻¹ = −Δ_M + V, &nbsp; V ≥ 0
+  <main class="main-content">
+    
+    <header class="top-bar">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass" style="margin-right: 8px;"></i> Search projects...
       </div>
-      <p>
-        Public statement:
-        <a href="https://inaciovasquez2020.github.io/urf-sg-wall.md">
-          urf-sg-wall.md
-        </a>
-      </p>
-    </section>
+      <div class="user-profile">
+        <span>Inacio F. Vasquez</span>
+        <div class="avatar">IV</div>
+      </div>
+    </header>
 
-    <section class="card" id="certificates">
-      <h2>Certified Spectral Gap Instances</h2>
-      <ul>
-        <li>
-          <strong>URF-SG-BASE-1</strong> —
-          L²(S¹), −d²/dx², constants<br>
-          <a href="https://inaciovasquez2020.github.io/vasquez-index/">PDF</a>
-        </li>
-        <li>
-          <strong>URF-SG-BASE-2</strong> —
-          L²(T²), −Δ, constants<br>
-          <a href="https://inaciovasquez2020.github.io/urf-sg-base-2.json">
-            JSON certificate
-          </a>
-        </li>
-      </ul>
-      <p class="mono">
-        Both certificates verified by URF schema:
-        <a href="https://inaciovasquez2020.github.io/urf-sg-schema.json">
-          urf-sg-schema.json
-        </a>
-      </p>
-    </section>
+    <div class="dashboard-container">
+      
+      <div class="list-header">
+        <h2>Active Research</h2>
+        <div style="font-size: 13px; color: var(--text-muted);">Sorted by: Importance</div>
+      </div>
 
-    <section class="card" id="blockchain">
-      <h2>Minimal Blockchain Reference</h2>
-      <p>
-        Complete, from-scratch implementation of Nakamoto consensus:
-      </p>
-      <ul>
-        <li>Proof-of-work mining</li>
-        <li>Cryptographic hash linking</li>
-        <li>Persistent chain storage</li>
-        <li>HTTP peer-to-peer propagation</li>
-        <li>Cumulative-work fork resolution</li>
-      </ul>
-      <p class="mono">
-        ~300 lines, no frameworks, fully reproducible
-      </p>
-      <p><strong>
-        <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain">
-          urc-minimal-blockchain (GitHub)
-        </a>
-      </strong></p>
-    </section>
+      <div class="project-table">
+        <div class="table-head">
+          <div>Title</div>
+          <div>Owner</div>
+          <div>Last Modified</div>
+          <div>Actions</div>
+        </div>
 
-    <section class="card" id="repos">
-      <h2>Repositories + PDFs</h2>
-      <ul>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain">
-            URC Minimal Blockchain
-          </a>
-          — Nakamoto consensus reference implementation
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/urf-core">URF Core</a>
-          — <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/URF-Axioms-Core.pdf">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity">Cycle–Local Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/cycle-local-rigidity/blob/main/paper.pdf">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/radiative-rigidity">Radiative Rigidity</a>
-          — <a href="https://github.com/inaciovasquez2020/radiative-rigidity/blob/main/paper.pdf">PDF</a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/biological-friction-framework">
-            Biological Friction Framework
-          </a>
-        </li>
-        <li>
-          <a href="https://github.com/inaciovasquez2020/terminal-rigidity-witness-erb">
-            Terminal Rigidity Witness (TRW–ERB)
-          </a>
-        </li>
-      </ul>
-    </section>
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-file-pdf" style="color: #d9534f;"></i>
+              Spectral Gap Rigidity Wall (Core Open Problem)
+              <span class="tag tag-purple">High Priority</span>
+            </div>
+            <div class="title-desc">
+              Central lemma: 
+              \( \exists \text{ bounded } U \text{ s.t. } U \Delta_H U^{-1} = -\Delta_M + V, V \geq 0 \)
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">Live Status</div>
+          <div class="action-cell">
+            <a href="https://inaciovasquez2020.github.io/urf-core/urf-sg-wall.md">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
+            </a>
+          </div>
+        </div>
 
-    <section class="card" id="contact">
-      <h2>Contact / Submissions</h2>
-      <ul>
-        <li>Email: <a href="mailto:inaciof.vasquez@vasquezresearch.com">inaciof.vasquez@vasquezresearch.com</a></li>
-        <li>GitHub: <a href="https://github.com/inaciovasquez2020">github.com/inaciovasquez2020</a></li>
-        <li>ORCID: 0009-0008-8459-3400</li>
-        <li>Website: <a href="https://www.vasquezresearch.com">vasquezresearch.com</a></li>
-      </ul>
-    </section>
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-folder" style="color: #ffd700;"></i>
+              Vasquez Index (Canonical Hub)
+            </div>
+            <div class="title-desc">
+              Complete index of manuscripts, certificates, and operational capacity constraints.
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">Today</div>
+          <div class="action-cell">
+            <a href="https://inaciovasquez2020.github.io/vasquez-index/">View Index</a>
+          </div>
+        </div>
 
-  </div>
-</div>
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-code" style="color: var(--accent-blue);"></i>
+              urc-minimal-blockchain
+              <span class="tag tag-blue">Python</span>
+            </div>
+            <div class="title-desc">
+              Reference Nakamoto consensus implementation. No frameworks, 300 LOC, fully executable.
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">git: main</div>
+          <div class="action-cell">
+            <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain">Repo</a>
+          </div>
+        </div>
 
-<footer>
-  © 2026 Inacio F. Vasquez — Canonical hub:
-  <a href="https://inaciovasquez2020.github.io/vasquez-index/">Vasquez Index</a>
-</footer>
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-file-lines" style="color: var(--text-muted);"></i>
+              Unified Rigidity Framework (URF)
+            </div>
+            <div class="title-desc">
+               Axiomatic limits on finite information-bearing systems. Cycle locality & EntropyDepth.
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">PDF</div>
+          <div class="action-cell">
+            <a href="https://github.com/inaciovasquez2020/urf-core">Read</a>
+          </div>
+        </div>
+
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-certificate" style="color: #f0b429;"></i>
+              URF-SG-BASE-2 (Certificate)
+              <span class="tag tag-green">Verified</span>
+            </div>
+            <div class="title-desc">
+              L²(T²), −Δ, constants. JSON verification artifact.
+            </div>
+          </div>
+          <div class="meta-cell">System</div>
+          <div class="meta-cell">JSON</div>
+          <div class="action-cell">
+            <a href="https://inaciovasquez2020.github.io/urf-core/urf-sg-base-2.json">Download</a>
+          </div>
+        </div>
+
+        <div class="project-row">
+          <div class="title-cell">
+            <div class="title-main">
+              <i class="fa-solid fa-file-pdf" style="color: #d9534f;"></i>
+              Biological Friction Framework
+            </div>
+            <div class="title-desc">
+              Research on invariant-based obstructions to refinement in biological systems.
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">Draft</div>
+          <div class="action-cell">
+            <a href="https://github.com/inaciovasquez2020/biological-friction-framework">View</a>
+          </div>
+        </div>
+
+      </div>
+      
+      <div style="margin-top: 30px; text-align: center; color: var(--text-muted); font-size: 12px;">
+        © 2026 Inacio F. Vasquez — ORCID: 0009-0008-8459-3400
+      </div>
+
+    </div>
+  </main>
 
 </body>
 </html>
