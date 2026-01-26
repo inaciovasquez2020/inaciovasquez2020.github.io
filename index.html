@@ -110,6 +110,7 @@
     <a class="pill" href="#about">Finite Capacity</a>
     <a class="pill" href="#about">Information Locality</a>
     <a class="pill" href="#core-problem">Spectral Gap Wall</a>
+    <a class="pill" href="#certificates">Certificates</a>
     <a class="pill" href="#blockchain">Nakamoto Consensus</a>
     <a class="pill" href="#repos">Repositories</a>
   </div>
@@ -128,8 +129,8 @@
       </strong></p>
       <p>
         Core open problem:
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
-          Spectral Gap Rigidity Wall — Problem Statement (PDF)
+        <a href="https://inaciovasquez2020.github.io/urf-sg-wall.md">
+          URF Spectral Gap Rigidity Wall (Live)
         </a>
       </p>
     </section>
@@ -144,6 +145,7 @@
         <li>Capacity → Rigidity principle</li>
         <li>No-free-creation / no-free-storage</li>
         <li>Spectral gap walls as terminal obstructions</li>
+        <li>Executable verification artifacts (SHA-256 certified)</li>
       </ul>
     </section>
 
@@ -154,7 +156,7 @@
         finite information-bearing systems across computation and physics.
       </p>
       <p class="mono">
-        Lean + SHA-256 ⇒ certified finite verification artifacts
+        Lean + Python + SHA-256 ⇒ certified finite verification artifacts
       </p>
       <ul>
         <li>Finite Model Theory: FOᵏ cycle and locality rigidity</li>
@@ -165,20 +167,42 @@
     </section>
 
     <section class="card" id="core-problem">
-      <h2>Spectral Gap Rigidity Wall (Open)</h2>
+      <h2>Spectral Gap Rigidity Wall (Single Remaining Core Wall)</h2>
       <p>Central open lemma:</p>
       <div class="mono">
-        Find conditions under which<br>
-        Spec(L | ker(Per)^⊥) ⊂ [ε₀, ∞)
+        For all admissible (H, Δ_H, Per):<br>
+        ∃ bounded invertible U such that<br>
+        U Δ_H U⁻¹ = −Δ_M + V, &nbsp; V ≥ 0
       </div>
       <p>
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/spectral_gap_rigidity_wall.pdf">
-          Problem statement (PDF)
+        Public statement:
+        <a href="https://inaciovasquez2020.github.io/urf-sg-wall.md">
+          urf-sg-wall.md
         </a>
       </p>
+    </section>
+
+    <section class="card" id="certificates">
+      <h2>Certified Spectral Gap Instances</h2>
+      <ul>
+        <li>
+          <strong>URF-SG-BASE-1</strong> —
+          L²(S¹), −d²/dx², constants<br>
+          <a href="https://inaciovasquez2020.github.io/vasquez-index/">PDF</a>
+        </li>
+        <li>
+          <strong>URF-SG-BASE-2</strong> —
+          L²(T²), −Δ, constants<br>
+          <a href="https://inaciovasquez2020.github.io/urf-sg-base-2.json">
+            JSON certificate
+          </a>
+        </li>
+      </ul>
       <p class="mono">
-        Verified instance: λ₁ = 0.2679 &gt; ε₀ = 0.001<br>
-        (URF-SG-BASE-1, SHA-256 certified)
+        Both certificates verified by URF schema:
+        <a href="https://inaciovasquez2020.github.io/urf-sg-schema.json">
+          urf-sg-schema.json
+        </a>
       </p>
     </section>
 
@@ -258,5 +282,3 @@
 
 </body>
 </html>
-
-
