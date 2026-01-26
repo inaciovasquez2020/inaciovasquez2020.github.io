@@ -5,14 +5,16 @@
 :root {
   --bg-main: #0b1220;
   --bg-header: #0f172a;
-  --bg-section: #111827;
+  --bg-section: #0e1626;
 
   --text-main: #e5e7eb;
-  --text-muted: #94a3b8;
+  --text-muted: #9aa5b1;
   --text-title: #f8fafc;
 
   --accent: #38bdf8;
+  --accent-soft: #7dd3fc;
   --border: #1f2933;
+  --border-soft: #2a3644;
 }
 
 * {
@@ -24,9 +26,10 @@ body {
   padding: 0;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
                Roboto, Helvetica, Arial, sans-serif;
-  background: var(--bg-main);
+  background: linear-gradient(180deg, #060b16, var(--bg-main) 40%, #060b16);
   color: var(--text-main);
-  line-height: 1.65;
+  line-height: 1.7;
+  font-size: 16px;
 }
 
 /* =========================
@@ -34,25 +37,25 @@ body {
 ========================= */
 
 header {
-  background: linear-gradient(135deg, #0b1220, #0f172a);
-  padding: 4rem 2rem 2.5rem;
+  background: linear-gradient(135deg, #060b16, #0f172a);
+  padding: 4.5rem 2rem 3rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
 }
 
 header h1 {
   margin: 0;
-  font-size: 2.7rem;
+  font-size: 2.9rem;
   font-weight: 600;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   color: var(--text-title);
 }
 
 .subtitle {
-  margin-top: 0.8rem;
+  margin-top: 0.9rem;
   font-size: 1.1rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 /* =========================
@@ -61,17 +64,21 @@ header h1 {
 
 section {
   max-width: 900px;
-  margin: 3rem auto;
-  padding: 0 2rem;
+  margin: 3.5rem auto;
+  padding: 2.2rem 2.4rem;
+  background: var(--bg-section);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
 }
 
 section h2 {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 500;
   color: var(--accent);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 0.4rem;
-  margin-bottom: 1.2rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 1.3rem;
+  letter-spacing: 0.3px;
 }
 
 /* =========================
@@ -84,11 +91,33 @@ p {
 }
 
 ul {
-  padding-left: 1.2rem;
+  padding-left: 1.3rem;
 }
 
 li {
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.65rem;
+  color: var(--text-main);
+}
+
+/* =========================
+   Monospace / Math / Code
+========================= */
+
+.mono,
+code,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  color: var(--accent-soft);
+}
+
+pre {
+  background: #050910;
+  border: 1px solid var(--border);
+  padding: 0.9rem 1.1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  line-height: 1.5;
 }
 
 /* =========================
@@ -102,6 +131,7 @@ a {
 
 a:hover {
   text-decoration: underline;
+  color: var(--accent-soft);
 }
 
 /* =========================
@@ -109,8 +139,8 @@ a:hover {
 ========================= */
 
 footer {
-  margin-top: 4rem;
-  padding: 2rem;
+  margin-top: 4.5rem;
+  padding: 2.4rem;
   text-align: center;
   font-size: 0.9rem;
   color: var(--text-muted);
@@ -127,12 +157,18 @@ section li {
   text-rendering: optimizeLegibility;
 }
 
+section p {
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
 @media (max-width: 600px) {
   header h1 {
     font-size: 2.2rem;
   }
 
   section {
-    padding: 0 1.2rem;
+    margin: 2.5rem auto;
+    padding: 1.6rem 1.4rem;
   }
 }
