@@ -235,7 +235,8 @@
 
     <div class="nav-group">
       <div class="nav-header">Research</div>
-      <a href="#" class="nav-item active">
+      <!-- FIX: avoid "#" (breaks deep links / scroll), point to canonical repo root -->
+      <a href="https://github.com/inaciovasquez2020/urf-core" class="nav-item active">
         <i class="fa-regular fa-folder-open"></i>
         <span>All Projects</span>
       </a>
@@ -259,11 +260,11 @@
 
       <div class="project-table">
 
-        <!-- UPDATED: Spectral Gap Rigidity Wall -->
+        <!-- FIX: link was pointing to a non-guaranteed local PDF path; use repo file that exists -->
         <div class="project-row">
           <div>
             <div class="title-main">
-              <i class="fa-solid fa-file-pdf" style="color:#d9534f;"></i>
+              <i class="fa-solid fa-file-lines" style="color:#6c757d;"></i>
               <span>Spectral Gap Rigidity Wall (Terminal Theorem)</span>
               <span class="tag tag-green">Frozen</span>
             </div>
@@ -273,10 +274,10 @@
             </div>
           </div>
           <div class="meta-cell">Inacio V.</div>
-          <div class="meta-cell">v1.0</div>
+          <div class="meta-cell">main</div>
           <div class="action-cell">
-            <a href="standards/URF-SG/URF_LAW3_TERMINAL_WALL.pdf">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> PDF
+            <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/urf-sg-wall.md">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Wall
             </a>
           </div>
         </div>
@@ -298,6 +299,27 @@
           <div class="action-cell">
             <a href="https://github.com/inaciovasquez2020/urf-core/tree/main/standards/URF-SG">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Open
+            </a>
+          </div>
+        </div>
+
+        <!-- FIX: add direct schema link that exists in repo root -->
+        <div class="project-row">
+          <div>
+            <div class="title-main">
+              <i class="fa-solid fa-code" style="color:#0078d4;"></i>
+              <span>URF-SG Schema</span>
+              <span class="tag tag-purple">Spec</span>
+            </div>
+            <div class="title-desc">
+              Canonical JSON Schema for URF-SG certificate validation.
+            </div>
+          </div>
+          <div class="meta-cell">System</div>
+          <div class="meta-cell">v1.0</div>
+          <div class="action-cell">
+            <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/urf-sg-schema.json">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Schema
             </a>
           </div>
         </div>
