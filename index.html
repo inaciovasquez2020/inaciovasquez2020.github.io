@@ -235,14 +235,23 @@
 
     <div class="nav-group">
       <div class="nav-header">Research</div>
-      <!-- FIX: avoid "#" (breaks deep links / scroll), point to canonical repo root -->
-      <a href="https://github.com/inaciovasquez2020/urf-core" class="nav-item active">
+
+      <!-- FIX: keep this as a real link; if this file is index.html, use "./" -->
+      <a href="./" class="nav-item active">
         <i class="fa-regular fa-folder-open"></i>
         <span>All Projects</span>
       </a>
+
+      <!-- OK: stable GitHub tree link -->
       <a href="https://github.com/inaciovasquez2020/urf-core/tree/main/standards" class="nav-item">
         <i class="fa-solid fa-scale-balanced"></i>
         <span>Standards</span>
+      </a>
+
+      <!-- FIX: add URC repo to nav -->
+      <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain" class="nav-item">
+        <i class="fa-solid fa-link"></i>
+        <span>URC Minimal Blockchain</span>
       </a>
     </div>
   </aside>
@@ -260,7 +269,7 @@
 
       <div class="project-table">
 
-        <!-- FIX: link was pointing to a non-guaranteed local PDF path; use repo file that exists -->
+        <!-- Spectral Gap Rigidity Wall -->
         <div class="project-row">
           <div>
             <div class="title-main">
@@ -276,6 +285,7 @@
           <div class="meta-cell">Inacio V.</div>
           <div class="meta-cell">main</div>
           <div class="action-cell">
+            <!-- OK: stable GitHub blob link -->
             <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/urf-sg-wall.md">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Wall
             </a>
@@ -303,7 +313,7 @@
           </div>
         </div>
 
-        <!-- FIX: add direct schema link that exists in repo root -->
+        <!-- URF-SG Schema -->
         <div class="project-row">
           <div>
             <div class="title-main">
@@ -320,6 +330,27 @@
           <div class="action-cell">
             <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/urf-sg-schema.json">
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Schema
+            </a>
+          </div>
+        </div>
+
+        <!-- FIX: restore URC Minimal Blockchain row -->
+        <div class="project-row">
+          <div>
+            <div class="title-main">
+              <i class="fa-solid fa-cubes-stacked" style="color:#3f9c35;"></i>
+              <span>URC Minimal Blockchain</span>
+              <span class="tag tag-blue">Prototype</span>
+            </div>
+            <div class="title-desc">
+              Minimal reference implementation (URC) used for executable governance / ledger demos.
+            </div>
+          </div>
+          <div class="meta-cell">Inacio V.</div>
+          <div class="meta-cell">git</div>
+          <div class="action-cell">
+            <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Repo
             </a>
           </div>
         </div>
