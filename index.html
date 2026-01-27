@@ -27,9 +27,7 @@
       --border: #cccccc;
       --sans: 'Inter', sans-serif;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: var(--sans);
@@ -39,9 +37,7 @@
       min-height: 100vh;
       overflow: hidden;
     }
-
     a { color: inherit; text-decoration: none; }
-
     .sidebar {
       width: 260px;
       background: var(--sidebar-bg);
@@ -52,7 +48,6 @@
       flex-shrink: 0;
       border-right: 1px solid #000;
     }
-
     .brand {
       font-size: 16px;
       font-weight: 700;
@@ -65,7 +60,6 @@
       letter-spacing: 1px;
     }
     .brand i { color: var(--arxiv-red); }
-
     .contact-btn {
       background: transparent;
       color: white;
@@ -80,135 +74,144 @@
       justify-content: center;
       gap: 8px;
       margin-bottom: 30px;
-      transition: all 0.2s;
+      transition: 0.2s;
     }
     .contact-btn:hover { background: var(--arxiv-red); border-color: var(--arxiv-red); }
-
     .nav-group { display: flex; flex-direction: column; gap: 4px; margin-bottom: 25px; }
-    .nav-header { text-transform: uppercase; font-size: 11px; font-weight: 800; color: #888; margin-bottom: 10px; padding-left: 10px; letter-spacing: 0.1em; }
-    .nav-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; color: var(--sidebar-text); font-size: 13px; border-radius: 4px; }
+    .nav-header {
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 800;
+      color: #888;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      letter-spacing: 0.1em;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      color: var(--sidebar-text);
+      font-size: 13px;
+      border-radius: 4px;
+    }
     .nav-item:hover, .nav-item.active { background: var(--sidebar-hover); color: white; border-left: 3px solid var(--arxiv-red); }
-
-    .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
-    .top-bar { height: 60px; background: white; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0; }
+    
+    .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .top-bar {
+      height: 60px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
     .dashboard-container { padding: 30px; overflow-y: auto; }
-
     .project-table { background: white; border: 1px solid var(--border); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .project-row { display: grid; grid-template-columns: 3fr 1fr 1fr 1fr; padding: 16px 20px; border-bottom: 1px solid #eee; align-items: center; }
-    .project-row:hover { background: #fcfcfc; }
-
+    .project-row {
+      display: grid;
+      grid-template-columns: 3fr 1fr 1fr 1fr;
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      align-items: center;
+    }
+    .project-row:hover { background-color: #fcfcfc; }
     .title-main { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 10px; }
-    .title-desc { font-size: 13px; color: var(--text-muted); margin-left: 28px; font-style: normal; }
+    .title-desc { font-size: 13px; color: var(--text-muted); margin-left: 28px; line-height: 1.4; }
     .meta-cell { font-size: 12px; color: #555; font-family: monospace; }
-    .action-cell a { color: var(--arxiv-blue); font-weight: 600; font-size: 12px; text-decoration: none; }
-    .action-cell a:hover { text-decoration: underline; }
-
-    .tag { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 10px; font-weight: 800; margin-left: 8px; text-transform: uppercase; }
+    .action-cell a { color: var(--arxiv-blue); font-weight: 600; font-size: 12px; }
+    
+    .tag { padding: 2px 8px; border-radius: 2px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
     .tag-green { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-    .tag-blue  { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
-    .tag-purple{ background: #f3e5f5; color: #7b1fa2; border: 1px solid #e1bee7; }
-
-    .footer { margin-top: 40px; text-align: center; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); padding-top: 20px; padding-bottom: 20px; }
+    .tag-blue { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; }
+    
+    .footer { margin-top: 40px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid var(--border); padding: 20px; }
   </style>
 </head>
 
 <body>
-
 <aside class="sidebar">
-  <div class="brand">
-    <i class="fa-solid fa-microscope"></i>
-    <span>Vasquez Core</span>
-  </div>
-
+  <div class="brand"><i class="fa-solid fa-microscope"></i> Vasquez Core</div>
+  
   <a href="mailto:inacio@vasquezresearch.com" class="contact-btn">
     <i class="fa-solid fa-paper-plane"></i>
     <span>SUBMIT INQUIRY</span>
   </a>
 
   <div class="nav-group">
-    <div class="nav-header">Research</div>
-    <a href="./" class="nav-item active">
-      <i class="fa-solid fa-database"></i>
-      <span>All Artifacts</span>
+    <div class="nav-header">Project Navigation</div>
+    <a href="index.html" class="nav-item">
+      <i class="fa-solid fa-house"></i>
+      <span>Main Index</span>
+    </a>
+    <a href="#" class="nav-item active">
+      <i class="fa-solid fa-gauge-high"></i>
+      <span>Artifact Dashboard</span>
     </a>
     <a href="https://github.com/inaciovasquez2020/urf-core" class="nav-item">
       <i class="fa-brands fa-github"></i>
-      <span>Core Repository</span>
+      <span>GitHub Root</span>
     </a>
   </div>
 </aside>
 
 <main class="main-content">
-  <header class="top-bar">
-    <div><strong>Terminal Rigidity Dashboard</strong></div>
-    <div style="font-size: 13px;">ID: <strong>Inacio F. Vasquez</strong></div>
-  </header>
+<header class="top-bar">
+  <div><strong>Terminal Rigidity Dashboard</strong></div>
+  <div style="font-size: 13px;">ID: <strong>Inacio F. Vasquez</strong></div>
+</header>
 
-  <div class="dashboard-container">
-    <div class="project-table">
+<div class="dashboard-container">
+<div class="project-table">
 
-      <div class="project-row">
-        <div>
-          <div class="title-main">
-            <i class="fa-solid fa-shield-halved" style="color:var(--arxiv-red);"></i>
-            <span>URF Core (Corrected)</span>
-            <span class="tag tag-green">Canonical</span>
-          </div>
-          <div class="title-desc">
-            Implemented <strong>Expander Exclusion Axiom (URF-Core-EX)</strong>. 
-            Certified Local→Global correspondence on bounded treewidth (<strong>URF-Core-LG-BTW</strong>). 
-            Obstruction set = {High-Girth Expanders}.
-          </div>
-        </div>
-        <div class="meta-cell">Vasquez.IV</div>
-        <div class="meta-cell">Axiom_Set_1</div>
-        <div class="action-cell">
-          <a href="https://github.com/inaciovasquez2020/urf-core">SOURCE</a>
-        </div>
+  <div class="project-row">
+    <div>
+      <div class="title-main">
+        <i class="fa-solid fa-layer-group" style="color:var(--arxiv-red);"></i>
+        <span>Unified Rigidity Framework (URF Core)</span>
+        <span class="tag tag-green">Mathematically Closed</span>
       </div>
-
-      <div class="project-row">
-        <div>
-          <div class="title-main">
-            <i class="fa-solid fa-book-atlas"></i>
-            <span>Unified Rigidity Framework (URF)</span>
-            <span class="tag tag-blue">Framework</span>
-          </div>
-          <div class="title-desc">
-            Axiomatic limits on finite information-bearing systems. Local→Global rigidity holds strictly outside the expander regime for $tw \le t$.
-          </div>
-        </div>
-        <div class="meta-cell">Vasquez.IV</div>
-        <div class="meta-cell">V1.0_LATEST</div>
-        <div class="action-cell">
-          <a href="https://github.com/inaciovasquez2020/urf-core">REPO</a>
-        </div>
+      <div class="title-desc">
+        Axiomatic closure established via <strong>Expander Exclusion</strong>. 
+        Local&rarr;Global rigidity holds for $tw \le t$ given $k \ge f(t)$. 
+        Obstruction set $\mathcal{O} = \{\text{Expanders only}\}$.
       </div>
-
-      <div class="project-row">
-        <div>
-          <div class="title-main">
-            <i class="fa-solid fa-certificate" style="color:#888;"></i>
-            <span>Spectral Gap Certificates</span>
-            <span class="tag tag-purple">Artifacts</span>
-          </div>
-          <div class="title-desc">
-            JSON-encoded spectral gap instances verifying non-expansion and rigidity bounds.
-          </div>
-        </div>
-        <div class="meta-cell">Automata</div>
-        <div class="meta-cell">JSON_CERT</div>
-        <div class="action-cell">
-          <a href="https://github.com/inaciovasquez2020/urf-core/tree/main/standards/URF-SG">VIEW</a>
-        </div>
-      </div>
-
     </div>
-
-    <div class="footer">
-      © 2026 INACIO F. VASQUEZ — ORCID: 0009-0008-8459-3400 — INDEPENDENT RESEARCH PROGRAM
+    <div class="meta-cell">Vasquez.IV</div>
+    <div class="meta-cell">CORE_2026</div>
+    <div class="action-cell">
+      <a href="https://github.com/inaciovasquez2020/urf-core"><i class="fa-solid fa-code"></i> SOURCE</a>
     </div>
   </div>
+
+  <div class="project-row">
+    <div>
+      <div class="title-main">
+        <i class="fa-solid fa-certificate"></i>
+        <span>Spectral Gap Certificates (Verified)</span>
+        <span class="tag tag-blue">Standard</span>
+      </div>
+      <div class="title-desc">
+        Deterministic instances of bounded-treewidth systems with certified $\alpha > 0$.
+      </div>
+    </div>
+    <div class="meta-cell">Automata</div>
+    <div class="meta-cell">V1.0.2</div>
+    <div class="action-cell">
+      <a href="https://github.com/inaciovasquez2020/urf-core/tree/main/standards/URF-SG"><i class="fa-solid fa-file-contract"></i> VIEW</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <strong>© 2026 Inacio F. Vasquez — ORCID 0009-0008-8459-3400</strong><br>
+  Unified Rigidity Framework: Mathematically closed core under expander-exclusion and logic-width dependency.
+</div>
+
+</div>
 </main>
 </body>
 </html>
