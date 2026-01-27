@@ -1,0 +1,14 @@
+{
+  "artifact_id": "ART-BC-01",
+  "project": "URC-Minimal-Blockchain",
+  "framework_version": "1.0.0",
+  "rigidity_parameters": {
+    "law_3_spectral_gap": 0.125,
+    "logic_width_k": 4,
+    "treewidth_limit_tw": 3,
+    "logic_width_dependency": "k >= f(tw)"
+  },
+  "verification_status": "CLOSED",
+  "audit_date": "2026-01-27",
+  "witness_hash": "sha256:8f4329b1...[your-repo-commit-hash]"
+}
