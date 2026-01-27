@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Inacio F. Vasquez — Research Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Research dashboard for URF, standards, certificates, terminal theorems, and executable verification artifacts.">
+  <meta name="description" content="Research dashboard for URF, formal standards, certified external instances, and executable verification artifacts.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,12 +15,12 @@
 
   <style>
     :root {
-      /* arXiv Color Palette */
+      /* Academic Palette */
       --arxiv-red: #b31b1b;
       --arxiv-blue: #0000ee;
       
       --sidebar-bg: #222222;
-      --sidebar-text: #dddddd;
+      --sidebar-text: #cfd3d8;
       --sidebar-hover: #333333;
 
       --main-bg: #f5f5f5;
@@ -46,7 +46,7 @@
 
     a { color: inherit; text-decoration: none; }
 
-    /* SIDEBAR */
+    /* --- SIDEBAR --- */
     .sidebar {
       width: 260px;
       background: var(--sidebar-bg);
@@ -90,6 +90,7 @@
     .contact-btn:hover {
       background: var(--arxiv-red);
       border-color: var(--arxiv-red);
+      color: white;
     }
 
     .nav-group {
@@ -126,7 +127,7 @@
       border-left: 3px solid var(--arxiv-red);
     }
 
-    /* MAIN CONTENT */
+    /* --- MAIN CONTENT --- */
     .main-content {
       flex-grow: 1;
       display: flex;
@@ -147,7 +148,6 @@
     }
 
     .top-bar strong {
-      font-family: 'Inter', sans-serif;
       font-weight: 700;
       color: var(--arxiv-red);
       text-transform: uppercase;
@@ -159,7 +159,7 @@
       overflow-y: auto;
     }
 
-    /* TABLE STYLING */
+    /* --- PROJECT TABLE --- */
     .project-table {
       background: white;
       border: 1px solid var(--border);
@@ -182,14 +182,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      color: var(--text-main);
     }
 
     .title-desc {
       font-size: 13px;
       color: var(--text-muted);
       margin-left: 28px;
-      font-family: var(--sans);
     }
 
     .meta-cell {
@@ -208,7 +206,7 @@
     }
     .action-cell a:hover { text-decoration: underline; }
 
-    /* TAGS */
+    /* --- TAGS --- */
     .tag {
       display: inline-block;
       padding: 2px 8px;
@@ -240,7 +238,7 @@
   <aside class="sidebar">
     <div class="brand">
       <i class="fa-solid fa-microscope"></i>
-      <span>Vasquez Research</span>
+      <span>Vasquez Core</span>
     </div>
 
     <a href="mailto:inacio@vasquezresearch.com" class="contact-btn">
@@ -249,7 +247,7 @@
     </a>
 
     <div class="nav-group">
-      <div class="nav-header">Repository</div>
+      <div class="nav-header">Research</div>
       <a href="./" class="nav-item active">
         <i class="fa-solid fa-database"></i>
         <span>All Artifacts</span>
@@ -262,7 +260,7 @@
 
       <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain" class="nav-item">
         <i class="fa-solid fa-cube"></i>
-        <span>URC Ledger</span>
+        <span>URC Minimal Blockchain</span>
       </a>
     </div>
   </aside>
@@ -270,7 +268,7 @@
   <main class="main-content">
 
     <header class="top-bar">
-      <div><strong>Project Manifest — 2026</strong></div>
+      <div><strong>Terminal Rigidity Dashboard</strong></div>
       <div class="user-profile" style="font-size: 13px; color: #666;">
         ID: <strong>Inacio F. Vasquez</strong>
       </div>
@@ -295,7 +293,7 @@
           <div class="meta-cell">REL_2026</div>
           <div class="action-cell">
             <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/urf-sg-wall.md">
-              <i class="fa-solid fa-external-link-alt"></i> VIEW THEOREM
+              <i class="fa-solid fa-external-link-alt"></i> THEOREM
             </a>
           </div>
         </div>
@@ -348,7 +346,7 @@
               <span class="tag tag-blue">Prototype</span>
             </div>
             <div class="title-desc">
-              Minimal reference implementation used for executable governance / ledger demos.
+              Minimal reference implementation used for executable governance demos.
             </div>
           </div>
           <div class="meta-cell">Vasquez.IV</div>
