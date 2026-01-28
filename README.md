@@ -37,10 +37,20 @@ For institutional correspondence, verification audits, and collaboration:
 * **Web:** [www.vasquezresearch.com](https://www.vasquezresearch.com)
 
 ---
-### Research Status
-The core mathematical requirements for Local$\to$Global spectral rigidity are **closed**. Remaining uncertainty is strictly external (institutional uptake).
+
+---
+
+## `inaciovasquez2020.github.io`
+
+```markdown
+## Research Status
+
+This repository serves as the canonical public interface for the Unified Rigidity Framework.
+All displayed claims correspond to closed or explicitly labeled conditional results.
+
 ## Citation
 
+```bibtex
 @manual{Vasquez_Website_2026,
   author       = {Vasquez, Inacio F.},
   title        = {Official Research Website — Unified Rigidity Framework},
