@@ -9,12 +9,12 @@ This repository hosts the public website for [https://inaciovasquez2020.github.i
 
 ---
 
-## 🏛️ Significance Statement: The URF Closure
+##  Significance Statement: The URF Closure
 The **Unified Rigidity Framework (URF)** resolves a fundamental impasse in Finite Model Theory regarding the inability of local logic ($FO^k$) to characterize global structural stability in the presence of expander obstructions. By establishing the **Logic-Width Dependency** ($k \ge f(tw)$), this program defines the threshold where local homogeneity forces global rigidity.
 
 ---
 
-## 📂 Research Ecosystem
+##  Research Ecosystem
 This hub provides a central index for the following specialized modules:
 
 | Repository | Focus | Registry ID |
@@ -26,11 +26,11 @@ This hub provides a central index for the following specialized modules:
 
 ---
 
-## 📊 Technical Dashboard
+##  Technical Dashboard
 For machine-verifiable verification and deterministic audit logs (including Heisenberg and Ornstein–Uhlenbeck witnesses), visit the:
-👉 **[Active Artifact Registry](https://inaciovasquez2020.github.io/vasquez-index/dashboard.html)**
+ **[Active Artifact Registry](https://inaciovasquez2020.github.io/vasquez-index/dashboard.html)**
 
-## 📧 Contact
+##  Contact
 For institutional correspondence, verification audits, and collaboration:
 * **Inacio F. Vasquez**
 * **Email:** [inacio@vasquezresearch.com](mailto:inacio@vasquezresearch.com)
