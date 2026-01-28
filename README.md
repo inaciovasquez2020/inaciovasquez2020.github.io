@@ -39,3 +39,27 @@ For institutional correspondence, verification audits, and collaboration:
 ---
 ### Research Status
 The core mathematical requirements for Local$\to$Global spectral rigidity are **closed**. Remaining uncertainty is strictly external (institutional uptake).
+
+## Citation
+
+If you use or reference this work, please cite:
+
+Vasquez, Inacio F. (2026). *Terminal Rigidity Witness — ERB: A Structural Resolution of Zero-Capacity Regimes*. Independent Research Program.  
+GitHub: https://github.com/inaciovasquez2020/trw-erb-sigc
+
+### Contact
+**Inacio F. Vasquez**  
+Independent Research Program  
+Email: inacio@vasquezresearch.com  
+Web: https://www.vasquezresearch.com  
+ORCID: https://orcid.org/0009-0008-8459-3400
+
+© 2026 Inacio F. Vasquez. Core Logic.
+
+
+
+
+
+
+
+
