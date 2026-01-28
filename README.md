@@ -39,6 +39,7 @@ For institutional correspondence, verification audits, and collaboration:
 ---
 ### Research Status
 The core mathematical requirements for Local$\to$Global spectral rigidity are **closed**. Remaining uncertainty is strictly external (institutional uptake).
+## Citation
 
 @manual{Vasquez_Website_2026,
   author       = {Vasquez, Inacio F.},
@@ -47,11 +48,3 @@ The core mathematical requirements for Local$\to$Global spectral rigidity are **
   year         = {2026},
   url          = {https://github.com/inaciovasquez2020/inaciovasquez2020.github.io}
 }
-
-
-
-
-
-
-
-
