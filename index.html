@@ -19,6 +19,7 @@
     :root {
       --slate-bg: #1e2329;
       --accent-green: #3f9c35;
+      --accent-orange: #d9480f;
       --text-main: #2f343b;
       --text-muted: #69707a;
       --border-light: #eef0f2;
@@ -66,17 +67,18 @@
       color: var(--slate-bg);
       letter-spacing: -1px;
     }
-    .hero p { 
+    .hero .subtitle { 
       max-width: 700px; 
       margin: 20px auto; 
       font-size: 1.1rem; 
       color: var(--text-muted); 
-      <p style="font-size: 13px; color: #777; margin-top: 15px;">
-This site is a public identity and reference archive.  
-Active technical research lives in dedicated repositories.
-</p>
-
     }
+    .hero .archive-note {
+      font-size: 13px; 
+      color: #777; 
+      margin-top: 15px;
+    }
+
     .orcid-badge {
       display: inline-flex;
       align-items: center;
@@ -121,10 +123,14 @@ Active technical research lives in dedicated repositories.
       box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       border-color: var(--accent-green);
     }
+    .project-card.challenge-card:hover {
+      border-color: var(--accent-orange);
+    }
     .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .project-title { font-weight: 700; font-size: 1.2rem; color: var(--slate-bg); }
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; background: #eee; }
     .status-closed { background: #d3f9d8; color: #2b8a3e; }
+    .status-challenge { background: #fff4e6; color: #d9480f; }
 
     /* --- Footer --- */
     footer {
@@ -138,7 +144,7 @@ Active technical research lives in dedicated repositories.
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; }
-      .nav-links { display: none; } /* Simplified for mobile */
+      .nav-links { display: none; } 
     }
   </style>
 </head>
@@ -158,10 +164,13 @@ Active technical research lives in dedicated repositories.
 
   <header class="hero">
     <h1>Inacio F. Vasquez</h1>
-    <p>Independent Researcher (2026). Lead architect of the Unified Rigidity Framework (URF) in Computational Rigidity and Information Topology.</p>
+    <p class="subtitle">Independent Researcher (2026). Lead architect of the Unified Rigidity Framework (URF) in Computational Rigidity and Information Topology.</p>
     <a href="https://orcid.org/0009-0008-8459-3400" class="orcid-badge" target="_blank">
       <i class="fa-brands fa-orcid" style="color: #A6CE39;"></i> 0009-0008-8459-3400
     </a>
+    <p class="archive-note">
+      This site is a public identity and reference archive. Active technical research lives in dedicated repositories.
+    </p>
   </header>
 
   <div class="container">
@@ -173,13 +182,26 @@ Active technical research lives in dedicated repositories.
         <a href="https://github.com/inaciovasquez2020/urf-core" class="project-card">
           <div class="project-header">
             <span class="project-title">Unified Rigidity Framework (URF)</span>
-            <span class="status-badge">Framework Complete</span>
+            <span class="status-badge status-closed">Framework Complete</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
             Formal closure of the Local&rarr;Global correspondence problem in finite information-bearing systems.
           </p>
           <div style="font-family: monospace; font-size: 12px; background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 10px;">
             $$ \lambda_1(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
+          </div>
+        </a>
+
+        <a href="https://github.com/inaciovasquez2020/urf-axioms" class="project-card challenge-card">
+          <div class="project-header">
+            <span class="project-title">XYSTEM Open Challenge</span>
+            <span class="status-badge status-challenge">Open Problem</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Prove or refute the XYSTEM axiom: Does vertex-transitivity force uniform local spectral expansion? High-priority open problem in URF information topology.
+          </p>
+          <div style="font-size: 12px; color: var(--accent-orange); margin-top: 5px; font-weight: 600;">
+            DOI: 10.5281/zenodo.18432925
           </div>
         </a>
 
@@ -220,7 +242,7 @@ Active technical research lives in dedicated repositories.
       <h2>Inquiries & Submissions</h2>
       <p style="font-size: 16px;">
         For formal technical correspondence or collaboration requests: <br>
-        <a href="mailto:inacio@vasquezresearch.com" style="color: var(--accent-green); font-weight: 700; text-decoration: none;">inacio@vasquezreserach.com</a>
+        <a href="mailto:inacio@vasquezresearch.com" style="color: var(--accent-green); font-weight: 700; text-decoration: none;">inacio@vasquezresearch.com</a>
       </p>
     </section>
 
