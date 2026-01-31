@@ -1,24 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Contact — Inacio F. Vasquez</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Technical Correspondence — Inacio F. Vasquez</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --slate-bg: #1e2329;
+      --accent-green: #3f9c35;
+      --text-main: #2f343b;
+      --text-muted: #69707a;
+      --border-light: #eef0f2;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    body { 
+      margin: 0; 
+      font-family: 'Inter', sans-serif; 
+      color: var(--text-main); 
+      background-color: #f8f9fa; 
+      line-height: 1.6;
+    }
+
+    /* --- Navigation --- */
+    nav {
+      background: var(--slate-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-brand { color: var(--white); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-brand i { color: var(--accent-green); }
+    .nav-links a { color: #cfd3d8; text-decoration: none; font-size: 13px; font-weight: 500; margin-left: 20px; }
+    .nav-links a:hover { color: var(--white); }
+
+    /* --- Hero --- */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border-light);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .hero h1 { 
+      font-family: 'Libre Baskerville', serif; 
+      font-size: 2.5rem; 
+      margin: 0; 
+      color: var(--slate-bg);
+    }
+
+    /* --- Container --- */
+    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    
+    h2.section-label { 
+      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; 
+      color: var(--accent-green); border-bottom: 2px solid var(--border-light);
+      padding-bottom: 10px; margin-bottom: 30px;
+    }
+
+    /* --- Contact Cards --- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      padding: 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .contact-card:hover {
+      border-color: var(--accent-green);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .contact-card i { font-size: 1.5rem; color: var(--accent-green); width: 30px; text-align: center; }
+    .contact-info strong { display: block; font-size: 14px; color: var(--slate-bg); }
+    .contact-info span { font-size: 13px; color: var(--text-muted); font-family: monospace; }
+
+    footer {
+      background: var(--slate-bg);
+      color: #9aa0a6;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 12px;
+      margin-top: 80px;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Contact</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="publications.html">Publications</a>
-  </nav>
-</header>
 
-<main>
-<p>Email: inacio@vasquezresearch.com</p>
-<p>ORCID: <a href="https://orcid.org/">orcid.org/xxxx-xxxx-xxxx-xxxx</a></p>
-<p>GitHub: <a href="https://github.com/inaciovasquez2020">
-github.com/inaciovasquez2020</a></p>
-</main>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <i class="fa-solid fa-envelope-open-text"></i>
+      <span>VASQUEZ LAB</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="citations.html">Citations</a>
+      <a href="https://github.com/inaciovasquez2020">GitHub</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <h1>Contact</h1>
+    <p style="color: var(--text-muted);">Institutional inquiries and technical correspondence.</p>
+  </header>
+
+  <main class="container">
+    <h2 class="section-label">Verification & Outreach</h2>
+    
+    <div class="contact-grid">
+      <a href="mailto:inaciovasquez2020@gmail.com" class="contact-card">
+        <i class="fa-solid fa-paper-plane"></i>
+        <div class="contact-info">
+          <strong>Direct Email</strong>
+          <span>inaciovasquez2020@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://orcid.org/0009-0008-8459-3400" class="contact-card" target="_blank">
+        <i class="fa-brands fa-orcid" style="color: #A6CE39;"></i>
+        <div class="contact-info">
+          <strong>ORCID iD</strong>
+          <span>0009-0008-8459-3400</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/inaciovasquez2020" class="contact-card" target="_blank">
+        <i class="fa-brands fa-github"></i>
+        <div class="contact-info">
+          <strong>Source Repository</strong>
+          <span>github.com/inaciovasquez2020</span>
+        </div>
+      </a>
+    </div>
+
+    <section style="margin-top: 60px;">
+      <h2 class="section-label">Institutional Verification</h2>
+      <p style="font-size: 14px; color: var(--text-muted);">
+        For cryptographic verification of research artifacts or requests for deterministic auditing of the URF closure, please include the relevant module hash in your correspondence.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
+    <p>Operational Status: Mathematically Closed | Deterministic Verification Enabled</p>
+  </footer>
+
 </body>
 </html>
