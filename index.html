@@ -123,14 +123,11 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.05);
       border-color: var(--accent-green);
     }
-    .project-card.challenge-card:hover {
-      border-color: var(--accent-orange);
-    }
     .project-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .project-title { font-weight: 700; font-size: 1.2rem; color: var(--slate-bg); }
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; background: #eee; }
     .status-closed { background: #d3f9d8; color: #2b8a3e; }
-    .status-challenge { background: #fff4e6; color: #d9480f; }
+    .status-active { background: #e7f5ff; color: #1971c2; }
 
     /* --- Footer --- */
     footer {
@@ -151,14 +148,15 @@
 <body>
 
   <nav>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand">
+    <a href="index.html" class="nav-brand">
       <i class="fa-solid fa-layer-group"></i>
       <span>VASQUEZ LAB</span>
     </a>
     <div class="nav-links">
       <a href="#research">Research</a>
       <a href="https://github.com/inaciovasquez2020">Repositories</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/dashboard.html">Technical Dashboard</a>
+      <a href="dashboard.html">Technical Dashboard</a>
+      <a href="citations.html">Citations</a>
     </div>
   </nav>
 
@@ -169,27 +167,37 @@
       <i class="fa-brands fa-orcid" style="color: #A6CE39;"></i> 0009-0008-8459-3400
     </a>
     <p class="archive-note">
-      This site is a public identity and reference archive. Active technical research lives in dedicated repositories.
+      Establishing formal closure for spectral rigidity in finite systems.
     </p>
   </header>
 
   <div class="container">
     
     <section id="research">
-      <h2>Active Research Programs</h2>
+      <h2>Foundational Programs (Tier A)</h2>
       <div class="project-grid">
         
         <a href="https://github.com/inaciovasquez2020/urf-core" class="project-card">
           <div class="project-header">
-            <span class="project-title">Unified Rigidity Framework (URF)</span>
-            <span class="status-badge status-closed">Framework Complete</span>
+            <span class="project-title">Unified Rigidity Framework (Core)</span>
+            <span class="status-badge status-closed">Mathematically Closed</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Formal closure of the Local&rarr;Global correspondence problem in finite information-bearing systems.
+            The definitive resolution of the Local&rarr;Global correspondence problem. Characterizes global stability via the spectral gap of the Hamiltonian Laplacian.
           </p>
-          <div style="font-family: monospace; font-size: 12px; background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 10px;">
-            $$ \lambda_1(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
+          <div style="font-family: monospace; font-size: 12px; background: #f8f9fa; padding: 10px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border-light);">
+            $$ \inf \mathrm{Spec}(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
           </div>
+        </a>
+
+        <a href="https://github.com/inaciovasquez2020/chronos-entropydepth" class="project-card">
+          <div class="project-header">
+            <span class="project-title">Chronos: Entropy-Depth Integration</span>
+            <span class="status-badge status-active">Active Repo</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Implementation of temporal rigidity markers in high-complexity finite models. 
+          </p>
         </a>
 
         <a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology" class="project-card">
@@ -198,17 +206,17 @@
             <span class="status-badge">Submitted</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Dark Fluid Model with Minimal Kinetic Coupling resolving cosmological tension parameters via a single additional kinetic degree of freedom.
+            Dark Fluid Model resolving cosmological tension parameters via Minimal Kinetic Coupling.
           </p>
         </a>
 
         <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain" class="project-card">
           <div class="project-header">
             <span class="project-title">URC Minimal Blockchain</span>
-            <span class="status-badge">Active Repository</span>
+            <span class="status-badge status-active">Active Repository</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Nakamoto consensus implementation optimized for deterministic capacity retention and audit transparency.
+            Consensus optimization for deterministic capacity retention.
           </p>
         </a>
 
@@ -218,7 +226,7 @@
             <span class="status-badge">Pre-Print Draft</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Investigating invariant-based obstructions to refinement in high-complexity biological structures.
+            Analysis of invariant-based obstructions to refinement in biological structures.
           </p>
         </a>
 
@@ -226,9 +234,9 @@
     </section>
 
     <section id="contact">
-      <h2>Inquiries & Submissions</h2>
+      <h2>Technical Correspondence</h2>
       <p style="font-size: 16px;">
-        For formal technical correspondence or collaboration requests: <br>
+        For institutional inquiries or verification audit requests: <br>
         <a href="mailto:inacio@vasquezresearch.com" style="color: var(--accent-green); font-weight: 700; text-decoration: none;">inacio@vasquezresearch.com</a>
       </p>
     </section>
@@ -236,8 +244,8 @@
   </div>
 
   <footer>
-    <p>&copy; 2026 Inacio F. Vasquez. All Rights Reserved.</p>
-    <p>Independent Research Program | ORCID: 0009-0008-8459-3400</p>
+    <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
+    <p>ORCID: 0009-0008-8459-3400 | Core Mathematically Closed</p>
     <div class="footer-disclaimer">
       Remaining uncertainty is external (adoption, citation, institutional uptake). Core mathematical requirements for URF spectral rigidity are closed.
     </div>
