@@ -104,6 +104,18 @@
     .module-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
     .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); background: #050910; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--border); }
 
+    /* Publications List Styles */
+    .pub-list { list-style: none; padding: 0; }
+    .pub-list li { 
+      margin-bottom: 15px; 
+      padding: 15px; 
+      background: rgba(14, 22, 38, 0.5); 
+      border-left: 3px solid var(--accent); 
+    }
+    .pub-list a { color: var(--text-title); text-decoration: none; font-weight: 500; font-size: 15px; }
+    .pub-list a:hover { color: var(--accent); }
+    .doi-label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); margin-top: 5px; }
+
     footer {
       background: var(--bg-header); color: var(--text-muted);
       padding: 60px 20px; text-align: center; font-size: 13px; border-top: 1px solid var(--border);
@@ -123,6 +135,7 @@
     </a>
     <div class="nav-links">
       <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
       <a href="dashboard.html">Artifacts</a>
       <a href="citations.html">Citations</a>
       <a href="https://github.com/inaciovasquez2020">GitHub</a>
@@ -179,6 +192,18 @@
           <p style="font-size: 14px; color: var(--text-muted);">Dark Fluid Model resolving cosmological tension via Minimal Kinetic Coupling.</p>
         </a>
       </div>
+    </section>
+
+    <section id="publications">
+      <h2>Formal Publications & Preprints</h2>
+      <ul class="pub-list">
+        <li>
+          <a href="https://doi.org/10.5281/zenodo.18450375" target="_blank">
+            Rank Dichotomy Theorem (CAT(0) cube complexes)
+          </a>
+          <span class="doi-label">DOI: 10.5281/zenodo.18450375</span>
+        </li>
+      </ul>
     </section>
 
     <section id="standards">
