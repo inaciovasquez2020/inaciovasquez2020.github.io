@@ -100,23 +100,20 @@
     
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); }
     .status-closed { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
-    .status-open { color: var(--warning); border-color: var(--warning); background: rgba(239, 68, 68, 0.1); }
     
     /* Module Mini Grid */
     .module-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
     .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); background: #050910; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--border); }
 
-    /* DOI List Styling */
-    .doi-list { list-style: none; padding: 0; margin-top: 20px; }
-    .doi-list li { margin-bottom: 12px; padding-left: 20px; position: relative; }
-    .doi-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
-    .doi-list a { color: var(--accent-soft); text-decoration: none; font-size: 14px; font-family: 'JetBrains Mono', monospace; transition: 0.2s; }
-    .doi-list a:hover { color: var(--text-title); text-decoration: underline; }
-
+    /* Footer and DOI styling */
     footer {
       background: var(--bg-header); color: var(--text-muted);
       padding: 60px 20px; text-align: center; font-size: 13px; border-top: 1px solid var(--border);
     }
+
+    ul { list-style: none; padding: 0; }
+    li a { color: var(--accent); text-decoration: none; transition: 0.2s; }
+    li a:hover { text-decoration: underline; }
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; }
@@ -133,7 +130,6 @@
     <div class="nav-links">
       <a href="#research">Research</a>
       <a href="dashboard.html">Artifacts</a>
-      <a href="citations.html">Citations</a>
       <a href="https://github.com/inaciovasquez2020">GitHub</a>
     </div>
   </nav>
@@ -172,15 +168,13 @@
           </div>
         </a>
 
-        <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card" style="border-left: 4px solid var(--warning);">
+        <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card">
           <div class="project-header">
             <span class="project-title">CCL Wall — Clause Contraction Lemma</span>
-            <span class="status-badge status-open">Open Boundary</span>
+            <span class="status-badge" style="color:#ef4444; border-color:#ef4444;">Open Boundary</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">
-            Final unresolved analytic obstruction in URF. All global rigidity results reduce to strict local TV contraction of the heat-bath kernel.
-          </p>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--warning);">
+          <p style="font-size: 14px; color: var(--text-muted);">Final unresolved analytic obstruction in URF. All global rigidity results reduce to strict local TV contraction.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border);">
             $$ (\Delta-1)(k-1)\rho < 1 $$
           </div>
         </a>
@@ -203,9 +197,9 @@
       </div>
     </section>
 
-    <section id="publications">
-      <h2>Formal Registry & Publications</h2>
-      <ul class="doi-list">
+    <section>
+      <h2>Formal Registry</h2>
+      <ul>
         <li>
           <a href="https://doi.org/10.5281/zenodo.18450375">
             Rank Dichotomy Theorem (CAT(0) cube complexes) — DOI:10.5281/zenodo.18450375
