@@ -104,6 +104,15 @@ https://inaciovasquez2020.github.io/vasquez-index/dashboard.html
 
 ---
 
+## External Canonical Results
+
+The following results are closed, public, and independently citable:
+
+• **Rank Dichotomy Theorem (CAT(0) cube complexes)**  
+  DOI: https://doi.org/10.5281/zenodo.18450375  
+  Repository: https://github.com/inaciovasquez2020/rank-dichotomy-cat0
+___
+
 ## Research Status
 
 The Unified Rigidity Framework is **structurally closed**.
