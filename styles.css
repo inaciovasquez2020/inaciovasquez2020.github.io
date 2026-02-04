@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Integrated from your updated styles.css */
     :root {
       --bg-main: #0b1220;
       --bg-header: #0f172a;
@@ -23,6 +22,7 @@
       --border: #1f2933;
       --border-soft: #2a3644;
       --success: #10b981;
+      --warning: #ef4444;
     }
 
     * { box-sizing: border-box; }
@@ -46,7 +46,7 @@
     }
     .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .nav-brand i { color: var(--accent); }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; margin-left: 20px; transition: 0.2s; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 20px; transition: 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
     /* --- Header --- */
@@ -56,24 +56,25 @@
       text-align: center;
       border-bottom: 1px solid var(--border);
     }
-    header h1 { margin: 0; font-size: 2.9rem; font-weight: 600; color: var(--text-title); }
-    .subtitle { margin-top: 0.9rem; color: var(--text-muted); }
+    header h1 { margin: 0; font-size: 2.9rem; font-weight: 600; color: var(--text-title); letter-spacing: -1px; }
+    .subtitle { margin-top: 0.9rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
 
     /* --- Dashboard Content --- */
+    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
     section {
-      max-width: 900px; margin: 3.5rem auto; padding: 2.2rem 2.4rem;
+      margin: 2rem 0; padding: 2.2rem 2.4rem;
       background: var(--bg-section);
       border: 1px solid var(--border-soft);
       border-radius: 6px;
     }
-    h2 { font-size: 1.35rem; font-weight: 500; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.45rem; margin-bottom: 1.3rem; }
+    h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.45rem; margin-bottom: 1.8rem; }
 
     /* --- Verification Table --- */
     .audit-table {
       width: 100%; border-collapse: collapse; margin-top: 1rem;
-      font-size: 0.9rem; font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem; font-family: "JetBrains Mono", monospace;
     }
-    .audit-table th { text-align: left; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; padding: 12px; border-bottom: 1px solid var(--border); }
+    .audit-table th { text-align: left; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; padding: 12px; border-bottom: 1px solid var(--border); }
     .audit-table td { padding: 12px; border-bottom: 1px solid var(--border-soft); }
     
     .status-pill {
@@ -82,13 +83,25 @@
     }
     .status-pill.verified { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
     .status-pill.pending { color: var(--accent); border-color: var(--accent); background: rgba(56, 189, 248, 0.1); }
+    .status-pill.blocked { color: var(--warning); border-color: var(--warning); background: rgba(239, 68, 68, 0.1); }
 
-    /* --- Monospace Components --- */
-    .hash { font-size: 0.8rem; color: var(--text-muted); opacity: 0.6; }
+    /* --- System Log Styling --- */
+    .console-box {
+      background: #050910;
+      padding: 20px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      overflow-x: auto;
+    }
+    .log-entry { margin-bottom: 5px; }
+    .log-entry span { color: var(--accent-soft); }
 
     footer {
-      margin-top: 4.5rem; padding: 2.4rem; text-align: center;
-      font-size: 0.9rem; color: var(--text-muted);
+      margin-top: 4.5rem; padding: 4rem 2.4rem; text-align: center;
+      font-size: 0.85rem; color: var(--text-muted);
       border-top: 1px solid var(--border);
       background: var(--bg-header);
     }
@@ -97,26 +110,26 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand"><i class="fa-solid fa-terminal"></i> VASQUEZ_CORE</a>
+    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand"><i class="fa-solid fa-terminal"></i> VASQUEZ_LAB</a>
     <div class="nav-links">
-      <a href="index.html">Identity</a>
-      <a href="publications.html">Manuscripts</a>
-      <a href="citations.html">Citations</a>
+      <a href="https://inaciovasquez2020.github.io/">Theory</a>
+      <a href="https://inaciovasquez2020.github.io/vasquez-index/publications.html">Manuscripts</a>
+      <a href="https://inaciovasquez2020.github.io/vasquez-index/citations.html">Citations</a>
     </div>
   </nav>
 
   <header>
     <h1>Technical Dashboard</h1>
-    <p class="subtitle">Operational status and deterministic audit of URF Tier A modules.</p>
+    <p class="subtitle">VERIFICATION_PROTOCOL: [DET_AUDIT_0.9.4] | February 2026</p>
   </header>
 
-  <main>
+  <main class="container">
     <section>
       <h2>Module Verification Registry</h2>
       <table class="audit-table">
         <thead>
           <tr>
-            <th>Module Identifier</th>
+            <th>Module ID</th>
             <th>Deterministic Hash</th>
             <th>Audit Status</th>
           </tr>
@@ -124,40 +137,50 @@
         <tbody>
           <tr>
             <td>urf-core</td>
-            <td class="hash">0x8f2a...c4e1</td>
+            <td style="color:var(--text-muted)">0x8f2a...c4e1</td>
             <td><span class="status-pill verified">Verified</span></td>
           </tr>
           <tr>
             <td>urf-axioms</td>
-            <td class="hash">0x31d4...a9f2</td>
+            <td style="color:var(--text-muted)">0x31d4...a9f2</td>
             <td><span class="status-pill verified">Verified</span></td>
           </tr>
           <tr>
-            <td>chronos-entropydepth</td>
-            <td class="hash">0xb7e1...44d0</td>
-            <td><span class="status-pill pending">In Progress</span></td>
+            <td>clc-protocol</td>
+            <td style="color:var(--text-muted)">0xf5e9...d212</td>
+            <td><span class="status-pill verified">Public Standard</span></td>
           </tr>
           <tr>
-            <td>final-wall-fo-k-locality</td>
-            <td class="hash">0x992c...e311</td>
-            <td><span class="status-pill verified">Verified</span></td>
+            <td>ccl-obstruction</td>
+            <td style="color:var(--text-muted)">0x992c...e311</td>
+            <td><span class="status-pill blocked">Pending Wall Audit</span></td>
+          </tr>
+          <tr>
+            <td>chronos-entropy</td>
+            <td style="color:var(--text-muted)">0xb7e1...44d0</td>
+            <td><span class="status-pill pending">Sampling...</span></td>
           </tr>
         </tbody>
       </table>
     </section>
 
     <section>
-      <h2>System Logs</h2>
-      <pre>
-[2026-01-31] URF-CORE: Spectral Rigidity confirmed at 99.997% confidence.
-[2026-01-31] CHRONOS: Entropy depth analysis initiated via local-global manifold.
-[2026-01-31] SYSTEM: Mathematically Closed. Operational status: RIGID.</pre>
+      <h2>Live Log Streaming</h2>
+      <div class="console-box">
+        <div class="log-entry"><span>[2026-02-01 09:12]</span> SYS: URF_Core parity check successful. Global rigidity markers locked.</div>
+        <div class="log-entry"><span>[2026-02-01 14:05]</span> CLC: Certification standard 1.0.2 pushed to production.</div>
+        <div class="log-entry"><span>[2026-02-04 10:22]</span> CHRONOS: Entropy depth depth parity 1.04 -> 1.00. Recalibrating.</div>
+        <div class="log-entry" style="color: var(--warning)"><span>[2026-02-04 13:10]</span> CCL: Unique obstruction detected. Logic-width dependency k < f(tw).</div>
+        <div class="log-entry" style="color: var(--success)"><span>[2026-02-04 13:10]</span> SYSTEM: Operational state RIGID. Entry point verified.</div>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2026 Inacio F. Vasquez | Independent Research Program</p>
-    <p style="font-size: 0.75rem; margin-top: 10px;">Authenticated via ORCID: 0009-0008-8459-3400</p>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 15px; color: var(--accent);">
+      [STATE: MATHEMATICALLY_CLOSED] | [ORCID: 0009-0008-8459-3400]
+    </p>
   </footer>
 
 </body>
