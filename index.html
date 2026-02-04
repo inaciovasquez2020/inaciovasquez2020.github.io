@@ -53,7 +53,7 @@
     .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
     .nav-brand i { color: var(--accent); }
     .nav-links { display: flex; gap: 25px; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.2s; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
     /* --- Hero --- */
@@ -100,10 +100,11 @@
     
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); }
     .status-closed { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
+    .status-open { color: var(--warning); border-color: var(--warning); background: rgba(239, 68, 68, 0.1); }
+    .status-standard { color: var(--accent-soft); border-color: var(--accent-soft); background: rgba(56, 189, 248, 0.1); }
     
-    /* Module Mini Grid */
-    .module-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 15px; }
-    .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); background: #050910; padding: 5px 10px; border-radius: 4px; border: 1px solid var(--border); }
+    .module-mini-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); background: #050910; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); }
 
     /* Footer and DOI styling */
     footer {
@@ -111,9 +112,9 @@
       padding: 60px 20px; text-align: center; font-size: 13px; border-top: 1px solid var(--border);
     }
 
-    ul { list-style: none; padding: 0; }
-    li a { color: var(--accent); text-decoration: none; transition: 0.2s; }
-    li a:hover { text-decoration: underline; }
+    .registry-list { list-style: none; padding: 0; }
+    .registry-list li { margin-bottom: 15px; padding: 15px; background: #050910; border-radius: 4px; border: 1px solid var(--border); }
+    .registry-list a { color: var(--accent-soft); text-decoration: none; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
 
     @media (max-width: 600px) {
       .hero h1 { font-size: 2rem; }
@@ -123,13 +124,14 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-brand">
+    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand">
       <i class="fa-solid fa-microchip"></i>
       <span>VASQUEZ_LAB</span>
     </a>
     <div class="nav-links">
-      <a href="#research">Research</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/dashboard.html">Artifacts</a>
+      <a href="https://inaciovasquez2020.github.io/vasquez-index/">Network Index</a>
+      <a href="#research">Theory</a>
+      <a href="#standards">Standards</a>
       <a href="https://github.com/inaciovasquez2020">GitHub</a>
     </div>
   </nav>
@@ -156,10 +158,9 @@
           <p style="font-size: 14px; color: var(--text-muted);">
             Resolution of the Local&rarr;Global correspondence problem. Characterizes stability via spectral gap verification.
           </p>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--success);">
             $$ \inf \mathrm{Spec}(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
           </div>
-          
           <div class="module-mini-grid">
             <span class="module-tag">urf-axioms</span>
             <span class="module-tag">final-wall-fo-k</span>
@@ -168,13 +169,28 @@
           </div>
         </a>
 
+        <a href="https://inaciovasquez2020.github.io/capacity-locality-certification/" class="project-card">
+          <div class="project-header">
+            <span class="project-title">Capacity–Locality Certification (CLC)</span>
+            <span class="status-badge status-standard">Public Standard</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Structural certification framework for predictive systems. Formally defines the 'Frozen' vs 'Liquid' regimes of AI reliability.
+          </p>
+          <div class="module-mini-grid">
+            <span class="module-tag">prediction-abstention</span>
+            <span class="module-tag">structural-unreliability</span>
+            <span class="module-tag">clc-1.0</span>
+          </div>
+        </a>
+
         <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card">
           <div class="project-header">
             <span class="project-title">CCL Wall — Clause Contraction Lemma</span>
-            <span class="status-badge" style="color:#ef4444; border-color:#ef4444;">Open Boundary</span>
+            <span class="status-badge status-open">Unique Obstruction</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Final unresolved analytic obstruction in URF. All global rigidity results reduce to strict local TV contraction.</p>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border);">
+          <p style="font-size: 14px; color: var(--text-muted);">Final unresolved analytic obstruction in URF. Global rigidity results reduce to local TV contraction thresholds.</p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--warning);">
             $$ (\Delta-1)(k-1)\rho < 1 $$
           </div>
         </a>
@@ -184,7 +200,7 @@
             <span class="project-title">Chronos: Entropy-Depth Integration</span>
             <span class="status-badge" style="color:var(--accent); border-color:var(--accent);">Active Repo</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Implementation of temporal rigidity markers in high-complexity finite models.</p>
+          <p style="font-size: 14px; color: var(--text-muted);">Temporal rigidity markers in high-complexity finite models.</p>
         </a>
 
         <a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology" class="project-card">
@@ -199,10 +215,10 @@
 
     <section>
       <h2>Formal Registry</h2>
-      <ul>
+      <ul class="registry-list">
         <li>
-          <a href="https://doi.org/10.5281/zenodo.18450375">
-            Rank Dichotomy Theorem (CAT(0) cube complexes) — DOI:10.5281/zenodo.18450375
+          <a href="https://doi.org/10.5281/zenodo.18450375" target="_blank">
+            [DOI] Rank Dichotomy Theorem (CAT(0) cube complexes) &rarr; 10.5281/zenodo.18450375
           </a>
         </li>
       </ul>
@@ -214,9 +230,9 @@
         <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain" class="project-card">
           <div class="project-header">
             <span class="project-title">URC Minimal Blockchain</span>
-            <span class="status-badge">Active Specification</span>
+            <span class="status-badge">Active Spec</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Consensus optimization and Nakamoto-based implementation for deterministic capacity retention.</p>
+          <p style="font-size: 14px; color: var(--text-muted);">Nakamoto-based implementation for deterministic capacity retention and URF consensus auditing.</p>
         </a>
       </div>
     </section>
@@ -225,7 +241,7 @@
       <h2>Technical Correspondence</h2>
       <p style="font-size: 16px;">
         Institutional inquiries or verification audit requests: <br>
-        <a href="mailto:inacio@vasquezresearch.com" style="color: var(--accent); font-weight: 700; text-decoration: none; font-family: 'JetBrains Mono', monospace;">inacio@vasquezresearch.com</a>
+        <a href="mailto:inacio@vasquezresearch.com" style="color: var(--accent); font-weight: 700; text-decoration: none; font-family: 'JetBrains Mono', monospace; border-bottom: 1px solid var(--accent);">inacio@vasquezresearch.com</a>
       </p>
     </section>
 
@@ -233,7 +249,9 @@
 
   <footer>
     <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 10px;">STATUS: CORE MATHEMATICALLY CLOSED | ORCID: 0009-0008-8459-3400</p>
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 10px; color: var(--accent-soft);">
+      STATUS: CORE MATHEMATICALLY CLOSED | ORCID: 0009-0008-8459-3400
+    </p>
   </footer>
 
 </body>
