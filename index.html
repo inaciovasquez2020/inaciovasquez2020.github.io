@@ -100,7 +100,6 @@
     
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); }
     .status-closed { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
-    .status-open { color: var(--warning); border-color: var(--warning); background: rgba(239, 68, 68, 0.1); }
     .status-standard { color: var(--accent-soft); border-color: var(--accent-soft); background: rgba(56, 189, 248, 0.1); }
     
     .module-mini-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
@@ -156,7 +155,7 @@
             <span class="status-badge status-closed">Mathematically Closed</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Resolution of the Local&rarr;Global correspondence problem. Characterizes stability via spectral gap verification.
+            Resolution of the Local&rarr;Global correspondence problem. Characterizes stability via spectral gap verification across high-rank combinatorial complexes.
           </p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--success);">
             $$ \inf \mathrm{Spec}(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
@@ -169,13 +168,27 @@
           </div>
         </a>
 
+        <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card">
+          <div class="project-header">
+            <span class="project-title">Final Wall (CLR) — Cycle Local Rigidity</span>
+            <span class="status-badge status-closed">Closed and Published</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Previously unresolved analytic obstruction. Now reduced to the <strong>Cycle–Orbit Splitting Lemma (CLR)</strong>, establishing deterministic local rigidity and eliminating the Clause Contraction Wall at the structural level.
+          </p>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--success);">
+            <span style="color: var(--text-muted); font-size: 10px; display: block; margin-bottom: 5px;">[Interpretive Form]</span>
+            $$ (\Delta-1)(k-1)\rho < 1 $$
+          </div>
+        </a>
+
         <a href="https://inaciovasquez2020.github.io/capacity-locality-certification/" class="project-card">
           <div class="project-header">
             <span class="project-title">Capacity–Locality Certification (CLC)</span>
             <span class="status-badge status-standard">Public Standard</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Structural certification framework for predictive systems. Formally defines the 'Frozen' vs 'Liquid' regimes of AI reliability.
+            Structural certification framework for predictive systems. Formally defines the 'Frozen' vs 'Liquid' regimes of AI reliability based on URF stability bounds.
           </p>
           <div class="module-mini-grid">
             <span class="module-tag">prediction-abstention</span>
@@ -184,23 +197,12 @@
           </div>
         </a>
 
-        <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card">
-          <div class="project-header">
-            <span class="project-title">CCL Wall — Clause Contraction Lemma</span>
-            <span class="status-badge status-open">Unique Obstruction</span>
-          </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Final unresolved analytic obstruction in URF. Global rigidity results reduce to local TV contraction thresholds.</p>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--warning);">
-            $$ (\Delta-1)(k-1)\rho < 1 $$
-          </div>
-        </a>
-
         <a href="https://github.com/inaciovasquez2020/chronos-entropydepth" class="project-card">
           <div class="project-header">
             <span class="project-title">Chronos: Entropy-Depth Integration</span>
             <span class="status-badge" style="color:var(--accent); border-color:var(--accent);">Active Repo</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Temporal rigidity markers in high-complexity finite models.</p>
+          <p style="font-size: 14px; color: var(--text-muted);">Temporal rigidity markers in high-complexity finite models. Integrating time-dependent entropy into URF structures.</p>
         </a>
 
         <a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology" class="project-card">
@@ -208,7 +210,7 @@
             <span class="project-title">DFM–MKC Cosmology</span>
             <span class="status-badge">Submitted</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Dark Fluid Model resolving cosmological tension via Minimal Kinetic Coupling.</p>
+          <p style="font-size: 14px; color: var(--text-muted);">Dark Fluid Model resolving cosmological tension via Minimal Kinetic Coupling. Formal application of rigidity theory to gravitational models.</p>
         </a>
       </div>
     </section>
