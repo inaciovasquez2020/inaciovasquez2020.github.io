@@ -23,6 +23,10 @@ The following research modules are indexed through this portal:
 * urf-axioms
 * urf-core
 
+## Source Repositories
+- Infrastructure: https://github.com/inaciovasquez2020/scientific-infrastructure
+- URF Core: https://github.com/inaciovasquez2020/urf-core
+
 ---
 
 ## Usage and Deployment
