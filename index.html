@@ -40,7 +40,6 @@
       line-height: 1.6;
     }
 
-    /* --- Navigation --- */
     nav {
       background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(10px);
@@ -57,7 +56,6 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* --- Hero --- */
     .hero {
       background: linear-gradient(135deg, #060b16, #0f172a);
       padding: 80px 20px;
@@ -79,7 +77,6 @@
       color: var(--accent-soft); text-decoration: none;
     }
 
-    /* --- Grid & Cards --- */
     .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     section { margin-bottom: 60px; }
     h2 { 
@@ -102,11 +99,11 @@
     .status-badge { font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--border); }
     .status-closed { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
     .status-standard { color: var(--accent-soft); border-color: var(--accent-soft); background: rgba(56, 189, 248, 0.1); }
+    .status-validating { color: #f59e0b; border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
     
     .module-mini-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
     .module-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); background: #050910; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border); }
 
-    /* Footer and DOI styling */
     footer {
       background: var(--bg-header); color: var(--text-muted);
       padding: 60px 20px; text-align: center; font-size: 13px; border-top: 1px solid var(--border);
@@ -124,15 +121,14 @@
 <body>
 
   <nav>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand" rel="noopener noreferrer">
+    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand">
       <i class="fa-solid fa-microchip"></i>
       <span>VASQUEZ_LAB</span>
     </a>
     <div class="nav-links">
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/" rel="noopener noreferrer">Network Index</a>
+      <a href="https://inaciovasquez2020.github.io/vasquez-index/">Network Index</a>
       <a href="#research">Theory</a>
-      <a href="#standards">Standards</a>
-      <a href="https://github.com/inaciovasquez2020" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/inaciovasquez2020">GitHub</a>
     </div>
   </nav>
 
@@ -150,78 +146,56 @@
       <h2>Foundational Programs (Tier A)</h2>
       <div class="project-grid">
         
-        <a href="https://github.com/inaciovasquez2020/urf-core" class="project-card" rel="noopener noreferrer">
+        <a href="https://github.com/inaciovasquez2020/urf-core" class="project-card" data-scope="bounded" data-status="closed">
           <div class="project-header">
             <span class="project-title">Unified Rigidity Framework (Core)</span>
             <span class="status-badge status-closed">Structurally Closed</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Structural resolution of the Local&rarr;Global correspondence problem under explicitly stated assumptions, using spectral gap verification in high-rank combinatorial complexes.
+            Structural resolution of the Local–Global correspondence problem under explicitly stated assumptions, using spectral gap verification.
           </p>
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--success);">
             $$ \inf \mathrm{Spec}(\Delta_H \mid \ker(\mathrm{Per})^\perp) > 0 $$
           </div>
           <div class="module-mini-grid">
             <span class="module-tag">urf-axioms</span>
-            <span class="module-tag">final-wall-fo-k</span>
             <span class="module-tag">radiative-rigidity</span>
-            <span class="module-tag">support-drift</span>
           </div>
         </a>
 
-        <a href="https://github.com/inaciovasquez2020/urf-axioms/tree/main/last-door" class="project-card" rel="noopener noreferrer">
+        <a href="https://github.com/inaciovasquez2020/final-wall-fo-k-locality" class="project-card" data-scope="bounded" data-status="closed">
           <div class="project-header">
             <span class="project-title">Final Wall (CLR) — Cycle Local Rigidity</span>
             <span class="status-badge status-closed">Structurally Closed · Bounded Verified</span>
           </div>
           <p style="font-size: 14px; color: var(--text-muted);">
-            Previously unresolved terminal obstruction. Reduced to the Cycle–Orbit Splitting Lemma (CLR) under bounded verification, establishing deterministic local rigidity without asymptotic claims.
+            Terminal obstruction reduced to the Cycle–Orbit Splitting Lemma (CLR). Establishes deterministic local rigidity without asymptotic claims.
           </p>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #050910; padding: 12px; border-radius: 4px; margin-top: 10px; border: 1px solid var(--border); color: var(--success);">
-            <span style="color: var(--text-muted); font-size: 10px; display: block; margin-bottom: 5px;">(interpretive form)</span>
-            $$ (\Delta-1)(k-1)\rho < 1 $$
-          </div>
         </a>
 
-        <a href="https://inaciovasquez2020.github.io/capacity-locality-certification/" class="project-card" rel="noopener noreferrer">
+        <a href="https://github.com/inaciovasquez2020/chronos-entropydepth" class="project-card" data-scope="active" data-status="validating">
+          <div class="project-header">
+            <span class="project-title">Chronos: Entropy-Depth Integration</span>
+            <span class="status-badge status-validating">Externally Validating</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted);">
+            Temporal rigidity markers in high-complexity finite models. 
+            <span style="display:block; font-size:12px; margin-top:5px; color:var(--accent-soft);">Closed internally · pending external adoption</span>
+          </p>
+        </a>
+
+        <a href="https://inaciovasquez2020.github.io/capacity-locality-certification/" class="project-card" data-scope="standard" data-status="public">
           <div class="project-header">
             <span class="project-title">Capacity–Locality Certification (CLC)</span>
             <span class="status-badge status-standard">Public Standard</span>
           </div>
-          <p style="font-size: 14px; color: var(--text-muted);">
-            Formally defines bounded reliability regimes for predictive systems using URF stability criteria.
-          </p>
-          <div class="module-mini-grid">
-            <span class="module-tag">prediction-abstention</span>
-            <span class="module-tag">structural-unreliability</span>
-            <span class="module-tag">clc-1.0</span>
-          </div>
-        </a>
-
-        <a href="https://github.com/inaciovasquez2020/chronos-entropydepth" class="project-card" rel="noopener noreferrer">
-          <div class="project-header">
-            <span class="project-title">Chronos: Entropy-Depth Integration</span>
-            <span class="status-badge status-standard">Active Research</span>
-          </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Temporal rigidity markers in high-complexity finite models. Integrating time-dependent entropy into URF structures.</p>
-        </a>
-
-        <a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology" class="project-card" rel="noopener noreferrer">
-          <div class="project-header">
-            <span class="project-title">DFM–MKC Cosmology</span>
-            <span class="status-badge status-standard">Public Model</span>
-          </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Dark Fluid Model resolving cosmological tension via Minimal Kinetic Coupling. Formal application of rigidity theory to gravitational models.</p>
+          <p style="font-size: 14px; color: var(--text-muted);">Formally defines bounded reliability regimes for predictive systems using URF stability criteria.</p>
         </a>
       </div>
     </section>
 
     <section>
       <h2>Formal Registry</h2>
-      <p style="font-size:13px; color: var(--text-muted); max-width: 700px;">
-        Entries in this registry correspond to formally complete results under explicitly stated assumptions. 
-        No implicit generalization beyond the stated scope is asserted.
-      </p>
       <ul class="registry-list">
         <li>
           <a href="https://doi.org/10.5281/zenodo.18450375" target="_blank" rel="noopener noreferrer">
@@ -229,19 +203,6 @@
           </a>
         </li>
       </ul>
-    </section>
-
-    <section id="standards">
-      <h2>Engineering Layer (Tier B)</h2>
-      <div class="project-grid">
-        <a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain" class="project-card" rel="noopener noreferrer">
-          <div class="project-header">
-            <span class="project-title">URC Minimal Blockchain</span>
-            <span class="status-badge">Active Spec</span>
-          </div>
-          <p style="font-size: 14px; color: var(--text-muted);">Nakamoto-based implementation for deterministic capacity retention and URF consensus auditing.</p>
-        </a>
-      </div>
     </section>
 
     <section id="contact">
@@ -257,7 +218,12 @@
   <footer>
     <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
     <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 10px; color: var(--accent-soft);">
-      STATUS: STRUCTURALLY CLOSED · ARTIFACT VERIFIED | ORCID: 0009-0008-8459-3400
+      STATUS: MIXED — STRUCTURALLY CLOSED MODULES · ACTIVE RESEARCH TRACKS
+    </p>
+    <p style="margin-top: 20px;">
+      <a href="./CANONICALITY.md" style="font-size:11px; color:var(--text-muted); text-decoration:none; border: 1px solid var(--border); padding: 5px 10px; border-radius: 4px;">
+        <i class="fa-solid fa-gavel"></i> Canonicality Doctrine
+      </a>
     </p>
   </footer>
 
