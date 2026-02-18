@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Manuscripts & Reports — Unified Rigidity Framework (URF)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Manuscripts and technical reports for the Unified Rigidity Framework (URF), including structurally closed results and bounded verification artifacts." />
+  <meta name="description" content="Formal manuscripts and technical reports for the Unified Rigidity Framework (URF)." />
   <meta name="theme-color" content="#0b1220" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,25 +27,11 @@
     }
 
     * { box-sizing: border-box; }
-    body { 
-      margin: 0; 
-      font-family: 'Inter', sans-serif; 
-      color: var(--text-main); 
-      background-color: var(--bg-main); 
-      line-height: 1.6;
-    }
+    body { margin: 0; font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--bg-main); line-height: 1.6; }
 
-    /* --- Navigation --- */
     nav {
-      background: var(--bg-nav);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
+      background: var(--bg-nav); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
     }
     .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
     .nav-brand i { color: var(--accent); }
@@ -53,116 +39,29 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.2s; }
     .nav-links a:hover { color: var(--accent); }
 
-    /* --- Hero Section --- */
-    .hero {
-      background: linear-gradient(180deg, var(--bg-nav), var(--bg-main));
-      border-bottom: 1px solid var(--border);
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .hero h1 { 
-      font-family: 'Libre Baskerville', serif; 
-      font-size: 2.5rem; 
-      margin: 0; 
-      color: var(--text-title);
-      letter-spacing: -1px;
-    }
-    .hero .subtitle { 
-      max-width: 700px; 
-      margin: 15px auto 0; 
-      font-size: 1.1rem; 
-      color: var(--text-muted); 
-    }
+    .hero { background: linear-gradient(180deg, var(--bg-nav), var(--bg-main)); border-bottom: 1px solid var(--border); padding: 80px 20px; text-align: center; }
+    .hero h1 { font-family: 'Libre Baskerville', serif; font-size: 2.5rem; margin: 0; color: var(--text-title); letter-spacing: -1px; }
+    .hero .subtitle { max-width: 700px; margin: 15px auto 0; font-size: 1.1rem; color: var(--text-muted); }
 
-    /* --- Content --- */
     .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    
-    h2.section-label { 
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; 
-      color: var(--accent); border-bottom: 1px solid var(--border);
-      padding-bottom: 10px; margin-bottom: 30px;
-    }
+    h2.section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px; }
 
-    /* --- Publication Card --- */
-    .pub-entry {
-      background: var(--bg-card);
-      padding: 35px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 25px;
-      transition: 0.2s;
-    }
-    .pub-entry:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
+    .pub-entry { background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 25px; transition: 0.2s; }
+    .pub-entry:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-    .pub-year { 
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; 
-      font-weight: 700; 
-      color: var(--accent-green); 
-      text-transform: uppercase; 
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .pub-title { 
-      font-family: 'Libre Baskerville', serif;
-      font-size: 1.4rem; 
-      font-weight: 700; 
-      color: var(--text-title); 
-      margin: 0 0 12px 0;
-      line-height: 1.3;
-    }
+    .pub-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block; }
+    .pub-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-title); margin: 0 0 12px 0; line-height: 1.3; }
     .pub-authors { font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 15px; }
     .pub-abstract { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
     
-    .pub-links { 
-      display: flex; 
-      flex-wrap: wrap;
-      gap: 15px; 
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-    .pub-links a { 
-      font-size: 12px; 
-      font-weight: 700; 
-      text-decoration: none; 
-      color: var(--text-main); 
-      display: flex; 
-      align-items: center; 
-      gap: 6px; 
-    }
+    .pub-links { display: flex; flex-wrap: wrap; gap: 15px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .pub-links a { font-size: 12px; font-weight: 700; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
     .pub-links a:hover { color: var(--accent); }
 
-    .tag { 
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; 
-      padding: 3px 10px; 
-      border-radius: 4px; 
-      background: #050910; 
-      color: var(--text-muted); 
-      border: 1px solid var(--border);
-      text-transform: uppercase;
-    }
+    .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 4px; background: #050910; color: var(--text-muted); border: 1px solid var(--border); text-transform: uppercase; }
 
-    /* --- Footer --- */
-    footer {
-      background: var(--bg-nav);
-      color: var(--text-muted);
-      padding: 60px 20px;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 80px;
-      border-top: 1px solid var(--border);
-    }
+    footer { background: var(--bg-nav); color: var(--text-muted); padding: 60px 20px; text-align: center; font-size: 13px; margin-top: 80px; border-top: 1px solid var(--border); }
     .footer-note { font-style: italic; opacity: 0.7; max-width: 600px; margin: 20px auto 0; }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2rem; }
-      .pub-entry { padding: 25px; }
-    }
   </style>
 </head>
 <body>
@@ -181,40 +80,23 @@
 
   <header class="hero">
     <h1>Manuscripts & Reports</h1>
-    <p class="subtitle">Formal manuscript pipeline for the Unified Rigidity Framework (URF), with explicitly scoped and artifact-backed results.</p>
+    <p class="subtitle">Formal manuscript pipeline for the Unified Rigidity Framework (URF), with explicitly scoped results.</p>
   </header>
 
   <main class="container">
     <h2 class="section-label">Current Pipeline</h2>
-    <p style="font-size:13px; color: var(--text-muted); max-width: 720px; margin-bottom: 30px;">
-      All items listed here represent formally complete or actively developed work under explicitly stated assumptions. No manuscript on this page asserts unbounded, asymptotic, or universal claims beyond its declared scope.
-    </p>
 
     <article class="pub-entry">
-      <span class="pub-year">2026 — Preprint</span>
+      <span class="pub-year">2026 — Manuscript (Journal-First)</span>
       <h2 class="pub-title">The Expander Obstruction and Logic-Width Dependency</h2>
       <div class="pub-authors">Inacio F. Vasquez</div>
       <p class="pub-abstract">
-        This manuscript analyzes the limits of \(FO^k\) local types in bounding global structural invariants on expander families. Within explicitly stated assumptions, it derives a logic–width dependency relating locality depth to structural rigidity, showing that for bounded-treewidth systems, local homogeneity enforces global rigidity.
+        This manuscript analyzes the limits of \(FO^k\) local types in bounding global structural invariants on expander families. Within explicitly stated assumptions, it derives a logic–width dependency relating locality depth to structural rigidity.
       </p>
       <div class="pub-links">
-        <a href="https://github.com/inaciovasquez2020/urf-core" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Manuscript PDF</a>
+        <a href="https://github.com/inaciovasquez2020/urf-core" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Manuscript (In-situ)</a>
         <a href="https://inaciovasquez2020.github.io/vasquez-index/" rel="noopener noreferrer"><i class="fa-solid fa-microchip"></i> Verification Artifacts</a>
         <span class="tag">Theoretical Computer Science</span>
-        <span class="tag">Bounded Analysis</span>
-      </div>
-    </article>
-
-    <article class="pub-entry">
-      <span class="pub-year">2026 — Draft in Progress</span>
-      <h2 class="pub-title">Finite Capacity and Rigidity in Operator Systems</h2>
-      <div class="pub-authors">Inacio F. Vasquez</div>
-      <p class="pub-abstract">
-        An exploration of URF rigidity bounds applied to finite operator systems. The manuscript studies how spectral gap constraints control capacity retention in homogeneous settings, without asserting asymptotic or universal guarantees.
-      </p>
-      <div class="pub-links">
-        <span class="tag">Operator Theory</span>
-        <span class="tag">Information Topology</span>
       </div>
     </article>
 
@@ -223,23 +105,24 @@
       <h2 class="pub-title">URF-SG: A Standard for Machine-Verifiable Spectral Rigidity</h2>
       <div class="pub-authors">Vasquez Research Program</div>
       <p class="pub-abstract">
-        Definition of the URF-SG JSON schema used for the deterministic audit of external witnesses. This report documents bounded verification results for the Heisenberg nilmanifold and Ornstein–Uhlenbeck operators under explicitly stated noise and resolution constraints.
+        Definition of the URF-SG JSON schema used for the deterministic audit of external witnesses. This report documents bounded verification results for the Heisenberg nilmanifold.
       </p>
       <div class="pub-links">
         <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/standards/URF-SG.json" rel="noopener noreferrer"><i class="fa-solid fa-code"></i> View Schema</a>
-        <a href="https://github.com/inaciovasquez2020/urf-core" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Repository</a>
         <span class="tag">Standardization</span>
       </div>
     </article>
-
   </main>
 
   <footer>
     <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);">ORCID: 0009-0008-8459-3400 | STATUS: STRUCTURALLY CLOSED · ARTIFACT VERIFIED</p>
-    <p class="footer-note">
-      Remaining uncertainty is external (adoption, citation, institutional uptake). 
-      Core structural requirements for URF spectral rigidity are closed under stated assumptions.
+    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);">
+      STATUS: MIXED — STRUCTURALLY CLOSED MODULES · ACTIVE RESEARCH TRACKS
+    </p>
+    <p style="margin-top: 15px;">
+      <a href="./CANONICALITY.md" style="font-size:11px; color:var(--accent); text-decoration:none; border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px;">
+        <i class="fa-solid fa-gavel"></i> Canonicality Doctrine
+      </a>
     </p>
   </footer>
 
