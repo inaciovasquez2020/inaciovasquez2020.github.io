@@ -23,6 +23,10 @@ The following research modules are indexed through this portal:
 * urf-axioms
 * urf-core
 
+## Source Repositories
+- Infrastructure: https://github.com/inaciovasquez2020/scientific-infrastructure
+- URF Core: https://github.com/inaciovasquez2020/urf-core
+
 ---
 
 ## Usage and Deployment
@@ -43,3 +47,6 @@ To cite the research infrastructure hosted here:
   year   = {2026},
   url    = {[https://inaciovasquez2020.github.io/vasquez-index/](https://inaciovasquez2020.github.io/vasquez-index/)}
 }
+
+Documentation source
+- Canonical docs source lives at https://github.com/inaciovasquez2020/vasquez-docs

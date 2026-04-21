@@ -1,187 +1,213 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Technical Dashboard — URF Verification</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    :root {
-      --bg-main: #0b1220;
-      --bg-header: #0f172a;
-      --bg-section: #0e1626;
-      --text-main: #e5e7eb;
-      --text-muted: #9aa5b1;
-      --text-title: #f8fafc;
-      --accent: #38bdf8;
-      --accent-soft: #7dd3fc;
-      --border: #1f2933;
-      --border-soft: #2a3644;
-      --success: #10b981;
-      --warning: #ef4444;
-    }
+/* VASQUEZ RESEARCH PORTAL - UNIFIED STYLESHEET
+   Target: inaciovasquez2020.github.io/styles.css
+   Theme: Research Dark / Executable Foundation
+*/
 
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; padding: 0;
-      font-family: "Inter", sans-serif;
-      background: linear-gradient(180deg, #060b16, var(--bg-main) 40%, #060b16);
-      color: var(--text-main);
-      line-height: 1.7;
-    }
-
-    /* --- Navigation --- */
-    nav {
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      position: sticky; top: 0; z-index: 1000;
-    }
-    .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-    .nav-brand i { color: var(--accent); }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-left: 20px; transition: 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* --- Header --- */
-    header {
-      background: linear-gradient(135deg, #060b16, #0f172a);
-      padding: 4.5rem 2rem 3rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-    header h1 { margin: 0; font-size: 2.9rem; font-weight: 600; color: var(--text-title); letter-spacing: -1px; }
-    .subtitle { margin-top: 0.9rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-
-    /* --- Dashboard Content --- */
-    .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-    section {
-      margin: 2rem 0; padding: 2.2rem 2.4rem;
-      background: var(--bg-section);
-      border: 1px solid var(--border-soft);
-      border-radius: 6px;
-    }
-    h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.45rem; margin-bottom: 1.8rem; }
-
-    /* --- Verification Table --- */
-    .audit-table {
-      width: 100%; border-collapse: collapse; margin-top: 1rem;
-      font-size: 0.85rem; font-family: "JetBrains Mono", monospace;
-    }
-    .audit-table th { text-align: left; color: var(--text-muted); font-size: 0.7rem; text-transform: uppercase; padding: 12px; border-bottom: 1px solid var(--border); }
-    .audit-table td { padding: 12px; border-bottom: 1px solid var(--border-soft); }
+:root {
+    /* Color Palette */
+    --bg-main: #0d1117;
+    --bg-surface: #161b22;
+    --bg-code: #010409;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent: #58a6ff;
+    --accent-success: #3fb950;
+    --accent-warning: #d29922;
+    --accent-error: #f85149;
+    --border: #30363d;
+    --link-hover: #79c0ff;
     
-    .status-pill {
-      font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
-      text-transform: uppercase; border: 1px solid transparent;
-    }
-    .status-pill.verified { color: var(--success); border-color: var(--success); background: rgba(16, 185, 129, 0.1); }
-    .status-pill.pending { color: var(--accent); border-color: var(--accent); background: rgba(56, 189, 248, 0.1); }
-    .status-pill.blocked { color: var(--warning); border-color: var(--warning); background: rgba(239, 68, 68, 0.1); }
+    /* Layout */
+    --max-width: 1000px;
+    --radius: 6px;
+}
 
-    /* --- System Log Styling --- */
-    .console-box {
-      background: #050910;
-      padding: 20px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      font-family: "JetBrains Mono", monospace;
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      overflow-x: auto;
-    }
-    .log-entry { margin-bottom: 5px; }
-    .log-entry span { color: var(--accent-soft); }
+/* Base Reset & Typography */
+* { box-sizing: border-box; }
 
-    footer {
-      margin-top: 4.5rem; padding: 4rem 2.4rem; text-align: center;
-      font-size: 0.85rem; color: var(--text-muted);
-      border-top: 1px solid var(--border);
-      background: var(--bg-header);
-    }
-  </style>
-</head>
-<body>
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-  <nav>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand"><i class="fa-solid fa-terminal"></i> VASQUEZ_LAB</a>
-    <div class="nav-links">
-      <a href="https://inaciovasquez2020.github.io/">Theory</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/publications.html">Manuscripts</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/citations.html">Citations</a>
-    </div>
-  </nav>
+/* Monospace for Technical Identifiers */
+code, pre, .mono, .repo-link, h1, h2, h3, nav {
+    font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
 
-  <header>
-    <h1>Technical Dashboard</h1>
-    <p class="subtitle">VERIFICATION_PROTOCOL: [DET_AUDIT_0.9.4] | February 2026</p>
-  </header>
+/* Header & Navigation */
+header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 2rem 1.5rem 2rem;
+    width: 100%;
+}
 
-  <main class="container">
-    <section>
-      <h2>Module Verification Registry</h2>
-      <table class="audit-table">
-        <thead>
-          <tr>
-            <th>Module ID</th>
-            <th>Deterministic Hash</th>
-            <th>Audit Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>urf-core</td>
-            <td style="color:var(--text-muted)">0x8f2a...c4e1</td>
-            <td><span class="status-pill verified">Verified</span></td>
-          </tr>
-          <tr>
-            <td>urf-axioms</td>
-            <td style="color:var(--text-muted)">0x31d4...a9f2</td>
-            <td><span class="status-pill verified">Verified</span></td>
-          </tr>
-          <tr>
-            <td>clc-protocol</td>
-            <td style="color:var(--text-muted)">0xf5e9...d212</td>
-            <td><span class="status-pill verified">Public Standard</span></td>
-          </tr>
-          <tr>
-            <td>ccl-obstruction</td>
-            <td style="color:var(--text-muted)">0x992c...e311</td>
-            <td><span class="status-pill blocked">Pending Wall Audit</span></td>
-          </tr>
-          <tr>
-            <td>chronos-entropy</td>
-            <td style="color:var(--text-muted)">0xb7e1...44d0</td>
-            <td><span class="status-pill pending">Sampling...</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+nav {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-    <section>
-      <h2>Live Log Streaming</h2>
-      <div class="console-box">
-        <div class="log-entry"><span>[2026-02-01 09:12]</span> SYS: URF_Core parity check successful. Global rigidity markers locked.</div>
-        <div class="log-entry"><span>[2026-02-01 14:05]</span> CLC: Certification standard 1.0.2 pushed to production.</div>
-        <div class="log-entry"><span>[2026-02-04 10:22]</span> CHRONOS: Entropy depth depth parity 1.04 -> 1.00. Recalibrating.</div>
-        <div class="log-entry" style="color: var(--warning)"><span>[2026-02-04 13:10]</span> CCL: Unique obstruction detected. Logic-width dependency k < f(tw).</div>
-        <div class="log-entry" style="color: var(--success)"><span>[2026-02-04 13:10]</span> SYSTEM: Operational state RIGID. Entry point verified.</div>
-      </div>
-    </section>
-  </main>
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
 
-  <footer>
-    <p>&copy; 2026 Inacio F. Vasquez | Independent Research Program</p>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 15px; color: var(--accent);">
-      [STATE: MATHEMATICALLY_CLOSED] | [ORCID: 0009-0008-8459-3400]
-    </p>
-  </footer>
+nav a:hover, nav a.active {
+    color: var(--accent);
+}
 
-</body>
-</html>
+/* Headlines */
+h1 {
+    font-size: 1.75rem;
+    margin: 0 0 1rem 0;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.1rem;
+    margin: 2.5rem 0 1.25rem 0;
+    color: var(--text-primary);
+    border-left: 3px solid var(--accent);
+    padding-left: 1rem;
+}
+
+h3 {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+}
+
+/* Main Container */
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 2rem 4rem 2rem;
+    width: 100%;
+    flex: 1;
+}
+
+/* URF-11 Promotion Block [cite: 7, 8, 9] */
+.promo-block {
+    border: 1px solid var(--accent-warning);
+    background: rgba(210, 153, 34, 0.05);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    margin: 2rem 0;
+}
+
+.promo-block strong {
+    color: var(--accent-warning);
+    display: block;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.promo-block p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Grid Layouts */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+}
+
+.card:hover {
+    border-color: var(--text-secondary);
+}
+
+/* Artifact Lists [cite: 90, 93, 106] */
+ul.artifact-list {
+    list-style: none;
+    padding: 0;
+}
+
+ul.artifact-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+}
+
+ul.artifact-list li:last-child {
+    border-bottom: none;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Contact / Intake Surface [cite: 129, 132, 144] */
+.contact-surface {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+}
+
+.priority-rule {
+    border: 1px solid var(--accent-error);
+    background: rgba(248, 81, 73, 0.05);
+    color: #ff7b72;
+    padding: 1.25rem;
+    margin-top: 2rem;
+    border-left: 5px solid var(--accent-error);
+    font-size: 0.9rem;
+}
+
+/* Technical Correspondence Identifiers */
+.identifier-tag {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    nav { gap: 1rem; flex-wrap: wrap; }
+    h1 { font-size: 1.5rem; }
+}
