@@ -5,13 +5,13 @@
     <title>Contact | Vasquez Research</title>
     <style>
         :root { --bg: #0d1117; --text: #c9d1d9; --accent: #f85149; --border: #30363d; --link: #58a6ff; }
-        body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; padding: 50px; display: flex; justify-content: center; }
+        body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; padding: 60px; display: flex; justify-content: center; }
         .surface { width: 100%; max-width: 800px; border: 1px solid var(--border); padding: 40px; background: #161b22; border-radius: 8px; }
         h1 { color: var(--accent); font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-        .priority { border: 1px solid var(--accent); background: rgba(248, 81, 73, 0.05); padding: 20px; margin: 30px 0; border-left: 5px solid var(--accent); color: #ff7b72; }
-        h3 { font-size: 0.9rem; color: var(--link); border-bottom: 1px dotted var(--border); padding-bottom: 5px; }
-        ul { list-style: none; padding: 0; }
-        li { margin-bottom: 10px; opacity: 0.8; font-size: 0.85rem; border-left: 2px solid var(--border); padding-left: 15px; }
+        .priority { border: 1px solid var(--accent); background: rgba(248, 81, 73, 0.05); padding: 20px; margin: 30px 0; border-left: 5px solid var(--accent); color: #ff7b72; font-size: 0.9rem; }
+        h3 { font-size: 0.9rem; color: var(--link); margin-top: 30px; }
+        ul { list-style: none; padding: 0; font-size: 0.85rem; }
+        li { margin-bottom: 10px; border-left: 2px solid var(--border); padding-left: 15px; }
         a { color: var(--link); text-decoration: none; }
         .email { margin-top: 40px; text-align: center; }
         .email a { border-bottom: 1px solid var(--link); font-size: 1.1rem; }
@@ -21,25 +21,18 @@
     <main class="surface">
         <nav style="font-size: 0.75rem; margin-bottom: 20px;"><a href="index.html" style="color:var(--text)">/BACK</a></nav>
         <h1>Technical Correspondence</h1>
-        <p>Operational intake for research artifacts, manuscripts, and audit requests.</p>
+        <p style="font-size: 0.9rem;">Operational intake for repository-native correspondence regarding research artifacts and standards.</p>
 
         <div class="priority">
-            <strong>Priority Rule:</strong> Requests containing a concrete repository identifier, commit hash, pull request, registry record, or DOI receive highest priority.
+            <strong>Priority Rule:</strong> Requests containing a concrete repository identifier, commit, pull request, registry record, or DOI receive highest priority.
         </div>
 
-        <h3>Required Identifiers</h3>
+        <h3>Include at Least One Identifier</h3>
         <ul>
-            <li>Repository name (e.g., <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, <a href="https://github.com/inaciovasquez2020/flagship-lean">flagship-lean</a>)</li>
+            <li>Repository name</li>
             <li>Commit hash or Pull Request number</li>
             <li>Registry record or theorem label</li>
             <li>DOI or Manuscript code</li>
-        </ul>
-
-        <h3>Inquiry Channels</h3>
-        <ul>
-            <li><strong>Institutional:</strong> Manuscripts and formal research summaries.</li>
-            <li><strong>Verification:</strong> <a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a> and reproducibility checks.</li>
-            <li><strong>Registry:</strong> <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a> community and URF-11 field records.</li>
         </ul>
 
         <div class="email">
