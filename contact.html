@@ -2,59 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Vasquez Research</title>
     <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #f85149; --border: #30363d; --code: #79c0ff; }
-        body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; margin: 0; padding: 40px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        
-        .intake-surface { width: 100%; max-width: 750px; border: 1px solid var(--border); background: #161b22; padding: 40px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { color: var(--accent); font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-        
-        .priority-alert { border: 1px solid var(--accent); background: rgba(248, 81, 73, 0.05); padding: 20px; margin: 25px 0; border-left: 5px solid var(--accent); }
-        .priority-alert strong { color: var(--accent); display: block; margin-bottom: 10px; }
-        
-        h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--code); margin-top: 30px; }
+        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #f85149; --border: #30363d; --link: #58a6ff; }
+        body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', monospace; padding: 50px; display: flex; justify-content: center; }
+        .surface { width: 100%; max-width: 800px; border: 1px solid var(--border); padding: 40px; background: #161b22; border-radius: 8px; }
+        h1 { color: var(--accent); font-size: 1.4rem; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .priority { border: 1px solid var(--accent); background: rgba(248, 81, 73, 0.05); padding: 20px; margin: 30px 0; border-left: 5px solid var(--accent); color: #ff7b72; }
+        h3 { font-size: 0.9rem; color: var(--link); border-bottom: 1px dotted var(--border); padding-bottom: 5px; }
         ul { list-style: none; padding: 0; }
-        li { margin-bottom: 10px; opacity: 0.8; font-size: 0.9rem; border-left: 2px solid var(--border); padding-left: 15px; }
-        
-        .email-block { margin-top: 40px; text-align: center; font-size: 1.1rem; }
-        .email-block a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
-        
-        nav { position: absolute; top: 40px; left: 40px; font-size: 0.8rem; }
-        nav a { color: var(--text); text-decoration: none; opacity: 0.6; }
-        nav a:hover { opacity: 1; }
+        li { margin-bottom: 10px; opacity: 0.8; font-size: 0.85rem; border-left: 2px solid var(--border); padding-left: 15px; }
+        a { color: var(--link); text-decoration: none; }
+        .email { margin-top: 40px; text-align: center; }
+        .email a { border-bottom: 1px solid var(--link); font-size: 1.1rem; }
     </style>
 </head>
 <body>
-    <nav><a href="index.html">RETURN_TO_INDEX</a></nav>
-
-    <main class="intake-surface">
+    <main class="surface">
+        <nav style="font-size: 0.75rem; margin-bottom: 20px;"><a href="index.html" style="color:var(--text)">/BACK</a></nav>
         <h1>Technical Correspondence</h1>
         <p>Operational intake for research artifacts, manuscripts, and audit requests.</p>
 
-        <div class="priority-alert">
-            <strong>Priority Rule:</strong>
-            Requests containing a concrete repository identifier, commit hash, pull request, registry record, or DOI receive highest priority handling.
+        <div class="priority">
+            <strong>Priority Rule:</strong> Requests containing a concrete repository identifier, commit hash, pull request, registry record, or DOI receive highest priority.
         </div>
 
-        <h2>Required Identifiers</h2>
+        <h3>Required Identifiers</h3>
         <ul>
-            <li>Repository name (e.g., urf-core, flagship-lean)</li>
-            <li>Commit hash or Pull Request ID</li>
-            <li>Registry record or module label</li>
+            <li>Repository name (e.g., <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, <a href="https://github.com/inaciovasquez2020/flagship-lean">flagship-lean</a>)</li>
+            <li>Commit hash or Pull Request number</li>
+            <li>Registry record or theorem label</li>
             <li>DOI or Manuscript code</li>
         </ul>
 
-        <h2>Inquiry Channels</h2>
+        <h3>Inquiry Channels</h3>
         <ul>
-            <li><strong>Institutional/Editorial:</strong> Manuscripts and formal research summaries.</li>
-            <li><strong>Verification/Audit:</strong> <a href="https://github.com/inaciovasquez2020/urf-verifier" style="color:var(--text)">urf-verifier</a> and reproducibility checks.</li>
-            <li><strong>Formalization/Frontier:</strong> <a href="https://github.com/inaciovasquez2020/flagship-lean" style="color:var(--text)">flagship-lean</a> and locality walls.</li>
-            <li><strong>Registry/Cross-field:</strong> <a href="https://github.com/inaciovasquez2020/urf-core" style="color:var(--text)">urf-core</a> and URF-11 subproblem records.</li>
+            <li><strong>Institutional:</strong> Manuscripts and formal research summaries.</li>
+            <li><strong>Verification:</strong> <a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a> and reproducibility checks.</li>
+            <li><strong>Registry:</strong> <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a> community and URF-11 field records.</li>
         </ul>
 
-        <div class="email-block">
+        <div class="email">
             <a href="mailto:inacio@vasquezresearch.com">inacio@vasquezresearch.com</a>
         </div>
     </main>
