@@ -1,52 +1,14 @@
-# Inacio F. Vasquez — Personal Research Portal
+# Inacio F. Vasquez — Start Here / Verification Path
 
-This repository hosts the primary GitHub Pages site for the inaciovasquez2020 organization. It serves as the top-level entry point for all hosted research documentation and infrastructure dashboards.
+This repository hosts the canonical root page for the public research surface.
 
-## Research Entry Points
+## Start Here / Verification Path
+1. [GitHub profile README](https://github.com/inaciovasquez2020/inaciovasquez2020)
+2. [URF core](https://github.com/inaciovasquez2020/urf-core)
+3. [Chronos executable artifact](https://github.com/inaciovasquez2020/chronos-urf-rr)
+4. [Vasquez Index](https://inaciovasquez2020.github.io/vasquez-index/)
 
-* **Main Site:** [https://inaciovasquez2020.github.io/](https://inaciovasquez2020.github.io/)
-* **Vasquez Index Registry:** [https://inaciovasquez2020.github.io/vasquez-index/](https://inaciovasquez2020.github.io/vasquez-index/)
-* **Canonical Dashboard:** [https://inaciovasquez2020.github.io/vasquez-index/dashboard.html](https://inaciovasquez2020.github.io/vasquez-index/dashboard.html)
-
----
-
-## Technical Infrastructure
-
-This repository facilitates the web deployment of scientific assets. The underlying metadata and stable repository references are managed via the [Vasquez Index](https://github.com/inaciovasquez2020/vasquez-index).
-
-### Managed Repositories
-The following research modules are indexed through this portal:
-* chronos-urf-rr
-* rank-dichotomy-cat0
-* scientific-infrastructure
-* support-drift
-* urf-axioms
-* urf-core
-
-## Source Repositories
-- Infrastructure: https://github.com/inaciovasquez2020/scientific-infrastructure
-- URF Core: https://github.com/inaciovasquez2020/urf-core
-
----
-
-## Usage and Deployment
-
-This repository is strictly for hosting the root site content. 
-* All HTML, CSS, and asset files located here are deployed to the `inaciovasquez2020.github.io` domain.
-* For the canonical registry source data, refer to the `vasquez-index` repository.
-* For executable code, refer to the specific research repositories listed above.
-
-## Citation
-
-To cite the research infrastructure hosted here:
-
-```bibtex
-@manual{Vasquez_Index_2026,
-  author = {Vasquez, Inacio F.},
-  title  = {Vasquez Index: Canonical Repository Registry and Dashboard},
-  year   = {2026},
-  url    = {[https://inaciovasquez2020.github.io/vasquez-index/](https://inaciovasquez2020.github.io/vasquez-index/)}
-}
-
-Documentation source
-- Canonical docs source lives at https://github.com/inaciovasquez2020/vasquez-docs
+## Canonical identity
+- [ORCID 0009-0008-8459-3400](https://orcid.org/0009-0008-8459-3400)
+- [vasquezresearch.com](https://www.vasquezresearch.com)
+- [GitHub organization](https://github.com/inaciovasquez2020)
