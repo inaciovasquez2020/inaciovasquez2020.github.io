@@ -2,60 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications | Vasquez Research</title>
     <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; --card: #161b22; }
+        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 50px; line-height: 1.6; }
         .container { max-width: 900px; margin: 0 auto; }
         h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; color: var(--accent); }
-        
         .promo-box { border: 1px solid var(--accent); padding: 20px; margin: 30px 0; background: rgba(88, 166, 255, 0.05); border-radius: 6px; }
-        
-        section { margin-bottom: 50px; }
-        h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; color: var(--accent); }
-        
-        .artifact-entry { margin-bottom: 25px; }
-        .artifact-name { font-weight: bold; color: #79c0ff; font-family: 'JetBrains Mono', monospace; }
-        .artifact-desc { font-size: 0.95rem; opacity: 0.8; margin-top: 5px; }
-        
+        h2 { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--accent); margin-top: 40px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .list { column-count: 2; column-gap: 40px; list-style: square; padding-left: 20px; }
+        li { margin-bottom: 15px; font-size: 0.95rem; }
         a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Manuscripts, Certificates, and Public Protocols</h1>
-            <p>Formal publication pipeline organized by repository-backed artifact families.</p>
-        </header>
+        <h1>Manuscripts, Reports, and Certificates</h1>
+        <nav style="font-family: 'JetBrains Mono', monospace;"><a href="index.html">/HOME</a></nav>
 
         <div class="promo-box">
-            <strong>Infrastructure Promotion:</strong> URF-11 registry work is now publication-facing. Subproblem records are canonical in <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>; translation-rule records are the next public consistency layer.
+            <strong>Current Infrastructure Promotion:</strong> URF-11 registry work is now publication-facing. Subproblem records are canonical in <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>; translation-rule records are the next public consistency layer.
         </div>
 
         <section>
-            <h2>Foundational and Complexity Artifacts</h2>
-            <div class="artifact-entry">
-                <div class="artifact-name">Final Wall (FO^k Locality)</div>
-                <div class="artifact-desc">Terminal obstruction results for FO^k locality and refinement limits. Linked to <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a> standards.</div>
-            </div>
-            <div class="artifact-entry">
-                <div class="artifact-name">Chronos–EntropyDepth</div>
-                <div class="artifact-desc">Entropy-depth and transcript capacity witnesses. Executable implementation: <a href="https://github.com/inaciovasquez2020/chronos-urf-rr">chronos-urf-rr</a>.</div>
-            </div>
+            <h2>Research Artifacts</h2>
+            <ul class="list">
+                <li>Final Wall (FO^k Locality)</li>
+                <li>Cycle-Local Rigidity</li>
+                <li>Chronos–EntropyDepth</li>
+                <li>Transcript Capacity Core</li>
+                <li><a href="https://github.com/inaciovasquez2020/rh-archimedean-kernel-rigidity">Riemann Hypothesis Kernel</a></li>
+                <li><a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology">DFM–MKC Cosmology</a></li>
+            </ul>
         </section>
 
         <section>
-            <h2>Standards and Certification</h2>
-            <div class="artifact-entry">
-                <div class="artifact-name">URF Verifier (URF-SG)</div>
-                <div class="artifact-desc">Deterministic certification stack. Repository: <a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a>.</div>
-            </div>
-            <div class="artifact-entry">
-                <div class="artifact-name">URF-P Series (0001–0003)</div>
-                <div class="artifact-desc">Public protocols and audit records for repository-native reproducibility.</div>
-            </div>
+            <h2>Standards and Protocols</h2>
+            <ul class="list">
+                <li><a href="https://github.com/inaciovasquez2020/urf-verifier">URF Verifier (URF-SG)</a></li>
+                <li>Capacity–Locality Certification</li>
+                <li>AIV Verifier Public</li>
+                <li>URF-P Audit Protocols</li>
+            </ul>
         </section>
     </div>
 </body>
