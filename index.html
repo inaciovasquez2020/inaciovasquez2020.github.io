@@ -3,41 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Inacio F. Vasquez | Unified Rigidity Framework</title>
-    <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; --promo: #d29922; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 60px; line-height: 1.6; }
-        main { max-width: 900px; margin: 0 auto; }
-        h1 { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .highlight { border: 1px solid var(--promo); background: rgba(210, 153, 34, 0.05); padding: 30px; border-radius: 6px; margin: 40px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        h3 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent); }
-        a { color: var(--accent); text-decoration: none; }
-        nav { font-family: 'JetBrains Mono', monospace; margin-bottom: 40px; }
-        nav a { margin-right: 25px; color: #8b949e; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <main>
-        <nav><a href="publications.html">PUBLICATIONS</a> | <a href="contact.html">CONTACT</a> | <a href="https://github.com/inaciovasquez2020">GITHUB</a></nav>
-
+    <header>
+        <nav>
+            <a href="publications.html">PUBLICATIONS</a>
+            <a href="contact.html">CONTACT</a>
+            <a href="https://github.com/inaciovasquez2020">GITHUB</a>
+        </nav>
         <h1>Inacio F. Vasquez</h1>
-        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, and public certification.</p>
+        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, mathematical frontiers, physical models, public certification, and auditable release surfaces[cite: 76, 77].</p>
+    </header>
 
-        <div class="highlight">
-            <strong style="color:var(--promo); font-family: 'JetBrains Mono', monospace;">Featured URF-Core Update — URF-11 Registry Layer</strong>
-            <p>urf-core now includes a canonical URF-11 subproblem registry. The next public layer is PR #282, which adds a translation-rule registry.</p>
+    <main>
+        <div class="promo-block">
+            <strong>Featured URF-Core Update — URF-11 Registry Layer</strong>
+            <p>
+                The URF-11 infrastructure buildout is active: the subproblem registry is now part of the canonical community layer within 
+                <a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, and the translation-rule registry is the next public consistency surface[cite: 84, 85].
+            </p>
         </div>
 
-        <div class="grid">
-            <div class="card">
-                <h3>Foundations</h3>
-                <p><a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, <a href="https://github.com/inaciovasquez2020/chronos-urf-rr">chronos-urf-rr</a>, urf-axioms, urf-spine.</p>
+        <section>
+            <h2>Program Structure</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Foundations</h3>
+                    <ul class="artifact-list">
+                        <li><a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a> — Canonical definitions[cite: 79].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/chronos-urf-rr">chronos-urf-rr</a> — Reference implementation[cite: 79].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/urf-axioms">urf-axioms</a> — Formal axiomatization[cite: 79].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/urf-spine">urf-spine</a> — Structural spine[cite: 79].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/transcript-capacity-core">transcript-capacity-core</a> — Information-theoretic limits[cite: 79].</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Formal Verification</h3>
+                    <ul class="artifact-list">
+                        <li><a href="https://github.com/inaciovasquez2020/flagship-lean">flagship-lean</a> — Lean 4 formalization[cite: 80].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/pachner-invariant">pachner-invariant</a> — Topological invariants[cite: 80].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/scientific-infrastructure">scientific-infrastructure</a> — Reproducibility tools[cite: 80].</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Certification & Audit</h3>
+                    <ul class="artifact-list">
+                        <li><a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a> — Deterministic verification[cite: 81].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/capacity-locality-certification">capacity-locality-certification</a> — Provenance[cite: 81].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">urf-open-review-ledger</a> — Public audit records[cite: 81].</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Mathematical Physics</h3>
+                    <ul class="artifact-list">
+                        <li><a href="https://github.com/inaciovasquez2020/rh-archimedean-kernel-rigidity">rh-archimedean-kernel-rigidity</a>[cite: 82].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology">dfm-mkc-cosmology</a>[cite: 82].</li>
+                        <li><a href="https://github.com/inaciovasquez2020/Exchange-Force-Framework">Exchange-Force-Framework</a>[cite: 82].</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card">
-                <h3>Certification</h3>
-                <p><a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a>, <a href="https://github.com/inaciovasquez2020/capacity-locality-certification">capacity-locality-certification</a>, <a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">urf-open-review-ledger</a>.</p>
-            </div>
-        </div>
+        </section>
+
+        <section>
+            <h2>Entry Points</h2>
+            <ul class="artifact-list">
+                <li><strong>Research map:</strong> <a href="https://github.com/inaciovasquez2020/vasquez-index">vasquez-index</a>[cite: 87].</li>
+                <li><strong>Audit records:</strong> <a href="publications.html">Publications page</a> and URF-P series[cite: 88].</li>
+                <li><strong>Technical infrastructure:</strong> <a href="https://github.com/inaciovasquez2020">GitHub repositories</a> and verifier surfaces[cite: 89].</li>
+            </ul>
+        </section>
     </main>
+
+    <footer>
+        <p>Independent Researcher, United States | ORCID: 0009-0008-8459-3400</p>
+    </footer>
 </body>
 </html>
