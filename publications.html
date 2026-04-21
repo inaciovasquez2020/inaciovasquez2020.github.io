@@ -2,80 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publications - Inacio F. Vasquez</title>
+    <title>Publications | Vasquez Research</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: rgb(51, 51, 51); max-width: 900px; margin: 0 auto; padding: 20px; background-color: rgb(249, 249, 249); }
-        header { border-bottom: 2px solid rgb(200, 200, 200); padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { font-size: 2em; color: rgb(0, 102, 204); }
-        h2 { font-size: 1.3em; border-bottom: 1px solid rgb(221, 221, 221); padding-bottom: 5px; }
-        .promo-block { background-color: rgb(224, 240, 255); padding: 15px; border-left: 5px solid rgb(0, 102, 204); margin-bottom: 20px; }
-        ul { list-style-type: square; }
-        li { margin-bottom: 10px; }
+        :root { --bg: #0d1117; --text: #c9d1d9; --border: #30363d; --accent: #58a6ff; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; }
+        .infra-promo { border: 1px solid var(--accent); padding: 15px; margin: 20px 0; background: rgba(88, 166, 255, 0.05); }
+        section { margin-bottom: 40px; }
+        h2 { font-family: 'JetBrains Mono', monospace; border-left: 4px solid var(--accent); padding-left: 15px; font-size: 1.2rem; }
+        .artifact-list { column-count: 2; column-gap: 40px; list-style-type: square; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Manuscripts, Reports, Certificates, and Public Protocols [cite: 91]</h1>
-        <p>Formal publication pipeline for the Vasquez research program, organized by repository-backed artifact families. [cite: 92]</p>
-    </header>
+    <div class="container">
+        <h1>Manuscripts, Reports, Certificates, and Public Protocols</h1> [cite: 91]
+        <p>Formal publication pipeline for the Vasquez research program, organized by repository-backed artifact families.</p> [cite: 92]
 
-    <div class="promo-block">
-        <h2>Current Infrastructure Promotion [cite: 127]</h2>
-        <p>URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer. [cite: 128]</p>
-    </div>
+        <div class="infra-promo">
+            <strong>Current Infrastructure Promotion:</strong> URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer. [cite: 127, 128]
+        </div>
 
-    <main>
         <section>
-            <h2>Foundational and Complexity Artifacts [cite: 93]</h2>
-            <ul>
-                <li>Final Wall (FO^k Locality) [cite: 94]</li>
-                <li>Cycle-Local Rigidity [cite: 95]</li>
-                <li>Chronos–EntropyDepth [cite: 96]</li>
-                <li>Transcript Capacity Core [cite: 97]</li>
-                <li>URC and locality/capacity decision surfaces [cite: 98]</li>
-            </ul>
-
-            <h2>Formalization Layer [cite: 99]</h2>
-            <ul>
-                <li>URF Axioms [cite: 100]</li>
-                <li>URF Spine [cite: 101]</li>
-                <li>Flagship Lean [cite: 102]</li>
-                <li>CorrRank [cite: 103]</li>
-                <li>Pachner Invariant [cite: 104]</li>
-                <li>Poincare New Derivation [cite: 105]</li>
-            </ul>
-
-            <h2>Standards and Certification [cite: 106]</h2>
-            <ul>
-                <li>URF-SG [cite: 107]</li>
-                <li>URF Verifier [cite: 108]</li>
-                <li>Capacity–Locality Certification [cite: 109]</li>
-                <li>AIV Verifier Public [cite: 110]</li>
-                <li>URF Open Review Ledger [cite: 111]</li>
-                <li>URF-P-0001 / URF-P-0002 / URF-P-0003 [cite: 112]</li>
-            </ul>
-
-            <h2>Mathematical Physics and Applied Rigidity [cite: 113]</h2>
-            <ul>
-                <li>Archimedean Kernel Rigidity [cite: 114]</li>
-                <li>YM–OS Quantization [cite: 115]</li>
-                <li>Yang–Mills HS Gap Cert [cite: 116]</li>
-                <li>Radiative Rigidity [cite: 117]</li>
-                <li>DFM–MKC Cosmology [cite: 118]</li>
-                <li>Operational Wavefunction Collapse [cite: 119]</li>
-                <li>Exchange Force Framework [cite: 120]</li>
-                <li>Biological Friction Framework [cite: 121]</li>
-            </ul>
-
-            <h2>Experimental and Boundary Repositories [cite: 122]</h2>
-            <ul>
-                <li>clay-problem-lab [cite: 123]</li>
-                <li>owc-counterexamples [cite: 124]</li>
-                <li>urf-application-stress-test [cite: 125]</li>
-                <li>terminal-rigidity-witness-erb [cite: 126]</li>
+            <h2>Foundational and Complexity Artifacts</h2> [cite: 93]
+            <ul class="artifact-list">
+                <li>Final Wall (FO^k Locality)</li> [cite: 94]
+                <li>Cycle-Local Rigidity</li> [cite: 95]
+                <li>Chronos–EntropyDepth</li> [cite: 96]
+                <li>Transcript Capacity Core</li> [cite: 97]
             </ul>
         </section>
-    </main>
+
+        <section>
+            <h2>Standards and Certification</h2> [cite: 106]
+            <ul class="artifact-list">
+                <li>URF-SG</li> [cite: 107]
+                <li>URF Verifier</li> [cite: 108]
+                <li>Capacity–Locality Certification</li> [cite: 109]
+                <li>AIV Verifier Public</li> [cite: 110]
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
