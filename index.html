@@ -2,53 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inacio F. Vasquez | Unified Rigidity Framework</title>
     <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; --warn: #d29922; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 50px; line-height: 1.6; }
+        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; --promo: #d29922; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 60px; line-height: 1.6; }
         main { max-width: 900px; margin: 0 auto; }
-        h1 { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 15px; color: var(--accent); }
-        .highlight { border: 1px solid var(--warn); padding: 25px; background: rgba(210, 153, 34, 0.05); border-radius: 6px; margin: 35px 0; }
-        .highlight h3 { margin-top: 0; color: var(--warn); font-family: 'JetBrains Mono', monospace; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
-        .card { border: 1px solid var(--border); padding: 20px; border-radius: 6px; background: #161b22; }
-        h3 { font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-top: 0; font-size: 1.1rem; }
+        h1 { font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .highlight { border: 1px solid var(--promo); background: rgba(210, 153, 34, 0.05); padding: 30px; border-radius: 6px; margin: 40px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        h3 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent); }
         a { color: var(--accent); text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        nav { margin-bottom: 40px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
-        nav a { margin-right: 25px; opacity: 0.7; }
-        nav a:hover { opacity: 1; }
+        nav { font-family: 'JetBrains Mono', monospace; margin-bottom: 40px; }
+        nav a { margin-right: 25px; color: #8b949e; }
     </style>
 </head>
 <body>
     <main>
-        <nav>
-            <a href="publications.html">/PUBLICATIONS</a>
-            <a href="contact.html">/CONTACT</a>
-            <a href="https://github.com/inaciovasquez2020">/GITHUB</a>
-        </nav>
+        <nav><a href="publications.html">PUBLICATIONS</a> | <a href="contact.html">CONTACT</a> | <a href="https://github.com/inaciovasquez2020">GITHUB</a></nav>
 
         <h1>Inacio F. Vasquez</h1>
-        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, mathematical frontiers, physical models, and auditable release surfaces.</p>
+        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, and public certification.</p>
 
         <div class="highlight">
-            <h3>Featured URF-Core Update — URF-11 Registry Layer</h3>
-            <p><a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a> now includes a canonical URF-11 subproblem registry with repository-native checks. The <a href="https://github.com/inaciovasquez2020/urf-core/commit/606f147">subproblem registry commit (606f147)</a> is now the reference baseline. Next: <a href="https://github.com/inaciovasquez2020/urf-core/pull/282">PR #282</a> for the translation-rule registry.</p>
+            <strong style="color:var(--promo); font-family: 'JetBrains Mono', monospace;">Featured URF-Core Update — URF-11 Registry Layer</strong>
+            <p>urf-core now includes a canonical URF-11 subproblem registry. The next public layer is PR #282, which adds a translation-rule registry.</p>
         </div>
 
         <div class="grid">
             <div class="card">
                 <h3>Foundations</h3>
-                <p><a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, <a href="https://github.com/inaciovasquez2020/chronos-urf-rr">chronos-urf-rr</a>, <a href="https://github.com/inaciovasquez2020/flagship-lean">flagship-lean</a>, urf-axioms, urf-spine.</p>
+                <p><a href="https://github.com/inaciovasquez2020/urf-core">urf-core</a>, <a href="https://github.com/inaciovasquez2020/chronos-urf-rr">chronos-urf-rr</a>, urf-axioms, urf-spine.</p>
             </div>
             <div class="card">
-                <h3>Verification</h3>
-                <p><a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a>, scientific-infrastructure, capacity-locality-certification, aiv-verifier-public.</p>
-            </div>
-            <div class="card">
-                <h3>Frontiers</h3>
-                <p><a href="https://github.com/inaciovasquez2020/rh-archimedean-kernel-rigidity">rh-archimedean-kernel-rigidity</a>, <a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology">dfm-mkc-cosmology</a>, pachner-invariant, cycle-local-rigidity.</p>
+                <h3>Certification</h3>
+                <p><a href="https://github.com/inaciovasquez2020/urf-verifier">urf-verifier</a>, <a href="https://github.com/inaciovasquez2020/capacity-locality-certification">capacity-locality-certification</a>, <a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">urf-open-review-ledger</a>.</p>
             </div>
         </div>
     </main>
