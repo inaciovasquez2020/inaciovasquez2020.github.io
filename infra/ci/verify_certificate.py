@@ -1,4 +1,5 @@
 import json
+
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -53,3 +54,17 @@ if __name__ == "__main__":
     with open(CERT_PATH, "r", encoding="utf-8") as f:
         cert = json.load(f)
     print({"valid": verify(cert, schema)})
+import math
+
+def verify(cert):
+    n = cert["n"]
+    assert n > 0
+    assert cert["c0"] > 0
+    assert cert["constants"]["kappa_ref"] > 0
+    return True
+
+if __name__ == "__main__":
+    with open("infra/certificates/example_certificate.json") as f:
+        cert = json.load(f)
+    print({"valid": verify(cert)})
+

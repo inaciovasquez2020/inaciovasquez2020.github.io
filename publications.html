@@ -1,247 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Manuscripts & Reports — Inacio F. Vasquez</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <style>
-    :root {
-      --bg-main: #0b1220;
-      --bg-card: #0e1626;
-      --bg-nav: #0f172a;
-      --accent: #38bdf8;
-      --accent-green: #10b981;
-      --text-main: #e5e7eb;
-      --text-muted: #9aa5b1;
-      --text-title: #f8fafc;
-      --border: #1f2933;
-    }
-
-    * { box-sizing: border-box; }
-    body { 
-      margin: 0; 
-      font-family: 'Inter', sans-serif; 
-      color: var(--text-main); 
-      background-color: var(--bg-main); 
-      line-height: 1.6;
-    }
-
-    /* --- Navigation --- */
-    nav {
-      background: var(--bg-nav);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-    .nav-brand i { color: var(--accent); }
-    .nav-links { display: flex; gap: 25px; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-
-    /* --- Hero Section --- */
-    .hero {
-      background: linear-gradient(180deg, var(--bg-nav), var(--bg-main));
-      border-bottom: 1px solid var(--border);
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .hero h1 { 
-      font-family: 'Libre Baskerville', serif; 
-      font-size: 2.5rem; 
-      margin: 0; 
-      color: var(--text-title);
-      letter-spacing: -1px;
-    }
-    .hero .subtitle { 
-      max-width: 700px; 
-      margin: 15px auto 0; 
-      font-size: 1.1rem; 
-      color: var(--text-muted); 
-    }
-
-    /* --- Content --- */
-    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    
-    h2.section-label { 
-      font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; 
-      color: var(--accent); border-bottom: 1px solid var(--border);
-      padding-bottom: 10px; margin-bottom: 30px;
-    }
-
-    /* --- Publication Card --- */
-    .pub-entry {
-      background: var(--bg-card);
-      padding: 35px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 25px;
-      transition: 0.2s;
-    }
-    .pub-entry:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .pub-year { 
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px; 
-      font-weight: 700; 
-      color: var(--accent-green); 
-      text-transform: uppercase; 
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .pub-title { 
-      font-family: 'Libre Baskerville', serif;
-      font-size: 1.4rem; 
-      font-weight: 700; 
-      color: var(--text-title); 
-      margin: 0 0 12px 0;
-      line-height: 1.3;
-    }
-    .pub-authors { font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 15px; }
-    .pub-abstract { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
-    
-    .pub-links { 
-      display: flex; 
-      flex-wrap: wrap;
-      gap: 15px; 
-      padding-top: 20px;
-      border-top: 1px solid var(--border);
-    }
-    .pub-links a { 
-      font-size: 12px; 
-      font-weight: 700; 
-      text-decoration: none; 
-      color: var(--text-main); 
-      display: flex; 
-      align-items: center; 
-      gap: 6px; 
-    }
-    .pub-links a:hover { color: var(--accent); }
-
-    .tag { 
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px; 
-      padding: 3px 10px; 
-      border-radius: 4px; 
-      background: #050910; 
-      color: var(--text-muted); 
-      border: 1px solid var(--border);
-      text-transform: uppercase;
-    }
-
-    /* --- Footer --- */
-    footer {
-      background: var(--bg-nav);
-      color: var(--text-muted);
-      padding: 60px 20px;
-      text-align: center;
-      font-size: 13px;
-      margin-top: 80px;
-      border-top: 1px solid var(--border);
-    }
-    .footer-note { font-style: italic; opacity: 0.7; max-width: 600px; margin: 20px auto 0; }
-
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2rem; }
-      .pub-entry { padding: 25px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Publications | Vasquez Research</title>
+    <style>
+        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 50px; }
+        .wrapper { max-width: 800px; margin: 0 auto; }
+        h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; color: var(--accent); }
+        .promo { border: 1px solid var(--accent); padding: 20px; background: rgba(88, 166, 255, 0.05); border-radius: 6px; margin: 30px 0; font-size: 0.9rem; }
+        h2 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent); margin-top: 40px; }
+        ul { list-style: square; padding-left: 20px; font-size: 0.95rem; }
+        li { margin-bottom: 10px; }
+        a { color: var(--accent); text-decoration: none; }
+    </style>
 </head>
 <body>
+    <div class="wrapper">
+        <nav style="font-family: 'JetBrains Mono', monospace;"><a href="index.html">/HOME</a></nav>
+        <h1>Manuscripts, Reports, and Certificates</h1>
 
-  <nav>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand">
-      <i class="fa-solid fa-layer-group"></i>
-      <span>VASQUEZ_LAB</span>
-    </a>
-    <div class="nav-links">
-      <a href="https://inaciovasquez2020.github.io/">Home</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/">Network Index</a>
-      <a href="https://github.com/inaciovasquez2020">GitHub</a>
+        <div class="promo">
+            <strong>Current Infrastructure Promotion:</strong> URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer.
+        </div>
+
+        <section>
+            <h2>Foundational Artifacts</h2>
+            <ul>
+                <li>Final Wall (FO^k Locality)</li>
+                <li>Cycle-Local Rigidity</li>
+                <li>Chronos–EntropyDepth</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Standards and Certification</h2>
+            <ul>
+                <li><a href="https://github.com/inaciovasquez2020/urf-verifier">URF Verifier</a></li>
+                <li><a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF Open Review Ledger</a></li>
+                <li>URF-P-0001 / URF-P-0002 / URF-P-0003</li>
+            </ul>
+        </section>
     </div>
-  </nav>
-
-  <header class="hero">
-    <h1>Manuscripts & Reports</h1>
-    <p class="subtitle">Formal research pipeline for the Unified Rigidity Framework (URF) and related Operator Theory.</p>
-  </header>
-
-  <main class="container">
-    <h2 class="section-label">Current Pipeline</h2>
-
-    <article class="pub-entry">
-      <span class="pub-year">2026 — Preprint</span>
-      <h2 class="pub-title">The Expander Obstruction and Logic-Width Dependency</h2>
-      <div class="pub-authors">Inacio F. Vasquez</div>
-      <p class="pub-abstract">
-        This paper characterizes the fundamental failure of \(FO^k\) local types to bound global structural invariants in spectral expanders. 
-        We resolve this by establishing the <strong>Logic-Width Dependency</strong> \(k \ge f(tw)\), proving that for 
-        bounded-treewidth systems, local homogeneity forces global rigidity.
-      </p>
-      <div class="pub-links">
-        <a href="https://github.com/inaciovasquez2020/urf-core"><i class="fa-solid fa-file-pdf"></i> Manuscript PDF</a>
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/"><i class="fa-solid fa-microchip"></i> Verification Artifacts</a>
-        <span class="tag">Theoretical Computer Science</span>
-      </div>
-    </article>
-
-    <article class="pub-entry">
-      <span class="pub-year">2026 — In Preparation</span>
-      <h2 class="pub-title">Finite Capacity and Rigidity in Operator Systems</h2>
-      <div class="pub-authors">Inacio F. Vasquez</div>
-      <p class="pub-abstract">
-        An exploration of URF rigidity bounds applied to finite operator systems. We demonstrate how 
-        spectral gap preservation ensures deterministic capacity retention in homogeneous structures, 
-        bridging the gap between operator algebra and information topology.
-      </p>
-      <div class="pub-links">
-        <span class="tag">Operator Theory</span>
-        <span class="tag">Information Topology</span>
-      </div>
-    </article>
-
-    <article class="pub-entry">
-      <span class="pub-year">2025 — Technical Report</span>
-      <h2 class="pub-title">URF-SG: A Standard for Machine-Verifiable Spectral Rigidity</h2>
-      <div class="pub-authors">Vasquez Research Program</div>
-      <p class="pub-abstract">
-        Definition of the URF-SG JSON schema used for the deterministic audit of external witnesses. 
-        This report documents verification results for the Heisenberg nilmanifold and Ornstein–Uhlenbeck operators 
-        under varying noise constraints.
-      </p>
-      <div class="pub-links">
-        <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/standards/URF-SG.json"><i class="fa-solid fa-code"></i> View Schema</a>
-        <a href="https://github.com/inaciovasquez2020/urf-core"><i class="fa-brands fa-github"></i> Repository</a>
-        <span class="tag">Standardization</span>
-      </div>
-    </article>
-
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);">ORCID: 0009-0008-8459-3400 | [STATUS: MATHEMATICALLY CLOSED]</p>
-    <p class="footer-note">
-      Remaining uncertainty is external (adoption, citation, institutional uptake). 
-      Core mathematical requirements for URF spectral rigidity are closed.
-    </p>
-  </footer>
-
 </body>
 </html>
