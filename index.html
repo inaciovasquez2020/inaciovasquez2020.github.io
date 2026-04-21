@@ -2,48 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inacio F. Vasquez - Homepage</title>
+    <title>Inacio F. Vasquez | Unified Rigidity Framework</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: rgb(51, 51, 51); max-width: 900px; margin: 0 auto; padding: 20px; background-color: rgb(249, 249, 249); }
-        header { border-bottom: 2px solid rgb(200, 200, 200); padding-bottom: 10px; margin-bottom: 20px; }
-        h1 { font-size: 2em; color: rgb(0, 102, 204); }
-        h2 { font-size: 1.3em; border-bottom: 1px solid rgb(221, 221, 221); padding-bottom: 5px; }
-        .promo-block { background-color: rgb(224, 240, 255); padding: 15px; border-left: 5px solid rgb(0, 102, 204); margin-bottom: 20px; }
-        ul { list-style-type: square; }
-        li { margin-bottom: 10px; }
+        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
+        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; padding: 40px; }
+        main { max-width: 900px; margin: 0 auto; }
+        h1 { font-family: 'JetBrains Mono', monospace; font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .highlight { border: 1px solid #d29922; padding: 20px; background: rgba(210, 153, 34, 0.05); border-radius: 6px; margin: 30px 0; }
+        .structure-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .card { border: 1px solid var(--border); padding: 15px; border-radius: 4px; }
+        h3 { font-family: 'JetBrains Mono', monospace; color: var(--accent); margin-top: 0; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Inacio F. Vasquez [cite: 76]</h1>
-        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, mathematical frontiers, physical models, public certification, and auditable release surfaces. [cite: 77]</p>
-    </header>
-
-    <div class="promo-block">
-        <h2>Featured URF-Core Update — URF-11 Registry Layer [cite: 9]</h2>
-        <p>urf-core now includes a canonical URF-11 subproblem registry with repository-native checks that every bridge source/subproblem pair resolves to a declared record. [cite: 9] The next public layer is PR 282, which adds a translation-rule registry and a consistency test requiring every bridge translation_rule to resolve to a declared rule record. [cite: 9]</p>
-        <p><strong>Current Highlight:</strong> URF-11 infrastructure buildout: the subproblem registry is now part of the canonical community layer, and the translation-rule registry is the next consistency surface. [cite: 84, 85]</p>
-    </div>
-
     <main>
-        <section>
-            <h2>Program Structure [cite: 78]</h2>
-            <ul>
-                <li><strong>Foundations:</strong> urf-core, chronos-urf-rr, urf-axioms, urf-spine, transcript-capacity-core. [cite: 79]</li>
-                <li><strong>Formal Verification:</strong> flagship-lean, CorrRank, overlap-rigidity-lean-dev, pachner-invariant, scientific-infrastructure. [cite: 80]</li>
-                <li><strong>Certification and Audit:</strong> urf-verifier, capacity-locality-certification, urf-open-review-ledger, URF-P-0001/0002/0003, aiv-verifier-public. [cite: 81]</li>
-                <li><strong>Mathematical Physics:</strong> rh-archimedean-kernel-rigidity, ym-os-quantization, yang-mills-hs-gap-cert, radiative-rigidity, dfm-mkc-cosmology, Operational-Wavefunction-Collapse, Exchange-Force-Framework. [cite: 82]</li>
-                <li><strong>Open Frontiers and Boundary Labs:</strong> final-wall-fo-k-locality, cycle-local-rigidity, final-wall-conditional-index, clay-problem-lab, bepty, owc-counterexamples. [cite: 83]</li>
-            </ul>
+        <h1>Inacio F. Vasquez</h1> [cite: 76]
+        <p>Independent researcher building the Unified Rigidity Framework as a repository-native research network linking formal definitions, executable verification, mathematical frontiers, physical models, public certification, and auditable release surfaces.</p> [cite: 77]
 
-            <h2>Entry Points [cite: 86]</h2>
-            <ul>
-                <li>Research map: vasquez-index [cite: 87]</li>
-                <li>Publications and audit records: publications page, URF-P series, and open-review ledger [cite: 88]</li>
-                <li>Technical infrastructure: GitHub repositories and verifier surfaces [cite: 89]</li>
-            </ul>
-        </section>
+        <div class="highlight">
+            <h3>Featured URF-Core Update — URF-11 Registry Layer</h3> [cite: 9]
+            <p>urf-core now includes a canonical URF-11 subproblem registry with repository-native checks. Next: PR #282 translation-rule registry.</p> [cite: 9]
+        </div>
+
+        <h2>Program Structure</h2> [cite: 78]
+        <div class="structure-grid">
+            <div class="card">
+                <h3>Foundations</h3>
+                <p>urf-core, chronos-urf-rr, urf-axioms, urf-spine, transcript-capacity-core.</p> [cite: 79]
+            </div>
+            <div class="card">
+                <h3>Formal Verification</h3>
+                <p>flagship-lean, CorrRank, overlap-rigidity-lean-dev, pachner-invariant, scientific-infrastructure.</p> [cite: 80]
+            </div>
+        </div>
+
+        <h2>Entry Points</h2> [cite: 86]
+        <ul>
+            <li>Research map: <strong>vasquez-index</strong></li> [cite: 87]
+            <li>Publications and audit records: <strong>publications page</strong></li> [cite: 88]
+            <li>Technical infrastructure: <strong>GitHub repositories</strong></li> [cite: 89]
+        </ul>
     </main>
 </body>
 </html>
