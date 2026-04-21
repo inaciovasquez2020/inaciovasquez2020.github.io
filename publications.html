@@ -1,130 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Manuscripts & Reports — Unified Rigidity Framework (URF)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Formal manuscripts and technical reports for the Unified Rigidity Framework (URF)." />
-  <meta name="theme-color" content="#0b1220" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-  <style>
-    :root {
-      --bg-main: #0b1220;
-      --bg-card: #0e1626;
-      --bg-nav: #0f172a;
-      --accent: #38bdf8;
-      --accent-green: #10b981;
-      --text-main: #e5e7eb;
-      --text-muted: #9aa5b1;
-      --text-title: #f8fafc;
-      --border: #1f2933;
-    }
-
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Inter', sans-serif; color: var(--text-main); background-color: var(--bg-main); line-height: 1.6; }
-
-    nav {
-      background: var(--bg-nav); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
-      position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border);
-    }
-    .nav-brand { color: var(--text-title); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-    .nav-brand i { color: var(--accent); }
-    .nav-links { display: flex; gap: 25px; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
-
-    .hero { background: linear-gradient(180deg, var(--bg-nav), var(--bg-main)); border-bottom: 1px solid var(--border); padding: 80px 20px; text-align: center; }
-    .hero h1 { font-family: 'Libre Baskerville', serif; font-size: 2.5rem; margin: 0; color: var(--text-title); letter-spacing: -1px; }
-    .hero .subtitle { max-width: 700px; margin: 15px auto 0; font-size: 1.1rem; color: var(--text-muted); }
-
-    .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-    h2.section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 30px; }
-
-    .pub-entry { background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 25px; transition: 0.2s; }
-    .pub-entry:hover { border-color: var(--accent); transform: translateY(-2px); }
-
-    .pub-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--accent-green); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; display: block; }
-    .pub-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; font-weight: 700; color: var(--text-title); margin: 0 0 12px 0; line-height: 1.3; }
-    .pub-authors { font-size: 14px; font-weight: 500; color: var(--accent); margin-bottom: 15px; }
-    .pub-abstract { font-size: 14.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
-    
-    .pub-links { display: flex; flex-wrap: wrap; gap: 15px; padding-top: 20px; border-top: 1px solid var(--border); }
-    .pub-links a { font-size: 12px; font-weight: 700; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-    .pub-links a:hover { color: var(--accent); }
-
-    .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 3px 10px; border-radius: 4px; background: #050910; color: var(--text-muted); border: 1px solid var(--border); text-transform: uppercase; }
-
-    footer { background: var(--bg-nav); color: var(--text-muted); padding: 60px 20px; text-align: center; font-size: 13px; margin-top: 80px; border-top: 1px solid var(--border); }
-    .footer-note { font-style: italic; opacity: 0.7; max-width: 600px; margin: 20px auto 0; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Manuscripts, Reports, Certificates, and Public Protocols</title>
 </head>
 <body>
+    <header>
+        <h1>Manuscripts, Reports, Certificates, and Public Protocols</h1>
+        <p>Formal publication pipeline for the Vasquez research program, organized by repository-backed artifact families.</p>
+    </header>
 
-  <nav>
-    <a href="https://inaciovasquez2020.github.io/vasquez-index/" class="nav-brand">
-      <i class="fa-solid fa-layer-group"></i>
-      <span>VASQUEZ_LAB</span>
-    </a>
-    <div class="nav-links">
-      <a href="https://inaciovasquez2020.github.io/">Home</a>
-      <a href="https://inaciovasquez2020.github.io/vasquez-index/">Network Index</a>
-      <a href="https://github.com/inaciovasquez2020">GitHub</a>
-    </div>
-  </nav>
+    <section id="infrastructure-promotion">
+        <h2>Infrastructure Update</h2>
+        <p>URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer.</p>
+    </section>
 
-  <header class="hero">
-    <h1>Manuscripts & Reports</h1>
-    <p class="subtitle">Formal manuscript pipeline for the Unified Rigidity Framework (URF), with explicitly scoped results.</p>
-  </header>
+    <main>
+        <section id="foundational-artifacts">
+            <h2>Foundational and Complexity Artifacts</h2>
+            <p>Final Wall (FO^k Locality) // Cycle-Local Rigidity // Chronos–EntropyDepth // Transcript Capacity Core // URC and locality/capacity decision surfaces.</p>
+        </section>
 
-  <main class="container">
-    <h2 class="section-label">Current Pipeline</h2>
+        <section id="formalization-layer">
+            <h2>Formalization Layer</h2>
+            <p>URF Axioms // URF Spine // Flagship Lean // CorrRank // Pachner Invariant // Poincare New Derivation.</p>
+        </section>
 
-    <article class="pub-entry">
-      <span class="pub-year">2026 — Manuscript (Journal-First)</span>
-      <h2 class="pub-title">The Expander Obstruction and Logic-Width Dependency</h2>
-      <div class="pub-authors">Inacio F. Vasquez</div>
-      <p class="pub-abstract">
-        This manuscript analyzes the limits of \(FO^k\) local types in bounding global structural invariants on expander families. Within explicitly stated assumptions, it derives a logic–width dependency relating locality depth to structural rigidity.
-      </p>
-      <div class="pub-links">
-        <a href="https://github.com/inaciovasquez2020/urf-core" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Manuscript (In-situ)</a>
-        <a href="https://inaciovasquez2020.github.io/vasquez-index/" rel="noopener noreferrer"><i class="fa-solid fa-microchip"></i> Verification Artifacts</a>
-        <span class="tag">Theoretical Computer Science</span>
-      </div>
-    </article>
+        <section id="standards-certification">
+            <h2>Standards and Certification</h2>
+            <p>URF-SG // URF Verifier // Capacity–Locality Certification // AIV Verifier Public // URF Open Review Ledger // URF-P-0001 / URF-P-0002 / URF-P-0003.</p>
+        </section>
 
-    <article class="pub-entry">
-      <span class="pub-year">2025 — Technical Report</span>
-      <h2 class="pub-title">URF-SG: A Standard for Machine-Verifiable Spectral Rigidity</h2>
-      <div class="pub-authors">Vasquez Research Program</div>
-      <p class="pub-abstract">
-        Definition of the URF-SG JSON schema used for the deterministic audit of external witnesses. This report documents bounded verification results for the Heisenberg nilmanifold.
-      </p>
-      <div class="pub-links">
-        <a href="https://github.com/inaciovasquez2020/urf-core/blob/main/standards/URF-SG.json" rel="noopener noreferrer"><i class="fa-solid fa-code"></i> View Schema</a>
-        <span class="tag">Standardization</span>
-      </div>
-    </article>
-  </main>
+        <section id="physics-applied">
+            <h2>Mathematical Physics and Applied Rigidity</h2>
+            <p>Archimedean Kernel Rigidity // YM–OS Quantization // Yang–Mills HS Gap Cert // Radiative Rigidity // DFM–MKC Cosmology // Operational Wavefunction Collapse // Exchange Force Framework // Biological Friction Framework.</p>
+        </section>
 
-  <footer>
-    <p>&copy; 2026 Inacio F. Vasquez. Independent Research Program.</p>
-    <p style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);">
-      STATUS: MIXED — STRUCTURALLY CLOSED MODULES · ACTIVE RESEARCH TRACKS
-    </p>
-    <p style="margin-top: 15px;">
-      <a href="./CANONICALITY.md" style="font-size:11px; color:var(--accent); text-decoration:none; border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px;">
-        <i class="fa-solid fa-gavel"></i> Canonicality Doctrine
-      </a>
-    </p>
-  </footer>
-
+        <section id="experimental-boundary">
+            <h2>Experimental and Boundary Repositories</h2>
+            <p>clay-problem-lab // owc-counterexamples // urf-application-stress-test // terminal-rigidity-witness-erb.</p>
+        </section>
+    </main>
 </body>
 </html>
