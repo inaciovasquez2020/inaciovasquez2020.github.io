@@ -3,44 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>Publications | Vasquez Research</title>
-    <style>
-        :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; }
-        body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 50px; }
-        .wrapper { max-width: 800px; margin: 0 auto; }
-        h1 { font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; color: var(--accent); }
-        .promo { border: 1px solid var(--accent); padding: 20px; background: rgba(88, 166, 255, 0.05); border-radius: 6px; margin: 30px 0; font-size: 0.9rem; }
-        h2 { font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent); margin-top: 40px; }
-        ul { list-style: square; padding-left: 20px; font-size: 0.95rem; }
-        li { margin-bottom: 10px; }
-        a { color: var(--accent); text-decoration: none; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="wrapper">
-        <nav style="font-family: 'JetBrains Mono', monospace;"><a href="index.html">/HOME</a></nav>
-        <h1>Manuscripts, Reports, and Certificates</h1>
+    <header>
+        <nav>
+            <a href="index.html">/HOME</a>
+            <a href="contact.html">/CONTACT</a>
+            <a href="https://github.com/inaciovasquez2020">/GITHUB</a>
+        </nav>
+        <h1>Manuscripts, Reports, Certificates, and Public Protocols</h1>
+        <p>Formal publication pipeline for the Vasquez research program, organized by repository-backed artifact families[cite: 91, 92].</p>
+    </header>
 
-        <div class="promo">
-            <strong>Current Infrastructure Promotion:</strong> URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer.
+    <main>
+        <div class="promo-block">
+            <strong>Current Infrastructure Promotion</strong>
+            <p>
+                URF-11 registry work is now publication-facing: subproblem records are canonical, and translation-rule records are the next public consistency layer[cite: 127, 128].
+            </p>
         </div>
 
         <section>
-            <h2>Foundational Artifacts</h2>
-            <ul>
-                <li>Final Wall (FO^k Locality)</li>
-                <li>Cycle-Local Rigidity</li>
-                <li>Chronos–EntropyDepth</li>
+            <h2>Foundational and Complexity Artifacts</h2>
+            <ul class="artifact-list">
+                <li><a href="https://github.com/inaciovasquez2020/final-wall-fo-k-locality">Final Wall (FO^k Locality)</a> [cite: 94]</li>
+                <li><a href="https://github.com/inaciovasquez2020/cycle-local-rigidity">Cycle-Local Rigidity</a> [cite: 95]</li>
+                <li><a href="https://github.com/inaciovasquez2020/chronos-urf-rr">Chronos–EntropyDepth</a> [cite: 96]</li>
+                <li><a href="https://github.com/inaciovasquez2020/transcript-capacity-core">Transcript Capacity Core</a> [cite: 97]</li>
+                <li><a href="https://github.com/inaciovasquez2020/urc-minimal-blockchain">URC and locality/capacity decision surfaces</a> [cite: 98]</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Formalization Layer</h2>
+            <ul class="artifact-list">
+                <li><a href="https://github.com/inaciovasquez2020/urf-axioms">URF Axioms</a> [cite: 100]</li>
+                <li><a href="https://github.com/inaciovasquez2020/urf-spine">URF Spine</a> [cite: 101]</li>
+                <li><a href="https://github.com/inaciovasquez2020/flagship-lean">Flagship Lean</a> [cite: 102]</li>
+                <li><a href="https://github.com/inaciovasquez2020/pachner-invariant">Pachner Invariant</a> [cite: 104]</li>
             </ul>
         </section>
 
         <section>
             <h2>Standards and Certification</h2>
-            <ul>
-                <li><a href="https://github.com/inaciovasquez2020/urf-verifier">URF Verifier</a></li>
-                <li><a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF Open Review Ledger</a></li>
-                <li>URF-P-0001 / URF-P-0002 / URF-P-0003</li>
+            <ul class="artifact-list">
+                <li><a href="https://github.com/inaciovasquez2020/urf-verifier">URF Verifier</a> [cite: 108]</li>
+                <li><a href="https://github.com/inaciovasquez2020/capacity-locality-certification">Capacity–Locality Certification</a> [cite: 109]</li>
+                <li><a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF Open Review Ledger</a> [cite: 111]</li>
+                <li>
+                    <a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF-P-0001</a> / 
+                    <a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF-P-0002</a> / 
+                    <a href="https://github.com/inaciovasquez2020/urf-open-review-ledger">URF-P-0003</a> [cite: 112]
+                </li>
             </ul>
         </section>
-    </div>
+
+        <section>
+            <h2>Mathematical Physics and Applied Rigidity</h2>
+            <ul class="artifact-list">
+                <li><a href="https://github.com/inaciovasquez2020/rh-archimedean-kernel-rigidity">Archimedean Kernel Rigidity</a> [cite: 114]</li>
+                <li><a href="https://github.com/inaciovasquez2020/dfm-mkc-cosmology">DFM–MKC Cosmology</a> [cite: 118]</li>
+                <li><a href="https://github.com/inaciovasquez2020/Exchange-Force-Framework">Exchange Force Framework</a> [cite: 120]</li>
+                <li><a href="https://github.com/inaciovasquez2020/biological-friction-framework">Biological Friction Framework</a> [cite: 121]</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Managed via <a href="https://github.com/inaciovasquez2020/vasquez-index">vasquez-index</a> | ORCID: 0009-0008-8459-3400</p>
+    </footer>
 </body>
 </html>
