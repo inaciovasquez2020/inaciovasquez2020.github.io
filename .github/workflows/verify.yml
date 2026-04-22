@@ -4,12 +4,13 @@ on:
   push:
   pull_request:
 
-on: [push]
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v3
-      - name: Run certificate check
-        run: python3 infra/ci/verify_certificate.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run site verification
+        run: python3 scripts/verify_site.py
