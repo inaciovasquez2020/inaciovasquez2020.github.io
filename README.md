@@ -1,5 +1,7 @@
 # Inacio F. Vasquez — Start Here / Verification Path
 
+This repository hosts the public research portal and primary GitHub Pages site for the inaciovasquez2020 organization.
+
 This repository hosts the canonical root page for the public research surface.
 
 ## Start Here / Verification Path
