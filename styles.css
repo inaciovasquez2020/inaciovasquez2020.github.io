@@ -101,7 +101,7 @@ main {
     flex: 1;
 }
 
-/* URF-11 Promotion Block [cite: 7, 8, 9] */
+/* URF-11 Promotion Block */
 .promo-block {
     border: 1px solid var(--accent-warning);
     background: rgba(210, 153, 34, 0.05);
@@ -142,7 +142,7 @@ main {
     border-color: var(--text-secondary);
 }
 
-/* Artifact Lists [cite: 90, 93, 106] */
+/* Artifact Lists */
 ul.artifact-list {
     list-style: none;
     padding: 0;
@@ -168,7 +168,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Contact / Intake Surface [cite: 129, 132, 144] */
+/* Contact / Intake Surface */
 .contact-surface {
     background-color: var(--bg-surface);
     border: 1px solid var(--border);
