@@ -14,3 +14,7 @@ This repository hosts the canonical root page for the public research surface.
 - [ORCID 0009-0008-8459-3400](https://orcid.org/0009-0008-8459-3400)
 - [vasquezresearch.com](https://www.vasquezresearch.com)
 - [GitHub organization](https://github.com/inaciovasquez2020)
+
+## Lean proof portfolio classification
+
+This repository is governed by [`docs/status/LEAN_PROOF_PORTFOLIO_CLASSIFICATION.md`](docs/status/LEAN_PROOF_PORTFOLIO_CLASSIFICATION.md). Its role in the portfolio is explicitly classified as proof-facing, conditional frontier, infrastructure/documentation, or legacy/scaffold.
