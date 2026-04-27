@@ -14,3 +14,7 @@ This repository hosts the canonical root page for the public research surface.
 - [ORCID 0009-0008-8459-3400](https://orcid.org/0009-0008-8459-3400)
 - [vasquezresearch.com](https://www.vasquezresearch.com)
 - [GitHub organization](https://github.com/inaciovasquez2020)
+
+## External status
+
+This repository is governed by [`docs/status/EXTERNAL_STATUS_LOCK.md`](docs/status/EXTERNAL_STATUS_LOCK.md). Build success, CI success, dashboards, ledgers, axioms, admits, `sorry`, or placeholder witnesses do not constitute theorem-level closure.
