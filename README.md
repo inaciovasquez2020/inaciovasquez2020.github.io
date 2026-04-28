@@ -15,6 +15,10 @@ This repository hosts the canonical root page for the public research surface.
 - [vasquezresearch.com](https://www.vasquezresearch.com)
 - [GitHub organization](https://github.com/inaciovasquez2020)
 
+## External status
+
+This repository is governed by [`docs/status/EXTERNAL_STATUS_LOCK.md`](docs/status/EXTERNAL_STATUS_LOCK.md). Build success, CI success, dashboards, ledgers, axioms, admits, `sorry`, or placeholder witnesses do not constitute theorem-level closure.
+
 ## Formal Status
 
 Status: Documentation / Website Surface
