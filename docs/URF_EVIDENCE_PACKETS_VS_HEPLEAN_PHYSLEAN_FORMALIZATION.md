@@ -28,7 +28,3 @@ Both styles reduce reliance on narrative trust. They make claims inspectable thr
 Boundary
 A URF-style artifact does not become a HepLean or PhysLean contribution merely by discussing Lean or physics. A HepLean or PhysLean relationship requires an actual contribution, citation, issue, pull request, or other public project-level link.
 BOUNDARY := comparison only; no HepLean or PhysLean affiliation claimed.
-NEXT_ACTIONS :=
-Add concrete repository links only after verifying they exist.
-Add citations only to public sources.
-Do not describe open-problem claims as solved without a complete checked proof of the standard theorem.

@@ -46,8 +46,3 @@ Stronger claims such as `no public evidence found of mainstream adoption or acce
 P vs NP, Clay Millennium problems, and similarly open problems remain `BOUNDARY` unless the Lean source proves the actual standard theorem without hidden assumptions, `axiom`, `opaque`, `sorry`, or `admit`.
 
 BOUNDARY := no HepLean or PhysLean affiliation is claimed here.
-
-NEXT_ACTIONS :=
-1. Add concrete repository links only after verifying they exist.
-2. Add public SHA-256 ledger URL only if this repository publishes one.
-3. Keep open-problem claims under BOUNDARY unless a standard hidden-assumption-free Lean proof exists.
