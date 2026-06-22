@@ -7,14 +7,14 @@
   <meta name="description" content="A public boundary page clarifying formal verification, Lean 4, reproducible proof artifacts, SHA-256 ledger policy, HepLean/PhysLean comparison limits, and open-problem boundaries.">
   <style>
     :root {
-      --bg: #f7f8fa;
+      --bg: #fbfdff;
       --panel: #ffffff;
-      --ink: #1f2933;
-      --muted: #5f6c7b;
-      --line: #d9e2ec;
-      --accent: #243b53;
-      --accent-soft: #eef2f6;
-      --code: #102a43;
+      --ink: #203040;
+      --muted: #66788a;
+      --line: #e6eef6;
+      --accent: #2f6f9f;
+      --accent-soft: #edf8ff;
+      --code: #21445f;
     }
 
     * {
@@ -23,7 +23,9 @@
 
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top left, #eef8ff 0, transparent 34rem),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 42%, #f7fbff 100%);
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       line-height: 1.6;
