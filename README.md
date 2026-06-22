@@ -36,3 +36,5 @@ Theorem-status rule:
 
 Source-of-truth document:
 - `docs/status/SOURCE_OF_TRUTH_2026_04_27.md`
+
+Formal verification / Lean 4 / reproducible proof artifacts.
