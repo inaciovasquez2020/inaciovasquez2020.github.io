@@ -2,72 +2,253 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Formal Verification Boundary</title>
+  <title>Formal Verification Boundary — Inacio F. Vasquez</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A public boundary page clarifying formal verification, Lean 4, reproducible proof artifacts, SHA-256 ledger policy, HepLean/PhysLean comparison limits, and open-problem boundaries.">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+      --ink: #1f2933;
+      --muted: #5f6c7b;
+      --line: #d9e2ec;
+      --accent: #243b53;
+      --accent-soft: #eef2f6;
+      --code: #102a43;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 24px 72px;
+    }
+
+    header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+    }
+
+    section,
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 1px 2px rgba(16, 42, 67, 0.04);
+    }
+
+    section {
+      margin: 18px 0;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: #0b63ce;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      padding: 0.12rem 0.3rem;
+      border-radius: 6px;
+      background: #eef2f6;
+      color: var(--code);
+      font-size: 0.95em;
+    }
+
+    blockquote {
+      margin: 14px 0 0;
+      padding: 14px 18px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      color: var(--code);
+      border-radius: 10px;
+    }
+
+    ul,
+    ol {
+      margin: 10px 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .boundary {
+      border-color: #bcccdc;
+      background: #fbfcfe;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+  </style>
 </head>
 <body>
 <main>
-<h1>Formal Verification Boundary</h1>
+  <header>
+    <span class="eyebrow">Public boundary page</span>
+    <h1>Formal Verification Boundary</h1>
+    <p class="lead">
+      This page clarifies the public boundary between independent research identity,
+      reproducible artifact practice, Lean/formal-verification work, SHA-256 ledger policy,
+      and external physics-formalization projects.
+    </p>
+  </header>
 
-<p><strong>STATUS :=</strong> PUBLIC_BOUNDARY_PAGE</p>
+  <div class="grid">
+    <div class="card">
+      <div class="label">Public identity anchor</div>
+      <p>ORCID: <a href="https://orcid.org/0009-0008-8459-3400"><code>0009-0008-8459-3400</code></a></p>
+      <blockquote>Formal verification / Lean 4 / reproducible proof artifacts.</blockquote>
+    </div>
 
-<p>This page records the boundary between public independent-research identity, reproducible artifact practice, Lean/formal-verification work, and external physics-formalization projects.</p>
+    <div class="card">
+      <div class="label">Status</div>
+      <p><code>STATUS := PUBLIC_BOUNDARY_PAGE</code></p>
+      <p>This page records scope, admissible claims, and explicit non-affiliation boundaries.</p>
+    </div>
+  </div>
 
-<h2>Public identity anchor</h2>
+  <section>
+    <h2>URF and reproducible evidence artifacts</h2>
+    <p>
+      URF evidence packets are treated as frozen, reproducible artifacts. A claim is not promoted
+      beyond its verified boundary unless the supporting text, code, artifact hashes, verifier outputs,
+      and assumptions are available from public inputs.
+    </p>
+  </section>
 
-<p>ORCID: <code>0009-0008-8459-3400</code></p>
+  <section>
+    <h2>Lean / verification repositories</h2>
+    <p>
+      Lean 4 and related verification repositories are used as machine-checkable proof and boundary
+      infrastructure where applicable. A compiled Lean theorem certifies only the theorem actually
+      stated in the source, under the imports and assumptions visible to the checker.
+    </p>
+  </section>
 
-<p>Public profile sentence:</p>
+  <section>
+    <h2>SHA-256 ledger policy</h2>
+    <p>
+      SHA-256 hashes identify frozen public artifacts and support reproducibility checks. A hash
+      certifies artifact identity, not mathematical truth by itself. Mathematical or scientific claims
+      still require explicit proof objects, verifier outputs, or clearly stated assumptions.
+    </p>
+  </section>
 
-<blockquote>
-<p>Formal verification / Lean 4 / reproducible proof artifacts.</p>
-</blockquote>
+  <section class="boundary">
+    <h2>HepLean / PhysLean boundary</h2>
+    <p>
+      HepLean and PhysLean are independent Lean formalization efforts for physics. This page may compare
+      methods with those projects, but it does not claim affiliation, contribution, endorsement, or
+      integration unless an actual public citation, issue, pull request, or committed contribution exists.
+    </p>
+    <ul>
+      <li>HepLean reference: <a href="https://arxiv.org/abs/2405.08863">arXiv:2405.08863</a></li>
+      <li>Lean 4 physics index notation reference: <a href="https://arxiv.org/abs/2411.07667">arXiv:2411.07667</a></li>
+    </ul>
+  </section>
 
-<h2>URF and reproducible evidence artifacts</h2>
+  <section>
+    <h2>Mainstream-impact boundary</h2>
+    <p>The admissible external-status statement is:</p>
+    <blockquote>no public evidence found of mainstream adoption or accepted breakthrough impact.</blockquote>
+    <p>
+      Stronger claims such as <code>zero impact</code> are not used here because they require exhaustive
+      negative evidence.
+    </p>
+  </section>
 
-<p>URF evidence packets are treated as frozen, reproducible artifacts. A claim is not promoted beyond its verified boundary unless the supporting text, code, artifact hashes, verifier outputs, and assumptions are available from public inputs.</p>
+  <section class="boundary">
+    <h2>Major open-problem boundary</h2>
+    <p>
+      P vs NP, Clay Millennium problems, and similarly open problems remain <code>BOUNDARY</code> unless
+      the Lean source proves the actual standard theorem without hidden assumptions, <code>axiom</code>,
+      <code>opaque</code>, <code>sorry</code>, or <code>admit</code>.
+    </p>
+    <p><code>BOUNDARY := no HepLean or PhysLean affiliation is claimed here.</code></p>
+  </section>
 
-<h2>Lean / verification repositories</h2>
-
-<p>Lean 4 and related verification repositories are used as machine-checkable proof and boundary infrastructure where applicable. A compiled Lean theorem certifies only the theorem actually stated in the source, under the imports and assumptions visible to the checker.</p>
-
-<h2>SHA-256 ledger policy</h2>
-
-<p>SHA-256 hashes identify frozen public artifacts and support reproducibility checks. A hash certifies artifact identity, not mathematical truth by itself. Mathematical or scientific claims still require explicit proof objects, verifier outputs, or clearly stated assumptions.</p>
-
-<h2>HepLean / PhysLean boundary</h2>
-
-<p>HepLean and PhysLean are independent Lean formalization efforts for physics. This repository may compare methods with those projects, but it does not claim affiliation, contribution, endorsement, or integration unless an actual public citation, issue, pull request, or committed contribution exists.</p>
-
-<p>Reference anchors:</p>
-
-<ul>
-<li>HepLean: <a href="https://arxiv.org/abs/2405.08863">https://arxiv.org/abs/2405.08863</a></li>
-<li>Lean 4 physics index notation: <a href="https://arxiv.org/abs/2411.07667">https://arxiv.org/abs/2411.07667</a></li>
-</ul>
-
-<h2>Mainstream-impact boundary</h2>
-
-<p>The admissible external-status statement is:</p>
-
-<blockquote>
-<p>no public evidence found of mainstream adoption or accepted breakthrough impact.</p>
-</blockquote>
-
-<p>Stronger claims such as <code>zero impact</code> are not used here because they require exhaustive negative evidence.</p>
-
-<h2>Major open-problem boundary</h2>
-
-<p>P vs NP, Clay Millennium problems, and similarly open problems remain <code>BOUNDARY</code> unless the Lean source proves the actual standard theorem without hidden assumptions, <code>axiom</code>, <code>opaque</code>, <code>sorry</code>, or <code>admit</code>.</p>
-
-<p><strong>BOUNDARY :=</strong> no HepLean or PhysLean affiliation is claimed here.</p>
-
-<p><strong>NEXT_ACTIONS :=</strong></p>
-<ol>
-<li>Add concrete repository links only after verifying they exist.</li>
-<li>Add public SHA-256 ledger URL only if this repository publishes one.</li>
-<li>Keep open-problem claims under BOUNDARY unless a standard hidden-assumption-free Lean proof exists.</li>
-</ol>
+  <footer>
+    NEXT_ACTIONS :=
+    <ol>
+      <li>Add concrete repository links only after verifying they exist.</li>
+      <li>Add public SHA-256 ledger URL only if this repository publishes one.</li>
+      <li>Keep open-problem claims under BOUNDARY unless a standard hidden-assumption-free Lean proof exists.</li>
+    </ol>
+  </footer>
 </main>
 </body>
 </html>
