@@ -77,3 +77,11 @@ def test_unchanged_source_of_truth_bounded():
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "open" in text.lower()
     assert (ROOT / "docs/FORMAL_VERIFICATION_BOUNDARY.html").is_file()
+
+
+if __name__ == "__main__":
+    test_subpages_have_consistent_public_navigation()
+    test_local_links_and_assets_resolve()
+    test_pages_dont_link_to_private_research()
+    test_unchanged_source_of_truth_bounded()
+    print("PUBLIC_NAVIGATION := PASS")
