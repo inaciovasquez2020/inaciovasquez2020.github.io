@@ -1,0 +1,27 @@
+/* Subpage styling for the research-first site. Kept separate from the homepage layout. */
+.document-hero{padding-top:78px;padding-bottom:52px;border-bottom:1px solid #243449}
+.document-hero .eyebrow{margin-bottom:14px}
+.document-hero h1{font-size:clamp(34px,5vw,57px);line-height:1.12;letter-spacing:-.04em;margin:0 0 18px;color:#f0f5f7;max-width:930px}
+.document-hero p:not(.eyebrow){color:#b2c6d3;font-size:16px;max-width:780px;margin:0}
+.document-main{padding-top:40px;padding-bottom:100px;max-width:1050px}
+.document-main section{border:1px solid #2b4055;border-radius:12px;background:#101e31;padding:24px 29px;margin:22px 0}
+.document-main h2{color:#e7f8f5;font-size:20px;margin:0 0 15px}
+.document-main h3{color:#b8d5e0;font-size:16px}
+.document-main p{color:#b1c5d0}
+.document-main a,.document-main .artifact-list a,.document-footer a{color:#79f0df;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.document-main a:hover,.document-footer a:hover{color:#b8fff0}
+.document-main .artifact-list{list-style:none;margin:0;padding:0}
+.document-main .artifact-list li{padding:12px 0;border-bottom:1px solid #2b4055}
+.document-main .artifact-list li:last-child{border-bottom:0}
+.document-main .promo-block,.document-main .priority{background:rgba(121,240,223,.04);border:1px solid #335968;border-left:3px solid #79f0df;border-radius:8px;padding:22px;margin:0 0 30px}
+.document-main .promo-block strong,.document-main .priority strong{color:#b6fcf0}
+.document-main .contact-surface{max-width:760px;margin:0 auto}
+.document-main .contact-guidelines{padding-left:25px;color:#c9d9e0}
+.document-main .contact-guidelines li{padding:6px 0}
+.document-main .contact-email{margin-top:29px;font-weight:700;font-size:19px}
+.document-main .restricted-reference{color:#adc1cc}
+.document-main .restricted-reference::after{content:" · source not public";font-size:12px;color:#9db3c2}
+.document-notice{padding:16px 20px;border:1px solid #34485a;border-radius:8px;background:rgba(164,185,255,.05);color:#afc5d7;font-size:13px}
+.document-footer{border-top:1px solid #26394c;background:#080e18;padding:32px 0;color:#91aabb;font-size:13px}
+.document-footer-inner{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+@media(max-width:750px){.document-hero{padding-top:46px;padding-bottom:39px}.document-main{padding-top:25px;padding-bottom:65px}.document-main section{padding:19px}.document-footer-inner{display:block}}
