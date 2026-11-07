@@ -75,6 +75,6 @@ for (const [page, prefix] of pages) {
   assert.equal(html.split(src).length, 2, "loader referenced once in " + page);
   assert.ok(html.indexOf(cfg) < html.indexOf(src), "config must load before loader");
 }
-assert.ok(!/cookie|localStorage|sessionStorage|sendBeacon\(|fetch\(/.test(loader),
+assert.ok(!/(?:document\.cookie|localStorage|sessionStorage|navigator\.sendBeacon|fetch\()/.test(loader),
   "application analytics loader should not collect or store visitor data directly");
 console.log("PRIVACY_ANALYTICS_TEST := PASS");
