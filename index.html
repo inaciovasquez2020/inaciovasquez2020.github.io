@@ -3,39 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inacio F. Vasquez | Research Index</title>
+  <meta name="theme-color" content="#0b1120">
+  <meta name="description" content="Independent research in mathematics, formal verification, computation and physics. Explore research programs, reproducible artifacts and open proof obligations.">
+  <meta property="og:title" content="Vasquez Research | Verification-first mathematics and computation">
+  <meta property="og:description" content="Research programs, source repositories, reproducible artifacts, and explicit proof boundaries.">
+  <meta property="og:type" content="website">
+  <title>Vasquez Research — Mathematics, Computation & Verification</title>
+  <link rel="stylesheet" href="research.css">
+  <script src="research.js" defer></script>
 </head>
 <body>
-  <main>
-    <h1>Inacio F. Vasquez</h1>
-    <p>Independent researcher building repository-native, executable research artifacts.</p>
-
-    <h2>Start Here / Verification Path</h2>
-    <ol>
-      <li><a href="https://github.com/inaciovasquez2020/inaciovasquez2020">GitHub profile README</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/urf-core">URF core</a></li>
-      <li><a href="https://github.com/inaciovasquez2020/chronos-urf-rr">Chronos executable artifact</a></li>
-      <li><a href="https://inaciovasquez2020.github.io/vasquez-index/">Vasquez Index</a></li>
-    </ol>
-
-    <h2>Canonical identity</h2>
-    <ul>
-      <li><a href="https://orcid.org/0009-0008-8459-3400">ORCID 0009-0008-8459-3400</a></li>
-      <li><a href="https://www.vasquezresearch.com">vasquezresearch.com</a></li>
-      <li><a href="https://github.com/inaciovasquez2020">GitHub organization</a></li>
-    </ul>
-
-<section class="index-card formal-verification-boundary">
-  <h2>Formal Verification Boundary</h2>
-  <p>
-    Public boundary page for Lean 4, reproducible proof artifacts, SHA-256 ledger policy,
-    HepLean/PhysLean comparison limits, mainstream-impact language, and open-problem claims.
-  </p>
-  <p>
-    <a href="/docs/FORMAL_VERIFICATION_BOUNDARY.html">Open Formal Verification Boundary</a>
-  </p>
-</section>
-
-</main>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="topbar-inner wrap">
+      <a class="wordmark" href="#top" aria-label="Vasquez Research home"><span class="brand-mark" aria-hidden="true">V<span class="brand-lower">R</span></span><span>VASQUEZ<span class="wordmark-light"> RESEARCH</span></span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#projects">Research</a>
+        <a href="#method">Verification</a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="topbar-github" href="https://github.com/inaciovasquez2020" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero wrap" id="top" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> INDEPENDENT RESEARCH · VERIFICATION FIRST</p>
+        <h1 id="hero-heading">Research you <em>can inspect.</em></h1>
+        <p class="hero-intro">Mathematics, topology, computation and mathematical physics—developed through explicit assumptions, executable checks and formal proof where available.</p>
+        <p class="hero-secondary">Every claim has a boundary. Verified intermediate results are distinguished from conditional reductions and unsolved global obligations.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects">Explore research <span aria-hidden="true">↗</span></a>
+          <a class="btn secondary" href="#method">How verification works</a>
+        </div>
+        <div class="hero-meta"><span>Researcher <strong>Inacio F. Vasquez</strong></span><span class="meta-divider" aria-hidden="true"></span><a href="https://orcid.org/0009-0008-8459-3400">ORCID <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-visual" aria-label="Illustration of linked foundations, formal verification and open research frontiers" role="img">
+        <div class="visual-halo halo-one" aria-hidden="true"></div>
+        <div class="visual-halo halo-two" aria-hidden="true"></div>
+        <svg class="constellation" viewBox="0 0 540 500" fill="none" aria-hidden="true" focusable="false">
+          <defs><linearGradient id="mesh" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#6ce8d8" stop-opacity=".74"/><stop offset="1" stop-color="#6d83ee" stop-opacity=".3"/></linearGradient><linearGradient id="sphere" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#53f3d6" stop-opacity=".34"/><stop offset="1" stop-color="#5b69de" stop-opacity=".04"/></linearGradient></defs>
+          <circle cx="270" cy="237" r="172" stroke="#6ce8d8" stroke-opacity=".16" stroke-dasharray="3 8"/>
+          <circle cx="270" cy="237" r="121" stroke="#6ce8d8" stroke-opacity=".17"/>
+          <circle cx="270" cy="237" r="75" fill="url(#sphere)" stroke="#5ae4d1" stroke-opacity=".53"/>
+          <path d="M137 98L397 109L445 271L325 408L112 334Z M137 98L270 237L397 109 M397 109L270 237L445 271 M445 271L270 237L325 408 M325 408L270 237L112 334 M112 334L270 237L137 98 M137 98L445 271 M397 109L112 334" stroke="url(#mesh)" stroke-opacity=".53" stroke-width="1.2"/>
+          <path d="M270 162C215 180 215 293 270 311M270 162C325 180 325 293 270 311M196 237H344M209 193C249 219 292 219 330 193M209 282C251 255 291 255 330 282" stroke="#83efe2" stroke-opacity=".5"/>
+          <g fill="#73eee1" stroke="#071a2a" stroke-width="4"><circle cx="137" cy="98" r="7"/><circle cx="397" cy="109" r="7"/><circle cx="445" cy="271" r="7"/><circle cx="325" cy="408" r="7"/><circle cx="112" cy="334" r="7"/></g><circle cx="270" cy="237" r="10" fill="#a8f8e8"/><circle cx="270" cy="237" r="25" stroke="#6debdc" stroke-opacity=".24"/>
+        </svg>
+        <span class="graph-label label-top">FORMAL METHODS <span class="label-dot"></span></span>
+        <span class="graph-label label-right">REPRODUCIBILITY <span class="label-dot"></span></span>
+        <span class="graph-label label-bottom">OPEN FRONTIERS <span class="label-dot"></span></span>
+        <div class="visual-caption"><span class="signal" aria-hidden="true"></span> THEORY → EVIDENCE → VERIFICATION</div>
+      </div>
+    </section>
+    <div class="subnav"><div class="wrap subnav-inner"><span class="kicker">RESEARCH SCOPE</span><span>Topology</span><span>Formal proof</span><span>Complexity</span><span>Computational science</span><span>Mathematical physics</span></div></div>
+    <section class="section wrap" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><div><p class="section-index">01 / RESEARCH</p><h2 id="projects-title">Explore the research programs</h2><p>Use the subject filters to find a project, then inspect its scope, source and unresolved boundary.</p></div><a class="quiet-link" href="https://github.com/inaciovasquez2020/vasquez-index">Complete research index <span aria-hidden="true">↗</span></a></div>
+      <div class="filter-toolbar" role="group" aria-label="Research subject filters">
+        <button type="button" class="filter-button is-selected" data-filter="all" aria-pressed="true">All programs</button>
+        <button type="button" class="filter-button" data-filter="mathematics" aria-pressed="false">Mathematics</button>
+        <button type="button" class="filter-button" data-filter="physics" aria-pressed="false">Physics</button>
+        <button type="button" class="filter-button" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
+        <label class="search-label"><span class="sr-only">Search research projects</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.3 16.3 4 4"/></svg><input id="project-search" type="search" placeholder="Search projects" autocomplete="off"></label>
+      </div>
+      <div class="research-layout">
+        <div class="research-grid" id="project-grid">
+          <button class="research-card is-active" type="button" data-project="poincare" data-category="mathematics" aria-pressed="true"><span class="card-top"><span class="small-number">01 / TOPOLOGY</span><span class="status status-open">GLOBAL OPEN</span></span><span class="card-name">Poincaré proof program <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Triangulations, Pachner moves and formally checked intermediate results.</span><span class="card-foot">Explore evidence and open obligations <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="chronos" data-category="physics" aria-pressed="false"><span class="card-top"><span class="small-number">02 / PHYSICS</span><span class="status status-conditional">CONDITIONAL</span></span><span class="card-name">Chronos / URF–RR <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Executable reductions and bounded spectral investigations.</span><span class="card-foot">Explore evidence and open obligations <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="urfcore" data-category="infrastructure" aria-pressed="false"><span class="card-top"><span class="small-number">03 / FOUNDATIONS</span><span class="status status-infra">INFRASTRUCTURE</span></span><span class="card-name">URF core <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Definitions, schemas and auditable certificate boundaries.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="verifier" data-category="infrastructure" aria-pressed="false"><span class="card-top"><span class="small-number">04 / TOOLING</span><span class="status status-infra">INFRASTRUCTURE</span></span><span class="card-name">URF verifier <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Deterministic certificate and provenance validation tooling.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="cslib" data-category="mathematics" aria-pressed="false"><span class="card-top"><span class="small-number">05 / LOGIC</span><span class="status status-open">GENERAL OPEN</span></span><span class="card-name">Finite-model theory <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Ehrenfeucht–Fraïssé games and locality bridge formalizations.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="cosmology" data-category="physics" aria-pressed="false"><span class="card-top"><span class="small-number">06 / COMPUTATION</span><span class="status status-conditional">BOUNDED CHECKS</span></span><span class="card-name">DFM–MKC cosmology <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Executable consistency tests and numerical claims under audit.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+        </div>
+        <aside class="evidence-panel" id="evidence-panel" aria-labelledby="evidence-title" aria-live="polite">
+          <div class="panel-top"><span>SELECTED RESEARCH PROGRAM</span><span class="panel-corners" aria-hidden="true">⌗ 001</span></div>
+          <div class="panel-body">
+            <span class="panel-tag">TOPOLOGY / FORMAL METHODS</span>
+            <h3 id="evidence-title">Poincaré proof program</h3>
+            <p id="evidence-summary">A repository-based attempt to derive and formally check a Poincaré result through combinatorial topology. The classical Poincaré theorem is established; this independent global derivation remains open.</p>
+            <div class="evidence-group"><span class="mini-label">STATUS CLASS</span><div id="evidence-status">OPEN · intermediate checks do not establish a global theorem</div></div>
+            <div class="evidence-group"><span class="mini-label">UNRESOLVED BOUNDARY</span><div id="evidence-frontier">Universal stabilized descent and global JIID remain unproved.</div></div>
+            <div class="evidence-group"><span class="mini-label">VERIFY THE SOURCE</span><div id="evidence-source">Inspect the theorem declarations, hypotheses, exact revision and build/axiom receipts in the repository.</div></div>
+            <a id="evidence-link" class="btn panel-button" href="https://github.com/inaciovasquez2020/poincare-new-derivation">Open source repository <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="panel-footer"><span class="signal" aria-hidden="true"></span> Static orientation snapshot · not a live proof audit</div>
+        </aside>
+      </div>
+      <p id="no-projects" class="empty-state" hidden>No matching project. Try another search or subject.</p>
+    </section>
+    <section class="section section-method" id="method" aria-labelledby="method-title"><div class="wrap">
+      <div class="section-heading"><div><p class="section-index">02 / METHODOLOGY</p><h2 id="method-title">Evidence without overclaiming</h2><p>A reproducible claim must identify its source, assumptions and actual validation level.</p></div></div>
+      <div class="method-grid">
+        <article class="method-card"><span class="method-num">01</span><h3>State the claim</h3><p>Define the theorem, computational question or scientific hypothesis with its exact hypotheses.</p></article>
+        <article class="method-card"><span class="method-num">02</span><h3>Attach evidence</h3><p>Reference a revision, declaration, executable certificate, test inputs and reproducible commands.</p></article>
+        <article class="method-card"><span class="method-num">03</span><h3>Audit the boundary</h3><p>Distinguish Lean verification, bounded computation, conditional results and what remains open.</p></article>
+      </div>
+      <div class="boundary-note"><span class="boundary-icon" aria-hidden="true">!</span><p><strong>Verification boundary.</strong> A green build or a dashboard badge is not itself a proof of an unrestricted theorem. Formal status inherits from the exact theorem, assumptions, revision and axiom audit. <a href="docs/FORMAL_VERIFICATION_BOUNDARY.html">Read the formal boundary <span aria-hidden="true">↗</span></a></p></div>
+    </div></section>
+    <section class="section wrap section-access" id="access" aria-labelledby="access-title"><div><p class="section-index">03 / OPEN RESEARCH</p><h2 id="access-title">Inspect. Reproduce. Challenge.</h2><p>Independent criticism is useful when it identifies a theorem declaration, concrete counterexample, missing hypothesis or reproducible failure.</p><div class="access-links"><a class="btn primary" href="https://github.com/inaciovasquez2020/vasquez-index">Browse the research index <span aria-hidden="true">↗</span></a><a class="btn secondary" href="publications.html">Read publications</a></div></div><div class="access-mark" aria-hidden="true">∴<span>VERIFIABLE<br>BY DESIGN</span></div></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><div><strong>VASQUEZ RESEARCH</strong><p>Independent research · Inacio F. Vasquez</p></div><div class="footer-links"><a href="https://orcid.org/0009-0008-8459-3400">ORCID</a><a href="contact.html">Contact</a><a href="https://github.com/inaciovasquez2020">GitHub</a></div><p class="footer-disclaimer">This site is an index and documentation surface. It does not independently prove mathematical claims.</p></div></footer>
 </body>
 </html>
