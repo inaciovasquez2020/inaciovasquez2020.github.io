@@ -34,3 +34,15 @@ test('published required manifest schema tracks category/subcategory matrix',()=
   assert.deepEqual(schema.allOf.map(x=>x.if.properties.field.const),TAXONOMY.map(x=>x.id));
   for(let i=0;i<TAXONOMY.length;i++)assert.deepEqual(schema.allOf[i].then.properties.subcategory.enum,TAXONOMY[i].subcategories.map(x=>x.id));
 });
+
+test('subject inference classifies molecular physics but abstains on mixed fields',()=>{
+  const physics="\\documentclass{article}\n\\title{Chiral-Vibration-Induced Magnetism and Circular Dichroism in Organic Molecules}\n\\begin{document} Normal-mode analysis and the Hessian yield damped oscillators.\n\\begin{equation}(x+1)^2=x^2+2x+1\\end{equation}\\end{document}";
+  let a=suggestCategory(physics);
+  assert.deepEqual([a.field,a.subcategory,a.confidence],['mathematical-physics','spectral-physics','HEURISTIC_ONLY']);
+  a=suggestCategory("\\documentclass{article}\\begin{document}Schwarzschild wormhole transcript capacity and mutual information.\\end{document}");
+  assert.equal(a.confidence,'AMBIGUOUS');
+  assert.deepEqual([a.field,a.subcategory],['other','unclassified']);
+  a=suggestCategory('x^2=x*x');
+  assert.deepEqual([a.field,a.subcategory],['algebra','polynomial-identities']);
+  assert.equal(suggestCategory('').confidence,'NO_MATCH');
+});

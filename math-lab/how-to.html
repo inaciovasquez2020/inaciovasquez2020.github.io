@@ -25,9 +25,10 @@
     <ol>
      <li>Open the <a href="index.html">verification workbench</a> and choose a <strong>Verification method</strong>.</li>
      <li>Enter a <strong>Claim ID</strong> and <strong>Source reference</strong> (use <code>Manual entry</code> for an example). These are provenance labels, not independent confirmation.</li>
-     <li>Choose a <strong>Mathematical field</strong> and <strong>Subcategory</strong>. These selections are user-declared metadata; check the capability indicator. A suggested category is a heuristic, not proof.</li>
+     <li>Paste your LaTeX or load a file. The Lab <strong>automatically suggests the subject field</strong> from keywords in manuscript mode. Review the field and subcategory; ambiguous input remains <strong>Other / Unclassified</strong>. You can override the suggestion. Field classification is not proof.</li>
      <li>Paste the equation or manuscript into the box, or select a local <code>.tex</code>/<code>.txt</code> file. Run the selected method and read the scoped result.</li>
     </ol>
+    <p><strong>Input warning:</strong> Incorrect or incomplete transcription, incorrect assumptions, unsupported notation and mislabeled subject matter can invalidate the interpretation of a result. The Lab does not establish that entered text matches the author's intended claim. Every result states the actual engine and its scope, separately from the manuscript's subject.</p>
     <p><strong>Important:</strong> <code>Algebra / Polynomial identities over R</code> is the only exact-supported field and subcategory. For physics, topology, information theory, and other subjects, the manuscript structure audit remains available but cannot prove the claims.</p>
    </section>
    <section id="exact" class="guide-card">
@@ -40,6 +41,7 @@
    <section id="manuscript" class="guide-card">
     <span class="serial">03 / MANUSCRIPT STRUCTURE AUDIT</span><h2>Understand what the paper contains</h2>
     <p>Choose <strong>Manuscript structure audit</strong>, then select the most appropriate field and subcategory (for example, <strong>Mathematical physics / Spectral theory and operators</strong> for a normal-mode paper). Paste a LaTeX document or load a <code>.tex</code> or <code>.txt</code> file of at most <strong>64 KiB</strong>.</p>
+    <p>On paste or upload, the field selector updates automatically if keywords suggest a subject. It is always labeled <strong>AUTO-SUGGESTED (UNCONFIRMED)</strong>. A manually chosen field remains under your control. If the text spans multiple subjects or no match is found, the suggestion is <strong>Other / Unclassified</strong> and the method is still only structural.</p>
     <p>The tool locates <code>definition</code>, <code>lemma</code>, <code>theorem</code>, <code>corollary</code> and <code>proposition</code> environments, counts <code>proof</code> blocks, inventories displayed mathematics and may provide rule-based review prompts. It is not an AI mathematical reviewer, a literature verifier, or a theorem prover.</p>
     <div class="guide-example"><h3>Minimal manuscript example</h3><pre>\begin{lemma}[Illustrative claim]
 For all real x, (x+1)^2=x^2+2x+1.

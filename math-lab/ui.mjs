@@ -7,6 +7,7 @@ const form=$('claim-form'),equation=$('equation'),area=$('result-area');
 const theme=$('theme'),picker=$('file-picker'),drop=$('drop-area'),method=$('method');
 const candidateControl=$('candidate-control'),candidateSelect=$('candidate-select'),fileStatus=$('file-status');
 let last=null,candidates=[],sourceName='manual input';
+let classificationOrigin='ENGINE_SCOPE', classificationLocked=false, classificationLastInput='';
 const casebook=new SessionCasebook();
 function claimManifest(){
   const assumptions=$('assumptions').value.split(/\n/).map(x=>x.trim()).filter(Boolean);
@@ -24,13 +25,13 @@ $('quality-export').addEventListener('click',()=>downloadJSON(casebook.export(),
 $('quality-clear').addEventListener('click',()=>{casebook.clear();$('quality-cases').textContent='0';$('quality-probes').textContent='0';$('quality-review').textContent='0';$('quality-export').disabled=true;$('quality-clear').disabled=true;$('quality-last').textContent='Session casebook cleared by user. No data was uploaded.';});
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function downloadJSON(data,name){const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function renderError(message){area.replaceChildren();const box=el('div','error-block');box.append(el('strong','', 'NOT VERIFIED — UNSUPPORTED INPUT'),el('p','',message));area.append(box);last=null;}
+function renderError(message){area.replaceChildren();const box=el('div','error-block');box.append(el('strong','', 'NOT VERIFIED — UNSUPPORTED INPUT'),el('p','',message));box.append(el('p','result-disclaimer','Input may be incomplete, mistranscribed, unsupported or incorrectly classified; no mathematical verdict has been established.'));area.append(box);last=null;}
 function addRow(container,k,v){let row=el('div','meta-row');row.append(el('span','',k),el('span','result-code',v));container.append(row);}
 function renderResult(r,entry){area.replaceChildren();last=r;const ok=r.status==='EXACT_CERTIFICATE_PASS';
   const root=el('div','result-content');const verdict=el('div',`verdict ${ok?'good':'bad'}`);const head=el('div','verdict-top');head.append(el('span','status-symbol',ok?'✓':'×'),el('span','',r.status));verdict.append(head);
   verdict.append(el('div','verdict-title',ok?'Identity established within polynomial scope.':'Counterexample found.'));
   verdict.append(el('div','verdict-desc',ok?`All ${r.degree_upper_bound+1} exact evaluations agree. The degree bound proves equality for every real x.`:`At x = ${r.certificate.at(-1).x}, the two sides differ. The universal equality is false.`));
-  root.append(verdict);const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`FIELD: ${c.field_label} / ${c.subcategory_label} · EXACT_SUPPORTED · USER-DECLARED`));root.append(el('h3','section-title','EXACT EVALUATION RECORD'));
+  root.append(verdict);const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED' : 'ENGINE-REQUIRED SCOPE'}`));root.append(el('p','classification-line','METHOD APPLIED: Exact integer polynomial identity over R, variable x · EXACT_SUPPORTED · NOT A LEAN PROOF'));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: The checker establishes only the entered polynomial equality. Incorrect transcription, missing assumptions or incorrect source identification are not validated.'));root.append(el('h3','section-title','EXACT EVALUATION RECORD'));
   const table=el('table','evidence-table');const thead=el('thead'),th=el('tr');for(const name of ['x','LHS','RHS'])th.append(el('th','',name));thead.append(th);table.append(thead);
   const body=el('tbody');for(const sample of r.certificate){const tr=el('tr',sample.lhs!==sample.rhs?'witness':'');for(const key of ['x','lhs','rhs'])tr.append(el('td','',String(sample[key])));body.append(tr);}table.append(body);root.append(table);
   root.append(el('h3','section-title','CERTIFICATE SCOPE'));const meta=el('div','meta-rows');addRow(meta,'Method','Exact Z[x] identity / root bound');addRow(meta,'Degree bound',String(r.degree_upper_bound));addRow(meta,'Original claim',r.source.equation);addRow(meta,'Python replay','Not yet performed');addRow(meta,'Lean proof','Not performed');root.append(meta);
@@ -46,7 +47,7 @@ function renderManuscript(r,entry){
   const top=el('div','verdict-top'); top.append(el('span','status-symbol','◇'),el('span','',r.status));
   verdict.append(top,el('div','verdict-title','Manuscript structure reviewed; mathematical claims not verified.'),
     el('div','verdict-desc',`${r.title} · ${r.source_name}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.`));root.append(verdict);
-  const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`FIELD: ${c.field_label} / ${c.subcategory_label} · STRUCTURAL_ONLY · USER-DECLARED`));
+  const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED' : classificationOrigin === 'AUTO' ? 'AUTO-SUGGESTED (UNCONFIRMED)' : 'UNCLASSIFIED / UNCONFIRMED'}`));root.append(el('p','classification-line','METHOD APPLIED: LaTeX manuscript structure inventory · STRUCTURAL_ONLY · NO MATHEMATICAL CLAIMS VERIFIED'));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: LaTeX extraction can miss statements or misread notation, proofs and assumptions. Subject classification is heuristic or user-declared, and this report is not a mathematical or scientific validation.'));
   const stats=el('div','auditor-grid');
   for(const [name,count] of [['Definitions',r.counts.definitions],['Lemmas',r.counts.lemmas],['Theorems',r.counts.theorems],['Corollaries',r.counts.corollaries],['Proof blocks',r.counts.proof_environments],['Math blocks',r.counts.displayed_math]]){
     const div=el('div');div.append(el('strong','',String(count)),el('span','',name));stats.append(div);
@@ -66,6 +67,8 @@ function renderManuscript(r,entry){
   root.append(el('p','scope-note',`Casebook entry: ${entry.status}; no manuscript text was retained in the regression casebook. No AI model is connected, and this parser provides no theorem-level verdict.`));area.append(root);
 }
 function updateMethod(){const isMs=method.value==='manuscript-audit';
+  $('evidence-method-tag').textContent=isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC';
+  classificationLocked=false;classificationOrigin=isMs?'UNCLASSIFIED':'ENGINE_SCOPE';
   $('source-label').textContent=isMs?'LaTeX manuscript · paste entire source':'Equation · LaTeX or ASCII';
   $('equation-help').textContent=isMs?'Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.':'Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.';
   $('run').textContent=isMs?'Analyze manuscript structure →':'Run exact verification →';
@@ -74,7 +77,8 @@ function updateMethod(){const isMs=method.value==='manuscript-audit';
   if(isMs){equation.value='';}else{equation.value='(x+1)^2 = x^2 + 2x + 1';}
   candidateControl.hidden=true;candidates=[];sourceName='manual input';
   area.replaceChildren(el('div','empty-state',isMs?'Paste or drop LaTeX to inventory statements and review questions; no theorem verdict will be produced.':'Enter a polynomial equality and run exact verification.'));
-  updateCoverage();
+  if(isMs){fieldSelect.value='other';fillSubcategories('unclassified');}else{fieldSelect.value='algebra';fillSubcategories('polynomial-identities');}
+  updateProvenance();updateCoverage();
 }
 // User-selected classification is metadata, not evidence that a mathematical claim is true.
 const fieldSelect=$('math-field'),subcategorySelect=$('math-subcategory');
@@ -96,15 +100,36 @@ function updateCoverage(){
 }
 for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=f.label;fieldSelect.append(option);}
 fieldSelect.value='algebra';fillSubcategories('polynomial-identities');
-fieldSelect.addEventListener('change',()=>{fillSubcategories();$('suggest-note').textContent='Category selected by user; not a proof statement.';});
-subcategorySelect.addEventListener('change',()=>{updateCoverage();$('suggest-note').textContent='Category selected by user; not a proof statement.';});
-$('suggest-category').addEventListener('click',()=>{
-  const hint=suggestCategory(equation.value);fieldSelect.value=hint.field;fillSubcategories(hint.subcategory);
-  $('suggest-note').textContent=`${hint.confidence}: ${hint.reason}`;
+function updateProvenance(){
+  const note=classificationOrigin==='MANUAL'?'MANUALLY SELECTED — user declaration, not verified':
+    classificationOrigin==='AUTO'?'AUTO-SUGGESTED (UNCONFIRMED) — review the source subject':
+    classificationOrigin==='ENGINE_SCOPE'?'ENGINE-REQUIRED ALGEBRA SCOPE — only the entered equality is verified':
+    'UNCLASSIFIED / UNCONFIRMED — no reliable subject selection';
+  $('classification-origin').textContent='Subject classification: '+note;
+}
+function applySuggestedCategory({force=false}={}){
+  if(method.value!=='manuscript-audit'||(!force&&classificationLocked))return;
+  if(!force&&classificationLastInput===equation.value)return;
+  classificationLastInput=equation.value;
+  const hint=suggestCategory(equation.value);
+  fieldSelect.value=hint.field;fillSubcategories(hint.subcategory);
+  classificationOrigin=hint.confidence==='HEURISTIC_ONLY'?'AUTO':'UNCLASSIFIED';
+  $('suggest-note').textContent=hint.confidence+': '+hint.reason;
+  updateProvenance();
+}
+let categorizationTimer=null;
+equation.addEventListener('input',()=>{
+  if(method.value!=='manuscript-audit')return;
+  clearTimeout(categorizationTimer);
+  categorizationTimer=setTimeout(()=>applySuggestedCategory(),250);
 });
+fieldSelect.addEventListener('change',()=>{fillSubcategories();classificationLocked=true;classificationOrigin='MANUAL';$('suggest-note').textContent='Manual override: mathematical field not independently verified.';updateProvenance();});
+subcategorySelect.addEventListener('change',()=>{classificationLocked=true;classificationOrigin='MANUAL';updateCoverage();$('suggest-note').textContent='Manual override: mathematical field not independently verified.';updateProvenance();});
+$('suggest-category').addEventListener('click',()=>{classificationLocked=false;classificationLastInput='';applySuggestedCategory({force:true});});
+updateProvenance();
 method.addEventListener('change',updateMethod);
 function setExample(kind){let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;area.replaceChildren(el('div','empty-state','Ready to verify the selected example.'));equation.focus();}
-form.addEventListener('submit',e=>{e.preventDefault();let m;
+form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory({force:true});let m;
   try{
     m=claimManifest();
     const c=coverage(m.field,m.subcategory,method.value);
@@ -130,11 +155,11 @@ theme.addEventListener('change',()=>{document.documentElement.dataset.theme=them
 function showCandidates(list,name){candidates=list;sourceName=name;candidateSelect.replaceChildren();candidateControl.hidden=false;
   list.forEach((c,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=`${i+1}. ${c.replace(/\s+/g,' ').slice(0,75)}`;candidateSelect.append(opt);});
   fileStatus.textContent=`${name}: ${list.length} equation candidate${list.length===1?'':'s'} found. Only the selected equation is evaluated.`;
-  equation.value=list[0];area.replaceChildren(el('div','empty-state', 'Source loaded. Review the selected equation and run verification.'));
+  equation.value=list[0];if(method.value==='manuscript-audit')applySuggestedCategory({force:true});area.replaceChildren(el('div','empty-state', 'Source loaded. Review the selected equation and run verification.'));
 }
 async function readFile(f){try{if(!f) return;if(!/\.(tex|txt)$/i.test(f.name))throw new UnsupportedClaim('Only .tex and .txt files are accepted.');if(f.size>65536)throw new UnsupportedClaim('File exceeds the 64 KiB limit; use a smaller excerpt.');
   const text=await f.text();if($('source-reference').value==='Manual entry')$('source-reference').value=f.name;if(text.includes('\0'))throw new UnsupportedClaim('Input contains a null byte.');
-  if(method.value==='manuscript-audit'){equation.value=text;sourceName=f.name;candidateControl.hidden=true;fileStatus.textContent='';$('suggest-note').textContent='Manuscript loaded. Select “Suggest category” or choose a field manually.';area.replaceChildren(el('div','empty-state','File loaded locally. Select Analyze manuscript structure.'));return;}
+  if(method.value==='manuscript-audit'){equation.value=text;sourceName=f.name;candidateControl.hidden=true;fileStatus.textContent='';applySuggestedCategory();area.replaceChildren(el('div','empty-state','File loaded locally. Select Analyze manuscript structure.'));return;}
   const list=extractEquations(text);if(!list.length)throw new UnsupportedClaim('No displayed equality found. Paste a single polynomial equation instead.');showCandidates(list,f.name);
  }catch(err){renderError(err instanceof UnsupportedClaim?err.message:'Unable to read the source file.');candidateControl.hidden=true;}}
 picker.addEventListener('change',()=>readFile(picker.files?.[0]));

@@ -35,6 +35,13 @@ def test_math_lab_navigation():
     assert 'NOT_APPROVED' in (ROOT/'math-lab/improvement.mjs').read_text(encoding='utf-8')
     assert 'NOT_VERIFIED' in (ROOT/'math-lab/manuscript.mjs').read_text(encoding='utf-8')
     assert 'href="how-to.html"' in page
+    assert 'id="evidence-method-tag"' in page
+    assert 'id="classification-origin"' in page
+    assert 'Input and interpretation warning' in page
+    ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
+    assert 'AUTO-SUGGESTED (UNCONFIRMED)' in ui
+    assert 'METHOD APPLIED' in ui
+    assert 'UNCERTIFIED' in ui
     guide=(ROOT/'math-lab/how-to.html').read_text(encoding='utf-8')
     for phrase in ('EXACT_CERTIFICATE_PASS','REFUTED','NOT_VERIFIED','STRUCTURAL_ONLY','NO_ENGINE','REGRESSION_CANDIDATE','INCOMPLETE_SOURCE_REQUIRED','Manuscript structure audit','Exact polynomial identity','64 KiB'):
         assert phrase in guide, phrase
