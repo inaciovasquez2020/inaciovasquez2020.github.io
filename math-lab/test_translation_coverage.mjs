@@ -25,7 +25,7 @@ test('report untranslated static candidate inventory without claiming full trans
   const html=await readFile(new URL(name,import.meta.url),'utf8');
   const candidates=visibleFragments(html);
   const untranslated=candidates.filter(x=>!Object.hasOwn(DICTIONARIES.en,x)&&
-    !/^[A-Z0-9._\\- ·/=≠]+$/.test(x)&&
+    !(/^[A-Z0-9._ /=≠·-]+$/.test(x))&&
     !/^(?:English|Español|Português \\(Brasil\\)|Français|Deutsch|简体中文|VASQUEZ RESEARCH)$/.test(x));
   inventory[name]={candidate_nodes:candidates.length,not_in_extended_dictionary:untranslated.length,examples:untranslated.slice(0,8)};
   assert.ok(candidates.length>0,name);
