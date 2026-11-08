@@ -6,7 +6,7 @@ import {DICTIONARIES} from './extended-i18n.mjs';
 // Diagnostic inventory, not a complete rendered-DOM or translation-quality proof.
 // HTML strings with nested markup and runtime-generated explanations require a browser audit.
 function visibleFragments(html){
- const stripped=html.replace(/<(script|style|pre|code|textarea)\\b[^>]*>[\\s\\S]*?<\\/\\1>/gi,'');
+ const stripped=html.replace(/<(script|style|pre|code|textarea)\b[^>]*>[\s\S]*?<\/\1>/gi,'');
  return [...stripped.matchAll(/>([^<>]+)</g)]
   .map(m=>m[1].trim())
   .filter(x=>x.length>4&&/[A-Za-z]{3}/.test(x));
