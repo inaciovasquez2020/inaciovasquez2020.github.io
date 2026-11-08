@@ -55,7 +55,7 @@ export function inspectLatex(source) {
      if(t==='$'&&stack.at(-1)?.kind==='inline-dollar'){
        const x=stack.pop();flag('INLINE_MATH_NOT_INVENTORIED','Inline dollar mathematics is not included in displayed equations.',x.pos,pos+1);
      }else if(t==='$$'&&stack.at(-1)?.kind==='dollar-display'){
-       const x=stack.pop();if(!x.invalid)display.push({start:x.pos,end:pos+2,content:text.slice(x.contentStart,pos),line:lineno(x.pos),kind:'dollar-display'});
+       const x=stack.pop();flag('UNSUPPORTED_DOLLAR_DISPLAY','A $ display is not inventoried by this structural parser.',x.pos,pos+2);
      }else{
        if((t==='\\('||t==='$')&&stack.length&&stack.at(-1).kind.startsWith('inline'))
          flag('NESTED_INLINE_MATH','Nested inline-math delimiter.',pos);
