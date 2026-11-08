@@ -54,3 +54,17 @@ test('all four Math Lab pages expose six-language controls without replacing sou
  assert.match(ui,/verifyEquation\(/);
  assert.match(ui,/auditManuscript\(/);
 });
+
+test('citation UI translation keys cover all languages and preserve citation identifiers',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const src=await readFile(new URL('citation-ui.mjs',import.meta.url),'utf8');
+ for(const key of ['No matching entries in this small curated library. This does NOT mean the manuscript needs no citations.','Open canonical arXiv record','I checked this reference and want its BibTeX entry.','Status: SUGGESTION_ONLY / CLAIM SUPPORT NOT CHECKED. ','Input changed. Re-run citation suggestions before exporting.']){
+  assert.match(src,/uiText\\(/);
+  for(const locale of Object.keys(DICTIONARIES))assert.ok(DICTIONARIES[locale][key],locale+': '+key);
+ }
+ assert.match(src,/ref\\.doi/);
+ assert.match(src,/ref\\.note/);
+ assert.match(src,/ref\\.title/);
+ assert.match(src,/formatBibtex/);
+ assert.equal(uiText('NOT_VERIFIED','es'),'NOT_VERIFIED');
+});
