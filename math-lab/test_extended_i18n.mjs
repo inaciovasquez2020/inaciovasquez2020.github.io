@@ -117,3 +117,21 @@ test('language switching updates accessible attributes and page title but never 
   if(oldFilter===undefined)delete globalThis.NodeFilter;else globalThis.NodeFilter=oldFilter;
  }
 });
+
+test('runtime taxonomy provides six locales without altering stable IDs or checker scope',async()=>{
+ const {FIELD_LABELS,fieldLabel}=await import('./runtime-taxonomy-i18n.mjs');
+ const {TAXONOMY,category,coverage}=await import('./taxonomy.mjs');
+ const labels=TAXONOMY.flatMap(f=>[f.label,...f.subcategories.map(c=>c.label)]);
+ for(const locale of ['en','es','pt-BR','zh-Hans','fr','de']){
+  for(const label of labels)assert.ok(FIELD_LABELS[locale][label],locale+' / '+label);
+ }
+ assert.equal(fieldLabel('Algebra','de'),'Algebra');
+ assert.equal(fieldLabel('Polynomial identities over R','pt-BR'),'Identidades polinomiais sobre R');
+ assert.equal(category('algebra','polynomial-identities').field,'algebra');
+ assert.equal(coverage('algebra','polynomial-identities','exact-polynomial').status,'EXACT_SUPPORTED');
+ assert.equal(coverage('topology','manifold-topology','exact-polynomial').status,'NO_ENGINE');
+ const ui=await (await import('node:fs/promises')).readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.ok(ui.includes('refreshTaxonomyDisplay()'));
+ assert.ok(ui.includes('fieldLabel(s.label,currentLanguage())'));
+ assert.ok(ui.includes('option.value=s.id'));
+});
