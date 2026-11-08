@@ -43,6 +43,8 @@ def test_math_lab_navigation():
     assert 'id="evidence-method-tag"' in page
     assert 'id="classification-origin"' in page
     assert 'id="field-confirm"' in page
+    assert 'id="citation-panel"' in page
+    assert 'src="citation-ui.mjs"' in page
     assert 'FIELD CONFIRMATION REQUIRED' in page
     ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
     assert 'EQUATION EXTRACTION COVERAGE' in ui

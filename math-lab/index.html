@@ -10,6 +10,7 @@
  <link rel="stylesheet" href="styles.css">
  <script type="module" src="ui.mjs"></script>
  <script type="module" src="tour.mjs"></script>
+ <script type="module" src="citation-ui.mjs"></script>
 </head>
 <body>
  <a class="skip" href="#main">Skip to verification workspace</a>
@@ -64,6 +65,13 @@
       <p id="quality-last" class="file-note" role="status">No checks recorded in this session. All source text stays in memory until you choose to export it.</p>
       <div class="report-actions"><button id="quality-export" type="button" disabled>Export review casebook JSON</button><button id="quality-clear" type="button" disabled>Clear session cases</button></div>
       <p class="scope-note">Privacy: no automatic uploads, cookies, local storage, external services, or repository commits. Export includes equation claims and source references; inspect before sharing. Full manuscripts are never automatically copied into the casebook.</p>
+   </section>
+   <section class="citation-panel" id="citation-panel" aria-labelledby="citation-title">
+    <div class="citation-head"><span class="serial">OPTIONAL / REFERENCE REMINDER</span><h2 id="citation-title">Citation assistance</h2>
+    <p>This small curated reference library suggests papers based on terms in your current input. A match is <strong>not proof that the publication supports your claim</strong>. Review the original work, theorem, hypotheses, and any corrections before citing. No manuscript is uploaded.</p></div>
+    <div class="report-actions"><button type="button" id="check-citations">Check for possible citations</button><button type="button" id="citation-export" disabled>Export confirmed BibTeX</button></div>
+    <div id="citation-results" aria-live="polite"><p>No citation analysis performed. Optional, local-only and user initiated.</p></div>
+    <p class="scope-note">Coverage: three publisher-verified historical publications only. This is not a comprehensive bibliography, a citation requirement, or a mathematical-verification result.</p>
    </section>
    <section class="protocol" aria-labelledby="protocol-title"><div class="protocol-copy"><span class="serial">04 / VERIFICATION BOUNDARY</span><h2 id="protocol-title">Verification is method-specific.</h2><p>The exact-algebra mode can establish polynomial identities or refute them by exact counterexample. Manuscript mode extracts theorem structure and highlights review questions; it does not verify a proof or send source to an AI service.</p><p><a class="muted-link" href="../docs/FORMAL_VERIFICATION_BOUNDARY.html">Formal-status definitions</a> · <a class="muted-link" href="https://github.com/inaciovasquez2020/urf-textbook/pull/177">Python checker PR</a></p></div><div class="protocol-grid"><div><b>01</b><strong>Translate</strong><span>Strict LaTeX subset to exact polynomial expressions.</span></div><div><b>02</b><strong>Certify</strong><span>Degree bound, coefficient normalization and integer evaluations.</span></div><div><b>03</b><strong>Reproduce</strong><span>Download the claim JSON for separate Python validation.</span></div></div></section>
    <dialog id="lab-tour" class="lab-tour" aria-labelledby="tour-title" aria-describedby="tour-summary">
