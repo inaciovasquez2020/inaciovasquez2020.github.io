@@ -31,3 +31,9 @@ test('normalization and integrity envelope are deterministic but not certificati
  assert.equal(e.request_sha256,'0'.repeat(64));
  assert.equal(e.request.candidate_lean_source,'a\nb');
 });
+
+test('request builder metadata has no runtime verification implication',()=>{
+ const r=makeRequest(sample);
+ assert.equal(r.environment.requested_verifier,'LEAN4_KERNEL_NOT_CONNECTED');
+ assert.equal(r.subject.provenance,'USER_DECLARED_AND_CONFIRMED_NOT_VERIFIED');
+});
