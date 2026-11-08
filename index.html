@@ -11,19 +11,23 @@
   <title>Vasquez Research — Mathematics, Computer Science & Physics</title>
   <link rel="stylesheet" href="research.css">
   <script src="research.js" defer></script>
-<script src="analytics-config.js" defer></script><script src="analytics.js" defer></script></head>
+  <script type="module" src="site-i18n.mjs"></script>
+<script src="analytics-config.js" defer></script><script src="analytics.js" defer></script>
+<style>.site-language-label{font-size:12px;color:#bbcbda;white-space:nowrap}.site-language-label select{background:#0c1525;color:#f0f5f7;border:1px solid #526777;border-radius:4px;padding:7px;max-width:165px}@media(max-width:750px){.site-language-label{margin-left:auto}.site-language-label select{max-width:140px}}</style>
+</head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="topbar-inner wrap">
       <a class="wordmark" href="#top" aria-label="Vasquez Research home"><span class="brand-mark" aria-hidden="true">V<span class="brand-lower">R</span></span><span>VASQUEZ<span class="wordmark-light"> RESEARCH</span></span></a>
       <nav aria-label="Primary navigation">
-        <a href="#projects">Research</a>
-        <a href="#method">Verification</a>
-        <a href="math-lab/index.html">Math Lab</a>
-        <a href="publications.html">Publications</a>
-        <a href="contact.html">Contact</a>
+        <a href="#projects" data-site-i18n="research">Research</a>
+        <a href="#method" data-site-i18n="verification">Verification</a>
+        <a href="math-lab/index.html" data-site-i18n="lab">Math Lab</a>
+        <a href="publications.html" data-site-i18n="publications">Publications</a>
+        <a href="contact.html" data-site-i18n="contact">Contact</a>
       </nav>
+      <label class="site-language-label" for="site-language">Language <select id="site-language" aria-label="Website language"><option value="en">English</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="zh-Hans">简体中文</option><option value="fr">Français</option><option value="de">Deutsch</option></select></label>
       <a class="topbar-github" href="https://github.com/inaciovasquez2020" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
     </div>
   </header>
@@ -32,8 +36,8 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> INDEPENDENT RESEARCH · VERIFICATION FIRST</p>
         <h1 id="hero-heading">Research you <em>can inspect.</em></h1>
-        <p class="hero-intro">Mathematics, computer science and mathematical physics—developed through explicit assumptions, executable checks and formal proof where available.</p>
-        <p class="hero-secondary">Every claim has a boundary. Verified intermediate results are distinguished from conditional reductions and unsolved global obligations.</p>
+        <p class="hero-intro" data-site-i18n="intro">Mathematics, computer science and mathematical physics—developed through explicit assumptions, executable checks and formal proof where available.</p>
+        <p class="hero-secondary" data-site-i18n="secondary">Every claim has a boundary. Verified intermediate results are distinguished from conditional reductions and unsolved global obligations.</p>
         <div class="hero-actions">
           <a class="btn primary" href="#projects">Explore research <span aria-hidden="true">↗</span></a>
           <a class="btn secondary" href="#method">How verification works</a>
@@ -60,13 +64,13 @@
     </section>
     <div class="subnav"><div class="wrap subnav-inner"><span class="kicker">RESEARCH SCOPE</span><span>Topology</span><span>Computer science</span><span>Formal proof</span><span>Complexity</span><span>Computational science</span><span>Mathematical physics</span></div></div>
     <section class="section wrap" id="projects" aria-labelledby="projects-title">
-      <div class="section-heading"><div><p class="section-index">01 / RESEARCH</p><h2 id="projects-title">Explore the research programs</h2><p>Use the subject filters to find a project, then inspect its scope, source and unresolved boundary.</p></div><a class="quiet-link" href="https://github.com/inaciovasquez2020/vasquez-index">Complete research index <span aria-hidden="true">↗</span></a></div>
+      <div class="section-heading"><div><p class="section-index">01 / RESEARCH</p><h2 id="projects-title" data-site-i18n="programs">Explore the research programs</h2><p>Use the subject filters to find a project, then inspect its scope, source and unresolved boundary.</p></div><a class="quiet-link" href="https://github.com/inaciovasquez2020/vasquez-index">Complete research index <span aria-hidden="true">↗</span></a></div>
       <div class="filter-toolbar" role="group" aria-label="Research subject filters">
-        <button type="button" class="filter-button is-selected" data-filter="all" aria-pressed="true">All programs</button>
-        <button type="button" class="filter-button" data-filter="mathematics" aria-pressed="false">Mathematics</button>
-        <button type="button" class="filter-button" data-filter="computer-science" aria-pressed="false">Computer Science</button>
-        <button type="button" class="filter-button" data-filter="physics" aria-pressed="false">Physics</button>
-        <button type="button" class="filter-button" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
+        <button type="button" class="filter-button is-selected" data-filter="all" aria-pressed="true" data-site-i18n="all">All programs</button>
+        <button type="button" class="filter-button" data-filter="mathematics" aria-pressed="false" data-site-i18n="mathematics">Mathematics</button>
+        <button type="button" class="filter-button" data-filter="computer-science" aria-pressed="false" data-site-i18n="computer-science">Computer Science</button>
+        <button type="button" class="filter-button" data-filter="physics" aria-pressed="false" data-site-i18n="physics">Physics</button>
+        <button type="button" class="filter-button" data-filter="infrastructure" aria-pressed="false" data-site-i18n="infrastructure">Infrastructure</button>
         <label class="search-label"><span class="sr-only">Search research projects</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.3 16.3 4 4"/></svg><input id="project-search" type="search" placeholder="Search projects" autocomplete="off"></label>
       </div>
       <div class="research-layout">
@@ -95,7 +99,7 @@
       <p id="no-projects" class="empty-state" hidden>No matching project. Try another search or subject.</p>
     </section>
     <section class="section section-method" id="method" aria-labelledby="method-title"><div class="wrap">
-      <div class="section-heading"><div><p class="section-index">02 / METHODOLOGY</p><h2 id="method-title">Evidence without overclaiming</h2><p>A reproducible claim must identify its source, assumptions and actual validation level.</p></div></div>
+      <div class="section-heading"><div><p class="section-index">02 / METHODOLOGY</p><h2 id="method-title" data-site-i18n="methodTitle">Evidence without overclaiming</h2><p>A reproducible claim must identify its source, assumptions and actual validation level.</p></div></div>
       <div class="method-grid">
         <article class="method-card"><span class="method-num">01</span><h3>State the claim</h3><p>Define the theorem, computational question or scientific hypothesis with its exact hypotheses.</p></article>
         <article class="method-card"><span class="method-num">02</span><h3>Attach evidence</h3><p>Reference a revision, declaration, executable certificate, test inputs and reproducible commands.</p></article>
@@ -103,7 +107,7 @@
       </div>
       <div class="boundary-note"><span class="boundary-icon" aria-hidden="true">!</span><p><strong>Verification boundary.</strong> A green build or a dashboard badge is not itself a proof of an unrestricted theorem. Formal status inherits from the exact theorem, assumptions, revision and axiom audit. <a href="docs/FORMAL_VERIFICATION_BOUNDARY.html">Read the formal boundary <span aria-hidden="true">↗</span></a></p></div>
     </div></section>
-    <section class="section wrap section-access" id="access" aria-labelledby="access-title"><div><p class="section-index">03 / OPEN RESEARCH</p><h2 id="access-title">Inspect. Reproduce. Challenge.</h2><p>Independent criticism is useful when it identifies a theorem declaration, concrete counterexample, missing hypothesis or reproducible failure.</p><div class="access-links"><a class="btn primary" href="https://github.com/inaciovasquez2020/vasquez-index">Browse the research index <span aria-hidden="true">↗</span></a><a class="btn secondary" href="publications.html">Read publications</a></div></div><div class="access-mark" aria-hidden="true">∴<span>VERIFIABLE<br>BY DESIGN</span></div></section>
+    <section class="section wrap section-access" id="access" aria-labelledby="access-title"><div><p class="section-index">03 / OPEN RESEARCH</p><h2 id="access-title" data-site-i18n="accessTitle">Inspect. Reproduce. Challenge.</h2><p>Independent criticism is useful when it identifies a theorem declaration, concrete counterexample, missing hypothesis or reproducible failure.</p><div class="access-links"><a class="btn primary" href="https://github.com/inaciovasquez2020/vasquez-index">Browse the research index <span aria-hidden="true">↗</span></a><a class="btn secondary" href="publications.html">Read publications</a></div></div><div class="access-mark" aria-hidden="true">∴<span>VERIFIABLE<br>BY DESIGN</span></div></section>
   </main>
   <footer class="footer"><div class="wrap footer-inner"><div><strong>VASQUEZ RESEARCH</strong><p>Independent research · Inacio F. Vasquez</p></div><div class="footer-links"><a href="https://orcid.org/0009-0008-8459-3400">ORCID</a><a href="contact.html">Contact</a><a href="https://github.com/inaciovasquez2020">GitHub</a></div><p class="footer-disclaimer">This site is an index and documentation surface. It does not independently prove mathematical claims.</p></div></footer>
 </body>
