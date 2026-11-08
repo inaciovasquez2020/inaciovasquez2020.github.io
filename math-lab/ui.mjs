@@ -1,5 +1,6 @@
 import {uiText,uiFormat} from './extended-i18n.mjs';
 import {fieldLabel,currentLanguage} from './runtime-taxonomy-i18n.mjs';
+import {message as localMessage} from './runtime-messages-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -29,10 +30,11 @@ function refreshFieldConfirmation(){
   fieldConfirmation.disabled=missing;
   const state=missing?'missing':confirmed?'confirmed':'review';
   $('field-confirm-panel').dataset.status=state;
-  $('field-confirm-title').textContent=missing?'FIELD MISSING / REVIEW REQUIRED':confirmed?'FIELD CONFIRMED BY USER':'CONFIRM FIELD AND SUBCATEGORY';
-  $('field-confirm-summary').textContent='Current selection: '+fieldLabel(chosen.field_label,currentLanguage())+' / '+fieldLabel(chosen.subcategory_label,currentLanguage())+
-    '. '+(classificationOrigin==='AUTO'?'Automatically suggested; user review required.':'User selection or engine scope; review required.')+
-    ' Method: '+(method.value==='manuscript-audit'?'Manuscript structure only; no theorem verification.':'Exact univariate polynomial identity.');
+  $('field-confirm-title').textContent=localMessage(missing?'confirmMissing':confirmed?'confirmYes':'confirmReview',currentLanguage());
+  $('field-confirm-summary').textContent=localMessage('selection',currentLanguage(),{
+    field:fieldLabel(chosen.field_label,currentLanguage()),subcategory:fieldLabel(chosen.subcategory_label,currentLanguage()),
+    origin:localMessage(classificationOrigin==='AUTO'?'autoOrigin':'selectedOrigin',currentLanguage()),
+    method:localMessage(method.value==='manuscript-audit'?'manuscript':'exact',currentLanguage())});
   return !missing&&confirmed;
 }
 for(const id of ['claim-id','source-reference','assumptions']){
@@ -143,19 +145,17 @@ function updateCoverage(){
   const c=coverage(fieldSelect.value,subcategorySelect.value,method.value);
   $('coverage-status').textContent=c.status==='EXACT_SUPPORTED'?'EXACT SUPPORTED':c.status==='STRUCTURAL_ONLY'?'STRUCTURAL INVENTORY ONLY':'NOT SUPPORTED';
   $('coverage-panel').dataset.coverage=c.status;
-  $('coverage-description').textContent=c.description;
+  const selected=category(fieldSelect.value,subcategorySelect.value);
+  $('coverage-description').textContent=localMessage(c.status==='EXACT_SUPPORTED'?'coverageExact':c.status==='STRUCTURAL_ONLY'?'coverageStructural':'coverageMissing',currentLanguage(),{field:fieldLabel(selected.field_label,currentLanguage()),subcategory:fieldLabel(selected.subcategory_label,currentLanguage())});
   const confirmed=refreshFieldConfirmation();
   $('run').disabled=!c.can_run||!confirmed;
-  $('run').title=!c.can_run?'No exact engine for the chosen field.':!confirmed?'Review and confirm the field and subcategory before continuing.':'';
+  $('run').title=!c.can_run?localMessage('runUnsupported',currentLanguage()):!confirmed?localMessage('runConfirm',currentLanguage()):'';
 }
 for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=fieldLabel(f.label,currentLanguage());fieldSelect.append(option);}
 fieldSelect.value='algebra';fillSubcategories('polynomial-identities');
 function updateProvenance(){
-  const note=classificationOrigin==='MANUAL'?'MANUALLY SELECTED — user declaration, not verified':
-    classificationOrigin==='AUTO'?'AUTO-SUGGESTED (UNCONFIRMED) — review the source subject':
-    classificationOrigin==='ENGINE_SCOPE'?'ENGINE-REQUIRED ALGEBRA SCOPE — only the entered equality is verified':
-    'UNCLASSIFIED / UNCONFIRMED — no reliable subject selection';
-  $('classification-origin').textContent='Subject classification: '+note;
+  const key=classificationOrigin==='MANUAL'?'manualOrigin':classificationOrigin==='AUTO'?'suggestedOrigin':classificationOrigin==='ENGINE_SCOPE'?'engineOrigin':'unclassifiedOrigin';
+  $('classification-origin').textContent=localMessage('classification',currentLanguage(),{origin:localMessage(key,currentLanguage())});
 }
 function applySuggestedCategory({force=false}={}){
   if(method.value!=='manuscript-audit'||(!force&&classificationLocked))return;
@@ -235,6 +235,7 @@ function refreshTaxonomyDisplay(){
   if(sub)option.textContent=fieldLabel(sub.label,lang);
  }
  refreshFieldConfirmation();
+ updateProvenance();
  updateCoverage();
 }
 // Language changes re-render only from the already-computed immutable result objects.
