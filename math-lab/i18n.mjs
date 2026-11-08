@@ -165,5 +165,7 @@ export function applyLanguage(root,lang){
 const selector=typeof document!=='undefined'?document.getElementById('ui-language'):null;
 if(selector){
  selector.addEventListener('change',()=>applyLanguage(document,selector.value));
+ const requested=new URLSearchParams(location.search).get('lang');
+ selector.value=getLocale(requested||selector.value);
  applyLanguage(document,selector.value);
 }
