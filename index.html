@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1120">
-  <meta name="description" content="Independent research in mathematics, formal verification, computation and physics. Explore research programs, reproducible artifacts and open proof obligations.">
-  <meta property="og:title" content="Vasquez Research | Verification-first mathematics and computation">
+  <meta name="description" content="Independent research in mathematics, computer science, formal verification and physics. Explore research programs, reproducible artifacts and open proof obligations.">
+  <meta property="og:title" content="Vasquez Research | Mathematics, Computer Science and Physics">
   <meta property="og:description" content="Research programs, source repositories, reproducible artifacts, and explicit proof boundaries.">
   <meta property="og:type" content="website">
-  <title>Vasquez Research — Mathematics, Computation & Verification</title>
+  <title>Vasquez Research — Mathematics, Computer Science & Physics</title>
   <link rel="stylesheet" href="research.css">
   <script src="research.js" defer></script>
 <script src="analytics-config.js" defer></script><script src="analytics.js" defer></script></head>
@@ -32,7 +32,7 @@
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> INDEPENDENT RESEARCH · VERIFICATION FIRST</p>
         <h1 id="hero-heading">Research you <em>can inspect.</em></h1>
-        <p class="hero-intro">Mathematics, topology, computation and mathematical physics—developed through explicit assumptions, executable checks and formal proof where available.</p>
+        <p class="hero-intro">Mathematics, computer science and mathematical physics—developed through explicit assumptions, executable checks and formal proof where available.</p>
         <p class="hero-secondary">Every claim has a boundary. Verified intermediate results are distinguished from conditional reductions and unsolved global obligations.</p>
         <div class="hero-actions">
           <a class="btn primary" href="#projects">Explore research <span aria-hidden="true">↗</span></a>
@@ -58,12 +58,13 @@
         <div class="visual-caption"><span class="signal" aria-hidden="true"></span> THEORY → EVIDENCE → VERIFICATION</div>
       </div>
     </section>
-    <div class="subnav"><div class="wrap subnav-inner"><span class="kicker">RESEARCH SCOPE</span><span>Topology</span><span>Formal proof</span><span>Complexity</span><span>Computational science</span><span>Mathematical physics</span></div></div>
+    <div class="subnav"><div class="wrap subnav-inner"><span class="kicker">RESEARCH SCOPE</span><span>Topology</span><span>Computer science</span><span>Formal proof</span><span>Complexity</span><span>Computational science</span><span>Mathematical physics</span></div></div>
     <section class="section wrap" id="projects" aria-labelledby="projects-title">
       <div class="section-heading"><div><p class="section-index">01 / RESEARCH</p><h2 id="projects-title">Explore the research programs</h2><p>Use the subject filters to find a project, then inspect its scope, source and unresolved boundary.</p></div><a class="quiet-link" href="https://github.com/inaciovasquez2020/vasquez-index">Complete research index <span aria-hidden="true">↗</span></a></div>
       <div class="filter-toolbar" role="group" aria-label="Research subject filters">
         <button type="button" class="filter-button is-selected" data-filter="all" aria-pressed="true">All programs</button>
         <button type="button" class="filter-button" data-filter="mathematics" aria-pressed="false">Mathematics</button>
+        <button type="button" class="filter-button" data-filter="computer-science" aria-pressed="false">Computer Science</button>
         <button type="button" class="filter-button" data-filter="physics" aria-pressed="false">Physics</button>
         <button type="button" class="filter-button" data-filter="infrastructure" aria-pressed="false">Infrastructure</button>
         <label class="search-label"><span class="sr-only">Search research projects</span><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.3 16.3 4 4"/></svg><input id="project-search" type="search" placeholder="Search projects" autocomplete="off"></label>
@@ -73,8 +74,8 @@
           <button class="research-card is-active" type="button" data-project="poincare" data-category="mathematics" aria-pressed="true"><span class="card-top"><span class="small-number">01 / TOPOLOGY</span><span class="status status-open">GLOBAL OPEN</span></span><span class="card-name">Poincaré proof program <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Triangulations, Pachner moves and formally checked intermediate results.</span><span class="card-foot">Explore evidence and open obligations <span aria-hidden="true">→</span></span></button>
           <button class="research-card" type="button" data-project="chronos" data-category="physics" aria-pressed="false"><span class="card-top"><span class="small-number">02 / PHYSICS</span><span class="status status-conditional">CONDITIONAL</span></span><span class="card-name">Chronos / URF–RR <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Executable reductions and bounded spectral investigations.</span><span class="card-foot">Explore evidence and open obligations <span aria-hidden="true">→</span></span></button>
           <button class="research-card" type="button" data-project="urfcore" data-category="infrastructure" aria-pressed="false"><span class="card-top"><span class="small-number">03 / FOUNDATIONS</span><span class="status status-infra">INFRASTRUCTURE</span></span><span class="card-name">URF core <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Definitions, schemas and auditable certificate boundaries.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
-          <button class="research-card" type="button" data-project="verifier" data-category="infrastructure" aria-pressed="false"><span class="card-top"><span class="small-number">04 / TOOLING</span><span class="status status-infra">INFRASTRUCTURE</span></span><span class="card-name">URF verifier <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Deterministic certificate and provenance validation tooling.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
-          <button class="research-card" type="button" data-project="cslib" data-category="mathematics" aria-pressed="false"><span class="card-top"><span class="small-number">05 / LOGIC</span><span class="status status-open">GENERAL OPEN</span></span><span class="card-name">Finite-model theory <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Ehrenfeucht–Fraïssé games and locality bridge formalizations.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="verifier" data-category="infrastructure computer-science" aria-pressed="false"><span class="card-top"><span class="small-number">04 / TOOLING</span><span class="status status-infra">INFRASTRUCTURE</span></span><span class="card-name">URF verifier <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Deterministic certificate and provenance validation tooling.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
+          <button class="research-card" type="button" data-project="cslib" data-category="mathematics computer-science" aria-pressed="false"><span class="card-top"><span class="small-number">05 / LOGIC</span><span class="status status-open">GENERAL OPEN</span></span><span class="card-name">Finite-model theory <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Ehrenfeucht–Fraïssé games and locality bridge formalizations.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
           <button class="research-card" type="button" data-project="cosmology" data-category="physics" aria-pressed="false"><span class="card-top"><span class="small-number">06 / COMPUTATION</span><span class="status status-conditional">BOUNDED CHECKS</span></span><span class="card-name">DFM–MKC cosmology <span class="card-arrow" aria-hidden="true">↗</span></span><span class="card-desc">Executable consistency tests and numerical claims under audit.</span><span class="card-foot">Inspect source and scope <span aria-hidden="true">→</span></span></button>
         </div>
         <aside class="evidence-panel" id="evidence-panel" aria-labelledby="evidence-title" aria-live="polite">
