@@ -1,4 +1,5 @@
 import {uiText,uiFormat} from './extended-i18n.mjs';
+import {fieldLabel,currentLanguage} from './runtime-taxonomy-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -29,7 +30,7 @@ function refreshFieldConfirmation(){
   const state=missing?'missing':confirmed?'confirmed':'review';
   $('field-confirm-panel').dataset.status=state;
   $('field-confirm-title').textContent=missing?'FIELD MISSING / REVIEW REQUIRED':confirmed?'FIELD CONFIRMED BY USER':'CONFIRM FIELD AND SUBCATEGORY';
-  $('field-confirm-summary').textContent='Current selection: '+chosen.field_label+' / '+chosen.subcategory_label+
+  $('field-confirm-summary').textContent='Current selection: '+fieldLabel(chosen.field_label,currentLanguage())+' / '+fieldLabel(chosen.subcategory_label,currentLanguage())+
     '. '+(classificationOrigin==='AUTO'?'Automatically suggested; user review required.':'User selection or engine scope; review required.')+
     ' Method: '+(method.value==='manuscript-audit'?'Manuscript structure only; no theorem verification.':'Exact univariate polynomial identity.');
   return !missing&&confirmed;
@@ -133,7 +134,7 @@ const fieldSelect=$('math-field'),subcategorySelect=$('math-subcategory');
 function fillSubcategories(preferred){
   subcategorySelect.replaceChildren();
   for(const s of subcategoriesFor(fieldSelect.value)){
-    const option=document.createElement('option');option.value=s.id;option.textContent=s.label;subcategorySelect.append(option);
+    const option=document.createElement('option');option.value=s.id;option.textContent=fieldLabel(s.label,currentLanguage());subcategorySelect.append(option);
   }
   if(preferred&&subcategoriesFor(fieldSelect.value).some(s=>s.id===preferred))subcategorySelect.value=preferred;
   updateCoverage();
@@ -147,7 +148,7 @@ function updateCoverage(){
   $('run').disabled=!c.can_run||!confirmed;
   $('run').title=!c.can_run?'No exact engine for the chosen field.':!confirmed?'Review and confirm the field and subcategory before continuing.':'';
 }
-for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=f.label;fieldSelect.append(option);}
+for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=fieldLabel(f.label,currentLanguage());fieldSelect.append(option);}
 fieldSelect.value='algebra';fillSubcategories('polynomial-identities');
 function updateProvenance(){
   const note=classificationOrigin==='MANUAL'?'MANUALLY SELECTED — user declaration, not verified':
@@ -222,9 +223,24 @@ for(const type of ['dragenter','dragover'])drop.addEventListener(type,e=>{e.prev
 for(const type of ['dragleave','drop'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragover');});
 drop.addEventListener('drop',e=>readFile(e.dataTransfer?.files?.[0]));
 
+function refreshTaxonomyDisplay(){
+ const lang=currentLanguage();
+ for(const option of fieldSelect.options){
+  const field=TAXONOMY.find(f=>f.id===option.value);
+  if(field)option.textContent=fieldLabel(field.label,lang);
+ }
+ const subs=subcategoriesFor(fieldSelect.value);
+ for(const option of subcategorySelect.options){
+  const sub=subs.find(s=>s.id===option.value);
+  if(sub)option.textContent=fieldLabel(sub.label,lang);
+ }
+ refreshFieldConfirmation();
+ updateCoverage();
+}
 // Language changes re-render only from the already-computed immutable result objects.
 // Never invoke verifyEquation, auditManuscript or change casebook state on localization.
 $('ui-language')?.addEventListener('change',()=>{
+ refreshTaxonomyDisplay();
  if(!lastRendered)return;
  const {kind,record,entry}=lastRendered;
  if(kind==='exact')renderResult(record,entry);
