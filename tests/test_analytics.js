@@ -37,12 +37,13 @@ function run(token, options = {}) {
   return inserted;
 }
 
-// Default configuration is disabled, including when read in isolation.
+// Activated configuration; privacy suppression remains separately tested.
 {
   const ctx = vm.createContext({window: {}});
   vm.runInContext(config, ctx, {timeout: 1000});
-  assert.equal(ctx.window.VASQUEZ_ANALYTICS_TOKEN, null);
-  assert.equal(run(ctx.window.VASQUEZ_ANALYTICS_TOKEN).length, 0);
+  assert.equal(ctx.window.VASQUEZ_ANALYTICS_TOKEN, "abf01b9570e64782ab28edf07a40818e");
+  assert.equal(run(ctx.window.VASQUEZ_ANALYTICS_TOKEN).length, 1);
+  assert.equal(run(null).length, 0);
 }
 assert.equal(run(undefined).length, 0);
 assert.equal(run("").length, 0);
@@ -58,6 +59,7 @@ assert.equal(run(validToken).length, 1);
   const [script] = run(validToken);
   assert.equal(script.src, "https://static.cloudflareinsights.com/beacon.min.js");
   assert.equal(script.defer, true);
+  assert.equal(script.type, "module");
   assert.equal(JSON.parse(script.attributes["data-cf-beacon"]).token, validToken);
   assert.equal(Object.keys(JSON.parse(script.attributes["data-cf-beacon"])).length, 1);
 }

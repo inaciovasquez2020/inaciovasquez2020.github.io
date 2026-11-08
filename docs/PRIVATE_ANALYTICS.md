@@ -2,7 +2,7 @@
 
 ## Current state
 
-**DISABLED**. The deployed source includes a guarded Cloudflare Web Analytics loader, but `analytics-config.js` sets `window.VASQUEZ_ANALYTICS_TOKEN = null`. With this value the loader returns before inserting a remote script or making tracking requests. No traffic counts exist until the site owner activates a valid Cloudflare site token.
+**ACTIVATION CONFIGURED (deployment-dependent)**. The configured token belongs to `inaciovasquez2020.github.io`. After deployment, the guarded loader activates unless GPC/DNT suppresses it. Verify live beacon delivery and the private Cloudflare dashboard before claiming data collection is operational.
 
 The Cloudflare token is a **public site identifier**, not an API secret. Never put Cloudflare API keys, private dashboard credentials, or visitors' personal information in a public repository. This integration adds no public statistics widget or analytics API endpoint.
 
@@ -12,7 +12,7 @@ The Cloudflare token is a **public site identifier**, not an API secret. Never p
 2. Add `inaciovasquez2020.github.io` as a **non-Cloudflare-hosted** site, then use its manual JavaScript installation instructions. Cloudflare DNS migration is not required.
 3. Confirm that the exact analytics JavaScript token provided for that site is a 32-character hexadecimal identifier. Cloudflare dashboard UI/site identifiers can differ from the beacon token: use the token from the actual JS installation snippet, not an API token.
 4. Review your privacy notice for analytics disclosure under applicable laws. Cloudflare's Web Analytics service is cookie-free, but collection and third-party requests may still require legal/privacy review.
-5. Obtain explicit approval for a second, narrowly scoped PR replacing the `null` value in `analytics-config.js` with that token. No other file needs changing for activation.
+5. Deploy the activation only after a reviewed, narrowly scoped PR passes configuration, loader, and privacy-guard tests.
 
 ## Site coverage
 
@@ -50,4 +50,4 @@ After activation: verify a real `beacon.min.js` response on each intended page, 
 
 ## Release boundary
 
-A PR with the disabled loader may be merged after CI and exact diff review. **DATA_COLLECTION := OFF** until the owner configures the correct site token and explicitly authorizes activation.
+The activation PR remains draft-only until CI, diff review, and explicit owner approval for merging. **DATA_COLLECTION := DEPLOYMENT_UNVERIFIED** until deployment and actual beacon delivery are confirmed.
