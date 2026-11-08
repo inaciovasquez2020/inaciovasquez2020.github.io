@@ -1,3 +1,4 @@
+import {uiText} from './extended-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -59,16 +60,16 @@ function renderError(message){area.replaceChildren();const box=el('div','error-b
 function addRow(container,k,v){let row=el('div','meta-row');row.append(el('span','',k),el('span','result-code',v));container.append(row);}
 function renderResult(r,entry){area.replaceChildren();last=r;const ok=r.status==='EXACT_CERTIFICATE_PASS';
   const root=el('div','result-content');const verdict=el('div',`verdict ${ok?'good':'bad'}`);const head=el('div','verdict-top');head.append(el('span','status-symbol',ok?'✓':'×'),el('span','',r.status));verdict.append(head);
-  verdict.append(el('div','verdict-title',ok?'Identity established within polynomial scope.':'Counterexample found.'));
+  verdict.append(el('div','verdict-title',ok?uiText('Identity established within polynomial scope.'):uiText('Counterexample found.')));
   verdict.append(el('div','verdict-desc',ok?`All ${r.degree_upper_bound+1} exact evaluations agree. The degree bound proves equality for every real x.`:`At x = ${r.certificate.at(-1).x}, the two sides differ. The universal equality is false.`));
-  root.append(verdict);const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : 'ENGINE-REQUIRED SCOPE · USER CONFIRMED'}`));root.append(el('p','classification-line','METHOD APPLIED: Exact integer polynomial identity over R, variable x · EXACT_SUPPORTED · NOT A LEAN PROOF'));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: The checker establishes only the entered polynomial equality. Incorrect transcription, missing assumptions or incorrect source identification are not validated.'));root.append(el('h3','section-title','EXACT EVALUATION RECORD'));
+  root.append(verdict);const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : 'ENGINE-REQUIRED SCOPE · USER CONFIRMED'}`));root.append(el('p','classification-line','METHOD APPLIED: Exact integer polynomial identity over R, variable x · EXACT_SUPPORTED · NOT A LEAN PROOF'));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: The checker establishes only the entered polynomial equality. Incorrect transcription, missing assumptions or incorrect source identification are not validated.'));root.append(el('h3','section-title',uiText('EXACT EVALUATION RECORD')));
   const table=el('table','evidence-table');const thead=el('thead'),th=el('tr');for(const name of ['x','LHS','RHS'])th.append(el('th','',name));thead.append(th);table.append(thead);
   const body=el('tbody');for(const sample of r.certificate){const tr=el('tr',sample.lhs!==sample.rhs?'witness':'');for(const key of ['x','lhs','rhs'])tr.append(el('td','',String(sample[key])));body.append(tr);}table.append(body);root.append(table);
-  root.append(el('h3','section-title','CERTIFICATE SCOPE'));const meta=el('div','meta-rows');addRow(meta,'Method','Exact Z[x] identity / root bound');addRow(meta,'Degree bound',String(r.degree_upper_bound));addRow(meta,'Original claim',r.source.equation);addRow(meta,'Python replay','Not yet performed');addRow(meta,'Lean proof','Not performed');root.append(meta);
+  root.append(el('h3','section-title',uiText('CERTIFICATE SCOPE')));const meta=el('div','meta-rows');addRow(meta,uiText('Method'),'Exact Z[x] identity / root bound');addRow(meta,uiText('Degree bound'),String(r.degree_upper_bound));addRow(meta,uiText('Original claim'),r.source.equation);addRow(meta,uiText('Python replay'),uiText('Not yet performed'));addRow(meta,uiText('Lean proof'),uiText('Not performed'));root.append(meta);
   root.append(el('p','scope-note',`Improvement loop: ${entry.probes_passed}/${entry.probes.length} metamorphic checks passed; ${entry.probes_skipped} skipped. Candidate status: ${entry.status}. Independent Python replay not performed.`));
-  const buttons=el('div','report-actions');const certificate=el('button','', 'Download evidence JSON');certificate.type='button';certificate.onclick=()=>downloadJSON(last,'vasquez-lab-evidence.json');
-  const python=el('button','', 'Download Python claim JSON');python.type='button';python.onclick=()=>downloadJSON(last.claim,'vasquez-lab-claim.json');
-  const replay=el('button','', 'Show Python replay command');replay.type='button';replay.onclick=()=>{const text=`python3 tools/math_audit.py check vasquez-lab-claim.json --output result.json\npython3 tools/math_audit.py verify result.json --claim vasquez-lab-claim.json`;const info=el('pre','file-note',text);buttons.after(info);replay.disabled=true;};
+  const buttons=el('div','report-actions');const certificate=el('button','', uiText('Download evidence JSON'));certificate.type='button';certificate.onclick=()=>downloadJSON(last,'vasquez-lab-evidence.json');
+  const python=el('button','', uiText('Download Python claim JSON'));python.type='button';python.onclick=()=>downloadJSON(last.claim,'vasquez-lab-claim.json');
+  const replay=el('button','', uiText('Show Python replay command'));replay.type='button';replay.onclick=()=>{const text=`python3 tools/math_audit.py check vasquez-lab-claim.json --output result.json\npython3 tools/math_audit.py verify result.json --claim vasquez-lab-claim.json`;const info=el('pre','file-note',text);buttons.after(info);replay.disabled=true;};
   buttons.append(certificate,python,replay);root.append(buttons);root.append(el('p','scope-note','Browser-side certificate only. The evidence JSON is not a Python-generated certificate; download the claim and run the authoritative Python checker independently.'));area.append(root);
 }
 function renderManuscript(r,entry){
@@ -79,11 +80,11 @@ function renderManuscript(r,entry){
     el('div','verdict-desc',`${r.title} · ${r.source_name}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.`));root.append(verdict);
   const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : classificationOrigin === 'AUTO' ? 'AUTO-SUGGESTED · USER CONFIRMED' : 'USER CONFIRMED'}`));root.append(el('p','classification-line','METHOD APPLIED: LaTeX manuscript structure inventory · STRUCTURAL_ONLY · NO MATHEMATICAL CLAIMS VERIFIED'));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: LaTeX extraction can miss statements or misread notation, proofs and assumptions. Subject classification is heuristic or user-declared, and this report is not a mathematical or scientific validation.'));
   const stats=el('div','auditor-grid');
-  for(const [name,count] of [['Definitions',r.counts.definitions],['Lemmas',r.counts.lemmas],['Theorems',r.counts.theorems],['Corollaries',r.counts.corollaries],['Proof blocks',r.counts.proof_environments],['Math blocks',r.counts.displayed_math]]){
+  for(const [name,count] of [[uiText('Definitions'),r.counts.definitions],[uiText('Lemmas'),r.counts.lemmas],[uiText('Theorems'),r.counts.theorems],[uiText('Corollaries'),r.counts.corollaries],[uiText('Proof blocks'),r.counts.proof_environments],[uiText('Math blocks'),r.counts.displayed_math]]){
     const div=el('div');div.append(el('strong','',String(count)),el('span','',name));stats.append(div);
   }root.append(stats);
   const extraction=r.extraction;
-  root.append(el('h3','section-title','EQUATION EXTRACTION COVERAGE'));
+  root.append(el('h3','section-title',uiText('EQUATION EXTRACTION COVERAGE')));
   root.append(el('p','result-disclaimer',extraction.status==='REVIEW_REQUIRED'?
     'EXTRACTION REVIEW REQUIRED: Some displayed or inline mathematics was not included in the extracted equation inventory. Review the flagged source below.':
     'EXTRACTION NOT EXHAUSTIVELY VERIFIED: No suspicious patterns detected by these bounded checks. This does not guarantee that every equation was recovered.'));
@@ -95,21 +96,21 @@ function renderManuscript(r,entry){
     const raw=el('pre','flagged-source',flag.source_excerpt);
     block.append(raw);flagList.append(block);
   }
-  if(!extraction.flags.length)flagList.append(el('p','scope-note','No flagged excerpts in supported detection patterns; manual source comparison is still required.'));
-  if(extraction.flags_truncated)flagList.append(el('p','scope-note','WARNING: Source flags truncated at the configured limit.'));
+  if(!extraction.flags.length)flagList.append(el('p','scope-note',uiText('No flagged excerpts in supported detection patterns; manual source comparison is still required.')));
+  if(extraction.flags_truncated)flagList.append(el('p','scope-note',uiText('WARNING: Source flags truncated at the configured limit.')));
   root.append(flagList);
-  root.append(el('h3','section-title','AUDIT FINDINGS — NOT PROOF VERDICTS'));
+  root.append(el('h3','section-title',uiText('AUDIT FINDINGS — NOT PROOF VERDICTS')));
   const findings=el('div','audit-claims');for(const f of r.findings){const block=el('div','audit-item review');block.append(el('div','audit-item-meta',f.type+' · '+f.severity.toUpperCase()),el('h4','',f.label),el('p','',f.detail));findings.append(block);}root.append(findings);
-  root.append(el('h3','section-title','EXTRACTED CLAIM ENVIRONMENTS'));
-  const claims=el('div','audit-claims');if(!r.claims.length)claims.append(el('p','scope-note','No supported theorem environments found. No mathematical inference has been made.'));
+  root.append(el('h3','section-title',uiText('EXTRACTED CLAIM ENVIRONMENTS')));
+  const claims=el('div','audit-claims');if(!r.claims.length)claims.append(el('p','scope-note',uiText('No supported theorem environments found. No mathematical inference has been made.')));
   for(const c of r.claims){const block=el('div','audit-item');block.append(el('div','audit-item-meta',c.kind.toUpperCase()+` · LINE ${c.line} · `+c.status),
     el('h4','',c.name||'Unnamed '+c.kind),el('p','',c.excerpt));claims.append(block);}root.append(claims);
-  root.append(el('h3','section-title','DISPLAYED MATHEMATICS'));
-  const math=el('div','audit-claims');if(!r.displayed_equations.length)math.append(el('p','scope-note','No displayed mathematics found.'));
+  root.append(el('h3','section-title',uiText('DISPLAYED MATHEMATICS')));
+  const math=el('div','audit-claims');if(!r.displayed_equations.length)math.append(el('p','scope-note',uiText('No displayed mathematics found.')));
   for(const entry of r.displayed_equations.slice(0,24)){
     const block=el('div','audit-item');block.append(el('div','audit-item-meta','LINE '+entry.line+' · NOT VERIFIED'),el('p','result-code',entry.latex));math.append(block);
   }if(r.displayed_equations.length>24)math.append(el('p','scope-note',`${r.displayed_equations.length-24} additional blocks omitted from screen; included in JSON report.`));root.append(math);
-  const actions=el('div','report-actions');const save=el('button','','Download structural audit JSON');save.type='button';save.onclick=()=>downloadJSON(r,'vasquez-manuscript-audit.json');actions.append(save);root.append(actions);
+  const actions=el('div','report-actions');const save=el('button','',uiText('Download structural audit JSON'));save.type='button';save.onclick=()=>downloadJSON(r,'vasquez-manuscript-audit.json');actions.append(save);root.append(actions);
   root.append(el('p','scope-note',`Casebook entry: ${entry.status}; no manuscript text was retained in the regression casebook. No AI model is connected, and this parser provides no theorem-level verdict.`));area.append(root);
 }
 function updateMethod(){const isMs=method.value==='manuscript-audit';
