@@ -1,4 +1,4 @@
-import {uiText} from './extended-i18n.mjs';
+import {uiText,uiFormat} from './extended-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -62,7 +62,7 @@ function addRow(container,k,v){let row=el('div','meta-row');row.append(el('span'
 function renderResult(r,entry){area.replaceChildren();last=r;lastRendered={kind:'exact',record:r,entry};const ok=r.status==='EXACT_CERTIFICATE_PASS';
   const root=el('div','result-content');const verdict=el('div',`verdict ${ok?'good':'bad'}`);const head=el('div','verdict-top');head.append(el('span','status-symbol',ok?'✓':'×'),el('span','',r.status));verdict.append(head);
   verdict.append(el('div','verdict-title',ok?uiText('Identity established within polynomial scope.'):uiText('Counterexample found.')));
-  verdict.append(el('div','verdict-desc',ok?`All ${r.degree_upper_bound+1} exact evaluations agree. The degree bound proves equality for every real x.`:`At x = ${r.certificate.at(-1).x}, the two sides differ. The universal equality is false.`));
+  verdict.append(el('div','verdict-desc',ok?uiFormat('All {count} exact evaluations agree. The degree bound proves equality for every real x.',{count:r.degree_upper_bound+1}):uiFormat('At x = {x}, the two sides differ. The universal equality is false.',{x:r.certificate.at(-1).x})));
   root.append(verdict);const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : 'ENGINE-REQUIRED SCOPE · USER CONFIRMED'}`));root.append(el('p','classification-line',uiText('METHOD APPLIED: Exact integer polynomial identity over R, variable x · EXACT_SUPPORTED · NOT A LEAN PROOF')));root.append(el('p','result-disclaimer',uiText('INPUT WARNING — UNCERTIFIED SOURCE: The checker establishes only the entered polynomial equality. Incorrect transcription, missing assumptions or incorrect source identification are not validated.')));root.append(el('h3','section-title',uiText('EXACT EVALUATION RECORD')));
   const table=el('table','evidence-table');const thead=el('thead'),th=el('tr');for(const name of ['x','LHS','RHS'])th.append(el('th','',name));thead.append(th);table.append(thead);
   const body=el('tbody');for(const sample of r.certificate){const tr=el('tr',sample.lhs!==sample.rhs?'witness':'');for(const key of ['x','lhs','rhs'])tr.append(el('td','',String(sample[key])));body.append(tr);}table.append(body);root.append(table);
@@ -78,7 +78,7 @@ function renderManuscript(r,entry){
   const verdict=el('div','verdict unverified');
   const top=el('div','verdict-top'); top.append(el('span','status-symbol','◇'),el('span','',r.status));
   verdict.append(top,el('div','verdict-title',uiText('Manuscript structure reviewed; mathematical claims not verified.')),
-    el('div','verdict-desc',`${r.title} · ${r.source_name}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.`));root.append(verdict);
+    el('div','verdict-desc',uiFormat('{title} · {source}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.',{title:r.title,source:r.source_name})));root.append(verdict);
   const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : classificationOrigin === 'AUTO' ? 'AUTO-SUGGESTED · USER CONFIRMED' : 'USER CONFIRMED'}`));root.append(el('p','classification-line',uiText('METHOD APPLIED: LaTeX manuscript structure inventory · STRUCTURAL_ONLY · NO MATHEMATICAL CLAIMS VERIFIED')));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: LaTeX extraction can miss statements or misread notation, proofs and assumptions. Subject classification is heuristic or user-declared, and this report is not a mathematical or scientific validation.'));
   const stats=el('div','auditor-grid');
   for(const [name,count] of [[uiText('Definitions'),r.counts.definitions],[uiText('Lemmas'),r.counts.lemmas],[uiText('Theorems'),r.counts.theorems],[uiText('Corollaries'),r.counts.corollaries],[uiText('Proof blocks'),r.counts.proof_environments],[uiText('Math blocks'),r.counts.displayed_math]]){
