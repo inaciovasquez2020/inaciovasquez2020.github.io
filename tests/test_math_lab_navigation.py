@@ -34,6 +34,19 @@ def test_math_lab_navigation():
         assert 'fetch(' not in code,name
     assert 'NOT_APPROVED' in (ROOT/'math-lab/improvement.mjs').read_text(encoding='utf-8')
     assert 'NOT_VERIFIED' in (ROOT/'math-lab/manuscript.mjs').read_text(encoding='utf-8')
+    assert 'href="how-to.html"' in page
+    guide=(ROOT/'math-lab/how-to.html').read_text(encoding='utf-8')
+    for phrase in ('EXACT_CERTIFICATE_PASS','REFUTED','NOT_VERIFIED','STRUCTURAL_ONLY','NO_ENGINE','REGRESSION_CANDIDATE','INCOMPLETE_SOURCE_REQUIRED','Manuscript structure audit','Exact polynomial identity','64 KiB'):
+        assert phrase in guide, phrase
+    guide_links=Parser()
+    guide_links.feed(guide)
+    for ref in guide_links.links+guide_links.assets:
+        x=urlsplit(ref)
+        if x.scheme or x.netloc or ref.startswith('//') or not x.path: continue
+        dest=(ROOT/'math-lab'/x.path).resolve()
+        assert dest.is_relative_to(ROOT.resolve()),ref
+        assert dest.is_file(),ref
+
 if __name__=='__main__':
     test_math_lab_navigation()
     print('MATH_LAB_NAVIGATION := PASS')
