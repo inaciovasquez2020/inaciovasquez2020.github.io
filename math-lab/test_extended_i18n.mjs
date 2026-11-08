@@ -62,9 +62,9 @@ test('citation UI translation keys cover all languages and preserve citation ide
   assert.ok(src.includes('uiText('));
   for(const locale of Object.keys(DICTIONARIES))assert.ok(DICTIONARIES[locale][key],locale+': '+key);
  }
- assert.match(src,/ref\\.doi/);
- assert.match(src,/ref\\.note/);
- assert.match(src,/ref\\.title/);
+ assert.ok(src.includes('ref.doi'));
+ assert.ok(src.includes('ref.note'));
+ assert.ok(src.includes('ref.title'));
  assert.match(src,/formatBibtex/);
  assert.equal(uiText('NOT_VERIFIED','es'),'NOT_VERIFIED');
 });
