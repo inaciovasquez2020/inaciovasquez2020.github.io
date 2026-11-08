@@ -27,3 +27,6 @@ next.addEventListener('click',()=>{
 close.addEventListener('click',()=>dialog.close());
 dialog.addEventListener('close',()=>launch.focus());
 dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+
+// Refresh the visible tour position and button captions when the language changes.
+document.getElementById('ui-language')?.addEventListener('change',()=>render());
