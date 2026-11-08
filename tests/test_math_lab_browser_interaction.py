@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+"""Browser interaction test in local headless Chrome: translation must not change exact evidence."""
+from __future__ import annotations
+import contextlib
+import html
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+import json
+import re
+import shutil
+import subprocess
+import tempfile
+import threading
+from urllib.parse import urlsplit, parse_qs
+
+ROOT=Path(__file__).resolve().parents[1]
+CHROME=next((p for name in ('google-chrome','google-chrome-stable','chromium','chromium-browser')
+             if (p:=shutil.which(name))),None)
+if not CHROME:
+    raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_NO_INSTALLED_CHROME')
+
+SCRIPT=r"""
+window.addEventListener('load',async()=>{
+  const out=document.createElement('pre');out.id='ci-interaction-result';document.body.append(out);
+  const $=id=>document.getElementById(id);
+  const change=lang=>{const s=$('ui-language');s.value=lang;s.dispatchEvent(new Event('change',{bubbles:true}));};
+  const capture=async()=>{
+    let blob=null;
+    const oldURL=URL.createObjectURL,oldClick=HTMLAnchorElement.prototype.click;
+    try{
+      URL.createObjectURL=b=>{blob=b;return 'blob:ci-test';};
+      HTMLAnchorElement.prototype.click=function(){};
+      const button=document.querySelector('#result-area .report-actions button');
+      if(!button)throw Error('evidence download button missing');
+      button.click();
+    }finally{URL.createObjectURL=oldURL;HTMLAnchorElement.prototype.click=oldClick;}
+    if(!blob)throw Error('evidence blob missing');
+    return await blob.text();
+  };
+  try{
+    const originalInput=$('equation').value;
+    const originalField=$('math-field').value;
+    const originalSub=$('math-subcategory').value;
+    $('field-confirm').click();
+    if(!$('field-confirm').checked||$('run').disabled)throw Error('confirmation did not enable run');
+    $('claim-form').requestSubmit();
+    const verdict=()=>document.querySelector('#result-area .verdict-title')?.textContent;
+    const status=()=>document.querySelector('#result-area .verdict-top')?.textContent||'';
+    if(!status().includes('EXACT_CERTIFICATE_PASS'))throw Error('exact certificate absent');
+    const evidence=await capture();
+    const initialVerdict=verdict();
+    const table=document.querySelector('#result-area .evidence-table')?.textContent;
+    if(!table)throw Error('exact evaluation table absent');
+    $('check-citations').click();
+    const citationEn=$('citation-results').textContent;
+    change('pt-BR');
+    const pt=verdict(),citationPt=$('citation-results').textContent;
+    if(!pt.includes('Identidade estabelecida'))throw Error('Portuguese verdict not translated: '+pt);
+    if(citationPt===citationEn)throw Error('citation guidance failed to relocalize');
+    if(await capture()!==evidence)throw Error('evidence changed in Portuguese');
+    change('es');
+    const es=verdict();
+    if(!es.includes('Identidad establecida'))throw Error('Spanish verdict not translated: '+es);
+    if(await capture()!==evidence)throw Error('evidence changed in Spanish');
+    change('en');
+    if(verdict()!==initialVerdict)throw Error('English restoration failed');
+    if(await capture()!==evidence)throw Error('evidence changed after full round trip');
+    if($('equation').value!==originalInput||$('math-field').value!==originalField||$('math-subcategory').value!==originalSub)
+      throw Error('mathematical input or classification IDs changed');
+    if(!$('field-confirm').checked||$('run').disabled)throw Error('confirmation state lost');
+    if(document.querySelector('#result-area .evidence-table')?.textContent!==table)throw Error('exact evaluation table changed');
+    out.textContent=JSON.stringify({status:'PASS',languages:['en','pt-BR','es','en'],exact_status:'EXACT_CERTIFICATE_PASS',certificate_bytes:evidence.length});
+  }catch(e){out.textContent=JSON.stringify({status:'FAIL',error:String(e.stack||e)});}
+});
+"""
+class Handler(SimpleHTTPRequestHandler):
+    def __init__(self,*args,**kw):
+        super().__init__(*args,directory=str(ROOT),**kw)
+    def log_message(self,*_args):
+        pass
+    def do_GET(self):
+        split=urlsplit(self.path)
+        if split.path!='/math-lab/index.html' or 'ci-interaction' not in parse_qs(split.query):
+            return super().do_GET()
+        source=(ROOT/'math-lab/index.html').read_text(encoding='utf-8')
+        if source.count('</body>')!=1:
+            self.send_error(500,'unexpected document markup')
+            return
+        output=source.replace('</body>','<script>'+SCRIPT+'</script></body>').encode('utf-8')
+        self.send_response(200)
+        self.send_header('Content-Type','text/html; charset=utf-8')
+        self.send_header('Content-Length',str(len(output)))
+        self.end_headers()
+        self.wfile.write(output)
+
+with contextlib.chdir(ROOT):
+    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+    threading.Thread(target=server.serve_forever,daemon=True).start()
+    try:
+        with tempfile.TemporaryDirectory(prefix='lab-ci-interactive-') as tmp:
+            url=f'http://127.0.0.1:{server.server_port}/math-lab/index.html?lang=en&ci-interaction=1'
+            cmd=[CHROME,'--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage',
+                 '--disable-background-networking','--no-first-run',
+                 '--virtual-time-budget=6500','--dump-dom',
+                 '--window-size=390,844',f'--user-data-dir={tmp}',url]
+            try:
+                p=subprocess.run(cmd,text=True,capture_output=True,timeout=35)
+            except subprocess.TimeoutExpired:
+                raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_TIMEOUT')
+            if p.returncode:
+                raise SystemExit(f'BROWSER_INTERACTION := FAIL_CHROME rc={p.returncode} {p.stderr[-450:]}')
+            match=re.search(r'<pre id="ci-interaction-result">(.*?)</pre>',p.stdout,re.S)
+            if not match:
+                raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_SCRIPT_OR_LOAD; no result marker')
+            result=json.loads(html.unescape(match.group(1)))
+            if result['status']!='PASS':
+                raise SystemExit('BROWSER_INTERACTION := FAIL '+str(result))
+            print('BROWSER_INTERACTION := PASS '+json.dumps(result,sort_keys=True))
+    finally:
+        server.shutdown()
+        server.server_close()
