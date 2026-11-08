@@ -49,9 +49,11 @@ resource limits, evidence semantics and promotion gates.
 - Offline Python replay tests: 8 / 8 PASS against the current reviewed
   `urf-textbook` checker at Git blob `edf3690bbc6156f62433487baec836e69bf5ac25`.
 - Cross-language replay: four classified exact claims and their metamorphic
-  candidate claims PASS; one entropy-capacity manuscript record remains `NOT_VERIFIED`.
-- Browser navigation/screenshot validation: NOT RUN (sandbox blocks browser
-  navigation even to local files); must be run in website preview CI.
+  candidate claims PASS; one generic synthetic manuscript record remains `NOT_VERIFIED`.
+- Browser validation: a Chromium offline DOM interaction test passed (identity,
+  refutation, download, unsupported-category restriction, manuscript status,
+  appearance switching). Direct HTTP module navigation was blocked by the
+  sandbox policy, so the deployed-site E2E test remains NOT_RUN.
 - GitHub Pages publication: NOT RUN. `main` and live site were not modified.
 
 ## PR integration checklist
@@ -75,3 +77,12 @@ resource limits, evidence semantics and promotion gates.
 
 The published site should retain a static interface. The Python replay is an
 **offline audit gate**, not a server endpoint or proof service.
+
+## Privacy and public-source boundary
+
+The GitHub Pages repository is public. Browser-delivered JavaScript is public and
+can be inspected or copied. Do not put private checker implementations, unpublished
+manuscripts, secret tokens or proprietary research into this repository or its
+PR branches. The manuscript fixture uses deliberately synthetic mathematics.
+Review the existing repository MIT license with the owner before publishing
+new tool code; CI success does not grant license or publication approval.

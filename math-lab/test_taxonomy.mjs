@@ -18,7 +18,7 @@ test('taxonomy field/subcategory coverage exact scope and no other engine',()=>{
   assert.throws(()=>coverage('algebra','polynomial-identities','fake-method'),TypeError);
 });
 test('deterministic manuscript suggestions never claim verification',()=>{
-  let a=suggestCategory('Shannon entropy and aggregate transcript capacity');
+  let a=suggestCategory('Shannon entropy and mutual information');
   assert.deepEqual([a.field,a.subcategory,a.confidence],['probability-information','entropy-capacity','HEURISTIC_ONLY']);
   a=suggestCategory('Pachner triangulation of a 3-manifold');
   assert.deepEqual([a.field,a.subcategory],['topology','manifold-topology']);

@@ -60,7 +60,7 @@ export function coverage(field,subcategory,method){
 export function suggestCategory(text){
   const t=String(text??'').slice(0,65536);
   const patterns=[
-    [/\\mathrm\{TC\}|transcript capacity|mutual information|entropy|shannon|fano|information capacity/i,'probability-information','entropy-capacity'],
+    [/mutual information|entropy|shannon|fano|information capacity/i,'probability-information','entropy-capacity'],
     [/poincar[eé]|pachner|triangulat|3.manifold|3-sphere/i,'topology','manifold-topology'],
     [/homotopy|homology|cohomology/i,'topology','algebraic-topology'],
     [/complexity|p\s*(?:vs\.?|=)\s*np|sat\b|nondeterministic/i,'logic-complexity','complexity'],

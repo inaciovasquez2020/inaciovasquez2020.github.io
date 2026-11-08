@@ -1,3 +1,4 @@
+[hidden]{display:none!important}
 :root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-synthesis:none;line-height:1.5;--canvas:#f6f6f3;--paper:#fff;--ink:#18283d;--muted:#637082;--line:#dce1e3;--accent:#2d5c85;--accent2:#27675f;--good:#19685c;--bad:#a04442;--shadow:0 12px 40px rgba(22,40,60,.045);color:var(--ink);background:var(--canvas)}
 html[data-theme=observatory]{--canvas:#121c29;--paper:#1b2a3c;--ink:#f2f5f6;--muted:#a8b7c4;--line:#374b60;--accent:#94c8f0;--accent2:#79c3b0;--good:#7fcbad;--bad:#f3a2a2;--shadow:none;color-scheme:dark}
 html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#596b86;--line:#cbd8e9;--accent:#255eb3;--accent2:#2b688a;--good:#1c685c;--bad:#ad3d4b;--shadow:0 14px 45px rgba(29,62,120,.065)}

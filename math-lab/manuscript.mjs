@@ -57,13 +57,13 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
     findings.push({type: 'PROOF_SURFACE', severity: 'review', label: 'No LaTeX proof environments found',
       detail: 'The source contains theorem-like statements but no \\begin{proof} blocks. This does not rule out prose proofs; inspect the source and dependencies.'});
   }
-  if (/aggregate transcript capacity/i.test(text) && /(?:Omega|\\Omega)\s*\(?\s*n\s*\)?/.test(text)) {
-    findings.push({type: 'ASSUMPTIONS', severity: 'review', label: 'Total capacity versus per-step capacity',
-      detail: 'Review whether a total-transcript capacity definition supplies the per-step information bound needed for a linear depth conclusion. This is a review question, not an automated refutation.'});
+  if (/(?:\\(?:Omega|Theta)\b|\\mathcal\{O\})/.test(text)) {
+    findings.push({type: 'ASYMPTOTIC_CLAIM', severity: 'review', label: 'Asymptotic statement requires a justified bound',
+      detail: 'Check the precise resource model, quantified parameters, asymptotic hypotheses, and proof of any rate claim. This is a generic review question, not an automated mathematical verdict.'});
   }
-  if (/viotropic/i.test(text) && /\\Rightarrow/.test(text) && /I_\{\\mathrm\{op\}\}/.test(text)) {
-    findings.push({type: 'IMPLICATION', severity: 'review', label: 'Zero-information implication requires proof',
-      detail: 'A capacity-exceedance premise does not automatically imply exactly zero operational mutual information. Inspect variable definitions, quantifiers and countermodels.'});
+  if (/\\(?:Rightarrow|implies)\b/.test(text)) {
+    findings.push({type: 'IMPLICATION', severity: 'review', label: 'Displayed implication requires a derivation',
+      detail: 'Check that the conclusion follows from its stated assumptions and that the implication is not vacuous. This is a generic syntactic flag, not a refutation.'});
   }
   return {schema: MANUSCRIPT_SCHEMA, status: 'NOT_VERIFIED', title, source_name: sourceName,
     source_characters: source.length, counts: {

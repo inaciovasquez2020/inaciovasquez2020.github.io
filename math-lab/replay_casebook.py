@@ -7,6 +7,7 @@ script nor the website auto-promotes tests, modifies source, or uploads claims.
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import importlib.util
 import json
@@ -68,6 +69,61 @@ def check_claim(claim, expected, checker):
     return generated
 
 
+
+def expected_relations(claim, status):
+    """Reconstruct exact transformations, never trust labels from the casebook."""
+    lhs, rhs = claim['lhs'], claim['rhs']
+    relations = [
+        ('swap_sides', rhs, lhs, status),
+        ('add_one_to_both', f'(({lhs})+1)', f'(({rhs})+1)', status),
+        ('negate_both', f'-({lhs})', f'-({rhs})', status),
+        ('double_both', f'2*({lhs})', f'2*({rhs})', status),
+    ]
+    if status == 'EXACT_CERTIFICATE_PASS':
+        relations.append(('negative_control_add_one_to_rhs', lhs, f'(({rhs})+1)', 'REFUTED'))
+    return relations
+
+
+def same_expression(actual, expected):
+    """Compare syntax trees, not only polynomial values or a claimed relation."""
+    if type(actual) is not str or type(expected) is not str:
+        return False
+    try:
+        return ast.dump(ast.parse(actual, mode='eval'), include_attributes=False) == \
+            ast.dump(ast.parse(expected, mode='eval'), include_attributes=False)
+    except (SyntaxError, ValueError, RecursionError, UnicodeError):
+        return False
+
+
+def verify_relation(probe, index, relation, checker):
+    label, expected_lhs, expected_rhs, expected_status = relation
+    if type(probe) is not dict or probe.get('relation') != label:
+        raise ReplayFailure(f'probe {index}: wrong, missing or reordered transformation')
+    outcome = probe.get('outcome')
+    if outcome == 'SKIPPED_RESOURCE_OR_GRAMMAR':
+        if not isinstance(probe.get('reason'), str) or not probe['reason'] or probe.get('candidate_claim') is not None:
+            raise ReplayFailure(f'probe {index}: invalid skip record')
+        return 'SKIPPED'
+    if outcome != 'PASS':
+        raise ReplayFailure(f'probe {index}: transformation did not pass')
+    candidate = probe.get('candidate_claim')
+    if type(candidate) is not dict or set(candidate) != {'id', 'domain', 'variable', 'lhs', 'rhs'}:
+        raise ReplayFailure(f'probe {index}: malformed transformed claim')
+    if candidate['id'] != f'meta-{index}' or candidate['domain'] != 'R' or candidate['variable'] != 'x':
+        raise ReplayFailure(f'probe {index}: transformed claim provenance mismatch')
+    if not same_expression(candidate['lhs'], expected_lhs) or not same_expression(candidate['rhs'], expected_rhs):
+        raise ReplayFailure(f'probe {index}: alleged transformation does not match original claim')
+    if probe.get('expected_status') != expected_status:
+        raise ReplayFailure(f'probe {index}: expected status manipulated')
+    report = check_claim(candidate, expected_status, checker)
+    if report['status'] != probe.get('observed_status'):
+        raise ReplayFailure(f'probe {index}: reported status disagrees with Python')
+    witness = report['certificate'][-1]['x'] if report['status'] == 'REFUTED' else None
+    if witness != probe.get('witness_x'):
+        raise ReplayFailure(f'probe {index}: witness mismatch')
+    return 'PASS'
+
+
 def run(casebook, checker):
     if type(casebook) is not dict or casebook.get('schema') != SCHEMA:
         raise ReplayFailure('incorrect casebook schema')
@@ -108,26 +164,14 @@ def run(casebook, checker):
         if witness != case.get('initial_witness_x'):
             raise ReplayFailure(f'case {index}: first witness mismatch')
         probes = case.get('probes')
-        if type(probes) is not list or not 1 <= len(probes) <= MAX_PROBES:
-            raise ReplayFailure(f'case {index}: invalid probes')
+        expected = expected_relations(claim, base['status'])
+        if type(probes) is not list or len(probes) != len(expected):
+            raise ReplayFailure(f'case {index}: expected {len(expected)} named transformations')
         checked, skipped = 0, 0
-        for j, p in enumerate(probes):
-            if type(p) is not dict:
-                raise ReplayFailure(f'case {index} probe {j}: invalid record')
-            outcome = p.get('outcome')
-            if outcome == 'SKIPPED_RESOURCE_OR_GRAMMAR':
-                skipped += 1
-                continue
-            if outcome != 'PASS':
-                raise ReplayFailure(f'case {index} probe {j}: browser metamorphic failure')
-            candidate = p.get('candidate_claim')
-            report = check_claim(candidate, p.get('expected_status'), checker)
-            if report['status'] != p.get('observed_status'):
-                raise ReplayFailure(f'case {index} probe {j}: recorded status mismatch')
-            probe_witness = report['certificate'][-1]['x'] if report['status'] == 'REFUTED' else None
-            if probe_witness != p.get('witness_x'):
-                raise ReplayFailure(f'case {index} probe {j}: witness mismatch')
-            checked += 1
+        for j, (probe, relation) in enumerate(zip(probes, expected)):
+            outcome = verify_relation(probe, j, relation, checker)
+            checked += int(outcome == 'PASS')
+            skipped += int(outcome == 'SKIPPED')
         if case.get('probes_passed') != checked or case.get('probes_skipped') != skipped:
             raise ReplayFailure(f'case {index}: probe count mismatch')
         if checked == 0:

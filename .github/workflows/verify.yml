@@ -30,3 +30,21 @@ jobs:
           node --test math-lab/test_*.mjs
           python3 tests/test_math_lab_navigation.py
           python3 -m py_compile math-lab/replay_casebook.py
+
+      - name: Math Lab independent replay against pinned Python checker
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import urlopen
+          import hashlib
+          url = 'https://raw.githubusercontent.com/inaciovasquez2020/urf-textbook/6bb795781cfc5e43cb41f94cd2348bea1de4a4eb/tools/math_audit.py'
+          with urlopen(url, timeout=20) as response:
+              source = response.read(65537)
+          if not source or len(source) > 65536:
+              raise SystemExit('PINNED_CHECKER := FAILED_SIZE')
+          if hashlib.sha256(source).hexdigest() != '14b9842c094117c849972f91717ed7b3e37de680002c9399cfe1c1da85e64d27':
+              raise SystemExit('PINNED_CHECKER := FAILED_DIGEST')
+          Path('/tmp/vasquez-pinned-math_audit.py').write_bytes(source)
+          print('PINNED_CHECKER := VERIFIED')
+          PY
+          python3 math-lab/test_replay_casebook.py --checker /tmp/vasquez-pinned-math_audit.py

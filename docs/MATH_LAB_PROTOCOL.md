@@ -91,7 +91,9 @@ A user-entered field remains metadata, not a formal proof classification.
 
 The offline replay checks the original and each reported successful metamorphic
 case with the trusted Python checker, rechecks status, degree, witness and
-claim-ID binding, and rejects forgeries and discrepancies. It never writes into
+claim-ID binding, independently reconstructs the required metamorphic
+transformations (including the negative control), and rejects mislabeled or
+substituted probe claims, forgeries and discrepancies. It never writes into
 repositories, changes the website, promotes a test, or claims source-to-LaTeX
 translation was independently confirmed. Unsupported manuscript cases remain
 `NOT_VERIFIED`. Reject a failed replay or resource timeout as INCOMPLETE/FAILED.
@@ -103,3 +105,12 @@ on the exact proposed revision. There is no automatic merge or source rewrite.
 Canonical backend source: `inaciovasquez2020/urf-textbook`, PR #177. Record its
 exact commit and `#print axioms` where Lean is involved; no Lean engine is
 connected to this tool. A successful site build is not a theorem proof.
+
+## Public-code disclosure
+
+This website repository is public, and its existing repository-level license
+includes MIT terms. A draft PR and an unmerged Git branch are not private.
+The exact browser engine is visible client-side; unpublished theorem sources,
+confidential manuscripts, and private verification methods must stay in private
+repositories. The owner must explicitly approve any release/licensing decision.
+CI cannot decide intellectual-property disposition.
