@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://inaciovasquez2020.github.io/math-lab/claim-manifest-schema.json",
+  "title": "Vasquez Research Math Verification Lab — required claim manifest v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_id",
+    "source_reference",
+    "field",
+    "subcategory",
+    "assumptions"
+  ],
+  "properties": {
+    "claim_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "source_reference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "description": "Manual entry or a specific source reference; does not imply independently checked provenance."
+    },
+    "field": {
+      "type": "string",
+      "enum": [
+        "algebra",
+        "analysis",
+        "topology",
+        "geometry",
+        "number-theory",
+        "probability-information",
+        "discrete",
+        "logic-complexity",
+        "mathematical-physics",
+        "other"
+      ]
+    },
+    "subcategory": {
+      "type": "string",
+      "enum": [
+        "polynomial-identities",
+        "polynomial-inequalities",
+        "rational-expressions",
+        "abstract-algebra",
+        "calculus",
+        "limits",
+        "functional-analysis",
+        "manifold-topology",
+        "algebraic-topology",
+        "differential-geometry",
+        "metric-geometry",
+        "divisibility",
+        "diophantine",
+        "entropy-capacity",
+        "probability",
+        "stochastic",
+        "graph-theory",
+        "combinatorics",
+        "formal-proof",
+        "complexity",
+        "model-theory",
+        "field-equations",
+        "spectral-physics",
+        "cosmology",
+        "unclassified"
+      ]
+    },
+    "assumptions": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 180
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "algebra"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "polynomial-identities",
+              "polynomial-inequalities",
+              "rational-expressions",
+              "abstract-algebra"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "analysis"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "calculus",
+              "limits",
+              "functional-analysis"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "topology"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "manifold-topology",
+              "algebraic-topology"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "geometry"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "differential-geometry",
+              "metric-geometry"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "number-theory"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "divisibility",
+              "diophantine"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "probability-information"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "entropy-capacity",
+              "probability",
+              "stochastic"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "discrete"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "graph-theory",
+              "combinatorics"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "logic-complexity"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "formal-proof",
+              "complexity",
+              "model-theory"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "mathematical-physics"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "field-equations",
+              "spectral-physics",
+              "cosmology"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "field": {
+            "const": "other"
+          }
+        },
+        "required": [
+          "field"
+        ]
+      },
+      "then": {
+        "properties": {
+          "subcategory": {
+            "enum": [
+              "unclassified"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "description": "Classification is self-declared metadata, NOT an engine capability or a proof status. Engine coverage is computed separately and never accepted as a user-supplied manifest field."
+}

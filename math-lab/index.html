@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" data-theme="journal">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#f6f6f3">
+ <meta name="description" content="Vasquez Research Math Verification Lab. Inspect exact univariate polynomial identities and reproducible counterexamples. Experimental scope, not Lean verification.">
+ <meta property="og:title" content="Math Verification Lab | Vasquez Research">
+ <title>Math Verification Lab | Vasquez Research</title>
+ <link rel="stylesheet" href="styles.css">
+ <script type="module" src="ui.mjs"></script>
+</head>
+<body>
+ <a class="skip" href="#main">Skip to verification workspace</a>
+ <div class="lab-shell">
+  <header class="topbar">
+   <a class="brand" href="../index.html" aria-label="Vasquez Research home"><span class="mark" aria-hidden="true"><span>∑</span></span><span class="brand-copy"><strong class="site-brand">VASQUEZ RESEARCH</strong><small>MATHEMATICAL INSTRUMENTS / LAB 001</small></span></a>
+   <div class="top-actions"><a class="site-link" href="../index.html">Research home</a><span class="phase"><span class="phase-dot" aria-hidden="true"></span> EXPERIMENTAL</span><label class="theme-label" for="theme">APPEARANCE</label><select id="theme" aria-label="Appearance theme"><option value="journal">Journal</option><option value="observatory">Observatory</option><option value="blueprint">Blueprint</option></select></div>
+  </header>
+  <main id="main">
+   <section class="intro" aria-labelledby="hero-title"><div class="eyebrow"><span class="rule"></span> VASQUEZ RESEARCH / EXACT MATHEMATICS</div><h1 id="hero-title">Math Verification <em>Lab.</em></h1><p>Check a polynomial identity or paste an entire LaTeX manuscript. Exact algebra generates integer-arithmetic evidence; manuscript audit inventories claims and highlights unverified obligations. Both run privately in your browser.</p><div class="intro-meta"><span>FIELD: USER-CLASSIFIED</span><span>DOMAIN: ℝ</span><span>VARIABLE: x</span><span>ENGINE: BROWSER / EXACT BIGINT</span></div></section>
+   <div class="workbench">
+    <section class="editor panel" aria-labelledby="input-title"><div class="panel-head"><div><span class="serial">01 / INPUT</span><h2 id="input-title">Claim workbench</h2></div><span class="tag">ENGINE SCOPE IS ENFORCED</span></div>
+     <form id="claim-form">
+      <div class="field"><label for="method">Verification method</label><select id="method" name="method"><option value="exact-polynomial">Exact polynomial identity — available</option><option value="manuscript-audit">Manuscript structure audit — available (not proof)</option><option disabled>Lean kernel — not connected</option><option disabled>Numerical scientific models — not connected</option></select><span class="help">Exact integer coefficients, one variable x, nonnegative integer exponents up to 16 and a syntactic degree bound of 32.</span></div>
+      <fieldset class="claim-manifest" aria-describedby="manifest-notice"><legend>Required verification manifest</legend>
+       <p class="help" id="manifest-notice">A reproducible result must identify its source and assumptions. The default “Manual entry” is a self-declared source, not external confirmation.</p>
+       <div class="manifest-grid"><div class="field"><label for="claim-id">Claim ID</label><input id="claim-id" maxlength="100" pattern="[A-Za-z0-9][A-Za-z0-9._-]*" required value="VR-EXAMPLE-001" autocomplete="off"></div>
+        <div class="field"><label for="source-reference">Source reference</label><input id="source-reference" maxlength="240" required value="Manual entry" autocomplete="off"></div></div>
+       <div class="manifest-grid"><div class="field"><label for="math-field">Mathematical field · required</label><select id="math-field" required></select></div>
+        <div class="field"><label for="math-subcategory">Subcategory · required</label><select id="math-subcategory" required></select></div></div>
+       <div class="coverage-panel" id="coverage-panel" role="status" aria-live="polite"><strong id="coverage-status">EXACT_SUPPORTED</strong><p id="coverage-description">Exact polynomial identities over R only.</p><button type="button" id="suggest-category">Suggest category from input</button><span id="suggest-note"></span></div>
+       <p class="help">Required <a class="small-link" href="claim-manifest-schema.json">claim manifest schema</a>. Mathematical field and subcategory are user declarations; engine capability is calculated independently.</p>
+       <div class="field"><label for="assumptions">Additional assumptions (one per line, optional)</label><textarea id="assumptions" rows="2" maxlength="1440" placeholder="Polynomial coefficients are integers; domain is real numbers." spellcheck="false"></textarea></div>
+      </fieldset>
+      <div class="field" style="margin-top:24px"><label for="equation" id="source-label">Equation · LaTeX or ASCII</label><textarea class="tex-input" id="equation" name="equation" spellcheck="false" required rows="3">(x+1)^2 = x^2 + 2x + 1</textarea><span class="help" id="equation-help">Examples: <code>(x+1)^2 = x^2+2x+1</code> or <code>\left(x+1\right)^2 = x^2+2\cdot x+1</code>. Unsupported macros are rejected.</span></div>
+      <div class="drop-area" id="drop-area"><strong>Drop a .tex or .txt file here</strong><small>Files stay in your browser. The Lab extracts displayed equations as candidates; it does not certify the entire paper.</small><input id="file-picker" aria-label="Choose LaTeX source file" type="file" accept=".tex,.txt,text/plain"></div>
+      <div class="candidate-control" id="candidate-control" hidden><label for="candidate-select">Equations extracted from source</label><select class="drop-select" id="candidate-select"></select><p id="file-status" class="file-note" role="status"></p></div>
+      <div class="presets" id="presets"><span>QUICK EXAMPLES</span><button type="button" class="chip" data-example="identity">Identity</button><button type="button" class="chip" data-example="false">Counterexample</button><button type="button" class="chip" data-example="latex">LaTeX expression</button></div>
+      <div class="button-row"><button class="primary-btn" type="submit" id="run">Run exact verification <span aria-hidden="true">→</span></button><button class="secondary-btn" type="button" id="reset">Reset</button></div>
+     </form>
+     <p class="editor-note">No equation data is uploaded. This GitHub Pages build runs an independent browser exact-arithmetic engine; the Python checker is available for separate replay. <a class="small-link" href="https://github.com/inaciovasquez2020/urf-textbook/pull/177">Source and verification scope</a> · <a class="small-link" href="../docs/MATH_LAB_PROTOCOL.md">Claim format and review protocol</a>.</p>
+    </section>
+    <section class="results panel" aria-labelledby="result-title"><div class="panel-head"><div><span class="serial">02 / EVIDENCE</span><h2 id="result-title">Verification record</h2></div><span class="tag">EXACT ARITHMETIC</span></div>
+      <div id="result-area" aria-live="polite"><div class="empty-state"><span class="ring" aria-hidden="true">∴</span><h3>Awaiting a claim</h3><p>Run an exact polynomial check to inspect the evidence and export a replayable source claim.</p></div></div>
+    </section>
+   </div>
+   <section class="quality-panel" id="quality-panel" aria-labelledby="quality-title">
+      <div class="quality-heading"><div><span class="serial">03 / IMPROVEMENT LOOP</span><h2 id="quality-title">Verification casebook</h2><p>Each check produces reproducible regression candidates and bounded adversarial transformations. Candidate tests require independent replay and explicit review before entering the permanent checker suite.</p></div><span class="quality-tag">NO AUTOMATIC LEARNING</span></div>
+      <div class="quality-stats"><div><strong id="quality-cases">0</strong><span>Session cases</span></div><div><strong id="quality-probes">0</strong><span>Metamorphic checks passed</span></div><div><strong id="quality-review">0</strong><span>Requires review</span></div></div>
+      <p id="quality-last" class="file-note" role="status">No checks recorded in this session. All source text stays in memory until you choose to export it.</p>
+      <div class="report-actions"><button id="quality-export" type="button" disabled>Export review casebook JSON</button><button id="quality-clear" type="button" disabled>Clear session cases</button></div>
+      <p class="scope-note">Privacy: no automatic uploads, cookies, local storage, external services, or repository commits. Export includes equation claims and source references; inspect before sharing. Full manuscripts are never automatically copied into the casebook.</p>
+   </section>
+   <section class="protocol" aria-labelledby="protocol-title"><div class="protocol-copy"><span class="serial">04 / VERIFICATION BOUNDARY</span><h2 id="protocol-title">Verification is method-specific.</h2><p>The exact-algebra mode can establish polynomial identities or refute them by exact counterexample. Manuscript mode extracts theorem structure and highlights review questions; it does not verify a proof or send source to an AI service.</p><p><a class="muted-link" href="../docs/FORMAL_VERIFICATION_BOUNDARY.html">Formal-status definitions</a> · <a class="muted-link" href="https://github.com/inaciovasquez2020/urf-textbook/pull/177">Python checker PR</a></p></div><div class="protocol-grid"><div><b>01</b><strong>Translate</strong><span>Strict LaTeX subset to exact polynomial expressions.</span></div><div><b>02</b><strong>Certify</strong><span>Degree bound, coefficient normalization and integer evaluations.</span></div><div><b>03</b><strong>Reproduce</strong><span>Download the claim JSON for separate Python validation.</span></div></div></section>
+  </main>
+  <footer class="lab-footer"><span>VASQUEZ RESEARCH · EXPERIMENTAL</span><span>EXACT POLYNOMIAL CERTIFICATE ≠ LEAN PROOF</span><a class="small-link" href="../index.html">Research home</a></footer>
+ </div>
+</body>
+</html>
