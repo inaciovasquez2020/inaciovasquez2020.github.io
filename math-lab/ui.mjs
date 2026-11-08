@@ -8,6 +8,7 @@ const form=$('claim-form'),equation=$('equation'),area=$('result-area');
 const theme=$('theme'),picker=$('file-picker'),drop=$('drop-area'),method=$('method');
 const candidateControl=$('candidate-control'),candidateSelect=$('candidate-select'),fileStatus=$('file-status');
 let last=null,candidates=[],sourceName='manual input';
+let lastRendered=null; // presentation cache only; never rerun mathematical verification
 let classificationOrigin='ENGINE_SCOPE', classificationLocked=false, classificationLastInput='';
 const casebook=new SessionCasebook();
 const fieldConfirmation=$('field-confirm');
@@ -15,7 +16,7 @@ let confirmedSelectionKey=null;
 function selectionKey(){return JSON.stringify([method.value,$('math-field').value,$('math-subcategory').value,equation.value,$('claim-id').value,$('source-reference').value,$('assumptions').value,sourceName]);}
 function invalidateFieldConfirmation(){
   fieldConfirmation.checked=false;confirmedSelectionKey=null;
-  if(last!==null){last=null;area.replaceChildren(el('div','empty-state','Source or field changed. Previous evidence cleared; re-run after confirmation.'));}
+  if(last!==null){last=null;lastRendered=null;area.replaceChildren(el('div','empty-state','Source or field changed. Previous evidence cleared; re-run after confirmation.'));}
   refreshFieldConfirmation();
 }
 function refreshFieldConfirmation(){
@@ -56,9 +57,9 @@ $('quality-export').addEventListener('click',()=>downloadJSON(casebook.export(),
 $('quality-clear').addEventListener('click',()=>{casebook.clear();$('quality-cases').textContent='0';$('quality-probes').textContent='0';$('quality-review').textContent='0';$('quality-export').disabled=true;$('quality-clear').disabled=true;$('quality-last').textContent='Session casebook cleared by user. No data was uploaded.';});
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function downloadJSON(data,name){const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function renderError(message){area.replaceChildren();const box=el('div','error-block');box.append(el('strong','', 'NOT VERIFIED — UNSUPPORTED INPUT'),el('p','',message));box.append(el('p','result-disclaimer','Input may be incomplete, mistranscribed, unsupported or incorrectly classified; no mathematical verdict has been established.'));area.append(box);last=null;}
+function renderError(message){area.replaceChildren();const box=el('div','error-block');box.append(el('strong','', 'NOT VERIFIED — UNSUPPORTED INPUT'),el('p','',message));box.append(el('p','result-disclaimer','Input may be incomplete, mistranscribed, unsupported or incorrectly classified; no mathematical verdict has been established.'));area.append(box);last=null;lastRendered=null;}
 function addRow(container,k,v){let row=el('div','meta-row');row.append(el('span','',k),el('span','result-code',v));container.append(row);}
-function renderResult(r,entry){area.replaceChildren();last=r;const ok=r.status==='EXACT_CERTIFICATE_PASS';
+function renderResult(r,entry){area.replaceChildren();last=r;lastRendered={kind:'exact',record:r,entry};const ok=r.status==='EXACT_CERTIFICATE_PASS';
   const root=el('div','result-content');const verdict=el('div',`verdict ${ok?'good':'bad'}`);const head=el('div','verdict-top');head.append(el('span','status-symbol',ok?'✓':'×'),el('span','',r.status));verdict.append(head);
   verdict.append(el('div','verdict-title',ok?uiText('Identity established within polynomial scope.'):uiText('Counterexample found.')));
   verdict.append(el('div','verdict-desc',ok?`All ${r.degree_upper_bound+1} exact evaluations agree. The degree bound proves equality for every real x.`:`At x = ${r.certificate.at(-1).x}, the two sides differ. The universal equality is false.`));
@@ -73,7 +74,7 @@ function renderResult(r,entry){area.replaceChildren();last=r;const ok=r.status==
   buttons.append(certificate,python,replay);root.append(buttons);root.append(el('p','scope-note','Browser-side certificate only. The evidence JSON is not a Python-generated certificate; download the claim and run the authoritative Python checker independently.'));area.append(root);
 }
 function renderManuscript(r,entry){
-  area.replaceChildren(); last=r; const root=el('div','result-content');
+  area.replaceChildren(); last=r;lastRendered={kind:'manuscript',record:r,entry}; const root=el('div','result-content');
   const verdict=el('div','verdict unverified');
   const top=el('div','verdict-top'); top.append(el('span','status-symbol','◇'),el('span','',r.status));
   verdict.append(top,el('div','verdict-title','Manuscript structure reviewed; mathematical claims not verified.'),
@@ -220,3 +221,12 @@ candidateSelect.addEventListener('change',()=>{invalidateFieldConfirmation();equ
 for(const type of ['dragenter','dragover'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragover');});
 for(const type of ['dragleave','drop'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragover');});
 drop.addEventListener('drop',e=>readFile(e.dataTransfer?.files?.[0]));
+
+// Language changes re-render only from the already-computed immutable result objects.
+// Never invoke verifyEquation, auditManuscript or change casebook state on localization.
+$('ui-language')?.addEventListener('change',()=>{
+ if(!lastRendered)return;
+ const {kind,record,entry}=lastRendered;
+ if(kind==='exact')renderResult(record,entry);
+ else if(kind==='manuscript')renderManuscript(record,entry);
+});
