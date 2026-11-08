@@ -95,7 +95,7 @@ function refresh() {
   buttons.forEach(button => {
     const id = button.dataset.project;
     const p = PROJECTS[id];
-    const match = (currentFilter === "all" || button.dataset.category === currentFilter) &&
+    const match = (currentFilter === "all" || button.dataset.category.split(/\s+/).includes(currentFilter)) &&
       (!q || [button.textContent, p.summary, p.tag, p.frontier].join(" ").toLowerCase().includes(q));
     button.hidden = !match;
     if (match) count++;
