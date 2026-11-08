@@ -18,7 +18,22 @@ function applyExtended(lang){
   node.nodeValue=leading+dict[normalized]+trailing;
  }
 }
-if(select){select.addEventListener('change',()=>applyExtended(select.value));applyExtended(select.value);}
+if(select){
+ const requested=typeof location!=='undefined'?new URLSearchParams(location.search).get('lang'):null;
+ if(requested&&Object.hasOwn(DICTIONARIES,requested))select.value=requested;
+ select.addEventListener('change',()=>{applyExtended(select.value);document.documentElement.lang=select.value;updateGuideLinks(select.value);});
+ applyExtended(select.value);
+ document.documentElement.lang=select.value;
+ updateGuideLinks(select.value);
+}
+function updateGuideLinks(lang){
+ for(const link of document.querySelectorAll('a[href]')){
+  const href=link.getAttribute('href');
+  if(!/^(?:index|how-to|ai-latex-guide|formal-request)\.html(?:\?.*)?$/.test(href))continue;
+  const path=href.split('?')[0];
+  link.setAttribute('href',path+'?lang='+encodeURIComponent(lang));
+ }
+}
 export {DICTIONARIES,applyExtended};
 
 /** Translate only explicit trusted UI string literals; never pass user content. */
