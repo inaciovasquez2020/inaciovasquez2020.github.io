@@ -24,3 +24,5 @@ export {DICTIONARIES,applyExtended};
 /** Translate only explicit trusted UI string literals; never pass user content. */
 export function uiText(key,lang){const chosen=lang||select?.value||'en';return (DICTIONARIES[chosen]||DICTIONARIES.en)[key]||key;}
 export function tourPosition(page,total,lang){const language=lang||select?.value||'en';const n=page+1;switch(language){case 'es':return 'Paso '+n+' de '+total;case 'pt-BR':return 'Etapa '+n+' de '+total;case 'zh-Hans':return '第 '+n+' 步，共 '+total+' 步';case 'fr':return 'Étape '+n+' sur '+total;case 'de':return 'Schritt '+n+' von '+total;default:return 'Step '+n+' of '+total;}}
+
+if(typeof globalThis!=='undefined')globalThis.MathLabTranslations={uiText,tourPosition};
