@@ -35,6 +35,11 @@ def test_math_lab_navigation():
     assert 'NOT_APPROVED' in (ROOT/'math-lab/improvement.mjs').read_text(encoding='utf-8')
     assert 'NOT_VERIFIED' in (ROOT/'math-lab/manuscript.mjs').read_text(encoding='utf-8')
     assert 'href="how-to.html"' in page
+    assert 'href="ai-latex-guide.html"' in page
+    assert 'id="open-tour"' in page
+    assert 'id="lab-tour"' in page
+    assert page.count('data-tour-step ') == 5
+    assert (ROOT/'math-lab/AI_LATEX_README.md').is_file()
     assert 'id="evidence-method-tag"' in page
     assert 'id="classification-origin"' in page
     assert 'id="field-confirm"' in page
