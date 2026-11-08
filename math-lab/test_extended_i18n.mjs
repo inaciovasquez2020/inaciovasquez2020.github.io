@@ -37,3 +37,20 @@ test('language changes restore original whitespace and protect source and certif
   if(oldNodeFilter===undefined)delete globalThis.NodeFilter;else globalThis.NodeFilter=oldNodeFilter;
  }
 });
+
+test('all four Math Lab pages expose six-language controls without replacing source fields',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const files=['index.html','how-to.html','ai-latex-guide.html','formal-request.html'];
+ for(const file of files){
+  const html=await readFile(new URL(file,import.meta.url),'utf8');
+  assert.match(html,/id="ui-language"/,file);
+  assert.match(html,/src="extended-i18n\.mjs"/,file);
+  for(const lang of ['en','es','pt-BR','zh-Hans','fr','de'])assert.ok(html.includes('value="'+lang+'"'),file+': '+lang);
+ }
+ const formal=await readFile(new URL('formal-request.html',import.meta.url),'utf8');
+ assert.match(formal,/id="req-theorem"/);
+ assert.match(formal,/id="req-proof"/);
+ const ui=await readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.match(ui,/verifyEquation\(/);
+ assert.match(ui,/auditManuscript\(/);
+});
