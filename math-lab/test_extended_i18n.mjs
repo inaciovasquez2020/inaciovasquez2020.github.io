@@ -81,6 +81,6 @@ test('cached results relocalize from stored records, never invoke verification o
  assert.ok(!handler.includes('auditManuscript('));
  const citation=await readFile(new URL('citation-ui.mjs',import.meta.url),'utf8');
  assert.ok(citation.includes("checkbox.checked=checked.has(i)"));
- assert.ok(citation.includes("if(suggestions.length||arxivIds.length)render()"));
+ assert.ok(citation.includes("if(analyzed)render()"));
  for(const language of ['en','pt-BR','es'])assert.ok(DICTIONARIES[language]['Manuscript structure reviewed; mathematical claims not verified.']);
 });
