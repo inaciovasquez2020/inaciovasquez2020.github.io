@@ -83,3 +83,6 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .tour-footer{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px}.tour-footer span{font-size:12px;color:var(--muted)}.tour-actions{display:flex;gap:9px}
 .tour-footer #tour-next{background:var(--ink);color:var(--paper)}.tour-footer button:disabled{opacity:.5}
 @media(max-width:700px){.quick-guide-actions{width:100%}.tour-head,.tour-footer,.tour-steps{padding:14px}.lab-tour{max-height:90vh}.tour-head h2{font-size:21px}.tour-steps h3{font-size:22px}}
+
+/* Standalone formal request beta. Reuses existing guide styling. */
+.formal-request-form .field{margin:15px 0}.formal-request-form textarea{width:100%;max-width:100%;box-sizing:border-box}.formal-request-form input:not([type=checkbox]),.formal-request-form select{width:100%;max-width:100%;box-sizing:border-box}
