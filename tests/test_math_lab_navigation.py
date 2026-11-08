@@ -39,6 +39,7 @@ def test_math_lab_navigation():
     assert 'id="classification-origin"' in page
     assert 'id="field-confirm"' in page
     assert 'FIELD CONFIRMATION REQUIRED' in page
+    ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
     assert 'EQUATION EXTRACTION COVERAGE' in ui
     assert 'SOURCE LINE ' in ui
     assert 'if(!refreshFieldConfirmation())' in ui
@@ -46,7 +47,6 @@ def test_math_lab_navigation():
     assert 'Previous evidence cleared' in ui
     assert 'EXTRACTION REVIEW REQUIRED' in ui
     assert 'Input and interpretation warning' in page
-    ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
     assert 'AUTO-SUGGESTED (UNCONFIRMED)' in ui
     assert 'METHOD APPLIED' in ui
     assert 'UNCERTIFIED' in ui
