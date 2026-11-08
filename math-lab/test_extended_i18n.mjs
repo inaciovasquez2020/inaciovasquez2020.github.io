@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {DICTIONARIES,uiText,tourPosition,applyExtended} from './extended-i18n.mjs';
+import {DICTIONARIES,uiText,uiFormat,tourPosition,applyExtended} from './extended-i18n.mjs';
 
 test('six language dictionaries have identical keys',()=>{
  const languages=['en','es','pt-BR','zh-Hans','fr','de'];
@@ -83,4 +83,14 @@ test('cached results relocalize from stored records, never invoke verification o
  assert.ok(citation.includes("checkbox.checked=checked.has(i)"));
  assert.ok(citation.includes("if(analyzed)render()"));
  for(const language of ['en','pt-BR','es'])assert.ok(DICTIONARIES[language]['Manuscript structure reviewed; mathematical claims not verified.']);
+});
+
+test('translated dynamic explanations preserve exact witness numbers and user provenance',()=>{
+ assert.equal(uiFormat('At x = {x}, the two sides differ. The universal equality is false.',{x:-42},'pt-BR'),'Em x = -42, os dois lados diferem. A igualdade universal é falsa.');
+ assert.equal(uiFormat('All {count} exact evaluations agree. The degree bound proves equality for every real x.',{count:33},'es').includes('33'),true);
+ const source='original-source.tex',title='\\\\alpha + \\\\beta';
+ for(const lang of ['en','pt-BR','es']){
+  const text=uiFormat('{title} · {source}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.',{title,source},lang);
+  assert.ok(text.includes(source));assert.ok(text.includes(title));
+ }
 });
