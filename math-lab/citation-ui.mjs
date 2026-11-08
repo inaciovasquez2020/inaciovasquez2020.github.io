@@ -7,6 +7,7 @@ const source=document.getElementById('equation');
 let suggestions=[],arxivIds=[];
 function safeText(tag,value){const e=document.createElement(tag);e.textContent=value;return e;}
 function render(){
+ const checked=new Set(Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).map(x=>Number(x.dataset.index)));
  panel.replaceChildren();
  const intro=safeText('p',suggestions.length?
   suggestions.length+' '+uiText('possible references found. Source relevance and theorem hypotheses have NOT been checked. Confirm before exporting.'):
@@ -27,12 +28,12 @@ function render(){
   const link=document.createElement('a');link.href='https://doi.org/'+ref.doi;link.textContent='DOI: '+ref.doi;link.target='_blank';link.rel='noopener noreferrer';article.append(link);
   article.append(safeText('p',uiText('Status: SUGGESTION_ONLY / CLAIM SUPPORT NOT CHECKED. ')+(ref.alreadyReferenced?uiText('Source includes this DOI or citation key. '):uiText('Potential missing citation. '))+ref.note));
   const label=document.createElement('label');label.className='citation-check';
-  const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.dataset.index=String(i);
+  const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.dataset.index=String(i);checkbox.checked=checked.has(i);
   checkbox.addEventListener('change',()=>{exportButton.disabled=!Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).length;});
   label.append(checkbox,safeText('span',uiText('I checked this reference and want its BibTeX entry.')));
   article.append(label);panel.append(article);
  });
- exportButton.disabled=true;
+ exportButton.disabled=!Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).length;
 }
 button.addEventListener('click',()=>{
  suggestions=suggestCitations(source.value);
@@ -50,3 +51,6 @@ exportButton.addEventListener('click',()=>{
  a.href=url;a.download='vasquez-reviewed-citations.bib';a.click();
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
+
+// Rebuild human-readable guidance using cached reference matches; do not refetch or alter citations.
+document.getElementById('ui-language')?.addEventListener('change',()=>{if(suggestions.length||arxivIds.length)render();});
