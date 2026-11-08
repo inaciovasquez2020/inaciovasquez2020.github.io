@@ -31,6 +31,9 @@ jobs:
           python3 tests/test_math_lab_navigation.py
           python3 -m py_compile math-lab/replay_casebook.py
 
+      - name: Browser localization smoke (installed Chrome, no downloads)
+        run: python3 tests/test_math_lab_browser_translation.py
+
       - name: Math Lab independent replay against pinned Python checker
         run: |
           python3 - <<'PY'
