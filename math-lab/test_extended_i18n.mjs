@@ -68,3 +68,19 @@ test('citation UI translation keys cover all languages and preserve citation ide
  assert.match(src,/formatBibtex/);
  assert.equal(uiText('NOT_VERIFIED','es'),'NOT_VERIFIED');
 });
+
+test('cached results relocalize from stored records, never invoke verification on locale changes',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const src=await readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.ok(src.includes("lastRendered={kind:'exact',record:r,entry}"));
+ assert.ok(src.includes("lastRendered={kind:'manuscript',record:r,entry}"));
+ const handler=src.slice(src.lastIndexOf("// Language changes re-render"));
+ assert.ok(handler.includes('renderResult(record,entry)'));
+ assert.ok(handler.includes('renderManuscript(record,entry)'));
+ assert.ok(!handler.includes('verifyEquation('));
+ assert.ok(!handler.includes('auditManuscript('));
+ const citation=await readFile(new URL('citation-ui.mjs',import.meta.url),'utf8');
+ assert.ok(citation.includes("checkbox.checked=checked.has(i)"));
+ assert.ok(citation.includes("if(suggestions.length||arxivIds.length)render()"));
+ for(const language of ['en','pt-BR','es'])assert.ok(DICTIONARIES[language]['Manuscript structure reviewed; mathematical claims not verified.']);
+});
