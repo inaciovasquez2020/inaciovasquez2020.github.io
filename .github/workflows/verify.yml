@@ -33,6 +33,8 @@ jobs:
 
       - name: Browser localization smoke (installed Chrome, no downloads)
         run: python3 tests/test_math_lab_browser_translation.py
+      - name: Browser interactive locale round-trip (mobile viewport)
+        run: python3 tests/test_math_lab_browser_interaction.py
 
       - name: Math Lab independent replay against pinned Python checker
         run: |
