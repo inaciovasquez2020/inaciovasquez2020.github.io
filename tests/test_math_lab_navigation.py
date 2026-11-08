@@ -47,6 +47,10 @@ def test_math_lab_navigation():
     assert 'id="field-confirm"' in page
     assert 'id="citation-panel"' in page
     assert 'src="citation-ui.mjs"' in page
+    assert 'src="doi-lookup-ui.mjs"' in page
+    assert 'id="doi-beta"' in page
+    assert 'only the DOI' in page
+    assert 'Crossref or DataCite' in page
     assert 'id="ui-language"' in page
     assert 'src="i18n.mjs"' in page
     assert 'FIELD CONFIRMATION REQUIRED' in page

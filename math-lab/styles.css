@@ -97,3 +97,17 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .citation-check{display:flex;gap:10px;align-items:center;margin-top:11px;font-size:12px}
 /* Standalone formal request beta. Reuses existing guide styling. */
 .formal-request-form .field{margin:15px 0}.formal-request-form textarea{width:100%;max-width:100%;box-sizing:border-box}.formal-request-form input:not([type=checkbox]),.formal-request-form select{width:100%;max-width:100%;box-sizing:border-box}
+
+/* DOI metadata beta: independent of theorem evidence and optional to use. */
+#doi-beta{scroll-margin-top:20px}
+#doi-beta h3{font:400 24px Georgia,serif;margin:5px 0 8px}
+#doi-beta>p{color:var(--muted);font-size:13px;line-height:1.7}
+.doi-lookup-row{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:15px 0}
+.doi-lookup-row label{font-size:12px;font-weight:700;width:100%}
+.doi-lookup-row input{flex:1 1 250px;max-width:540px;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink)}
+.doi-lookup-row button,#doi-beta button{padding:10px 13px;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+#doi-lookup-result{margin:10px 0;padding:12px;border:1px solid var(--line);border-radius:5px;overflow-wrap:anywhere;min-height:38px;font-size:13px}
+#doi-lookup-result:empty{display:none}
+#doi-lookup-result p{margin:7px 0}
+#doi-lookup-result a{color:var(--accent)}
+#doi-beta>.citation-check{margin-bottom:12px}
