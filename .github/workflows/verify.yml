@@ -24,3 +24,9 @@ jobs:
           node --check analytics-config.js
           node --check analytics.js
           node tests/test_analytics.js
+
+      - name: Math Lab exact arithmetic, manifest and categorization tests
+        run: |
+          node --test math-lab/test_*.mjs
+          python3 tests/test_math_lab_navigation.py
+          python3 -m py_compile math-lab/replay_casebook.py
