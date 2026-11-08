@@ -37,3 +37,22 @@ test('untrusted LaTeX bounded with no theorem proof status',()=>{
  assert.equal(r.claims.length,0);
  assert.equal(r.displayed_equations[0].status,'NOT_VERIFIED');
 });
+
+test('unrecognized math shows flagged source lines and excerpts',()=>{
+ const r=auditManuscript("\\documentclass{article}\n\\begin{document}\n\\begin{equation}x^2=x*x\\end{equation}\n\\begin{split}a=b\\end{split}\n$$ c=d $$\n\\(e=f\\)\n\\begin{equation}g=h\n\\end{document}");
+ assert.equal(r.status,'NOT_VERIFIED');
+ assert.equal(r.counts.displayed_math,1);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+ const flags=r.extraction.flags;
+ for(const code of ['UNSUPPORTED_DISPLAY_ENVIRONMENT','UNSUPPORTED_DOLLAR_DISPLAY','INLINE_MATH_NOT_INVENTORIED','UNTERMINATED_DISPLAY'])
+   assert.ok(flags.some(x=>x.code===code),code);
+ assert.ok(flags.every(x=>x.line>=1 && x.source_excerpt.length && x.mathematical_verdict==='NOT_VERIFIED'));
+ assert.ok(flags.some(x=>x.source_excerpt.includes('a=b')));
+ assert.ok(flags.some(x=>x.source_excerpt.includes('c=d')));
+});
+test('absence of flags is never a completeness certificate',()=>{
+ const r=auditManuscript('\\begin{equation}x^2=x*x\\end{equation}');
+ assert.equal(r.extraction.flags.length,0);
+ assert.equal(r.extraction.status,'EXTRACTION_NOT_EXHAUSTIVELY_VERIFIED');
+ assert.equal(r.status,'NOT_VERIFIED');
+});

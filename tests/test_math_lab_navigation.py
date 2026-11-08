@@ -37,6 +37,14 @@ def test_math_lab_navigation():
     assert 'href="how-to.html"' in page
     assert 'id="evidence-method-tag"' in page
     assert 'id="classification-origin"' in page
+    assert 'id="field-confirm"' in page
+    assert 'FIELD CONFIRMATION REQUIRED' in page
+    assert 'EQUATION EXTRACTION COVERAGE' in ui
+    assert 'SOURCE LINE ' in ui
+    assert 'if(!refreshFieldConfirmation())' in ui
+    assert 'confirmed_by_user:true' in ui
+    assert 'Previous evidence cleared' in ui
+    assert 'EXTRACTION REVIEW REQUIRED' in ui
     assert 'Input and interpretation warning' in page
     ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
     assert 'AUTO-SUGGESTED (UNCONFIRMED)' in ui

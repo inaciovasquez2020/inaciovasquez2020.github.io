@@ -35,6 +35,12 @@
         <div class="field"><label for="math-subcategory">Subcategory · required</label><select id="math-subcategory" required></select></div></div>
        <div class="coverage-panel" id="coverage-panel" role="status" aria-live="polite"><strong id="coverage-status">EXACT_SUPPORTED</strong><p id="coverage-description">Exact polynomial identities over R only.</p><button type="button" id="suggest-category">Suggest category from input</button><span id="suggest-note" role="status" aria-live="polite"></span></div>
        <p class="help" id="classification-origin">Selection: engine-required algebra scope. Subject classification is not a mathematical verdict.</p>
+       <div class="confirm-field" id="field-confirm-panel" data-status="missing" role="group" aria-labelledby="field-confirm-title">
+        <strong id="field-confirm-title">FIELD CONFIRMATION REQUIRED</strong>
+        <p id="field-confirm-summary" aria-live="polite">Review the field and subcategory above before proceeding.</p>
+        <label for="field-confirm"><input type="checkbox" id="field-confirm" required> I confirm this is the intended mathematical field and subcategory for my input.</label>
+        <p class="help">This confirms your choice, not the truth of any statement. Missing/ambiguous fields must be corrected first.</p>
+       </div>
        <p class="help">Required <a class="small-link" href="claim-manifest-schema.json">claim manifest schema</a>. Mathematical field and subcategory are user declarations; engine capability is calculated independently.</p>
        <div class="field"><label for="assumptions">Additional assumptions (one per line, optional)</label><textarea id="assumptions" rows="2" maxlength="1440" placeholder="Polynomial coefficients are integers; domain is real numbers." spellcheck="false"></textarea></div>
       </fieldset>

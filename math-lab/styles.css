@@ -62,3 +62,7 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .input-warning strong{font-size:12px;color:var(--ink)}.input-warning p{font-size:12px;line-height:1.7;color:var(--muted);margin:6px 0 0}
 #classification-origin{border-left:2px solid var(--accent);padding:7px 10px;margin:3px 0 0;font-size:12px;color:var(--muted)}
 .result-disclaimer{border:1px solid var(--line);border-radius:6px;padding:11px 13px;color:var(--muted);font-size:12px;line-height:1.6;margin:14px 0}
+
+/* Source-bound field confirmation, visually separate from proof statuses. */
+.confirm-field{padding:13px 15px;margin:12px 0;border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:7px;background:var(--canvas)}
+.confirm-field[data-status=confirmed]{border-left-color:var(--good)}.confirm-field>strong{font-size:12px}.confirm-field p{font-size:12px;color:var(--muted);line-height:1.65;margin:7px 0}.confirm-field label{font-size:12px;display:flex;align-items:flex-start;gap:10px;font-weight:650}.confirm-field input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent)}
