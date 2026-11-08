@@ -56,3 +56,17 @@ test('absence of flags is never a completeness certificate',()=>{
  assert.equal(r.extraction.status,'EXTRACTION_NOT_EXHAUSTIVELY_VERIFIED');
  assert.equal(r.status,'NOT_VERIFIED');
 });
+
+test('starred theorem and inline dollars cannot disappear silently',()=>{
+ const r=auditManuscript(String.raw`\begin{theorem*}[Uncaptured] The statement is $x=x$. \end{theorem*}`);
+ assert.equal(r.counts.theorems,0);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+ assert.ok(r.extraction.flags.some(x=>x.code==='UNSUPPORTED_CLAIM_ENVIRONMENT'));
+ assert.ok(r.extraction.flags.some(x=>x.code==='INLINE_MATH_NOT_INVENTORIED'));
+});
+test('malformed display environment is rejected by structural scanner',()=>{
+ const r=auditManuscript(String.raw`\begin{align}x=x\end{equation}`);
+ assert.equal(r.counts.displayed_math,0);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+ assert.ok(r.extraction.flags.some(x=>x.code==='MISMATCHED_ENVIRONMENT'));
+});

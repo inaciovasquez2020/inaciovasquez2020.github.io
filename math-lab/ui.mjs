@@ -11,7 +11,7 @@ let classificationOrigin='ENGINE_SCOPE', classificationLocked=false, classificat
 const casebook=new SessionCasebook();
 const fieldConfirmation=$('field-confirm');
 let confirmedSelectionKey=null;
-function selectionKey(){return JSON.stringify([method.value,$('math-field').value,$('math-subcategory').value,equation.value]);}
+function selectionKey(){return JSON.stringify([method.value,$('math-field').value,$('math-subcategory').value,equation.value,$('claim-id').value,$('source-reference').value,$('assumptions').value,sourceName]);}
 function invalidateFieldConfirmation(){
   fieldConfirmation.checked=false;confirmedSelectionKey=null;
   if(last!==null){last=null;area.replaceChildren(el('div','empty-state','Source or field changed. Previous evidence cleared; re-run after confirmation.'));}
@@ -31,6 +31,9 @@ function refreshFieldConfirmation(){
     '. '+(classificationOrigin==='AUTO'?'Automatically suggested; user review required.':'User selection or engine scope; review required.')+
     ' Method: '+(method.value==='manuscript-audit'?'Manuscript structure only; no theorem verification.':'Exact univariate polynomial identity.');
   return !missing&&confirmed;
+}
+for(const id of ['claim-id','source-reference','assumptions']){
+ $(id).addEventListener('input',()=>{invalidateFieldConfirmation();updateCoverage();});
 }
 fieldConfirmation.addEventListener('change',()=>{
   confirmedSelectionKey=fieldConfirmation.checked?selectionKey():null;
