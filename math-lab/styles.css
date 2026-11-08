@@ -47,3 +47,39 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .coverage-panel #suggest-note{display:block;margin-top:7px;font-size:11px;color:var(--muted)}
 .classification-line{border:1px solid var(--line);background:var(--canvas);padding:9px 11px;border-radius:6px;font:600 11px ui-monospace,Consolas,monospace;overflow-wrap:anywhere}
 .claim-manifest select{width:100%}
+
+/* User guide: scoped to Math Lab and theme-compatible. */
+.quick-guide{display:flex;align-items:center;justify-content:space-between;gap:26px;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:20px 24px;margin:0 0 22px}
+.quick-guide h2{font:400 24px Georgia,serif;margin:3px 0 5px}.quick-guide p{color:var(--muted);font-size:12px;max-width:700px;margin:0}.guide-link{font-size:12px;font-weight:750;color:var(--accent);max-width:225px}
+.guide-main{max-width:960px;margin:0 auto;padding:55px 0 72px}.guide-main h1{font:400 clamp(34px,5vw,58px)/1.15 Georgia,serif;margin:18px 0}.guide-main h1 em{font-style:normal;color:var(--accent)}.guide-lede{color:var(--muted);font-size:16px;line-height:1.8}
+.guide-contents{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 35px}.guide-contents a{font-size:12px;text-decoration:none;border:1px solid var(--line);border-radius:20px;padding:7px 13px;color:var(--accent)}
+.guide-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:28px 32px;margin:18px 0;scroll-margin-top:24px}.guide-card h2{font:400 28px Georgia,serif;margin:7px 0 15px}.guide-card h3{font-size:14px;margin:0 0 8px}.guide-card p,.guide-card li{font-size:14px;line-height:1.8;color:var(--ink)}.guide-card li{margin:7px 0}.guide-card a,.guide-return a{color:var(--accent)}.guide-card code,.guide-example pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.guide-card code{font-size:.92em}.guide-example{border-left:3px solid var(--accent);padding:13px 18px;margin:18px 0;background:var(--canvas);border-radius:0 6px 6px 0}.guide-example pre{white-space:pre-wrap;word-break:break-word;font-size:13px}.guide-example p{color:var(--muted);margin-bottom:0}
+.guide-table-wrap{overflow-x:auto}.guide-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}.guide-table th,.guide-table td{border-bottom:1px solid var(--line);padding:12px 10px;vertical-align:top}.guide-table th{color:var(--muted)}.guide-table td:first-child{white-space:nowrap;color:var(--accent)}.guide-return{margin:34px 0;font-weight:700}
+@media(max-width:700px){.quick-guide{flex-direction:column;align-items:flex-start}.guide-main{padding:35px 0 50px}.guide-card{padding:19px}.guide-table td:first-child{white-space:normal}}
+
+/* Visible provenance and warning status; not a mathematical validation claim. */
+.input-warning{margin-top:18px;border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:7px;padding:12px 15px;background:var(--canvas)}
+.input-warning strong{font-size:12px;color:var(--ink)}.input-warning p{font-size:12px;line-height:1.7;color:var(--muted);margin:6px 0 0}
+#classification-origin{border-left:2px solid var(--accent);padding:7px 10px;margin:3px 0 0;font-size:12px;color:var(--muted)}
+.result-disclaimer{border:1px solid var(--line);border-radius:6px;padding:11px 13px;color:var(--muted);font-size:12px;line-height:1.6;margin:14px 0}
+
+/* Source-bound field confirmation, visually separate from proof statuses. */
+.confirm-field{padding:13px 15px;margin:12px 0;border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:7px;background:var(--canvas)}
+.confirm-field[data-status=confirmed]{border-left-color:var(--good)}.confirm-field>strong{font-size:12px}.confirm-field p{font-size:12px;color:var(--muted);line-height:1.65;margin:7px 0}.confirm-field label{font-size:12px;display:flex;align-items:flex-start;gap:10px;font-weight:650}.confirm-field input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent)}
+
+/* Optional five-step walkthrough. Schematic illustrations; no private source. */
+.quick-guide-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:0 0 auto}
+.guide-link-button{background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:10px 14px;border-radius:7px;font-size:12px;font-weight:650}
+.lab-tour{width:min(770px,calc(100vw - 24px));max-height:88vh;padding:0;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 56px rgba(9,20,35,.25)}
+.lab-tour::backdrop{background:rgba(9,20,34,.62)}.tour-frame{display:flex;flex-direction:column;max-height:88vh;overflow:auto}
+.tour-head{display:flex;justify-content:space-between;gap:16px;padding:20px 24px;border-bottom:1px solid var(--line)}
+.tour-head h2{font:400 25px Georgia,serif;margin:3px 0 6px}.tour-head p{color:var(--muted);font-size:12px;margin:0}
+.tour-close,.tour-footer button{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:8px 13px;font-size:12px;align-self:flex-start}
+.tour-steps{padding:23px 24px}.tour-steps h3{font:400 26px Georgia,serif;margin:7px 0}.tour-steps p{font-size:14px;line-height:1.7}
+.tour-figure{margin:17px 0 0;padding:19px;background:var(--canvas);border:1px solid var(--line);border-radius:8px}.tour-figure figcaption{font-size:11px;color:var(--muted);margin-top:10px}
+.tour-mini{background:var(--paper);border:1px solid var(--line);border-radius:7px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.tour-mini-label{font-size:10px;font-weight:750;letter-spacing:1px;color:var(--accent)}.tour-mini-note{font-size:11px;color:var(--muted)}
+.tour-mini pre{font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;margin:0;padding:11px;background:var(--canvas);overflow-wrap:anywhere;white-space:pre-wrap}
+.tour-footer{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px}.tour-footer span{font-size:12px;color:var(--muted)}.tour-actions{display:flex;gap:9px}
+.tour-footer #tour-next{background:var(--ink);color:var(--paper)}.tour-footer button:disabled{opacity:.5}
+@media(max-width:700px){.quick-guide-actions{width:100%}.tour-head,.tour-footer,.tour-steps{padding:14px}.lab-tour{max-height:90vh}.tour-head h2{font-size:21px}.tour-steps h3{font-size:22px}}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="journal">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="theme-color" content="#f6f6f3">
+ <meta name="description" content="How to use Vasquez Research Math Verification Lab: choose a method, enter claims, interpret verification records and protect manuscript privacy.">
+ <title>How to Use Math Verification Lab | Vasquez Research</title>
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ <a class="skip" href="#guide-main">Skip to guide</a>
+ <div class="lab-shell">
+  <header class="topbar">
+   <a class="brand" href="../index.html" aria-label="Vasquez Research home"><span class="mark" aria-hidden="true">∑</span><span class="brand-copy"><strong class="site-brand">VASQUEZ RESEARCH</strong><small>MATHEMATICAL INSTRUMENTS / LAB 001</small></span></a>
+   <div class="top-actions"><a class="site-link" href="index.html">Open the Lab</a><a class="site-link" href="../index.html">Research home</a><span class="phase">EXPERIMENTAL</span></div>
+  </header>
+  <main id="guide-main" class="guide-main">
+   <div class="eyebrow"><span class="rule"></span> DOCUMENTATION / VERSION 0.1</div>
+   <h1>How to use the <em>Math Verification Lab.</em></h1>
+   <p class="guide-lede">The Lab offers two different operations. An <strong>exact polynomial check</strong> can certify a supported identity or give an exact counterexample. A <strong>manuscript audit</strong> reads LaTeX structure but does not check mathematical truth. Choose the method before interpreting any result.</p>
+   <nav class="guide-contents" aria-label="Guide sections"><a href="#start">Quick start</a><a href="#exact">Exact algebra</a><a href="#manuscript">Manuscripts</a><a href="#status">Results</a><a href="#privacy">Privacy and exports</a><a href="ai-latex-guide.html">AI &amp; LaTeX</a></nav>
+   <section id="start" class="guide-card">
+    <span class="serial">01 / QUICK START</span><h2>Four steps</h2>
+    <ol>
+     <li>Open the <a href="index.html">verification workbench</a> and choose a <strong>Verification method</strong>.</li>
+     <li>Enter a <strong>Claim ID</strong> and <strong>Source reference</strong> (use <code>Manual entry</code> for an example). These are provenance labels, not independent confirmation.</li>
+     <li>Paste your LaTeX or load a file. The Lab <strong>automatically suggests the subject field</strong> from keywords in manuscript mode. Review the field and subcategory; ambiguous input remains <strong>Other / Unclassified</strong>. You can override the suggestion. Field classification is not proof.</li>
+     <li>Review the suggested field and subcategory, check the required confirmation box, then run the selected method. Inspect any flagged equations and the exact scope of the evidence report before exporting.</li>
+    </ol>
+    <p><strong>Field confirmation required:</strong> Automatically suggested categories are unverified. The user must inspect the displayed field/subcategory and check the confirmation box. <strong>FIELD MISSING / REVIEW REQUIRED</strong> appears for ambiguous or unclassified input; a specific category must be selected manually. Any manuscript edit or category change resets confirmation. Confirmation does not verify mathematics.</p>
+    <p><strong>Equation extraction review:</strong> Math may be missed because of unusual delimiters, custom environments, split expressions, or transcription errors. This Lab flags selected unsupported display environments, unbalanced delimiters, inline math, and mismatched display blocks; it shows literal source excerpts, line numbers and reasons. <strong>Absence of flags is not evidence of complete extraction.</strong> Compare the listed equations with the original.</p>
+    <p><strong>Optional walkthrough:</strong> From the Lab homepage, choose “Start illustrated walkthrough” to view five schematic steps. It is dismissible at any time and does not require an account or transmit your source. For AI-generated source, see the <a href="ai-latex-guide.html">AI-assisted LaTeX preparation guide</a>.</p>
+    <p><strong>Input warning:</strong> Incorrect or incomplete transcription, incorrect assumptions, unsupported notation and mislabeled subject matter can invalidate the interpretation of a result. The Lab does not establish that entered text matches the author's intended claim. Every result states the actual engine and its scope, separately from the manuscript's subject.</p>
+    <p><strong>Important:</strong> <code>Algebra / Polynomial identities over R</code> is the only exact-supported field and subcategory. For physics, topology, information theory, and other subjects, the manuscript structure audit remains available but cannot prove the claims.</p>
+   </section>
+   <section id="exact" class="guide-card">
+    <span class="serial">02 / EXACT ALGEBRA</span><h2>Verify an equation, not a whole paper</h2>
+    <p>Choose <strong>Exact polynomial identity</strong>, with field <strong>Algebra</strong> and subcategory <strong>Polynomial identities over R</strong>. The engine handles <strong>integer coefficients, one variable <code>x</code>, powers 0–16, and syntactic degree at most 32</strong>. It accepts a limited LaTeX subset such as <code>\left</code>, <code>\right</code>, <code>\cdot</code> and braces in exponents. It does not support general division, calculus, multivariable equations, inequalities or arbitrary LaTeX macros.</p>
+    <div class="guide-example"><h3>Expected PASS</h3><pre>(x+1)^2 = x^2 + 2x + 1</pre><p>Expected <code>EXACT_CERTIFICATE_PASS</code>. For the degree-2 bound, evaluations at 0, 1 and 2 establish an identity between these polynomials over the reals.</p></div>
+    <div class="guide-example"><h3>Expected refutation</h3><pre>(x+1)^2 = x^2 + 1</pre><p>Expected <code>REFUTED</code>: at <code>x = 1</code>, the left side is 4 and the right side is 2.</p></div>
+    <p>On this mode, dropping a <code>.tex</code> document extracts <em>candidate displayed equalities</em>. Select one equation to evaluate. Unrecognized mathematics must be explicitly rejected as unsupported.</p>
+   </section>
+   <section id="manuscript" class="guide-card">
+    <span class="serial">03 / MANUSCRIPT STRUCTURE AUDIT</span><h2>Understand what the paper contains</h2>
+    <p>Choose <strong>Manuscript structure audit</strong>, then select the most appropriate field and subcategory (for example, <strong>Mathematical physics / Spectral theory and operators</strong> for a normal-mode paper). Paste a LaTeX document or load a <code>.tex</code> or <code>.txt</code> file of at most <strong>64 KiB</strong>.</p>
+    <p>On paste or upload, the field selector updates automatically if keywords suggest a subject. It is always labeled <strong>AUTO-SUGGESTED (UNCONFIRMED)</strong>. A manually chosen field remains under your control. If the text spans multiple subjects or no match is found, the suggestion is <strong>Other / Unclassified</strong> and the method is still only structural.</p>
+    <p>The tool locates <code>definition</code>, <code>lemma</code>, <code>theorem</code>, <code>corollary</code> and <code>proposition</code> environments, counts <code>proof</code> blocks, inventories displayed mathematics and may provide rule-based review prompts. It is not an AI mathematical reviewer, a literature verifier, or a theorem prover.</p>
+    <div class="guide-example"><h3>Minimal manuscript example</h3><pre>\begin{lemma}[Illustrative claim]
+For all real x, (x+1)^2=x^2+2x+1.
+\end{lemma}</pre><p>The manuscript audit extracts the lemma and marks it <code>NOT_VERIFIED</code>. To verify the polynomial equality, copy that equation separately into <strong>Exact polynomial identity</strong>.</p></div>
+   </section>
+   <section id="status" class="guide-card">
+    <span class="serial">04 / EVIDENCE STATUS</span><h2>How to interpret the verification record</h2>
+    <div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody>
+     <tr><td><code>EXACT_CERTIFICATE_PASS</code></td><td>Supported polynomial identity established by exact arithmetic and a degree-bound argument. Not a Lean proof.</td></tr>
+     <tr><td><code>REFUTED</code></td><td>Exact witness where a claimed universal polynomial equality fails.</td></tr>
+     <tr><td><code>NOT_VERIFIED</code></td><td>Statement extracted or reviewed structurally; the Lab has not determined whether it is true or false.</td></tr>
+     <tr><td><code>STRUCTURAL_ONLY</code></td><td>Selected method inventories manuscript text and mathematical environments, but cannot issue proof verdicts.</td></tr>
+     <tr><td><code>NO_ENGINE</code></td><td>No exact verification engine is connected for that selected field/subcategory.</td></tr>
+     <tr><td><code>REGRESSION_CANDIDATE</code></td><td>A proposed casebook test. It has not been independently reviewed or promoted.</td></tr>
+     <tr><td><code>INCOMPLETE_SOURCE_REQUIRED</code></td><td>The exported manuscript casebook preserves metadata but not enough source to independently verify a mathematical claim.</td></tr>
+    </tbody></table></div>
+    <p><strong>Example:</strong> Your chiral-vibration document returning <code>1 definition / 1 lemma / 1 proof block / 10 displayed equations</code> and <code>NOT_VERIFIED</code> is a successful <em>structure extraction</em> test, not a mathematical proof.</p>
+   </section>
+   <section id="privacy" class="guide-card">
+    <span class="serial">05 / PRIVACY AND REPRODUCIBILITY</span><h2>What is shared?</h2>
+    <p>Processing happens locally in the browser. The page does not automatically upload manuscripts or equations, call an AI service, or save a session to browser storage. The current browser JavaScript is publicly inspectable under the website's MIT license; do not put private algorithms in website source code.</p>
+    <p>The optional <strong>Export review casebook JSON</strong> action saves a local file for independent review. The casebook may include entered equations and source references. A manuscript entry records limited structure metadata, rather than the full manuscript. Check exports before sharing.</p>
+    <p>Every supported exact check produces bounded metamorphic regression candidates. This <strong>does not automatically improve or retrain the checker</strong>. Permanent changes require independent replay, source review and approved tests. See the <a href="../docs/MATH_LAB_PROTOCOL.md">technical verification protocol</a> for implementation limits.</p>
+    <p><strong>Formal-verification boundary:</strong> a successful browser certificate, a passed CI workflow or an extracted theorem does not establish any unrelated theorem, including global claims in topology or mathematical physics.</p>
+   </section>
+   <p class="guide-return"><a href="index.html">Return to Math Verification Lab →</a></p>
+  </main>
+  <footer class="lab-footer"><span>VASQUEZ RESEARCH · EXPERIMENTAL</span><span>MANUSCRIPT EXTRACTION ≠ MATHEMATICAL PROOF</span><a href="../index.html">Research home</a></footer>
+ </div>
+</body>
+</html>

@@ -34,6 +34,39 @@ def test_math_lab_navigation():
         assert 'fetch(' not in code,name
     assert 'NOT_APPROVED' in (ROOT/'math-lab/improvement.mjs').read_text(encoding='utf-8')
     assert 'NOT_VERIFIED' in (ROOT/'math-lab/manuscript.mjs').read_text(encoding='utf-8')
+    assert 'href="how-to.html"' in page
+    assert 'href="ai-latex-guide.html"' in page
+    assert 'id="open-tour"' in page
+    assert 'id="lab-tour"' in page
+    assert page.count('data-tour-step ') == 5
+    assert (ROOT/'math-lab/AI_LATEX_README.md').is_file()
+    assert 'id="evidence-method-tag"' in page
+    assert 'id="classification-origin"' in page
+    assert 'id="field-confirm"' in page
+    assert 'FIELD CONFIRMATION REQUIRED' in page
+    ui=(ROOT/'math-lab/ui.mjs').read_text(encoding='utf-8')
+    assert 'EQUATION EXTRACTION COVERAGE' in ui
+    assert 'SOURCE LINE ' in ui
+    assert 'if(!refreshFieldConfirmation())' in ui
+    assert 'confirmed_by_user:true' in ui
+    assert 'Previous evidence cleared' in ui
+    assert 'EXTRACTION REVIEW REQUIRED' in ui
+    assert 'Input and interpretation warning' in page
+    assert 'AUTO-SUGGESTED (UNCONFIRMED)' in ui
+    assert 'METHOD APPLIED' in ui
+    assert 'UNCERTIFIED' in ui
+    guide=(ROOT/'math-lab/how-to.html').read_text(encoding='utf-8')
+    for phrase in ('EXACT_CERTIFICATE_PASS','REFUTED','NOT_VERIFIED','STRUCTURAL_ONLY','NO_ENGINE','REGRESSION_CANDIDATE','INCOMPLETE_SOURCE_REQUIRED','Manuscript structure audit','Exact polynomial identity','64 KiB'):
+        assert phrase in guide, phrase
+    guide_links=Parser()
+    guide_links.feed(guide)
+    for ref in guide_links.links+guide_links.assets:
+        x=urlsplit(ref)
+        if x.scheme or x.netloc or ref.startswith('//') or not x.path: continue
+        dest=(ROOT/'math-lab'/x.path).resolve()
+        assert dest.is_relative_to(ROOT.resolve()),ref
+        assert dest.is_file(),ref
+
 if __name__=='__main__':
     test_math_lab_navigation()
     print('MATH_LAB_NAVIGATION := PASS')

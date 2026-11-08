@@ -56,23 +56,41 @@ export function coverage(field,subcategory,method){
     status:'NO_ENGINE',engine:null,can_run:false,
     description:`No mathematical verification engine is connected for ${c.field_label} / ${c.subcategory_label}. Use Manuscript structure audit for a non-proof inventory.`};
 }
-/** Untrusted hint only. This may miss or misclassify material; user must confirm. */
-export function suggestCategory(text){
-  const t=String(text??'').slice(0,65536);
-  const patterns=[
-    [/mutual information|entropy|shannon|fano|information capacity/i,'probability-information','entropy-capacity'],
-    [/poincar[eé]|pachner|triangulat|3.manifold|3-sphere/i,'topology','manifold-topology'],
-    [/homotopy|homology|cohomology/i,'topology','algebraic-topology'],
-    [/complexity|p\s*(?:vs\.?|=)\s*np|sat\b|nondeterministic/i,'logic-complexity','complexity'],
-    [/lean\s*4|theorem prover|proof assistant|formal verification/i,'logic-complexity','formal-proof'],
-    [/graph Laplacian|adjacen|vertices|edges/i,'discrete','graph-theory'],
-    [/riemann|curvature|metric tensor/i,'geometry','differential-geometry'],
-    [/einstein|schwarzschild|black hole|field equation/i,'mathematical-physics','field-equations'],
-    [/eigenvalue|spectrum|spectral gap/i,'analysis','functional-analysis'],
-    [/integral|derivative|\\frac\{d\}/i,'analysis','calculus'],
-    [/congruence|prime numbers|divisibility/i,'number-theory','divisibility'],
-    [/\\sum|polynomial|x\^|x\*\*|x\s*\+/i,'algebra','polynomial-identities']
+/**
+ * Subject suggestion only. No classification is independently certified.
+ * When reviewing a manuscript, algebraic controls do not classify the paper.
+ */
+export function suggestCategory(source){
+  const t=String(source??'').slice(0,65536);
+  if(!t.trim())return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',
+    reason:'No source text to classify. Choose the subject manually.'};
+  const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
+  const rules=[
+    ['mathematical-physics','spectral-physics',[
+      /chiral[\s-]*(?:vibrat|phonon)|circular dichroism|vibrational (?:inverse|IFE)|molecular vibrat|phonon inverse faraday/i,
+      /normal[\s-]*mode|mass[\s-]*weight|hessian|DFTB\+?|degenerate vibrat|vibration[\s-]*induced magnetism/i,
+      /\\(?:ddot|dot)\b|\\Gamma\b.*\\omega\b/i]],
+    ['mathematical-physics','field-equations',[/einstein[\s-]*rosen|schwarzschild|topological censorship|wormhole|black hole|field equation/i]],
+    ['probability-information','entropy-capacity',[/mutual information|transcript capacity|information capacity|\\mathrm\{TC\}|shannon entropy|information-theoretic/i,/\\(?:mathrm\{)?(?:Cap|TC)\b|entropy/i]],
+    ['topology','manifold-topology',[/poincar[eé]|pachner|triangulat|3[\s-]*manifold|3[\s-]*sphere/i]],
+    ['topology','algebraic-topology',[/homotopy|homology|cohomology/i]],
+    ['logic-complexity','complexity',[/\bp[\s-]*(?:vs\.?|=)[\s-]*np\b|satisfiability|computational complexity|\\mathsf\{NP\}/i]],
+    ['logic-complexity','formal-proof',[/lean[\s-]*4|theorem prover|proof assistant|formal verification/i]],
+    ['geometry','differential-geometry',[/riemann|curvature tensor|metric tensor/i]],
+    ['discrete','graph-theory',[/graph Laplacian|adjacen|graph theory/i]],
+    ['number-theory','divisibility',[/prime numbers|divisibility|congruence/i]],
+    ['analysis','functional-analysis',[/functional analysis|bounded operator|spectral gap/i]],
+    ['analysis','calculus',[/differential equation|integration by parts|derivative/i]],
+    ['algebra','polynomial-identities',paper?[/\bpolynomial identities\b/i]:[/\bpolynomial\b|x\^|x\*\*|x\s*\+/i]]
   ];
-  for(const [re,field,subcategory] of patterns){if(re.test(t))return {field,subcategory,confidence:'HEURISTIC_ONLY',reason:'Keyword match; review and confirm the classification manually.'};}
-  return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',reason:'No deterministic category match; select the field manually.'};
+  const hits=rules.map(([field,subcategory,res])=>({field,subcategory,score:res.reduce((n,re)=>n+Number(re.test(t)),0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+  if(!hits.length)return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',
+    reason:'No distinctive field signal found. Select the subject manually.'};
+  const top=hits[0],rival=hits.find(x=>x.field!==top.field);
+  if(rival && (rival.score===top.score || rival.score>=2)){
+    return {field:'other',subcategory:'unclassified',confidence:'AMBIGUOUS',
+      reason:'Signals from multiple mathematical fields were found; select the appropriate subject manually.'};
+  }
+  return {field:top.field,subcategory:top.subcategory,confidence:'HEURISTIC_ONLY',
+    reason:'Automatically suggested from source keywords. Not independently checked; confirm the subject and assumptions.'};
 }

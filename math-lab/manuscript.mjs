@@ -4,6 +4,49 @@
  */
 export const MANUSCRIPT_SCHEMA = 'vasquez.math-lab.manuscript-structure.v0.1';
 const LIMIT = 65536;
+
+/** Conservative omission detector. Not a complete LaTeX parser. */
+function inspectExtraction(text, extractedCount) {
+  const flags=[],limit=30,excerptLimit=260;
+  const recognized=new Set(['equation','equation*','align','align*','gather','gather*']);
+  const unusual=/^(?:math|displaymath|multline|multline\*|split|flalign|flalign\*|alignat|alignat\*|eqnarray|eqnarray\*|gathered|aligned)$/;
+  let overflow=false;
+  function add(code,reason,index,endIndex) {
+    if(flags.length>=limit){overflow=true;return;}
+    flags.push({code,reason,line:lineno(text,index),source_excerpt:text.slice(index,Math.min(endIndex,index+excerptLimit)).replace(/\s+/g,' ').trim(),mathematical_verdict:'NOT_VERIFIED'});
+  }
+  const starts=[...text.matchAll(/\\begin\{([A-Za-z*]+)\}/g)];
+  const ends=[...text.matchAll(/\\end\{([A-Za-z*]+)\}/g)];
+  const seen=starts.filter(m=>recognized.has(m[1])),ended=ends.filter(m=>recognized.has(m[1]));
+  for(const m of seen){
+    if(text.indexOf('\\end{'+m[1]+'}',m.index+m[0].length)<0)
+      add('UNTERMINATED_DISPLAY','No matching end for a displayed equation environment.',m.index,m.index+excerptLimit);
+  }
+  for(const m of starts.filter(x=>unusual.test(x[1]))) {
+    const at=text.indexOf('\\end{'+m[1]+'}',m.index+m[0].length);
+    add('UNSUPPORTED_DISPLAY_ENVIRONMENT','This math environment is not inventoried as a display.',m.index,at<0?m.index+excerptLimit:at+16);
+  }
+  const dd=[...text.matchAll(/\$\$/g)];
+  for(let i=0;i<dd.length;i+=2){
+    const start=dd[i].index,end=dd[i+1]?.index;
+    add(end===undefined?'UNBALANCED_DOLLAR_DISPLAY':'UNSUPPORTED_DOLLAR_DISPLAY',
+      end===undefined?'Missing closing $ delimiter.':'A $ display is not inventoried.',start,end===undefined?start+excerptLimit:end+2);
+  }
+  const inline=[...text.matchAll(/\\\(/g)];
+  for(const m of inline){
+    const end=text.indexOf('\\)',m.index+m[0].length);
+    add(end<0?'UNBALANCED_INLINE_MATH':'INLINE_MATH_NOT_INVENTORIED',
+      end<0?'Missing closing inline math delimiter.':'Inline math is not included in the displayed-equation count.',
+      m.index,end<0?m.index+excerptLimit:end+2);
+  }
+  if(seen.length>extractedCount)add('EXTRACTION_COUNT_MISMATCH','More recognized displays than extracted math blocks.',0,Math.min(text.length,excerptLimit));
+  if(seen.length!==ended.length)add('DISPLAY_DELIMITER_COUNT_MISMATCH','Display begin/end counts differ.',0,Math.min(text.length,excerptLimit));
+  return {status:flags.length?'REVIEW_REQUIRED':'EXTRACTION_NOT_EXHAUSTIVELY_VERIFIED',
+    flags,flags_truncated:overflow,recognized_display_starts:seen.length,
+    extracted_display_blocks:extractedCount,
+    note:'Heuristic diagnostics only. No-warning status does not prove every equation was found.'};
+}
+
 const CLAIM_TYPES = new Set(['definition', 'lemma', 'theorem', 'corollary', 'proposition']);
 function lineno(text, position) { return text.slice(0, position).split('\n').length; }
 function concise(s, max = 340) { return s.replace(/\s+/g, ' ').trim().slice(0, max); }
@@ -65,7 +108,9 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
     findings.push({type: 'IMPLICATION', severity: 'review', label: 'Displayed implication requires a derivation',
       detail: 'Check that the conclusion follows from its stated assumptions and that the implication is not vacuous. This is a generic syntactic flag, not a refutation.'});
   }
-  return {schema: MANUSCRIPT_SCHEMA, status: 'NOT_VERIFIED', title, source_name: sourceName,
+  const extraction=inspectExtraction(text,math.length);
+  if(extraction.flags.length)findings.push({type:'EXTRACTION_COVERAGE',severity:'review',label:'Source equations may be omitted',detail:extraction.flags.length+' flagged source fragments with line numbers require manual inspection.'});
+  return {schema: MANUSCRIPT_SCHEMA, status: 'NOT_VERIFIED', extraction, title, source_name: sourceName,
     source_characters: source.length, counts: {
       definitions: claims.filter(c => c.kind === 'definition').length,
       lemmas: claims.filter(c => c.kind === 'lemma').length,
