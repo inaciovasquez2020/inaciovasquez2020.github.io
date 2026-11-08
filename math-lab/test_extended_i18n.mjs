@@ -94,3 +94,26 @@ test('translated dynamic explanations preserve exact witness numbers and user pr
   assert.ok(text.includes(source));assert.ok(text.includes(title));
  }
 });
+
+test('language switching updates accessible attributes and page title but never input values',()=>{
+ const oldDocument=globalThis.document,oldFilter=globalThis.NodeFilter;
+ try{
+  const attrs={'placeholder':'Reviewed repo URL and commit','aria-label':'Interface language'};
+  const control={value:'user-authored-unchanged',hasAttribute:k=>Object.hasOwn(attrs,k),getAttribute:k=>attrs[k],setAttribute(k,v){attrs[k]=v;}};
+  const textNode={nodeValue:'',parentElement:{closest:()=>null}};
+  globalThis.NodeFilter={SHOW_TEXT:4};
+  globalThis.document={body:{},title:'How to Use Math Verification Lab | Vasquez Research',querySelectorAll(){return [control];},createTreeWalker(){return {nextNode:()=>null};}};
+  applyExtended('pt-BR');
+  assert.equal(attrs.placeholder,'URL do repositório revisado e commit');
+  assert.equal(attrs['aria-label'],'Idioma da interface');
+  assert.equal(control.value,'user-authored-unchanged');
+  applyExtended('es');
+  assert.equal(attrs.placeholder,'URL del repositorio revisado y commit');
+  applyExtended('en');
+  assert.equal(attrs.placeholder,'Reviewed repo URL and commit');
+  assert.equal(attrs['aria-label'],'Interface language');
+ }finally{
+  if(oldDocument===undefined)delete globalThis.document;else globalThis.document=oldDocument;
+  if(oldFilter===undefined)delete globalThis.NodeFilter;else globalThis.NodeFilter=oldFilter;
+ }
+});
