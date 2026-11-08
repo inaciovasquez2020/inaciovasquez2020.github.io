@@ -1,3 +1,4 @@
+import {inspectLatex} from './latex-scan.mjs';
 /**
  * Vasquez Research Math Verification Lab: browser-side, exact Z[x] certificate.
  * No Python execution, network access, eval, third-party libraries, or theorem-level claims.
@@ -97,21 +98,29 @@ export function parseExpression(text){const tokens=lex(translateLatex(text));let
   return {ast,degree:ast.degree,normalized};
 }
 export function extractEquations(tex){
-  if(typeof tex!=='string'||tex.length>MAX_SOURCE)fail('Dropped source must be a text file of at most 64 KiB.');
-  const found=[];const specs=[
-    /\\begin\{(?:equation\*?|align\*?|gather\*?)\}([\s\S]*?)\\end\{(?:equation\*?|align\*?|gather\*?)\}/g,
-    /\\\[([\s\S]*?)\\\]/g,
-    /\$\$([\s\S]*?)\$\$/g,
-  ];
-  for(const re of specs)for(let m;(m=re.exec(tex));){for(let line of m[1].split(/\\\\/)){
-    line=line.replace(/&/g,'').trim();if(line.includes('=')&&line.length<=MAX_EXPR*2)found.push(line);
-  }}
-  if(found.length===0&&tex.trim()&&!/\\(?:documentclass|begin\{document\})/.test(tex)){
-    if(tex.includes('='))found.push(tex.trim());
-  }
-  // Preserve source order, avoid duplicates from overlapping environments.
-  const unique=[...new Set(found)];if(unique.length>40)fail('Too many equation candidates; submit a smaller excerpt.');
-  return unique;
+ if(typeof tex!=='string'||tex.length>MAX_SOURCE)fail('Dropped source must be a text file of at most 64 KiB.');
+ const audit=inspectLatex(tex);
+ if(audit.flags.length)fail('SOURCE_REVIEW_REQUIRED: '+audit.flags[0].code+
+   ' at line '+audit.flags[0].line+'. '+audit.flags[0].reason+
+   ' Review or isolate a correctly delimited equation before exact checking.');
+ const found=[];
+ for(const block of audit.display){
+   for(const line of block.content.split(/\\\\/)){
+     const candidate=line.replace(/&/g,'').trim();
+     if(candidate.includes('=')){
+       if(candidate.length>MAX_EXPR*2)fail('Displayed equation exceeds the maximum supported length.');
+       found.push(candidate);
+     }
+   }
+ }
+ if(!found.length&&tex.trim()&&!/\\(?:documentclass|begin\{document\})/.test(tex)){
+   // Only treat a stand-alone equality as a candidate, never a fragment
+   // of an unparsed LaTeX document or a compound malformed expression.
+   if(tex.includes('=')&&!/\\begin\{|\\end\{|\\\[|\\\]|\$\$/.test(tex))found.push(tex.trim());
+ }
+ const unique=[...new Set(found)];
+ if(unique.length>40)fail('Too many equation candidates; submit a smaller excerpt.');
+ return unique;
 }
 export function verifyEquation(equation,{id='website-example',sourceName='manual input'}={}){
   if(typeof equation!=='string'||equation.length>MAX_EXPR*2)fail('Equation exceeds input size limit.');

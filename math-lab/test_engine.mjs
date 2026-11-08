@@ -54,3 +54,15 @@ test('deterministic seeded differential identities and refutations',()=>{
   check(`${lhs}=(${rhs})+1`,'REFUTED');
  }
 });
+
+test('exact source extraction is ordered and refuses mismatched environments',()=>{
+ const tex=String.raw`\[x=x\]
+\begin{equation}x^2=x*x\end{equation}`;
+ assert.deepEqual(extractEquations(tex),['x=x','x^2=x*x']);
+ for(const bad of [
+  String.raw`\begin{align}(x+1)^2=x^2+2x+1\end{equation}`,
+  String.raw`\begin{equation}x=x\end{align}`,
+  String.raw`\begin{split}x=x\end{split}`,
+  String.raw`\begin{theorem*}The claim is $x=x$.\end{theorem*}`
+ ])assert.throws(()=>extractEquations(bad),UnsupportedClaim);
+});

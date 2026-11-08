@@ -48,6 +48,7 @@ def test_math_lab_navigation():
     assert 'EQUATION EXTRACTION COVERAGE' in ui
     assert 'SOURCE LINE ' in ui
     assert 'if(!refreshFieldConfirmation())' in ui
+    assert "$('source-reference').value,$('assumptions').value,sourceName" in ui
     assert 'confirmed_by_user:true' in ui
     assert 'Previous evidence cleared' in ui
     assert 'EXTRACTION REVIEW REQUIRED' in ui
