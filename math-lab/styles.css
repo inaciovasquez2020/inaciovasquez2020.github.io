@@ -95,3 +95,5 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .citation-item{padding:16px 0;border-bottom:1px solid var(--line)}
 .citation-item strong{font-size:14px}.citation-item a{font-size:12px;color:var(--accent);overflow-wrap:anywhere}
 .citation-check{display:flex;gap:10px;align-items:center;margin-top:11px;font-size:12px}
+/* Standalone formal request beta. Reuses existing guide styling. */
+.formal-request-form .field{margin:15px 0}.formal-request-form textarea{width:100%;max-width:100%;box-sizing:border-box}.formal-request-form input:not([type=checkbox]),.formal-request-form select{width:100%;max-width:100%;box-sizing:border-box}

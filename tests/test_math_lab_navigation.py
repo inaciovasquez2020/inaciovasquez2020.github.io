@@ -36,6 +36,8 @@ def test_math_lab_navigation():
     assert 'NOT_VERIFIED' in (ROOT/'math-lab/manuscript.mjs').read_text(encoding='utf-8')
     assert 'href="how-to.html"' in page
     assert 'href="ai-latex-guide.html"' in page
+    assert 'href="formal-request.html"' in page
+    assert (ROOT/"math-lab/formal-request.html").is_file()
     assert 'id="open-tour"' in page
     assert 'id="lab-tour"' in page
     assert page.count('data-tour-step ') == 5

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="journal"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Formal Verification Request Beta | Vasquez Research</title><link rel="stylesheet" href="styles.css">
+<script type="module" src="formal-request-ui.mjs"></script></head>
+<body><a class="skip" href="#main">Skip to request form</a><div class="lab-shell">
+<header class="topbar"><a class="brand" href="index.html"><span class="mark" aria-hidden="true">∑</span><span class="brand-copy"><strong class="site-brand">VASQUEZ RESEARCH</strong><small>FORMAL VERIFICATION REQUEST / BETA</small></span></a>
+<div class="top-actions"><a class="site-link" href="index.html">Math Lab</a><a class="site-link" href="how-to.html">How to use</a><span class="phase">NOT A CERTIFICATE</span></div></header>
+<main id="main" class="guide-main"><div class="eyebrow"><span class="rule"></span> FUTURE FORMAL VERIFICATION / REQUEST BUILDER</div>
+<h1>Prepare a <em>verification request.</em></h1>
+<p class="guide-lede">This beta creates a local, portable input package for future Lean kernel verification. <strong>It does not compile Lean, examine a proof, run an axiom audit, upload data, charge a fee, or issue a certificate.</strong></p>
+<section class="guide-card"><span class="serial">01 / MANIFEST</span><h2>Source and environment</h2>
+<form id="formal-form" class="formal-request-form">
+<div class="field"><label for="req-id">Request ID</label><input id="req-id" required maxlength="100" value="BETA-SYNTHETIC-001"></div>
+<div class="field"><label for="req-source">Source reference</label><input id="req-source" required maxlength="240" value="Manual entry"></div>
+<div class="field"><label for="req-repo">Repository and revision (optional)</label><input id="req-repo" maxlength="240" placeholder="Reviewed repo URL and commit"></div>
+<div class="manifest-grid"><div class="field"><label for="req-field">Mathematical field</label>
+<select id="req-field"><option value="algebra">Algebra</option><option value="topology">Topology</option><option value="geometry">Geometry</option><option value="analysis">Analysis</option><option value="logic-complexity">Logic and computation</option><option value="mathematical-physics">Mathematical physics</option><option value="other">Other / unclassified (not accepted)</option></select></div>
+<div class="field"><label for="req-subcategory">Subcategory identifier (review manually)</label><input id="req-subcategory" required maxlength="100" value="polynomial-identities"></div></div>
+<div class="field"><label for="req-toolchain">Exact Lean 4 toolchain</label><input id="req-toolchain" required maxlength="160" placeholder="Lean 4 version and toolchain revision"></div>
+<div class="field"><label for="req-dependency">Pinned dependency revisions / mathlib lock</label><input id="req-dependency" required maxlength="240" placeholder="Commit hashes and lockfile description"></div>
+<div class="field"><label for="req-theorem">Exact target theorem declaration</label><textarea id="req-theorem" rows="4" required maxlength="8192" spellcheck="false" placeholder="Paste the full intended theorem statement"></textarea></div>
+<div class="field"><label for="req-proof">Complete proposed Lean source</label><textarea id="req-proof" rows="7" required maxlength="65536" spellcheck="false" placeholder="Paste complete source to be checked; not executed on this page"></textarea></div>
+<div class="field"><label for="req-assumptions">Assumptions, imports and intended axioms</label><textarea id="req-assumptions" rows="3" maxlength="4000" spellcheck="false" placeholder="Optional user-declared assumptions, not independently checked"></textarea></div>
+<aside class="input-warning"><strong>Untrusted input warning</strong><p>A malformed theorem, invented proof step, unpinned dependency, hidden assumption, changed file, or incomplete Lean environment prevents reliable certification. Any future verification must use an isolated trusted kernel, exact source and pinned dependencies, resource guards and independent replay. A hash is not a proof.</p></aside>
+<div class="confirm-field"><strong>USER CONSENT — NOT A PROOF VERDICT</strong>
+<label><input id="req-confirm" type="checkbox" required> I reviewed the theorem, field, source and proposed assumptions.</label>
+<label><input id="req-privacy" type="checkbox" required> I understand the downloaded JSON includes my full source and I will inspect it before sharing.</label></div>
+<div class="button-row"><button class="primary-btn" type="submit">Prepare unverified request</button><button type="button" id="formal-export" class="secondary-btn" disabled>Download JSON request</button></div>
+<p id="formal-status" role="status" aria-live="polite">NOT_RUN — No proof has been checked; no certificate has been issued.</p>
+</form></section>
+<section class="guide-card"><span class="serial">02 / TRUST AND PAYMENTS</span><h2>Conditions for a future machine-verification certificate</h2>
+<p>A future service must execute an exact Lean toolchain, verify the target theorem at its actual use site, audit axioms for unapproved assumptions, reject admitted or opaque proof shortcuts, record hashes, and provide replayable signed provenance. Timeout and resource exhaustion mean <code>INCOMPLETE</code>, never PASS.</p>
+<p><strong>No payment system exists in this beta.</strong> A future paid service may charge for bounded computation or review, never for a guaranteed positive verdict. Deployment of such a service requires separate security, privacy, billing, and independent-verification review.</p>
+</section><p class="guide-return"><a href="index.html">Back to Math Lab</a></p></main>
+<footer class="lab-footer"><span>VASQUEZ RESEARCH / REQUEST BETA</span><span>NOT_RUN · NOT_ISSUED · PAYMENTS DISABLED</span><a href="../index.html">Research home</a></footer></div></body></html>
