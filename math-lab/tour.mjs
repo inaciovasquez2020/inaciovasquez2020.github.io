@@ -1,3 +1,4 @@
+import {uiText,tourPosition} from './extended-i18n.mjs';
 /* Optional, no storage or source upload; illustrations are schematic. */
 const dialog=document.getElementById('lab-tour');
 const launch=document.getElementById('open-tour');
@@ -10,8 +11,8 @@ let page=0;
 function render(){
   for(let i=0;i<slides.length;i++)slides[i].hidden=i!==page;
   back.disabled=page===0;
-  next.textContent=page===slides.length-1?'Finish':'Next';
-  position.textContent='Step '+(page+1)+' of '+slides.length;
+  next.textContent=uiText(page===slides.length-1?'Finish':'Next');
+  position.textContent=tourPosition(page,slides.length);
   dialog.setAttribute('aria-labelledby','tour-step-title-'+(page+1));
 }
 launch.addEventListener('click',()=>{
