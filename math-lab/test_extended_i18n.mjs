@@ -135,3 +135,23 @@ test('runtime taxonomy provides six locales without altering stable IDs or check
  assert.ok(ui.includes('fieldLabel(s.label,currentLanguage())'));
  assert.ok(ui.includes('option.value=s.id'));
 });
+
+test('runtime messages cover every locale and preserve mathematical IDs',async()=>{
+ const {RUNTIME_MESSAGES,message}=await import('./runtime-messages-i18n.mjs');
+ const {TAXONOMY,coverage}=await import('./taxonomy.mjs');
+ const languages=['en','es','pt-BR','zh-Hans','fr','de'];
+ const keys=Object.keys(RUNTIME_MESSAGES.en);
+ assert.equal(keys.length,18);
+ for(const language of languages){
+   assert.deepEqual(Object.keys(RUNTIME_MESSAGES[language]),keys);
+   for(const key of keys)assert.ok(message(key,language));
+ }
+ assert.equal(message('confirmReview','de'),'FACHGEBIET UND UNTERKATEGORIE BESTÄTIGEN');
+ const rendered=message('selection','pt-BR',{field:'Topologia',subcategory:'Variedades e triangulações',origin:message('autoOrigin','pt-BR'),method:message('manuscript','pt-BR')});
+ assert.ok(rendered.includes('Topologia'));assert.ok(rendered.includes('Variedades e triangulações'));
+ assert.equal(coverage('topology','manifold-topology','exact-polynomial').status,'NO_ENGINE');
+ assert.equal(TAXONOMY.find(f=>f.id==='topology').id,'topology');
+ const source=await (await import('node:fs/promises')).readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.ok(source.includes("localMessage('selection',currentLanguage()"));
+ assert.ok(source.includes("localMessage('classification',currentLanguage()"));
+});
