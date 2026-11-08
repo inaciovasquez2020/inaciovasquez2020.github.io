@@ -1,9 +1,9 @@
-import {suggestCitations,formatBibtex} from './citation-assist.mjs';
+import {suggestCitations,formatBibtex,detectArxivIdentifiers} from './citation-assist.mjs';
 const button=document.getElementById('check-citations');
 const panel=document.getElementById('citation-results');
 const exportButton=document.getElementById('citation-export');
 const source=document.getElementById('equation');
-let suggestions=[];
+let suggestions=[],arxivIds=[];
 function safeText(tag,value){const e=document.createElement(tag);e.textContent=value;return e;}
 function render(){
  panel.replaceChildren();
@@ -11,6 +11,14 @@ function render(){
   suggestions.length+' possible references found. Source relevance and theorem hypotheses have NOT been checked. Confirm before exporting.':
   'No matching entries in this small curated library. This does NOT mean the manuscript needs no citations.');
  panel.append(intro);
+ if(arxivIds.length)panel.append(safeText('p',arxivIds.length+' arXiv identifier(s) detected. Metadata, publication identity, version history and peer-review status have NOT been fetched.'));
+ for(const ref of arxivIds){
+   const item=document.createElement('article');item.className='citation-item';
+   item.append(safeText('strong','arXiv:'+ref.id+' · IDENTIFIER ONLY'));
+   const link=document.createElement('a');link.href=ref.url;link.textContent='Open canonical arXiv record';link.target='_blank';link.rel='noopener noreferrer';item.append(link);
+   item.append(safeText('p','IDENTIFIER_DETECTED_METADATA_NOT_FETCHED — Open the record and check authors, title, version and journal status before citing. No BibTeX is generated for an unverified identifier.'));
+   panel.append(item);
+ }
  suggestions.forEach((ref,i)=>{
   const article=document.createElement('article');article.className='citation-item';
   article.append(safeText('strong',ref.title+' ('+ref.year+')'));
@@ -27,10 +35,11 @@ function render(){
 }
 button.addEventListener('click',()=>{
  suggestions=suggestCitations(source.value);
+ arxivIds=detectArxivIdentifiers(source.value);
  render();
 });
 source.addEventListener('input',()=>{
- suggestions=[];panel.replaceChildren(safeText('p','Input changed. Re-run citation suggestions before exporting.'));exportButton.disabled=true;
+ suggestions=[];arxivIds=[];panel.replaceChildren(safeText('p','Input changed. Re-run citation suggestions before exporting.'));exportButton.disabled=true;
 });
 exportButton.addEventListener('click',()=>{
  const confirmed=Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).map(c=>suggestions[Number(c.dataset.index)]).filter(Boolean);

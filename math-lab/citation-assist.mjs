@@ -31,3 +31,24 @@ export function suggestCitations(source){
    .map(ref=>({...ref,alreadyReferenced:trimmed.includes('\\cite{'+ref.key+'}')||
     trimmed.includes(ref.doi),status:'SUGGESTION_ONLY',reference_supports_claim:'NOT_CHECKED'}));
 }
+
+/**
+ * Detect modern arXiv identifiers without network access or invented metadata.
+ * Returns canonical outbound links, not confirmed records or BibTeX.
+ * A syntactically valid ID is not proof the paper exists or supports a claim.
+ */
+export function detectArxivIdentifiers(source) {
+ if(typeof source!=='string')return [];
+ const text=source.slice(0,65536),seen=new Set(),out=[];
+ const pattern=/(?:arXiv:\s*|https?:\/\/(?:www\.)?arxiv\.org\/(?:abs|pdf)\/)(\d{4}\.\d{4,5}(?:v[1-9]\d*)?)(?![A-Za-z0-9.])/gi;
+ for(const match of text.matchAll(pattern)) {
+   const id=match[1],yy=Number(id.slice(0,2)),month=Number(id.slice(2,4)),digits=id.split('.')[1].match(/^\d+/)[0].length;
+   const modern=yy>=15&&yy<=99,old=yy>=7&&yy<=14;
+   if(month<1||month>12||(!modern&&!old)||digits!==(modern?5:4)||seen.has(id))continue;
+   seen.add(id);out.push({id,url:'https://arxiv.org/abs/'+id,
+    status:'IDENTIFIER_DETECTED_METADATA_NOT_FETCHED',title:null,authors:null,
+    peer_review_status:'UNKNOWN',reference_supports_claim:'NOT_CHECKED'});
+   if(out.length>=30)break;
+ }
+ return out;
+}
