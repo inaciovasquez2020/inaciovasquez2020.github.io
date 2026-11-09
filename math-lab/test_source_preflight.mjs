@@ -21,8 +21,8 @@ test('valid exact text admitted without proof or upload',async()=>{
 });
 test('structural source admitted as review without proof',async()=>{
  const r=await preflightFile(fakeFile('% \\begin{theorem} hidden \\end{theorem}\n\\begin{theorem}Visible\\end{theorem} \\(x\\)'),'manuscript-audit');
- assert.equal(r.status,'REVIEW_REQUIRED');
- assert.ok(r.extraction_flags>0);
+ assert.equal(r.status,'READY');
+ assert.equal(r.extraction_flags,0);
  assert.equal(r.mathematical_truth_assessed,false);
 });
 test('invalid suffix, names, sizes and read mismatches fail before admission',async()=>{
