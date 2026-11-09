@@ -29,3 +29,16 @@ test('equation rejection does not reuse earlier PASS record',()=>{
  assert.equal(verifyEquation('(x+1)^2=x^2+2x+1').status,'EXACT_CERTIFICATE_PASS');
  reject('x=x=x+1');
 });
+
+test('versioned exponent grammar accepts braced powers and rejects ambiguous shorthand',()=>{
+ const pass=[
+  'x^2=x^{2}',
+  'x^{12}=x^{12}',
+  'x^(12)=x^{12}',
+  '(x+1)^{12}=(x+1)^{12}'
+ ];
+ for(const equation of pass)
+   assert.equal(verifyEquation(equation).status,'EXACT_CERTIFICATE_PASS',equation);
+ const unsupported=['x^12=x^{12}','x^16=x^{16}','x^12=x^12','x^{17}=x^{17}'];
+ for(const equation of unsupported)reject(equation);
+});
