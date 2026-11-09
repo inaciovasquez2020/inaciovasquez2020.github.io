@@ -2,6 +2,7 @@ import {uiText,uiFormat} from './extended-i18n.mjs';
 import {fieldLabel,currentLanguage} from './runtime-taxonomy-i18n.mjs';
 import {message as localMessage} from './runtime-messages-i18n.mjs';
 import {errorText,explainError} from './runtime-errors-i18n.mjs';
+import {flagText} from './manuscript-flags-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -98,7 +99,7 @@ function renderManuscript(r,entry){
   for(const flag of extraction.flags){
     const block=el('div','audit-item review');
     block.append(el('div','audit-item-meta','SOURCE LINE '+flag.line+' · '+flag.code+' · NOT VERIFIED'));
-    block.append(el('p','',flag.reason));
+    block.append(el('p','',flagText(flag.reason,currentLanguage())));
     const raw=el('pre','flagged-source',flag.source_excerpt);
     block.append(raw);flagList.append(block);
   }
