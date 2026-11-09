@@ -49,7 +49,7 @@ window.addEventListener('load',async()=>{
     if(lang!=='en'&&raw.includes('Exactly one equality sign is required'))fail('exact reason untranslated: '+lang);
     change('en');
     if(title()!=='NOT VERIFIED — UNSUPPORTED INPUT')fail('error heading did not restore English');
-    if(message()!==raw)fail('raw diagnostic changed during translation');
+    if(message()!=='Exactly one equality sign is required; inequalities and chained equalities are unsupported.')fail('original English diagnostic not restored');
     if($('math-field').value!==field||$('math-subcategory').value!==sub)fail('taxonomy IDs changed');
     if($('equation').value!=='x + 1')fail('invalid source modified');
     // Switch to manuscript mode and submit an empty source through the existing confirmation gate.
