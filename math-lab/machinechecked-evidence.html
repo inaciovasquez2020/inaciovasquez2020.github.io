@@ -12,6 +12,7 @@
 </main><script type="module">
 import {normalizeReport} from './machinechecked-evidence-reader.mjs';
 const f=document.getElementById('file'),demo=document.getElementById('demo'),message=document.getElementById('message'),area=document.getElementById('claims');
+let importGeneration=0; // Shared across file and demo: latest user action wins.
 function node(tag,txt,parent){const x=document.createElement(tag);x.textContent=String(txt??'Not reported');parent.appendChild(x);return x}
 function show(raw){
   const report=normalizeReport(raw);if(!report.claims.length)throw new Error('No claims available');
@@ -34,14 +35,29 @@ function show(raw){
   message.textContent='External report loaded. No mathematical claim was independently verified by the Lab.';
 }
 function error(e){area.replaceChildren();message.textContent='Import rejected: '+String(e.message)}
-f.addEventListener('change',async()=>{const file=f.files?.[0];if(!file)return;area.replaceChildren();
+f.addEventListener('change',async()=>{
+  const generation=++importGeneration;
+  const file=f.files?.[0];
+  area.replaceChildren();
+  if(!file){message.textContent='No report loaded.';return}
   if(file.size>2097152){message.textContent='Import rejected: JSON exceeds 2 MiB.';return}
-  try{show(JSON.parse(await file.text()))}catch(e){error(e)}
+  try{
+    const body=await file.text();
+    if(generation!==importGeneration)return;
+    show(JSON.parse(body));
+  }catch(e){if(generation===importGeneration)error(e)}
 });
-demo.addEventListener('click',async()=>{area.replaceChildren();try{
-  const r=await fetch('./fixtures/machinechecked-shape-decided.json',{credentials:'omit'});
-  if(!r.ok)throw Error('HTTP '+r.status);
-  const body=await r.text();if(body.length>2097152)throw Error('Fixture too large');
-  show(JSON.parse(body));
-}catch(e){error(e)}});
+demo.addEventListener('click',async()=>{
+  const generation=++importGeneration;
+  area.replaceChildren();
+  try{
+    const r=await fetch('./fixtures/machinechecked-shape-decided.json',{credentials:'omit'});
+    if(generation!==importGeneration)return;
+    if(!r.ok)throw Error('HTTP '+r.status);
+    const body=await r.text();
+    if(generation!==importGeneration)return;
+    if(body.length>2097152)throw Error('Fixture too large');
+    show(JSON.parse(body));
+  }catch(e){if(generation===importGeneration)error(e)}
+});
 </script></body></html>
