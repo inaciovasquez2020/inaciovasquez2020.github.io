@@ -269,7 +269,7 @@ test('typed manuscript findings relocalize without altering JSON source objects'
 test('citation caveat translation never changes source metadata or BibTeX output',async()=>{
  const {CITATION_NOTES,citationNote}=await import('./citation-notes-i18n.mjs');
  const {REFERENCES,formatBibtex}=await import('./citation-assist.mjs');
- assert.equal(REFERENCES.length,3);
+ assert.equal(REFERENCES.length,7);
  for(const ref of REFERENCES){
   const before=JSON.stringify(ref),bib=formatBibtex(ref);
   for(const lang of ['en','es','pt-BR','zh-Hans','fr','de']){
