@@ -51,9 +51,10 @@ window.addEventListener('load',async()=>{
       // Use textContent to include closed walkthroughs. Those controls are translated,
       // but are intentionally absent from innerText until the dialog opens.
       if(!currentText.includes(target)){
+        const sample=[...document.querySelectorAll('h1,em,strong,a,label')].filter(e=>e.textContent.includes(text)).slice(0,2).map(e=>({tag:e.tagName,text:e.textContent.slice(0,130)}));
         // These are initial placeholders intentionally replaced after initialization.
         if(!node.parentElement.closest('#coverage-panel,#field-confirm-panel,#classification-origin,#result-area,#tour-position'))
-          violations.push({source:text.slice(0,115),expected:target.slice(0,115)});
+          violations.push({source:text.slice(0,115),expected:target.slice(0,115),sample});
       }
       tested++;
     }else if(text.length>=30&&/[a-z]{4,}/.test(text)&&text.split(/\s+/).length>=6){
