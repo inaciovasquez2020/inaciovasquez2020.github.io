@@ -18,11 +18,17 @@ function plainRecord(value,keys,label){
   if(value===null||typeof value!=='object'||Array.isArray(value))throw new TypeError(label+'_NOT_RECORD');
   const proto=Object.getPrototypeOf(value);
   if(proto!==Object.prototype&&proto!==null)throw new TypeError(label+'_PROTOTYPE');
-  if(Reflect.ownKeys(value).length!==keys.length)throw new TypeError(label+'_KEYS');
+  const ownKeys=Reflect.ownKeys(value);
+  if(ownKeys.length!==keys.length||ownKeys.some(k=>!keys.includes(k)))throw new TypeError(label+'_KEYS');
+  // Snapshot every checked own data descriptor once. Never read properties
+  // again from the caller's object: a Proxy get trap can lie or change values.
+  const snapshot=Object.create(null);
   for(const key of keys){
     const descriptor=Object.getOwnPropertyDescriptor(value,key);
     if(!descriptor||!Object.hasOwn(descriptor,'value'))throw new TypeError(label+'_KEYS_OR_ACCESSOR');
+    snapshot[key]=descriptor.value;
   }
+  return snapshot;
 }
 function exactDecimal(value,max,label){
   if(typeof value!=='string'||value.length>20||!/^(?:0|-?[1-9][0-9]*)$/.test(value))
@@ -32,21 +38,21 @@ function exactDecimal(value,max,label){
   return n;
 }
 export function auditGeneralT4LineBundle(input){
-  plainRecord(input,KEYS,'T4_INPUT');
-  if(input.profile!==GENERAL_T4_PROFILE||!OPERATORS.has(input.operator))
+  const request=plainRecord(input,KEYS,'T4_INPUT');
+  if(request.profile!==GENERAL_T4_PROFILE||!OPERATORS.has(request.operator))
     throw new TypeError('T4_UNSUPPORTED_PROFILE_OR_OPERATOR');
-  plainRecord(input.coefficients,COEFFICIENT_KEYS,'T4_COEFFICIENTS');
+  const supplied=plainRecord(request.coefficients,COEFFICIENT_KEYS,'T4_COEFFICIENTS');
   const c=Object.fromEntries(COEFFICIENT_KEYS.map(k=>[
-    k,exactDecimal(input.coefficients[k],COEFFICIENT_LIMIT,'T4_'+k)
+    k,exactDecimal(supplied[k],COEFFICIENT_LIMIT,'T4_'+k)
   ]));
-  const expected=exactDecimal(input.expected,EXPECTED_LIMIT,'T4_EXPECTED');
+  const expected=exactDecimal(request.expected,EXPECTED_LIMIT,'T4_EXPECTED');
   // Pfaffian of the skew-symmetric 4-by-4 integral coefficient matrix.
   const positive1=c.n12*c.n34, negative=c.n13*c.n24, positive2=c.n14*c.n23;
   const pfaffian=positive1-negative+positive2;
   const square=2n*pfaffian;
   // Rank one => c2(L)=0. ch2(L)=c1(L)^2/2.
   const values={c2_integral:0n,ch2_integral:pfaffian,c1_square_integral:square};
-  const actual=values[input.operator], matches=actual===expected;
+  const actual=values[request.operator], matches=actual===expected;
   return {
     schema:GENERAL_T4_PROFILE,
     status:matches?'EXACT_MODEL_MATCH':'EXACT_MODEL_COUNTEREXAMPLE',
@@ -57,7 +63,7 @@ export function auditGeneralT4LineBundle(input){
       'c1(L)=sum_(i<j) n_ij e_i wedge e_j, with all six coefficients supplied',
       'The supplied coefficients and bundle identification are assumptions, not verified observations'
     ],
-    operator:input.operator,
+    operator:request.operator,
     inputs:{coefficients:Object.fromEntries(COEFFICIENT_KEYS.map(k=>[k,c[k].toString()])),expected:expected.toString()},
     certificate:{signed_pair_products:[positive1.toString(),negative.toString(),positive2.toString()],
       pfaffian:pfaffian.toString(),c1_square_integral:square.toString(),computed:actual.toString()},
