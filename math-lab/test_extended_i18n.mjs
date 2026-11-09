@@ -180,3 +180,20 @@ test('bounded diagnostic translations cover all six locales and preserve tokens'
  assert.ok(engine.includes('Exactly one equality sign is required'));
  assert.ok(formal.includes("required(d.proof,'Complete candidate Lean source',65536)"));
 });
+
+test('all static engine fail diagnostics have six-language presentation mappings',async()=>{
+ const {DIAGNOSTIC_SOURCES,ERROR_MESSAGES}=await import('./runtime-errors-i18n.mjs');
+ const {readFile}=await import('node:fs/promises');
+ const engine=await readFile(new URL('engine.mjs',import.meta.url),'utf8');
+ const fixed=[...engine.matchAll(/\\bfail\\('([^']+)'\\)/g)].map(m=>m[1]);
+ assert.ok(fixed.length>=20,'source scanner should not silently stop finding engine diagnostics');
+ for(const raw of fixed){
+  const key=DIAGNOSTIC_SOURCES[raw]||(raw==='Exactly one equality sign is required; inequalities and chained equalities are unsupported.'?'missingEquality':null);
+  assert.ok(key,'untranslated engine failure: '+raw);
+  for(const lang of ['en','es','pt-BR','zh-Hans','fr','de'])assert.ok(ERROR_MESSAGES[lang][key],lang+': '+raw);
+ }
+ const names=['Request ID','Subject field','Subcategory','Theorem declaration','Complete candidate Lean source','Exact Lean version','Pinned dependency or repository revision','Source reference'];
+ const formal=await readFile(new URL('formal-request-core.mjs',import.meta.url),'utf8');
+ const found=[...formal.matchAll(/required\\(d\\.\\w+,'([^']+)',\\d+\\)/g)].map(m=>m[1]);
+ for(const name of found)assert.ok(names.includes(name),'unknown unlocalized formal field '+name);
+});
