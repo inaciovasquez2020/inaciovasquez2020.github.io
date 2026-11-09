@@ -3,6 +3,7 @@ import {fieldLabel,currentLanguage} from './runtime-taxonomy-i18n.mjs';
 import {message as localMessage} from './runtime-messages-i18n.mjs';
 import {errorText,explainError} from './runtime-errors-i18n.mjs';
 import {flagText} from './manuscript-flags-i18n.mjs';
+import {findingUI} from './manuscript-findings-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -107,7 +108,7 @@ function renderManuscript(r,entry){
   if(extraction.flags_truncated)flagList.append(el('p','scope-note',uiText('WARNING: Source flags truncated at the configured limit.')));
   root.append(flagList);
   root.append(el('h3','section-title',uiText('AUDIT FINDINGS — NOT PROOF VERDICTS')));
-  const findings=el('div','audit-claims');for(const f of r.findings){const block=el('div','audit-item review');block.append(el('div','audit-item-meta',f.type+' · '+f.severity.toUpperCase()),el('h4','',f.label),el('p','',f.detail));findings.append(block);}root.append(findings);
+  const findings=el('div','audit-claims');for(const f of r.findings){const block=el('div','audit-item review');const display=findingUI(f,currentLanguage());block.append(el('div','audit-item-meta',f.type+' · '+f.severity.toUpperCase()),el('h4','',display.label),el('p','',display.detail));findings.append(block);}root.append(findings);
   root.append(el('h3','section-title',uiText('EXTRACTED CLAIM ENVIRONMENTS')));
   const claims=el('div','audit-claims');if(!r.claims.length)claims.append(el('p','scope-note',uiText('No supported theorem environments found. No mathematical inference has been made.')));
   for(const c of r.claims){const block=el('div','audit-item');block.append(el('div','audit-item-meta',c.kind.toUpperCase()+` · LINE ${c.line} · `+c.status),
