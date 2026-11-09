@@ -30,10 +30,12 @@ test('exact signs, zeros, boundaries and independent coefficient oracle',()=>{
  }
  for(const [nx,ny] of [['1000000000','1000000000'],['-1000000000','1000000000']]){
   const n=BigInt(nx),m=BigInt(ny);
-  // expected is deliberately inside the input cap; this tests exact computed values.
+  // Intentionally false but within the wider expected-value cap.
   const r=auditTorusLineBundle(req(nx,ny,'ch2_integral','0'));
   assert.equal(r.status,'EXACT_MODEL_COUNTEREXAMPLE');
   assert.equal(r.certificate.computed,String(n*m));
+  assert.equal(auditTorusLineBundle(req(nx,ny,'ch2_integral',String(n*m))).status,'EXACT_MODEL_MATCH');
+  assert.equal(auditTorusLineBundle(req(nx,ny,'c1_square_integral',String(2n*n*m))).status,'EXACT_MODEL_MATCH');
  }
 });
 test('untrusted sources and unsupported claims fail closed without promotion',()=>{
@@ -41,7 +43,7 @@ test('untrusted sources and unsupported claims fail closed without promotion',()
  for(const bad of [null,[],{}, {...good,additional:'yes'}, {...good,operator:'poincare'},
   {...good,profile:'invented'}, {...good,n_x:1}, {...good,n_x:'1.0'},
   {...good,n_x:'1e9'}, {...good,n_x:'+1'}, {...good,n_x:'-0'},
-  {...good,n_y:'1000000001'}, {...good,expected:'1000000001'},
+  {...good,n_y:'1000000001'}, {...good,expected:'2000000000000000001'},
   {...good,n_x:'1;evil()'}]){
   assert.throws(()=>auditTorusLineBundle(bad));
  }
