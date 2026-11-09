@@ -58,3 +58,22 @@ test('reported checked link is not enough even for nonexistent reviewer metadata
  const x=clone(base);x.reviews=[];
  assert(normalizeReport(x).claims[0].issues.length>0);
 });
+
+test('real upstream pinned audit: Shape.decided reports Lean-checked but correspondence remains open',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const {fileURLToPath}=await import('node:url');
+ const {join,dirname}=await import('node:path');
+ const file=join(dirname(fileURLToPath(import.meta.url)),'fixtures/machinechecked-shape-decided.json');
+ const audit=JSON.parse(readFileSync(file,'utf8'));
+ assert.equal(audit.schema,'prooflens/manifest@1');
+ assert.equal(audit.id,'P:thm:decided');
+ assert.equal(audit.links[0].name,'Shape.decided');
+ assert.equal(audit.links[0].status_code,'link.checked');
+ const result=normalizeReport(audit).claims[0];
+ assert.equal(result.reported_status_code,'link.checked');
+ assert.equal(result.lean_declaration,'Shape.decided');
+ assert.equal(result.local_integrity.correspondence,'NOT_ESTABLISHED_BY_ADAPTER');
+ assert.equal(result.verification_verdict,'NOT_VERIFIED_BY_ADAPTER');
+ assert(result.issues.some(x=>x.code==='SOURCE_NOT_VERIFIED'));
+ assert(result.issues.some(x=>x.code==='CORRESPONDENCE_NOT_REVIEWED'));
+});
