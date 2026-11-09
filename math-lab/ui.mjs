@@ -23,7 +23,7 @@ let confirmedSelectionKey=null;
 function selectionKey(){return JSON.stringify([method.value,$('math-field').value,$('math-subcategory').value,equation.value,$('claim-id').value,$('source-reference').value,$('assumptions').value,sourceName]);}
 function invalidateFieldConfirmation(){
   fieldConfirmation.checked=false;confirmedSelectionKey=null;
-  if(last!==null){last=null;lastRendered=null;area.replaceChildren(el('div','empty-state','Source or field changed. Previous evidence cleared; re-run after confirmation.'));}
+  if(last!==null){last=null;lastRendered=null;renderEmptyState('Source or field changed. Previous evidence cleared; re-run after confirmation.');}
   refreshFieldConfirmation();
 }
 function refreshFieldConfirmation(){
@@ -55,16 +55,41 @@ function claimManifest(){
   const assumptions=$('assumptions').value.split(/\n/).map(x=>x.trim()).filter(Boolean);
   return validateManifest({claim_id:$('claim-id').value.trim(),source_reference:$('source-reference').value.trim(),field:$('math-field').value,subcategory:$('math-subcategory').value,assumptions});
 }
+function renderEmptyState(key){
+ const node=el('div','empty-state',copyText(key,currentLanguage()));
+ node.dataset.copyKey=key;
+ area.replaceChildren(node);
+}
+function refreshEmptyState(){
+ const node=area.querySelector('.empty-state');
+ if(!node)return;
+ if(node.dataset.copyKey){node.textContent=copyText(node.dataset.copyKey,currentLanguage());return;}
+ const heading=node.querySelector('h3'),description=node.querySelector('p');
+ if(heading&&description){
+  heading.textContent=uiText('Awaiting a claim');
+  description.textContent=uiText('Run an exact polynomial check to inspect the evidence and export a replayable source claim.');
+ }
+}
+let latestCasebookEntry=null,casebookWasCleared=false;
+const QUALITY_TEMPLATE='Last record: {kind} · {status}. {probes} follow-up probes; {passed} passed; {skipped} skipped. Python replay NOT RUN.';
+function renderQualityStatus(){
+ if(latestCasebookEntry){
+  const e=latestCasebookEntry;
+  $('quality-last').textContent=uiFormat(QUALITY_TEMPLATE,{kind:e.kind,status:e.status,probes:e.probes?.length||0,passed:e.probes_passed||0,skipped:e.probes_skipped||0});
+ }else{
+  $('quality-last').textContent=uiText(casebookWasCleared?'Session casebook cleared by user. No data was uploaded.':'No checks recorded in this session. All source text stays in memory until you choose to export it.');
+ }
+}
 function updateCasebook(entry){
-  const summary=casebook.add(entry);
+  const summary=casebook.add(entry);latestCasebookEntry=entry;casebookWasCleared=false;
   $('quality-cases').textContent=String(summary.cases);
   $('quality-probes').textContent=String(summary.metamorphic_pass);
   $('quality-review').textContent=String(summary.needs_review);
   $('quality-export').disabled=false;$('quality-clear').disabled=false;
-  $('quality-last').textContent=`Last record: ${entry.kind} · ${entry.status}. ${entry.probes?.length||0} follow-up probes; ${entry.probes_passed||0} passed; ${entry.probes_skipped||0} skipped. Python replay NOT RUN.`;
+  renderQualityStatus();
 }
 $('quality-export').addEventListener('click',()=>downloadJSON(casebook.export(),'vasquez-math-lab-review-casebook.json'));
-$('quality-clear').addEventListener('click',()=>{casebook.clear();$('quality-cases').textContent='0';$('quality-probes').textContent='0';$('quality-review').textContent='0';$('quality-export').disabled=true;$('quality-clear').disabled=true;$('quality-last').textContent='Session casebook cleared by user. No data was uploaded.';});
+$('quality-clear').addEventListener('click',()=>{casebook.clear();$('quality-cases').textContent='0';$('quality-probes').textContent='0';$('quality-review').textContent='0';$('quality-export').disabled=true;$('quality-clear').disabled=true;latestCasebookEntry=null;casebookWasCleared=true;renderQualityStatus();});
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function downloadJSON(data,name){const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function renderError(message){lastErrorRaw=message;area.replaceChildren();const box=el('div','error-block');box.append(el('strong','',errorText('unsupported',currentLanguage())),el('p','',explainError(message,currentLanguage())));box.append(el('p','result-disclaimer',errorText('disclaimer',currentLanguage())));area.append(box);last=null;lastRendered=null;}
@@ -126,7 +151,7 @@ function renderManuscript(r,entry){
 }
 function updateMethodPresentation(){
  const isMs=method.value==='manuscript-audit',lang=currentLanguage();
- $('evidence-method-tag').textContent=isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC';
+ $('evidence-method-tag').textContent=uiText(isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC');
  $('source-label').textContent=isMs?copyText('LaTeX manuscript · paste entire source',lang):uiText('Equation · LaTeX or ASCII');
  $('equation-help').textContent=isMs?copyText('Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.',lang):copyText('Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.',lang);
  $('run').textContent=isMs?copyText('Analyze manuscript structure →',lang):copyText('Run exact verification →',lang);
@@ -138,7 +163,7 @@ function updateMethod(){const isMs=method.value==='manuscript-audit';
   equation.classList.toggle('manuscript-copy',isMs);
   if(isMs){equation.value='';}else{equation.value='(x+1)^2 = x^2 + 2x + 1';}
   candidateControl.hidden=true;candidates=[];sourceName='manual input';
-  area.replaceChildren(el('div','empty-state',copyText(isMs?'Paste or drop LaTeX to inventory statements and review questions; no theorem verdict will be produced.':'Enter a polynomial equality and run exact verification.',currentLanguage())));
+  renderEmptyState(isMs?'Paste or drop LaTeX to inventory statements and review questions; no theorem verdict will be produced.':'Enter a polynomial equality and run exact verification.');
   if(isMs){fieldSelect.value='other';fillSubcategories('unclassified');}else{fieldSelect.value='algebra';fillSubcategories('polynomial-identities');}
   invalidateFieldConfirmation();updateProvenance();updateCoverage();
 }
@@ -191,9 +216,9 @@ equation.addEventListener('input',()=>{
 fieldSelect.addEventListener('change',()=>{fillSubcategories();classificationLocked=true;classificationOrigin='MANUAL';$('suggest-note').textContent='Manual override: mathematical field not independently verified.';invalidateFieldConfirmation();updateProvenance();updateCoverage();});
 subcategorySelect.addEventListener('change',()=>{classificationLocked=true;classificationOrigin='MANUAL';invalidateFieldConfirmation();updateCoverage();$('suggest-note').textContent='Manual override: mathematical field not independently verified.';updateProvenance();});
 $('suggest-category').addEventListener('click',()=>{classificationLocked=false;classificationLastInput='';applySuggestedCategory({force:true});});
-updateProvenance();updateCoverage();
+updateMethodPresentation();refreshEmptyState();renderQualityStatus();updateProvenance();updateCoverage();
 method.addEventListener('change',updateMethod);
-function setExample(kind){invalidateFieldConfirmation();let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;area.replaceChildren(el('div','empty-state','Ready to verify the selected example.'));equation.focus();}
+function setExample(kind){invalidateFieldConfirmation();let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;renderEmptyState('Ready to verify the selected example.');equation.focus();}
 form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory();if(!refreshFieldConfirmation()){renderError(errorText('fieldRequired','en'));return;}let m;
   try{
     m=claimManifest();
@@ -224,15 +249,15 @@ theme.addEventListener('change',()=>{document.documentElement.dataset.theme=them
 function showCandidates(list,name){invalidateFieldConfirmation();candidates=list;sourceName=name;candidateSelect.replaceChildren();candidateControl.hidden=false;
   list.forEach((c,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=`${i+1}. ${c.replace(/\s+/g,' ').slice(0,75)}`;candidateSelect.append(opt);});
   fileStatus.textContent=`${name}: ${list.length} equation candidate${list.length===1?'':'s'} found. Only the selected equation is evaluated.`;
-  equation.value=list[0];if(method.value==='manuscript-audit')applySuggestedCategory({force:true});area.replaceChildren(el('div','empty-state', 'Source loaded. Review the selected equation and run verification.'));
+  equation.value=list[0];if(method.value==='manuscript-audit')applySuggestedCategory({force:true});renderEmptyState('Source loaded. Review the selected equation and run verification.');
 }
 async function readFile(f){try{if(!f) return;if(!/\.(tex|txt)$/i.test(f.name))throw new UnsupportedClaim('Only .tex and .txt files are accepted.');if(f.size>65536)throw new UnsupportedClaim('File exceeds the 64 KiB limit; use a smaller excerpt.');
   const text=await f.text();if($('source-reference').value==='Manual entry')$('source-reference').value=f.name;if(text.includes('\0'))throw new UnsupportedClaim('Input contains a null byte.');
-  if(method.value==='manuscript-audit'){invalidateFieldConfirmation();equation.value=text;sourceName=f.name;candidateControl.hidden=true;fileStatus.textContent='';applySuggestedCategory();area.replaceChildren(el('div','empty-state','File loaded locally. Select Analyze manuscript structure.'));return;}
+  if(method.value==='manuscript-audit'){invalidateFieldConfirmation();equation.value=text;sourceName=f.name;candidateControl.hidden=true;fileStatus.textContent='';applySuggestedCategory();renderEmptyState('File loaded locally. Select Analyze manuscript structure.');return;}
   const list=extractEquations(text);if(!list.length)throw new UnsupportedClaim('No displayed equality found. Paste a single polynomial equation instead.');showCandidates(list,f.name);
  }catch(err){renderError(err instanceof UnsupportedClaim?err.message:'Unable to read the source file.');candidateControl.hidden=true;}}
 picker.addEventListener('change',()=>readFile(picker.files?.[0]));
-candidateSelect.addEventListener('change',()=>{invalidateFieldConfirmation();equation.value=candidates[Number(candidateSelect.value)]||'';last=null;area.replaceChildren(el('div','empty-state','Equation selected. Review before checking.'));});
+candidateSelect.addEventListener('change',()=>{invalidateFieldConfirmation();equation.value=candidates[Number(candidateSelect.value)]||'';last=null;renderEmptyState('Equation selected. Review before checking.');});
 for(const type of ['dragenter','dragover'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragover');});
 for(const type of ['dragleave','drop'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragover');});
 drop.addEventListener('drop',e=>readFile(e.dataTransfer?.files?.[0]));
@@ -256,7 +281,7 @@ function refreshTaxonomyDisplay(){
 // Language changes re-render only from the already-computed immutable result objects.
 // Never invoke verifyEquation, auditManuscript or change casebook state on localization.
 $('ui-language')?.addEventListener('change',()=>{
- refreshTaxonomyDisplay();
+ refreshTaxonomyDisplay();refreshEmptyState();renderQualityStatus();
  if(!lastRendered){if(lastErrorRaw!==null)renderError(lastErrorRaw);return;}
  const {kind,record,entry}=lastRendered;
  if(kind==='exact')renderResult(record,entry);

@@ -26,6 +26,35 @@ window.addEventListener('load',async()=>{
   const assert=(label,actual,expected)=>{
     if(actual.trim()!==expected.trim())problems.push(label+': '+JSON.stringify(actual)+' expected '+JSON.stringify(expected));
   };
+  const {COPY}=await import('./runtime-copy-i18n.mjs');
+  const shellKeys=["USER GUIDE","01 / INPUT","02 / EVIDENCE","03 / IMPROVEMENT LOOP","04 / VERIFICATION BOUNDARY","ENGINE SCOPE IS ENFORCED","QUICK EXAMPLES","NO AUTOMATIC LEARNING","OPTIONAL / REFERENCE REMINDER","APPEARANCE","EXPERIMENTAL","VASQUEZ RESEARCH / EXACT MATHEMATICS","EXACT POLYNOMIAL CERTIFICATE ≠ LEAN PROOF","EXACT POLYNOMIAL ARITHMETIC","MANUSCRIPT STRUCTURE ONLY","OPTIONAL USER WALKTHROUGH","VASQUEZ RESEARCH · EXPERIMENTAL"];
+  for(const key of shellKeys.filter(key=>key!=='MANUSCRIPT STRUCTURE ONLY')){
+    const expected=dictionary[key];
+    if(!expected||!document.body.textContent.includes(expected))problems.push('missing localized shell label '+key);
+  }
+  const expectedIdle={
+    resultTitle:'Awaiting a claim',
+    resultHelp:'Run an exact polynomial check to inspect the evidence and export a replayable source claim.',
+    quality:'No checks recorded in this session. All source text stays in memory until you choose to export it.',
+    citation:'No citation analysis performed. Optional, local-only and user initiated.'
+  };
+  if(document.querySelector('#result-area .empty-state h3')?.textContent!==dictionary[expectedIdle.resultTitle])problems.push('result idle heading not localized');
+  if(document.querySelector('#result-area .empty-state p')?.textContent!==dictionary[expectedIdle.resultHelp])problems.push('result idle explanation not localized');
+  if(document.getElementById('quality-last')?.textContent!==dictionary[expectedIdle.quality])problems.push('casebook idle state not localized');
+  if(document.querySelector('#citation-results p')?.textContent!==dictionary[expectedIdle.citation])problems.push('citation idle state not localized');
+  const selector=document.getElementById('ui-language');
+  const helpKey='Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.';
+  if(document.getElementById('equation-help')?.textContent!==COPY[lang][helpKey])problems.push('runtime equation help not translated');
+  const sourceValue=document.getElementById('equation')?.value;
+  for(const switchTo of ['de','fr','zh-Hans','es','pt-BR','en',lang]){
+   selector.value=switchTo;selector.dispatchEvent(new Event('change',{bubbles:true}));
+   const expectedRun=COPY[switchTo]['Run exact verification →'];
+   if(document.getElementById('run')?.textContent!==expectedRun)problems.push('run-button cross-language bleed '+switchTo);
+   if(document.querySelector('#result-area .empty-state h3')?.textContent!==DICTIONARIES[switchTo][expectedIdle.resultTitle])problems.push('result idle switch '+switchTo);
+   if(document.getElementById('quality-last')?.textContent!==DICTIONARIES[switchTo][expectedIdle.quality])problems.push('casebook idle switch '+switchTo);
+   if(document.querySelector('#citation-results p')?.textContent!==DICTIONARIES[switchTo][expectedIdle.citation])problems.push('citation idle switch '+switchTo);
+   if(document.getElementById('equation')?.value!==sourceValue)problems.push('mathematical source changed on language switch');
+  }
   const get=id=>document.getElementById(id)?.textContent||'';
   const intro='Check a polynomial identity or paste an entire LaTeX manuscript. Exact algebra generates integer-arithmetic evidence; manuscript audit inventories claims and highlights unverified obligations. Both run privately in your browser.';
   const introNode=document.querySelector('.intro > p:not(.help)');

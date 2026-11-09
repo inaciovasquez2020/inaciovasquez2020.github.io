@@ -5,8 +5,13 @@ const button=document.getElementById('check-citations');
 const panel=document.getElementById('citation-results');
 const exportButton=document.getElementById('citation-export');
 const source=document.getElementById('equation');
-let suggestions=[],arxivIds=[],analyzed=false;
+let suggestions=[],arxivIds=[],analyzed=false,idleKind='initial';
 function safeText(tag,value){const e=document.createElement(tag);e.textContent=value;return e;}
+function renderIdle(){
+ const key=idleKind==='changed'?'Input changed. Re-run citation suggestions before exporting.':'No citation analysis performed. Optional, local-only and user initiated.';
+ panel.replaceChildren(safeText('p',uiText(key)));
+}
+renderIdle();
 function render(){
  const checked=new Set(Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).map(x=>Number(x.dataset.index)));
  panel.replaceChildren();
@@ -43,7 +48,7 @@ button.addEventListener('click',()=>{
  render();
 });
 source.addEventListener('input',()=>{
- suggestions=[];arxivIds=[];analyzed=false;panel.replaceChildren(safeText('p',uiText('Input changed. Re-run citation suggestions before exporting.')));exportButton.disabled=true;
+ suggestions=[];arxivIds=[];analyzed=false;idleKind='changed';renderIdle();exportButton.disabled=true;
 });
 exportButton.addEventListener('click',()=>{
  const confirmed=Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).map(c=>suggestions[Number(c.dataset.index)]).filter(Boolean);
@@ -55,4 +60,4 @@ exportButton.addEventListener('click',()=>{
 });
 
 // Rebuild human-readable guidance using cached reference matches; do not refetch or alter citations.
-document.getElementById('ui-language')?.addEventListener('change',()=>{if(analyzed)render();});
+document.getElementById('ui-language')?.addEventListener('change',()=>{if(analyzed)render();else renderIdle();});
