@@ -11,7 +11,8 @@ export function classifyComplexityManuscript(source) {
   const body = titleMatch
     ? text.slice(0, titleMatch.index) + text.slice(titleMatch.index + titleMatch[0].length)
     : text;
-  const complexityTitle = /(?:polynomial[\s~-]*time|computational complexity|turing machine|\bP\s*(?:vs\.?|=)\s*NP\b|\bSAT\b)/i.test(title);
+  const complexityTitle = /(?:polynomial[\s~-]*time|computational complexity|turing machine)/i.test(title)
+    || /(?:\bP\s*(?:vs\.?|=)\s*NP\b|\bSAT\b)/.test(title);
   // Require corroboration in the body: a generic 'computation' in a physics title
   // must not override the ordinary cross-field ambiguity rule.
   const signals = [

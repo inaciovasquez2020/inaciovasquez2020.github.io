@@ -28,6 +28,18 @@ test('negative controls: weak or non-complexity titles must not override',()=>{
   assert.equal(classifyComplexityManuscript(String.raw`\title{Schwarzschild Wormhole Transcript Capacity} polynomial simulation; entropy`),null);
   assert.equal(classifyComplexityManuscript(String.raw`\title{Polynomial-Time Simulations of Black-Hole Information} quantum gravity, Schwarzschild geometry, Turing machine, SAT solver, polynomial simulation, entropy`),null);
 });
+test('case-sensitive SAT/P-vs-NP tokens reject ordinary lowercase prose',()=>{
+  const body = 'polynomial-time Turing machine';
+  for (const title of ['The Cat Sat Quietly','The cat sat quietly','A p vs np casual note']) {
+    const source = '\\title{' + title + '} ' + body;
+    assert.equal(classifyComplexityManuscript(source),null,title);
+  }
+  for (const title of ['SAT Decision Procedures','P vs NP Boundary','Computational Complexity']) {
+    const source = '\\title{' + title + '} ' + body;
+    assert.equal(classifyComplexityManuscript(source)?.field,'logic-complexity',title);
+  }
+});
+
 test('the reported bridge patterns raise TWO review prompts, never proof verdicts',()=>{
   const f=reviewTranscriptManuscript(bridge);
   assert.deepEqual(f.map(x=>x.type),['TRANSCRIPT_INITIAL_STATE_REVIEW','TRANSCRIPT_CHAIN_RULE_REVIEW']);
