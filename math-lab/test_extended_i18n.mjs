@@ -155,3 +155,28 @@ test('runtime messages cover every locale and preserve mathematical IDs',async()
  assert.ok(source.includes("localMessage('selection',currentLanguage()"));
  assert.ok(source.includes("localMessage('classification',currentLanguage()"));
 });
+
+test('bounded diagnostic translations cover all six locales and preserve tokens',async()=>{
+ const {ERROR_MESSAGES,DIAGNOSTIC_SOURCES,REQUEST_FIELD_NAMES,explainError}=await import('./runtime-errors-i18n.mjs');
+ const locales=['en','es','pt-BR','zh-Hans','fr','de'];
+ const keys=Object.keys(ERROR_MESSAGES.en);
+ assert.ok(keys.length>=50);
+ assert.equal(Object.keys(DIAGNOSTIC_SOURCES).length,40);
+ for(const locale of locales){
+  assert.deepEqual(Object.keys(ERROR_MESSAGES[locale]),keys);
+  for(const key of keys)assert.ok(ERROR_MESSAGES[locale][key],locale+' '+key);
+  assert.ok(explainError('Expression exceeds 512 characters.',locale));
+  assert.equal(explainError('SOURCE_UNRECOGNIZED_STATUS_17',locale),'SOURCE_UNRECOGNIZED_STATUS_17');
+ }
+ assert.equal(explainError('Exactly one equality sign is required; inequalities and chained equalities are unsupported.','de'),ERROR_MESSAGES.de.missingEquality);
+ assert.equal(explainError("Expected 'rparen', received 'eof'.",'es'),"Se esperaba «rparen», se recibió «eof».");
+ assert.equal(explainError("Expected a polynomial term, received 'eof'.",'pt-BR'),"Esperado termo polinomial; recebido «eof».");
+ assert.equal(explainError('Complete candidate Lean source must be nonempty and under 65536 characters.','de'),'Vollständiger Lean-Quelltext muss 1 bis 65536 Zeichen enthalten.');
+ assert.equal(explainError('Theorem declaration must be nonempty and under 8192 characters.','fr'),ERROR_MESSAGES.fr.theorem);
+ for(const locale of locales)assert.equal(Object.keys(REQUEST_FIELD_NAMES[locale]).length,10);
+ const {readFile}=await import('node:fs/promises');
+ const engine=await readFile(new URL('engine.mjs',import.meta.url),'utf8');
+ const formal=await readFile(new URL('formal-request-core.mjs',import.meta.url),'utf8');
+ assert.ok(engine.includes('Exactly one equality sign is required'));
+ assert.ok(formal.includes("required(d.proof,'Complete candidate Lean source',65536)"));
+});
