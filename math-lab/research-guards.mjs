@@ -2,6 +2,8 @@
  * Narrow research audit guards: keyword suggestions and review prompts only.
  * No component in this file proves or refutes a mathematical statement.
  */
+import {MAX_MANUSCRIPT_BYTES,utf8Size} from './source-limits.mjs';
+
 export function classifyComplexityManuscript(source) {
   const text = String(source ?? '').slice(0, 65536);
   const titleMatch = /\\title\s*\{([^{}]{1,500})\}/.exec(text);
@@ -39,7 +41,10 @@ export function classifyComplexityManuscript(source) {
  * Caller must attach source anchors and keep overall status NOT_VERIFIED.
  */
 export function reviewTranscriptManuscript(source) {
-  const text = String(source ?? '').slice(0, 65536);
+  const text = String(source ?? '');
+  // Match the admitted manuscript limit; never silently ignore late claims.
+  if (text.length > MAX_MANUSCRIPT_BYTES || utf8Size(text) > MAX_MANUSCRIPT_BYTES)
+    throw new RangeError('Transcript review source exceeds the admitted manuscript limit.');
   const findings = [];
   const initialization = /Y_\{?0\}?\s*:?=\s*c_\{?0\}?/.exec(text);
   const reconstruction = /\\Conf_\{?t\}?\s*=\s*D\s*\(\s*Y_\{\\le\s*t\}\s*\)/.exec(text);

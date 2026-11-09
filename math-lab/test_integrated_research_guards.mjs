@@ -33,3 +33,13 @@ test('integration: non-applicable paper has no transcript warnings',()=>{
  assert.equal(r.findings.filter(x=>x.type.startsWith('TRANSCRIPT_')).length,0);
  assert.equal(r.status,'NOT_VERIFIED');
 });
+
+test('review prompts beyond 65,536 characters remain visible in an admitted manuscript',()=>{
+ const late=' '.repeat(65540)+source;
+ assert.ok(late.length>65536&&late.length<=131072);
+ const report=auditManuscript(late);
+ const marks=report.findings.filter(f=>f.type.startsWith('TRANSCRIPT_'));
+ assert.deepEqual(marks.map(f=>f.type),['TRANSCRIPT_INITIAL_STATE_REVIEW','TRANSCRIPT_CHAIN_RULE_REVIEW']);
+ assert.ok(marks.every(f=>f.source_anchor.start_utf16>65536&&verifySourceAnchor(late,f.source_anchor)));
+ assert.equal(report.status,'NOT_VERIFIED');
+});
