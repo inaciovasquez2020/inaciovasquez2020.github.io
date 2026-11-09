@@ -99,10 +99,64 @@ test('fail closed on unknown fields, prototypes, accessors, malformed numbers',(
     {...good,coefficients:{...good.coefficients,extra:'2'}},
     {...good,expected:'6000000000000000001'},
     {...good,expected:'9007199254740993.0'},
-    Object.assign(Object.create({untrusted:true}),good),
-    Object.defineProperty({...good},'expected',{get(){throw Error('getter executed');}})
+    Object.assign(Object.create({untrusted:true}),good)
   ];
-  for(const bad of weird)assert.throws(()=>auditGeneralT4LineBundle(bad));
+  for(const bad of weird)assert.throws(
+    ()=>auditGeneralT4LineBundle(bad),
+    err=>err instanceof TypeError||err instanceof RangeError
+  );
+  let getterExecuted=false;
+  const accessor=Object.defineProperty({...good},'expected',{
+    get(){getterExecuted=true;throw Error('getter executed');}
+  });
+  assert.throws(()=>auditGeneralT4LineBundle(accessor),{
+    name:'TypeError',message:'T4_INPUT_KEYS_OR_ACCESSOR'
+  });
+  assert.equal(getterExecuted,false);
+  let coefficientGetterExecuted=false;
+  const dangerousCoefficients=Object.defineProperty({...good.coefficients},'n34',{
+    get(){coefficientGetterExecuted=true;throw Error('coefficient getter executed');}
+  });
+  assert.throws(()=>auditGeneralT4LineBundle({...good,coefficients:dangerousCoefficients}),{
+    name:'TypeError',message:'T4_COEFFICIENTS_KEYS_OR_ACCESSOR'
+  });
+  assert.equal(coefficientGetterExecuted,false);
+  const base={...good};
+  let operatorReads=0;
+  const varyingOperator=new Proxy(base,{
+    get(target,key,receiver){
+      if(key==='operator'){
+        operatorReads++;
+        return operatorReads===1?'c2_integral':'ch2_integral';
+      }
+      return Reflect.get(target,key,receiver);
+    }
+  });
+  const snapResult=auditGeneralT4LineBundle(varyingOperator);
+  assert.equal(snapResult.status,'EXACT_MODEL_MATCH');
+  assert.equal(snapResult.operator,'ch2_integral');
+  assert.equal(snapResult.certificate.computed,'1');
+  assert.equal(operatorReads,0);
+  const misleading=new Proxy({...good,expected:'0'},{
+    get(target,key,receiver){
+      if(key==='expected')return '1';
+      return Reflect.get(target,key,receiver);
+    }
+  });
+  const mismatch=auditGeneralT4LineBundle(misleading);
+  assert.equal(mismatch.status,'EXACT_MODEL_COUNTEREXAMPLE');
+  assert.equal(mismatch.inputs.expected,'0');
+  let coefficientReads=0;
+  const coeffProxy=new Proxy({...good.coefficients,n34:'0'},{
+    get(target,key,receiver){
+      if(key==='n34'){coefficientReads++;return '1';}
+      return Reflect.get(target,key,receiver);
+    }
+  });
+  const coefficientMismatch=auditGeneralT4LineBundle({...good,coefficients:coeffProxy});
+  assert.equal(coefficientMismatch.status,'EXACT_MODEL_COUNTEREXAMPLE');
+  assert.equal(coefficientMismatch.certificate.computed,'0');
+  assert.equal(coefficientReads,0);
   const before=JSON.stringify(good),r=auditGeneralT4LineBundle(good);
   assert.equal(JSON.stringify(good),before);
   assert.equal(r.status,'EXACT_MODEL_MATCH');
