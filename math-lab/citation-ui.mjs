@@ -1,5 +1,6 @@
 import {suggestCitations,formatBibtex,detectArxivIdentifiers} from './citation-assist.mjs';
 import {uiText} from './extended-i18n.mjs';
+import {citationNote} from './citation-notes-i18n.mjs';
 const button=document.getElementById('check-citations');
 const panel=document.getElementById('citation-results');
 const exportButton=document.getElementById('citation-export');
@@ -26,7 +27,7 @@ function render(){
   article.append(safeText('strong',ref.title+' ('+ref.year+')'));
   article.append(safeText('p',ref.authors+' · '+ref.journal));
   const link=document.createElement('a');link.href='https://doi.org/'+ref.doi;link.textContent='DOI: '+ref.doi;link.target='_blank';link.rel='noopener noreferrer';article.append(link);
-  article.append(safeText('p',uiText('Status: SUGGESTION_ONLY / CLAIM SUPPORT NOT CHECKED. ')+(ref.alreadyReferenced?uiText('Source includes this DOI or citation key. '):uiText('Potential missing citation. '))+ref.note));
+  article.append(safeText('p',uiText('Status: SUGGESTION_ONLY / CLAIM SUPPORT NOT CHECKED. ')+(ref.alreadyReferenced?uiText('Source includes this DOI or citation key. '):uiText('Potential missing citation. '))+citationNote(ref,document.getElementById('ui-language')?.value||'en')));
   const label=document.createElement('label');label.className='citation-check';
   const checkbox=document.createElement('input');checkbox.type='checkbox';checkbox.dataset.index=String(i);checkbox.checked=checked.has(i);
   checkbox.addEventListener('change',()=>{exportButton.disabled=!Array.from(panel.querySelectorAll('input[type=checkbox]:checked')).length;});
