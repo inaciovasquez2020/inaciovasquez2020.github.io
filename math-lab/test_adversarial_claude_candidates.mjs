@@ -42,3 +42,24 @@ test('versioned exponent grammar accepts braced powers and rejects ambiguous sho
  const unsupported=['x^12=x^{12}','x^16=x^{16}','x^12=x^12','x^{17}=x^{17}'];
  for(const equation of unsupported)reject(equation);
 });
+
+test('public grammar, input guidance, and six-language strings cover multi-digit exponents',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const {DICTIONARIES}=await import('./extended-i18n.mjs');
+ const grammar=await readFile(new URL('./PARSER_GRAMMAR.md',import.meta.url),'utf8');
+ const page=await readFile(new URL('./index.html',import.meta.url),'utf8');
+ const guide=await readFile(new URL('./how-to.html',import.meta.url),'utf8');
+ for(const token of ['x^12','x^{12}','x^(12)','2 3 = 6','unsupported','Unsupported'])assert.ok(grammar.includes(token),token);
+ assert.match(page,/multi-digit exponents require braces/i);
+ assert.match(page,/PARSER_GRAMMAR\.md/);
+ assert.match(guide,/Multi-digit exponents require braces/);
+ assert.match(guide,/PARSER_GRAMMAR\.md/);
+ const keys=[
+  'Multi-digit exponents require braces (x^{12}); bare x^12 is unsupported.',
+  'Parser grammar',
+  'For one-digit powers, x^2 and x^{2} are accepted. Multi-digit exponents require braces: x^{12} is accepted, but bare x^12 is unsupported to avoid LaTeX ambiguity. ASCII x^(12) is accepted by this limited expression parser but is not faithful LaTeX notation.',
+  'Parser grammar and compatibility contract'];
+ for(const locale of ['en','es','pt-BR','zh-Hans','fr','de']){
+  for(const key of keys)assert.ok(DICTIONARIES[locale][key],locale+': '+key);
+ }
+});
