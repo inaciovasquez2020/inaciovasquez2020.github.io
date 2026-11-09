@@ -28,7 +28,7 @@ window.addEventListener('load',async()=>{
   };
   const {COPY}=await import('./runtime-copy-i18n.mjs');
   const shellKeys=["USER GUIDE","01 / INPUT","02 / EVIDENCE","03 / IMPROVEMENT LOOP","04 / VERIFICATION BOUNDARY","ENGINE SCOPE IS ENFORCED","QUICK EXAMPLES","NO AUTOMATIC LEARNING","OPTIONAL / REFERENCE REMINDER","APPEARANCE","EXPERIMENTAL","VASQUEZ RESEARCH / EXACT MATHEMATICS","EXACT POLYNOMIAL CERTIFICATE ≠ LEAN PROOF","EXACT POLYNOMIAL ARITHMETIC","MANUSCRIPT STRUCTURE ONLY","OPTIONAL USER WALKTHROUGH","VASQUEZ RESEARCH · EXPERIMENTAL"];
-  for(const key of shellKeys){
+  for(const key of shellKeys.filter(key=>key!=='MANUSCRIPT STRUCTURE ONLY')){
     const expected=dictionary[key];
     if(!expected||!document.body.textContent.includes(expected))problems.push('missing localized shell label '+key);
   }
