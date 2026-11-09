@@ -157,8 +157,14 @@ window.addEventListener('load',async()=>{
     await new Promise(done=>setTimeout(done,0));
     if($('source-preflight-status').dataset.state!=='MANUAL'||$('equation').value!=='x=x+0')throw Error('stale upload overwritten current text');
     upload(new File(['x=x'],'good.tex'));
-    await new Promise(done=>setTimeout(done,0));
-    if($('source-preflight-status').dataset.state!=='READY'||$('source-reference').value!=='good.tex'||$('equation').value!=='x=x')throw Error('valid file not admitted');
+    let admitted=false;
+    for(let attempt=0;attempt<100;attempt++){
+      if($('source-preflight-status').dataset.state==='READY'){admitted=true;break;}
+      if($('source-preflight-status').dataset.state==='BLOCKED')break;
+      await new Promise(done=>setTimeout(done,20));
+    }
+    if(!admitted)throw Error('INCOMPLETE_ADMISSION_TIMEOUT: '+$('source-preflight-status').dataset.state);
+    if($('source-reference').value!=='good.tex'||$('equation').value!=='x=x')throw Error('valid file admitted with incorrect provenance');
     if($('field-confirm').checked||!$('run').disabled)throw Error('new file reused old consent');
     out.textContent=JSON.stringify({status:'PASS',languages:['en','pt-BR','es','en'],exact_status:'EXACT_CERTIFICATE_PASS',certificate_bytes:evidence.length,bibtex_bytes:bib.length,citation_languages:6});
   }catch(e){out.textContent=JSON.stringify({status:'FAIL',error:String(e.stack||e)});}
