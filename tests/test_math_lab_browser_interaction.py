@@ -38,6 +38,39 @@ window.addEventListener('load',async()=>{
     return await blob.text();
   };
   try{
+    // Original Safari reproduction: other/unclassified must explain the disabled controls.
+    const method=$('method');
+    method.value='manuscript-audit';method.dispatchEvent(new Event('change',{bubbles:true}));
+    if($('math-field').value!=='other'||$('math-subcategory').value!=='unclassified')
+      throw Error('expected unclassified manuscript setup');
+    const helpPrefixes={
+      en:'Select a specific mathematical field',es:'Seleccione arriba un campo matemático',
+      'pt-BR':'Selecione acima uma área matemática',fr:'Choisissez ci-dessus un domaine mathématique',
+      de:'Wählen Sie oben ein konkretes mathematisches','zh-Hans':'请在上方选择具体的数学领域'
+    };
+    for(const [lang,prefix] of Object.entries(helpPrefixes)){
+      change(lang);
+      if(!$('field-confirm').disabled||!$('run').disabled)throw Error('unclassified gate absent: '+lang);
+      if(!$('field-confirm-summary').textContent.includes(prefix))throw Error('localized guidance absent: '+lang);
+      if(!$('run').title||$('run').title==='Review and confirm the field and subcategory before continuing.')
+        throw Error('missing localized disabled reason: '+lang);
+    }
+    change('en');
+    $('math-field').value='logic-complexity';$('math-field').dispatchEvent(new Event('change',{bubbles:true}));
+    if($('math-subcategory').value!=='formal-proof'||$('field-confirm').disabled)
+      throw Error('specific CS field not confirmable');
+    const checkboxRect=$('field-confirm').getBoundingClientRect();
+    if(Math.abs(checkboxRect.width-18)>1||Math.abs(checkboxRect.height-18)>1)
+      throw Error('checkbox size wrong: '+checkboxRect.width+'x'+checkboxRect.height);
+    $('field-confirm').click();
+    if(!$('field-confirm').checked||$('run').disabled)throw Error('CS confirmation failed');
+    $('equation').value='changed';$('equation').dispatchEvent(new Event('input',{bubbles:true}));
+    if($('field-confirm').checked||!$('run').disabled)throw Error('source edit failed to invalidate confirmation');
+    method.value='exact-polynomial';method.dispatchEvent(new Event('change',{bubbles:true}));
+    $('math-field').value='logic-complexity';$('math-field').dispatchEvent(new Event('change',{bubbles:true}));
+    $('field-confirm').click();
+    if(!$('run').disabled)throw Error('unsupported exact CS verification enabled');
+    method.dispatchEvent(new Event('change',{bubbles:true}));
     const originalInput=$('equation').value;
     const originalField=$('math-field').value;
     const originalSub=$('math-subcategory').value;

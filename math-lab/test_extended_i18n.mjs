@@ -141,12 +141,17 @@ test('runtime messages cover every locale and preserve mathematical IDs',async()
  const {TAXONOMY,coverage}=await import('./taxonomy.mjs');
  const languages=['en','es','pt-BR','zh-Hans','fr','de'];
  const keys=Object.keys(RUNTIME_MESSAGES.en);
- assert.equal(keys.length,18);
+ assert.equal(keys.length,20);
  for(const language of languages){
    assert.deepEqual(Object.keys(RUNTIME_MESSAGES[language]),keys);
    for(const key of keys)assert.ok(message(key,language));
  }
  assert.equal(message('confirmReview','de'),'FACHGEBIET UND UNTERKATEGORIE BESTÄTIGEN');
+ for(const lang of languages){
+  assert.ok(message('confirmMissingHelp',lang).length>20);
+  assert.ok(message('runMissing',lang).length>15);
+  if(lang!=='en')assert.notEqual(message('confirmMissingHelp',lang),message('confirmMissingHelp','en'),lang);
+ }
  const rendered=message('selection','pt-BR',{field:'Topologia',subcategory:'Variedades e triangulações',origin:message('autoOrigin','pt-BR'),method:message('manuscript','pt-BR')});
  assert.ok(rendered.includes('Topologia'));assert.ok(rendered.includes('Variedades e triangulações'));
  assert.equal(coverage('topology','manifold-topology','exact-polynomial').status,'NO_ENGINE');
