@@ -100,6 +100,9 @@ export function parseExpression(text){const tokens=lex(translateLatex(text));let
 export function extractEquations(tex){
  if(typeof tex!=='string'||tex.length>MAX_SOURCE)fail('Dropped source must be a text file of at most 64 KiB.');
  const audit=inspectLatex(tex);
+ // Exact mode must not reinterpret inventoried inline math as a stand-alone equality.
+ // Inventory coverage is not an exact-polynomial admission decision.
+ if(audit.inline.length)fail('SOURCE_REVIEW_REQUIRED: INLINE_MATH_UNSUPPORTED. Isolate a supported displayed or stand-alone equality before exact checking.');
  if(audit.flags.length)fail('SOURCE_REVIEW_REQUIRED: '+audit.flags[0].code+
    ' at line '+audit.flags[0].line+'. '+audit.flags[0].reason+
    ' Review or isolate a correctly delimited equation before exact checking.');
