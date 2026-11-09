@@ -46,12 +46,27 @@ window.addEventListener('load',async()=>{
     if(!title())fail('unsupported equality lacked error');
     if(lang!=='en'&&title()==='NOT VERIFIED — UNSUPPORTED INPUT')fail('error heading remained English');
     const raw=message();
+    if(lang!=='en'&&raw.includes('Exactly one equality sign is required'))fail('exact reason untranslated: '+lang);
     change('en');
     if(title()!=='NOT VERIFIED — UNSUPPORTED INPUT')fail('error heading did not restore English');
     if(message()!==raw)fail('raw diagnostic changed during translation');
     if($('math-field').value!==field||$('math-subcategory').value!==sub)fail('taxonomy IDs changed');
     if($('equation').value!=='x + 1')fail('invalid source modified');
-    out.textContent=JSON.stringify({status:'PASS',test:'exact-negative',language:lang});
+    // Switch to manuscript mode and submit an empty source through the existing confirmation gate.
+    const method=$('method');method.value='manuscript-audit';method.dispatchEvent(new Event('change',{bubbles:true}));
+    const newField=$('math-field');newField.value='topology';newField.dispatchEvent(new Event('change',{bubbles:true}));
+    if($('math-subcategory').value!=='manifold-topology')fail('unexpected topology subcategory');
+    $('field-confirm').click();
+    if(!$('field-confirm').checked)fail('manuscript field confirmation failed');
+    change(lang);
+    $('claim-form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
+    const manuscriptError=message();
+    if(lang!=='en'&&manuscriptError.includes('Manuscript must contain 1'))fail('manuscript error untranslated: '+lang);
+    if(!title())fail('manuscript error missing');
+    if($('equation').value!=='')fail('empty manuscript source unexpectedly changed');
+    change('en');
+    if(!message().includes('Manuscript must contain 1'))fail('manuscript English restoration failed');
+    out.textContent=JSON.stringify({status:'PASS',test:'exact-and-manuscript-negative',language:lang});
   }
  }catch(e){out.textContent=JSON.stringify({status:'FAIL',error:String(e.stack||e)});}
 });
