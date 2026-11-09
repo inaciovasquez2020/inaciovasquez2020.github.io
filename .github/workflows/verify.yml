@@ -33,6 +33,8 @@ jobs:
 
       - name: Browser localization smoke (installed Chrome, no downloads)
         run: python3 tests/test_math_lab_browser_translation.py
+      - name: Browser main-page translated prose across five languages
+        run: python3 tests/test_math_lab_browser_content.py
       - name: Browser interactive locale round-trip (mobile viewport)
         run: python3 tests/test_math_lab_browser_interaction.py
       - name: Browser localized negative paths (12 cases)
