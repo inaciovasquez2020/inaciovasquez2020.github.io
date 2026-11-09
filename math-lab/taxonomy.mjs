@@ -67,6 +67,7 @@ export function suggestCategory(source){
   const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
   const rules=[
     ['mathematical-physics','spectral-physics',[
+      /(?:quantum[\s-]*hall|chern (?:number|character|class)|berry curvature|topological (?:band|charge pump)|photonic topological|spectral projector)/i,
       /chiral[\s-]*(?:vibrat|phonon)|circular dichroism|vibrational (?:inverse|IFE)|molecular vibrat|phonon inverse faraday/i,
       /normal[\s-]*mode|mass[\s-]*weight|hessian|DFTB\+?|degenerate vibrat|vibration[\s-]*induced magnetism/i,
       /\\(?:ddot|dot)\b|\\Gamma\b.*\\omega\b/i]],
