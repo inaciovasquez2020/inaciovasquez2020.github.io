@@ -13,11 +13,11 @@ export function explainError(raw,lang='en'){
  if(raw==='Internal checker failure; no verdict produced.')return errorText('internal',lang);
  if(raw==='Source and privacy confirmations required.')return errorText('confirm',lang);
  if(raw==='Theorem declaration must be nonempty and under 8192 characters.')return errorText('theorem',lang);
- const expected=/^Expected '([^']+)', received '([^']+)'\\.$/.exec(raw);
+ const expected=/^Expected '([^']+)', received '([^']+)'\.$/.exec(raw);
  if(expected)return errorText('diag38',lang,{expected:expected[1],actual:expected[2]});
- const term=/^Expected a polynomial term, received '([^']+)'\\.$/.exec(raw);
+ const term=/^Expected a polynomial term, received '([^']+)'\.$/.exec(raw);
  if(term)return errorText('diag39',lang,{actual:term[1]});
- const required=/^(.+) must be nonempty and under (\\d+) characters\\.$/.exec(raw);
+ const required=/^(.+) must be nonempty and under (\d+) characters\.$/.exec(raw);
  if(required&&Object.hasOwn(REQUEST_FIELD_NAMES.en,required[1]))return errorText('diag40',lang,{name:REQUEST_FIELD_NAMES[lang]?.[required[1]]||required[1],max:required[2]});
  // Explicit fallback: preserve unrecognized engine messages for auditing; never invent a verdict.
  return raw;
