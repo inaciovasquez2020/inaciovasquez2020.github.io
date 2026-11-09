@@ -37,6 +37,8 @@ jobs:
         run: python3 tests/test_math_lab_browser_interaction.py
       - name: Browser localized negative paths (12 cases)
         run: python3 tests/test_math_lab_browser_negative.py
+      - name: Six-language browser responsive layout checks
+        run: python3 tests/test_math_lab_browser_layout.py
 
       - name: Math Lab independent replay against pinned Python checker
         run: |
