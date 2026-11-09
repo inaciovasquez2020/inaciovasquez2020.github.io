@@ -14,6 +14,8 @@ export function fromPublishedClaim(raw){
  const id=str(raw.id,'id'), release=str(raw.release,'release');
  const links=arr(raw.links,'links',128).map(x=>object(x,'link'));
  const issues=[];
+ const supportedCodes=new Set(['link.checked','link.incomplete','link.unbuilt','link.axioms','link.suggested','link.other-route','link.definition','link.module-unbuilt','link.unlinked','formal.accepted','formal.review-pending','formal.open','formal.refuted']);
+ if(!supportedCodes.has(raw.status_code)||links.some(x=>!supportedCodes.has(x.status_code)))issues.push(finding('UNKNOWN_SOURCE_STATUS','Unrecognized evidence code; cannot infer proof status.'));
  if(raw.status_code!==CHECKED)issues.push(finding('SOURCE_NOT_PROVED','The audit does not report a checked Lean theorem.'));
  if(links.length!==1||links[0]?.status_code!==CHECKED||links[0]?.name===undefined)
    issues.push(finding('DECLARATION_MAPPING_NOT_UNIQUE','One independently identifiable checked link is required.'));
