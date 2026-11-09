@@ -34,20 +34,29 @@ window.addEventListener('load',async()=>{
   const seen=new Set();
   const violations=[];
   const untranslated=[];
+  const currentText=document.body.textContent;
   let tested=0;
   for(let node; (node=walker.nextNode());){
     if(!node.parentElement||node.parentElement.closest(excluded))continue;
     const text=node.nodeValue.trim().replaceAll('&amp;','&');
     if(!text||seen.has(text))continue;
     seen.add(text);
-    const target=Object.hasOwn(DICTIONARIES.en,text)?dict[text]:standard[text];
+    // data-i18n is authoritative when a legacy and extended dictionary share source text.
+    const owner=node.parentElement.closest('[data-i18n]');
+    const target=owner&&LOCALES.en[owner.dataset.i18n]===text
+      ? LOCALES[lang][owner.dataset.i18n]
+      : (Object.hasOwn(DICTIONARIES.en,text)?dict[text]:standard[text]);
     if(target!==undefined){
-      if(target===text)continue; // legitimate shared scientific term or cognate
-      // Document text includes labels and narration from all static page sections.
-      if(!document.body.innerText.includes(target))violations.push({source:text.slice(0,115),expected:target.slice(0,115)});
+      if(target===text)continue;
+      // Use textContent to include closed walkthroughs. Those controls are translated,
+      // but are intentionally absent from innerText until the dialog opens.
+      if(!currentText.includes(target)){
+        // These are initial placeholders intentionally replaced after initialization.
+        if(!node.parentElement.closest('#coverage-panel,#field-confirm-panel,#classification-origin,#result-area,#tour-position'))
+          violations.push({source:text.slice(0,115),expected:target.slice(0,115)});
+      }
       tested++;
     }else if(text.length>=30&&/[a-z]{4,}/.test(text)&&text.split(/\s+/).length>=6){
-      // Unmapped human language is a coverage omission; preserve mathematical sources.
       if(!/^(?:[A-Z][A-Z\s/ ·\-0-9]+|https?:\/\/)/.test(text))untranslated.push(text.slice(0,180));
     }
   }
