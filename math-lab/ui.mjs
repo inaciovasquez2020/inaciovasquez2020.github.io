@@ -27,9 +27,11 @@ function refreshFieldConfirmation(){
   const state=missing?'missing':confirmed?'confirmed':'review';
   $('field-confirm-panel').dataset.status=state;
   $('field-confirm-title').textContent=missing?'FIELD MISSING / REVIEW REQUIRED':confirmed?'FIELD CONFIRMED BY USER':'CONFIRM FIELD AND SUBCATEGORY';
-  $('field-confirm-summary').textContent='Current selection: '+chosen.field_label+' / '+chosen.subcategory_label+
-    '. '+(classificationOrigin==='AUTO'?'Automatically suggested; user review required.':'User selection or engine scope; review required.')+
-    ' Method: '+(method.value==='manuscript-audit'?'Manuscript structure only; no theorem verification.':'Exact univariate polynomial identity.');
+  $('field-confirm-summary').textContent=missing
+    ? 'Choose a specific Mathematical field and Subcategory above (not Other / Unclassified). Then tick this checkbox to enable the selected method. This confirms classification, not mathematical truth.'
+    : 'Current selection: '+chosen.field_label+' / '+chosen.subcategory_label+
+      '. '+(classificationOrigin==='AUTO'?'Automatically suggested; user review required.':'User selection or engine scope; review required.')+
+      ' Method: '+(method.value==='manuscript-audit'?'Manuscript structure only; no theorem verification.':'Exact univariate polynomial identity.');
   return !missing&&confirmed;
 }
 for(const id of ['claim-id','source-reference','assumptions']){
@@ -143,7 +145,10 @@ function updateCoverage(){
   $('coverage-description').textContent=c.description;
   const confirmed=refreshFieldConfirmation();
   $('run').disabled=!c.can_run||!confirmed;
-  $('run').title=!c.can_run?'No exact engine for the chosen field.':!confirmed?'Review and confirm the field and subcategory before continuing.':'';
+  const missing=fieldSelect.value==='other'||subcategorySelect.value==='unclassified';
+  $('run').title=missing?'Choose a specific field and subcategory above; Other / Unclassified cannot be confirmed.':
+    !c.can_run?'No exact engine for this category. Select Manuscript structure audit for a structural review.':
+    !confirmed?'Check the field confirmation box after reviewing the selected category.':'';
 }
 for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=f.label;fieldSelect.append(option);}
 fieldSelect.value='algebra';fillSubcategories('polynomial-identities');
