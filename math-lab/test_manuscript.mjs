@@ -30,7 +30,7 @@ test('proof blocks counted, comments stripped',()=>{
  assert.equal(r.findings.some(x=>x.type==='PROOF_SURFACE'),false);
 });
 test('untrusted LaTeX bounded with no theorem proof status',()=>{
- assert.throws(()=>auditManuscript('a'.repeat(65537)), TypeError);
+ assert.throws(()=>auditManuscript('a'.repeat(131073)), TypeError);
  assert.throws(()=>auditManuscript(''), TypeError);
  assert.throws(()=>auditManuscript('a\0b'), TypeError);
  const r=auditManuscript(String.raw`\section{Hello}\[x^2=1\]`);
@@ -107,4 +107,30 @@ test('source location anchor rejects stale offsets, digests and repeated-text re
  assert.equal(verifySourceAnchor(src,{...a,source_sha256:'0'.repeat(64)}),false);
  assert.equal(verifySourceAnchor('x'+src,a),false);
  assert.throws(()=>sourceAnchor(src,0,src.length+1),RangeError);
+});
+
+test('large manuscript retains exact source anchors and non-proof status',async()=>{
+ const {verifySourceAnchor,sha256Utf8}=await import('./source-location.mjs');
+ const source='\\title{Larger synthetic test}\n'+'% synthetic padding\n'.repeat(4650)+
+   '\\begin{theorem}Bounded structural review.\\end{theorem}\n'+
+   '\\begin{equation}a=b\\end{equation}\n';
+ assert.ok(source.length>65536&&source.length<131072);
+ const r=auditManuscript(source);
+ assert.equal(r.status,'NOT_VERIFIED');assert.equal(r.source_characters,source.length);
+ assert.equal(r.formal_kernel_verified,false);assert.equal(r.mathematical_truth_assessed,false);
+ assert.equal(r.extraction.source_sha256,sha256Utf8(source));
+ assert.equal(r.counts.theorems,1);assert.equal(r.counts.displayed_math,1);
+ assert.equal(verifySourceAnchor(source,r.claims[0].source_anchor),true);
+ assert.equal(verifySourceAnchor(source,r.displayed_equations[0].source_anchor),true);
+ assert.throws(()=>auditManuscript('x'.repeat(131073)),/MANUSCRIPT_SOURCE_TOO_LARGE/);
+ assert.throws(()=>auditManuscript(' '),/EMPTY_MANUSCRIPT_SOURCE/);
+});
+test('display inventory beyond 150 explicitly reports truncation',()=>{
+ const source=Array.from({length:151},(_,i)=>'\\begin{equation}x_'+i+'=x_'+i+'\\end{equation}').join('\n');
+ const r=auditManuscript(source);
+ assert.equal(r.extraction.display_blocks_truncated,true);
+ assert.equal(r.extraction.total_display_blocks,151);
+ assert.equal(r.extraction.extracted_display_blocks,150);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+ assert.ok(r.findings.some(f=>f.type==='DISPLAY_INVENTORY_TRUNCATED'));
 });

@@ -4,8 +4,9 @@
  * SHA-256 digests use UTF-8 with replacement for unpaired surrogates.
  * Does not read files, transmit source, or use a non-portable crypto backend.
  */
+import {MAX_MANUSCRIPT_BYTES} from './source-limits.mjs';
 export const SOURCE_ANCHOR_SCHEMA='vasquez.math-lab.source-anchor.v0.1';
-const LIMIT=65536,EXCERPT_LIMIT=240;
+const LIMIT=MAX_MANUSCRIPT_BYTES,EXCERPT_LIMIT=240;
 const H0=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
 const K=[
  0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
@@ -36,7 +37,9 @@ function utf8Bytes(source){
 const rotr=(v,b)=>(v>>>b)|(v<<(32-b));
 export function sha256Utf8(source){
  if(typeof source!=='string'||source.length>LIMIT)throw new RangeError('SHA-256 input must be a string of at most 65536 UTF-16 code units.');
- const bytes=utf8Bytes(source),size=Math.ceil((bytes.length+9)/64)*64;
+ const bytes=utf8Bytes(source);
+ if(bytes.length>LIMIT)throw new RangeError('SHA-256 source exceeds 128 KiB UTF-8.');
+ const size=Math.ceil((bytes.length+9)/64)*64;
  const block=new Uint8Array(size);
  block.set(bytes);block[bytes.length]=0x80;
  const bits=bytes.length*8;

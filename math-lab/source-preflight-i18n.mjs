@@ -45,7 +45,7 @@ const MESSAGES={
 };
 const REASONS={
   "INVALID_EXTENSION_OR_NAME": "Only safe .tex/.txt filenames are accepted.",
-  "FILE_SIZE": "File must contain 1–65,536 bytes.",
+  "FILE_SIZE": "Exact files: 1–65,536 bytes; manuscript files: 1–131,072 bytes.",
   "FILE_READ_FAILED": "Unable to read the file.",
   "BYTE_COUNT_MISMATCH": "Declared file size does not match read bytes.",
   "INVALID_UTF8": "File is not valid UTF-8.",

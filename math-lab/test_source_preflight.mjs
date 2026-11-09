@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {preflightFile,validateSourceText,SourcePreflightError,MAX_FILE_BYTES} from './source-preflight.mjs';
+import {preflightFile,validateSourceText,SourcePreflightError,MAX_FILE_BYTES,MAX_MANUSCRIPT_BYTES} from './source-preflight.mjs';
 import {preflightMessage} from './source-preflight-i18n.mjs';
 import {sha256Utf8} from './source-location.mjs';
 
@@ -54,4 +54,21 @@ test('six locales preserve machine codes',()=>{
   assert.ok(message.includes('INVALID_UTF8'));
  }
  assert.notEqual(preflightMessage('READY','fr'),preflightMessage('READY','de'));
+});
+
+test('large manuscript admitted while exact mode stays limited',async()=>{
+ const large='\\title{Synthetic manuscript}\n'+'% synthetic padding\n'.repeat(4900);
+ assert.ok(large.length>65536&&new TextEncoder().encode(large).byteLength<MAX_MANUSCRIPT_BYTES);
+ const r=await preflightFile(fakeFile(large),'manuscript-audit');
+ assert.equal(r.text,large);assert.equal(r.source_sha256,sha256Utf8(large));
+ assert.equal(r.source_uploaded,false);assert.equal(r.mathematical_truth_assessed,false);
+ assert.equal(MAX_FILE_BYTES,65536);assert.equal(MAX_MANUSCRIPT_BYTES,131072);
+ assert.throws(()=>validateSourceText(large),e=>e.code==='SOURCE_TOO_LARGE');
+ assert.equal(validateSourceText(large,'manuscript-audit'),large);
+ let read=false;
+ await rejects({name:'oversize.tex',size:MAX_MANUSCRIPT_BYTES+1,async arrayBuffer(){read=true;}},'manuscript-audit','FILE_SIZE');
+ assert.equal(read,false);
+ await rejects(fakeFile('π'.repeat(65537)),'manuscript-audit','FILE_SIZE');
+ assert.equal(validateSourceText('π'.repeat(65536),'manuscript-audit').length,65536);
+ await rejects(fakeFile('x'.repeat(65537)),'exact-polynomial','FILE_SIZE');
 });

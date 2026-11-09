@@ -4,6 +4,7 @@
  * Unsupported and malformed source is flagged, never silently certified.
  */
 import {sha256Utf8,sourceAnchor,verifySourceAnchor} from './source-location.mjs';
+import {MAX_MANUSCRIPT_BYTES,utf8Size} from './source-limits.mjs';
 const DISPLAY = new Set(['equation','equation*','align','align*','gather','gather*']);
 const MATH_ENV = /^(?:math|displaymath|multline\*?|split|flalign\*?|alignat\*?|eqnarray\*?|gathered|aligned)$/;
 const CLAIM_ENV = /^(?:definition|lemma|theorem|corollary|proposition)\*?$/;
@@ -19,7 +20,7 @@ export function removeLatexComments(tex) {
  }).join('\n');
 }
 export function inspectLatex(source) {
- if(typeof source!=='string'||source.length>65536)throw new RangeError('Source must be a bounded original string.');
+ if(typeof source!=='string'||source.length>MAX_MANUSCRIPT_BYTES||utf8Size(source)>MAX_MANUSCRIPT_BYTES)throw new RangeError('Source must be at most 128 KiB UTF-8.');
  const text=removeLatexComments(source);
  const source_sha256=sha256Utf8(source);
  const display=[],flags=[];let truncated=false;
