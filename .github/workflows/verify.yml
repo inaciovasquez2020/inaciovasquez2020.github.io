@@ -31,6 +31,19 @@ jobs:
           python3 tests/test_math_lab_navigation.py
           python3 -m py_compile math-lab/replay_casebook.py
 
+      - name: Browser localization smoke (installed Chrome, no downloads)
+        run: python3 tests/test_math_lab_browser_translation.py
+      - name: Browser main-page translated prose across five languages
+        run: python3 tests/test_math_lab_browser_content.py
+      - name: Rendered four-page translation parity across five languages
+        run: python3 tests/test_math_lab_browser_page_parity.py
+      - name: Browser interactive locale round-trip (mobile viewport)
+        run: python3 tests/test_math_lab_browser_interaction.py
+      - name: Browser localized negative paths (12 cases)
+        run: python3 tests/test_math_lab_browser_negative.py
+      - name: Six-language browser responsive layout checks
+        run: python3 tests/test_math_lab_browser_layout.py
+
       - name: Math Lab independent replay against pinned Python checker
         run: |
           python3 - <<'PY'
