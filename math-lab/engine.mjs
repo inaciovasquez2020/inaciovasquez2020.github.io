@@ -102,7 +102,7 @@ export function extractEquations(tex){
  const audit=inspectLatex(tex);
  // Exact mode must not reinterpret inventoried inline math as a stand-alone equality.
  // Inventory coverage is not an exact-polynomial admission decision.
- if(audit.inline.length)fail('SOURCE_REVIEW_REQUIRED: INLINE_MATH_UNSUPPORTED. Isolate a supported displayed or stand-alone equality before exact checking.');
+ if(audit.inline.length)fail('Unsupported LaTeX/Python syntax. Allowed: integer literals, x, +, -, multiplication, parentheses, and literal powers.');
  if(audit.flags.length)fail('SOURCE_REVIEW_REQUIRED: '+audit.flags[0].code+
    ' at line '+audit.flags[0].line+'. '+audit.flags[0].reason+
    ' Review or isolate a correctly delimited equation before exact checking.');
