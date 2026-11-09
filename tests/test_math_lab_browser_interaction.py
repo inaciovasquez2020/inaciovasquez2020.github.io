@@ -129,6 +129,43 @@ window.addEventListener('load',async()=>{
       if(await bibtex()!==bib)throw Error('BibTeX changed: '+lang);
     }
     if($('equation').value!=='Shannon entropy and mutual information')throw Error('citation source changed');
+    const drop=$('drop-area');
+    const upload=file=>{
+      const event=new Event('drop',{bubbles:true,cancelable:true});
+      Object.defineProperty(event,'dataTransfer',{value:{files:[file]}});
+      drop.dispatchEvent(event);
+    };
+    upload(new File([new Uint8Array([0xc3,0x28])],'rejected.tex'));
+    // File.arrayBuffer resolves asynchronously; require bounded completion, not one tick.
+    let blocked=false;
+    for(let attempt=0;attempt<100;attempt++){
+      if($('source-preflight-status').dataset.state==='BLOCKED'){blocked=true;break;}
+      await new Promise(done=>setTimeout(done,20));
+    }
+    if(!blocked)throw Error('INCOMPLETE_PRECHECK_TIMEOUT: '+$('source-preflight-status').dataset.state);
+    if($('source-reference').value!=='Manual entry'||$('equation').value!=='')throw Error('blocked input preserved stale provenance');
+    if(!$('run').disabled||$('field-confirm').checked)throw Error('blocked upload left verification enabled');
+    $('equation').value='x=x';$('equation').dispatchEvent(new Event('input',{bubbles:true}));
+    if($('source-preflight-status').dataset.state!=='MANUAL')throw Error('manual edit failed reset');
+    let finish;
+    const deferred=new File(['x=x'],'late.tex');
+    Object.defineProperty(deferred,'arrayBuffer',{value:()=>new Promise(done=>{finish=done;})});
+    upload(deferred);
+    if($('source-preflight-status').dataset.state!=='PENDING'||!$('run').disabled)throw Error('pending upload not gated');
+    $('equation').value='x=x+0';$('equation').dispatchEvent(new Event('input',{bubbles:true}));
+    finish(new TextEncoder().encode('x=x').buffer);
+    await new Promise(done=>setTimeout(done,0));
+    if($('source-preflight-status').dataset.state!=='MANUAL'||$('equation').value!=='x=x+0')throw Error('stale upload overwritten current text');
+    upload(new File(['x=x'],'good.tex'));
+    let admitted=false;
+    for(let attempt=0;attempt<100;attempt++){
+      if($('source-preflight-status').dataset.state==='READY'){admitted=true;break;}
+      if($('source-preflight-status').dataset.state==='BLOCKED')break;
+      await new Promise(done=>setTimeout(done,20));
+    }
+    if(!admitted)throw Error('INCOMPLETE_ADMISSION_TIMEOUT: '+$('source-preflight-status').dataset.state);
+    if($('source-reference').value!=='good.tex'||$('equation').value!=='x=x')throw Error('valid file admitted with incorrect provenance');
+    if($('field-confirm').checked||!$('run').disabled)throw Error('new file reused old consent');
     out.textContent=JSON.stringify({status:'PASS',languages:['en','pt-BR','es','en'],exact_status:'EXACT_CERTIFICATE_PASS',certificate_bytes:evidence.length,bibtex_bytes:bib.length,citation_languages:6});
   }catch(e){out.textContent=JSON.stringify({status:'FAIL',error:String(e.stack||e)});}
 });

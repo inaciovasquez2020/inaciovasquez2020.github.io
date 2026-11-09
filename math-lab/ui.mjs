@@ -7,6 +7,8 @@ import {findingUI} from './manuscript-findings-i18n.mjs';
 import {copyText} from './runtime-copy-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
+import {preflightFile,SourcePreflightError} from './source-preflight.mjs';
+import {preflightMessage} from './source-preflight-i18n.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
 import {SessionCasebook,validateManifest,buildExactCase,buildManuscriptCase,buildUnsupportedCase} from './improvement.mjs';
 const $=id=>document.getElementById(id);
@@ -14,6 +16,25 @@ const form=$('claim-form'),equation=$('equation'),area=$('result-area');
 const theme=$('theme'),picker=$('file-picker'),drop=$('drop-area'),method=$('method');
 const candidateControl=$('candidate-control'),candidateSelect=$('candidate-select'),fileStatus=$('file-status');
 let last=null,candidates=[],sourceName='manual input';
+let uploadVersion=0,admission='MANUAL',admissionReason='',importedName=null;
+function showAdmission(){
+ const node=$('source-preflight-status');
+ node.dataset.state=admission;
+ node.textContent=preflightMessage(admission,currentLanguage(),admissionReason);
+}
+function forgetFile(){
+ uploadVersion++;admission='MANUAL';admissionReason='';sourceName='manual input';
+ candidates=[];candidateControl.hidden=true;
+ if(importedName!==null&&$('source-reference').value===importedName)$('source-reference').value='Manual entry';
+ importedName=null;showAdmission();
+}
+function quarantineFile(){
+ forgetFile();$('source-reference').value='Manual entry';equation.value='';
+ last=null;lastRendered=null;lastErrorRaw=null;invalidateFieldConfirmation();
+ renderEmptyState('Source or field changed. Previous evidence cleared; re-run after confirmation.');
+ admission='PENDING';showAdmission();updateCoverage();return uploadVersion;
+}
+
 let lastRendered=null; // presentation cache only; never rerun mathematical verification
 let lastErrorRaw=null;
 let classificationOrigin='ENGINE_SCOPE', classificationLocked=false, classificationLastInput='';
@@ -32,7 +53,7 @@ function refreshFieldConfirmation(){
   const missing=chosen.field==='other'||chosen.subcategory==='unclassified';
   const confirmed=fieldConfirmation.checked&&confirmedSelectionKey===selectionKey();
   if(!confirmed)fieldConfirmation.checked=false;
-  fieldConfirmation.disabled=missing;
+  fieldConfirmation.disabled=missing||admission==='PENDING'||admission==='BLOCKED';
   const state=missing?'missing':confirmed?'confirmed':'review';
   $('field-confirm-panel').dataset.status=state;
   $('field-confirm-title').textContent=localMessage(missing?'confirmMissing':confirmed?'confirmYes':'confirmReview',currentLanguage());
@@ -42,7 +63,7 @@ function refreshFieldConfirmation(){
         field:fieldLabel(chosen.field_label,currentLanguage()),subcategory:fieldLabel(chosen.subcategory_label,currentLanguage()),
         origin:localMessage(classificationOrigin==='AUTO'?'autoOrigin':'selectedOrigin',currentLanguage()),
         method:localMessage(method.value==='manuscript-audit'?'manuscript':'exact',currentLanguage())});
-  return !missing&&confirmed;
+  return !missing&&confirmed&&admission!=='PENDING'&&admission!=='BLOCKED';
 }
 for(const id of ['claim-id','source-reference','assumptions']){
  $(id).addEventListener('input',()=>{invalidateFieldConfirmation();updateCoverage();});
@@ -156,7 +177,7 @@ function updateMethodPresentation(){
  $('equation-help').textContent=isMs?copyText('Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.',lang):copyText('Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.',lang);
  $('run').textContent=isMs?copyText('Analyze manuscript structure →',lang):copyText('Run exact verification →',lang);
 }
-function updateMethod(){const isMs=method.value==='manuscript-audit';
+function updateMethod(){forgetFile();const isMs=method.value==='manuscript-audit';
   updateMethodPresentation();
   classificationLocked=false;classificationOrigin=isMs?'UNCLASSIFIED':'ENGINE_SCOPE';
   $('presets').hidden=isMs;
@@ -184,7 +205,7 @@ function updateCoverage(){
   const selected=category(fieldSelect.value,subcategorySelect.value);
   $('coverage-description').textContent=localMessage(c.status==='EXACT_SUPPORTED'?'coverageExact':c.status==='STRUCTURAL_ONLY'?'coverageStructural':'coverageMissing',currentLanguage(),{field:fieldLabel(selected.field_label,currentLanguage()),subcategory:fieldLabel(selected.subcategory_label,currentLanguage())});
   const confirmed=refreshFieldConfirmation();
-  $('run').disabled=!c.can_run||!confirmed;
+  $('run').disabled=!c.can_run||!confirmed||admission==='PENDING'||admission==='BLOCKED';
   const missing=fieldSelect.value==='other'||subcategorySelect.value==='unclassified';
   $('run').title=missing?localMessage('runMissing',currentLanguage()):
     !c.can_run?localMessage('runUnsupported',currentLanguage()):
@@ -208,7 +229,7 @@ function applySuggestedCategory({force=false}={}){
 }
 let categorizationTimer=null;
 equation.addEventListener('input',()=>{
-  invalidateFieldConfirmation();updateCoverage();
+  forgetFile();invalidateFieldConfirmation();updateCoverage();
   if(method.value!=='manuscript-audit')return;
   clearTimeout(categorizationTimer);
   categorizationTimer=setTimeout(()=>applySuggestedCategory(),250);
@@ -216,10 +237,10 @@ equation.addEventListener('input',()=>{
 fieldSelect.addEventListener('change',()=>{fillSubcategories();classificationLocked=true;classificationOrigin='MANUAL';$('suggest-note').textContent='Manual override: mathematical field not independently verified.';invalidateFieldConfirmation();updateProvenance();updateCoverage();});
 subcategorySelect.addEventListener('change',()=>{classificationLocked=true;classificationOrigin='MANUAL';invalidateFieldConfirmation();updateCoverage();$('suggest-note').textContent='Manual override: mathematical field not independently verified.';updateProvenance();});
 $('suggest-category').addEventListener('click',()=>{classificationLocked=false;classificationLastInput='';applySuggestedCategory({force:true});});
-updateMethodPresentation();refreshEmptyState();renderQualityStatus();updateProvenance();updateCoverage();
+updateMethodPresentation();refreshEmptyState();renderQualityStatus();showAdmission();updateProvenance();updateCoverage();
 method.addEventListener('change',updateMethod);
-function setExample(kind){invalidateFieldConfirmation();let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;renderEmptyState('Ready to verify the selected example.');equation.focus();}
-form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory();if(!refreshFieldConfirmation()){renderError(errorText('fieldRequired','en'));return;}let m;
+function setExample(kind){forgetFile();invalidateFieldConfirmation();let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;renderEmptyState('Ready to verify the selected example.');equation.focus();}
+form.addEventListener('submit',e=>{e.preventDefault();if(admission==='PENDING'||admission==='BLOCKED'){renderError('SOURCE_PREFLIGHT_BLOCKED: input not admitted.');return;}if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory();if(!refreshFieldConfirmation()){renderError(errorText('fieldRequired','en'));return;}let m;
   try{
     m=claimManifest();
     const c=coverage(m.field,m.subcategory,method.value);
@@ -243,7 +264,7 @@ form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscr
     renderError(message);
   }
 });
-$('reset').addEventListener('click',()=>{if(method.value==='manuscript-audit'){invalidateFieldConfirmation();equation.value='';sourceName='manual input';area.replaceChildren();}else setExample('identity');});
+$('reset').addEventListener('click',()=>{forgetFile();if(method.value==='manuscript-audit'){invalidateFieldConfirmation();equation.value='';sourceName='manual input';area.replaceChildren();}else setExample('identity');});
 for(const b of document.querySelectorAll('[data-example]'))b.addEventListener('click',()=>setExample(b.dataset.example));
 theme.addEventListener('change',()=>{document.documentElement.dataset.theme=theme.value;});
 function showCandidates(list,name){invalidateFieldConfirmation();candidates=list;sourceName=name;candidateSelect.replaceChildren();candidateControl.hidden=false;
@@ -251,11 +272,30 @@ function showCandidates(list,name){invalidateFieldConfirmation();candidates=list
   fileStatus.textContent=`${name}: ${list.length} equation candidate${list.length===1?'':'s'} found. Only the selected equation is evaluated.`;
   equation.value=list[0];if(method.value==='manuscript-audit')applySuggestedCategory({force:true});renderEmptyState('Source loaded. Review the selected equation and run verification.');
 }
-async function readFile(f){try{if(!f) return;if(!/\.(tex|txt)$/i.test(f.name))throw new UnsupportedClaim('Only .tex and .txt files are accepted.');if(f.size>65536)throw new UnsupportedClaim('File exceeds the 64 KiB limit; use a smaller excerpt.');
-  const text=await f.text();if($('source-reference').value==='Manual entry')$('source-reference').value=f.name;if(text.includes('\0'))throw new UnsupportedClaim('Input contains a null byte.');
-  if(method.value==='manuscript-audit'){invalidateFieldConfirmation();equation.value=text;sourceName=f.name;candidateControl.hidden=true;fileStatus.textContent='';applySuggestedCategory();renderEmptyState('File loaded locally. Select Analyze manuscript structure.');return;}
-  const list=extractEquations(text);if(!list.length)throw new UnsupportedClaim('No displayed equality found. Paste a single polynomial equation instead.');showCandidates(list,f.name);
- }catch(err){renderError(err instanceof UnsupportedClaim?err.message:'Unable to read the source file.');candidateControl.hidden=true;}}
+async function readFile(f){
+ if(!f)return;
+ const version=quarantineFile(),methodAtStart=method.value;
+ try{
+  const result=await preflightFile(f,methodAtStart);
+  if(version!==uploadVersion||method.value!==methodAtStart)return;
+  admission=result.status;admissionReason='';sourceName=result.filename;
+  $('source-reference').value=result.filename;importedName=result.filename;
+  if(methodAtStart==='manuscript-audit'){
+   equation.value=result.text;candidateControl.hidden=true;fileStatus.textContent='';
+   classificationLastInput='';applySuggestedCategory();
+   renderEmptyState('File loaded locally. Select Analyze manuscript structure.');
+  }else showCandidates(result.candidates,result.filename);
+  invalidateFieldConfirmation();showAdmission();updateCoverage();
+ }catch(error){
+  if(version!==uploadVersion||method.value!==methodAtStart)return;
+  admission='BLOCKED';admissionReason=error instanceof SourcePreflightError?error.code:'INTERNAL_PREFLIGHT_FAILURE';
+  last=null;lastRendered=null;lastErrorRaw=null;candidateControl.hidden=true;candidates=[];
+  sourceName='manual input';importedName=null;
+  equation.value='';$('source-reference').value='Manual entry';
+  renderEmptyState('Source or field changed. Previous evidence cleared; re-run after confirmation.');
+  invalidateFieldConfirmation();showAdmission();updateCoverage();
+ }
+}
 picker.addEventListener('change',()=>readFile(picker.files?.[0]));
 candidateSelect.addEventListener('change',()=>{invalidateFieldConfirmation();equation.value=candidates[Number(candidateSelect.value)]||'';last=null;renderEmptyState('Equation selected. Review before checking.');});
 for(const type of ['dragenter','dragover'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragover');});
@@ -281,7 +321,7 @@ function refreshTaxonomyDisplay(){
 // Language changes re-render only from the already-computed immutable result objects.
 // Never invoke verifyEquation, auditManuscript or change casebook state on localization.
 $('ui-language')?.addEventListener('change',()=>{
- refreshTaxonomyDisplay();refreshEmptyState();renderQualityStatus();
+ showAdmission();refreshTaxonomyDisplay();refreshEmptyState();renderQualityStatus();
  if(!lastRendered){if(lastErrorRaw!==null)renderError(lastErrorRaw);return;}
  const {kind,record,entry}=lastRendered;
  if(kind==='exact')renderResult(record,entry);
