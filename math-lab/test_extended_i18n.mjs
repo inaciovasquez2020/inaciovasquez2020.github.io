@@ -197,3 +197,26 @@ test('all static engine fail diagnostics have six-language presentation mappings
  const found=[...formal.matchAll(/required\(d\.\w+,'([^']+)',\d+\)/g)].map(m=>m[1]);
  for(const name of found)assert.ok(names.includes(name),'unknown unlocalized formal field '+name);
 });
+
+test('nine extraction warning explanations translate without touching code, excerpt, or line number',async()=>{
+ const {FLAG_REASONS,flagText}=await import('./manuscript-flags-i18n.mjs');
+ const {inspectLatex}=await import('./latex-scan.mjs');
+ assert.equal(Object.keys(FLAG_REASONS.en).length,9);
+ for(const lang of ['en','es','pt-BR','zh-Hans','fr','de']){
+  assert.deepEqual(Object.keys(FLAG_REASONS[lang]),Object.keys(FLAG_REASONS.en));
+  assert.ok(Object.values(FLAG_REASONS[lang]).every(x=>typeof x==='string'&&x.length>0));
+ }
+ const raw=String.raw`\\begin{theorem}x\\end{theorem} $x$`;
+ const result=inspectLatex(raw);
+ assert.ok(result.flags.length);
+ for(const flag of result.flags){
+   const before=JSON.stringify(flag),label=flagText(flag.reason,'de');
+   assert.ok(label);
+   assert.equal(JSON.stringify(flag),before);
+   assert.equal(flagText(flag.reason,'en'),flag.reason);
+   assert.equal(flag.mathematical_verdict,'NOT_VERIFIED');
+ }
+ const src=await (await import('node:fs/promises')).readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.ok(src.includes("flagText(flag.reason,currentLanguage())"));
+ assert.ok(src.includes("flag.source_excerpt"));
+});
