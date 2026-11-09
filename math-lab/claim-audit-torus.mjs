@@ -7,17 +7,18 @@
  */
 export const CLAIM_AUDIT_PROFILE='vasquez.math-lab.claim-audit.torus-line-bundle.v0.1';
 const MAX_ABS=1000000000n;
+const MAX_EXPECTED=2n*MAX_ABS*MAX_ABS;
 const OPS=Object.freeze(['c2_integral','ch2_integral','c1_square_integral']);
 const FIELDS=new Set(['profile','n_x','n_y','operator','expected']);
 function requireExactKeys(input){
  if(input===null||typeof input!=='object'||Array.isArray(input))throw new TypeError('CLAIM_AUDIT_INVALID_INPUT');
  if(Object.keys(input).some(k=>!FIELDS.has(k))||Object.keys(input).length!==FIELDS.size)throw new TypeError('CLAIM_AUDIT_INVALID_KEYS');
 }
-function integer(value,name){
- if(typeof value!=='string'||! /^(?:0|-?[1-9][0-9]{0,9})$/.test(value))
+function integer(value,name,max=MAX_ABS){
+ if(typeof value!=='string'||! /^(?:0|-?[1-9][0-9]{0,18})$/.test(value))
   throw new TypeError('CLAIM_AUDIT_INVALID_INTEGER_'+name);
  const n=BigInt(value);
- if(n>MAX_ABS||n< -MAX_ABS)throw new RangeError('CLAIM_AUDIT_INTEGER_LIMIT_'+name);
+ if(n>max||n< -max)throw new RangeError('CLAIM_AUDIT_INTEGER_LIMIT_'+name);
  return n;
 }
 function multiply(x,y){
@@ -33,7 +34,7 @@ export function auditTorusLineBundle(input){
  requireExactKeys(input);
  if(input.profile!==CLAIM_AUDIT_PROFILE||!OPS.includes(input.operator))
   throw new TypeError('CLAIM_AUDIT_UNSUPPORTED_PROFILE_OR_OPERATOR');
- const nx=integer(input.n_x,'NX'),ny=integer(input.n_y,'NY'),expected=integer(input.expected,'EXPECTED');
+ const nx=integer(input.n_x,'NX'),ny=integer(input.n_y,'NY'),expected=integer(input.expected,'EXPECTED',MAX_EXPECTED);
  const firstChern=[0n,nx,ny,0n];
  const square=multiply(firstChern,firstChern);
  // ch_2=c_1^2/2 for a line bundle; the degree-four coefficient is even here.
