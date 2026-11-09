@@ -9,7 +9,7 @@ For an external tensor-product **complex line bundle** with `c1=n_x*a+n_y*b`, th
 - `ch2_integral=n_x*n_y` (degree-four component of Chern character)
 - `c1_square_integral=2*n_x*n_y`
 
-All integers are accepted as decimal **strings**, bounded by absolute value 10^9 for each submitted input, and computed using exact BigInt arithmetic. The expected value cap is also 10^9, though the computed value may be larger.
+All values are decimal **strings** and are evaluated using exact BigInt arithmetic. The two input Chern numbers are bounded by absolute value 10^9 each. The submitted expected value is bounded by absolute value 2 × 10^18, matching the largest possible magnitude of the computed outputs.
 
 ## Example
 ```js
