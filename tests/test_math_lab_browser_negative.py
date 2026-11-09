@@ -75,8 +75,8 @@ window.addEventListener('load',async()=>{
     if($('equation').value!=='')fail('empty manuscript source unexpectedly changed');
     change('en');
     if(!message().includes('Paste LaTeX manuscript text before analyzing.'))fail('manuscript English restoration failed');
-    // Accepted manuscript with unsupported inline mathematics: translate the explanation, never the excerpt.
-    const source=String.raw`\(x\)`;
+    // Accepted manuscript with an unsupported display environment: translate the warning, never the excerpt.
+    const source=String.raw`\begin{split}x=x\end{split}`;
     $('equation').value=source;
     $('equation').dispatchEvent(new Event('input',{bubbles:true}));
     $('field-confirm').click();
@@ -86,11 +86,11 @@ window.addEventListener('load',async()=>{
     const excerpt=document.querySelector('#result-area .flagged-source')?.textContent;
     const flagReason=document.querySelector('#result-area .audit-claims .audit-item.review p')?.textContent||'';
     if(!excerpt||!flagReason)fail('manuscript extraction warning not rendered');
-    if(lang!=='en'&&flagReason.includes('Inline mathematics is not included'))fail('manuscript warning untranslated');
+    if(lang!=='en'&&flagReason.includes('This environment is not extracted by the current inventory.'))fail('manuscript warning untranslated');
     if(!document.querySelector('#result-area .verdict-top')?.textContent.includes('NOT_VERIFIED'))fail('manuscript status changed');
     change('en');
     const englishReason=document.querySelector('#result-area .audit-claims .audit-item.review p')?.textContent||'';
-    if(!englishReason.includes('Inline mathematics is not included'))fail('manuscript warning English restoration failed');
+    if(!englishReason.includes('This environment is not extracted by the current inventory.'))fail('manuscript warning English restoration failed');
     if(document.querySelector('#result-area .flagged-source')?.textContent!==excerpt)fail('flagged source excerpt changed');
     if($('equation').value!==source)fail('manuscript source altered during translation');
     out.textContent=JSON.stringify({status:'PASS',test:'exact-and-manuscript-negative-and-extraction',language:lang});
