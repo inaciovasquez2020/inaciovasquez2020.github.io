@@ -23,7 +23,13 @@ export function inspectLatex(source) {
  if(typeof source!=='string'||source.length>MAX_MANUSCRIPT_BYTES||utf8Size(source)>MAX_MANUSCRIPT_BYTES)throw new RangeError('Source must be at most 128 KiB UTF-8.');
  const text=removeLatexComments(source);
  const source_sha256=sha256Utf8(source);
- const display=[],flags=[];let truncated=false;
+ const display=[],inline=[],flags=[];let truncated=false;
+ const MAX_INLINE=150;
+ function inventoryInline(x,end,kind){
+   if(x.invalid)return;
+   if(inline.length>=MAX_INLINE){flag('INLINE_INVENTORY_TRUNCATED','Inline math inventory is capped at 150 entries.',x.pos,end);return;}
+   inline.push({start:x.pos,end,content:text.slice(x.contentStart,end-(kind==='inline-paren'?2:1)),line:lineno(x.pos),kind,source_anchor:sourceAnchor(source,x.pos,end,source_sha256)});
+ }
  const lineno=pos=>1+text.slice(0,pos).split('\n').length-1;
  function flag(code,reason,pos,to=pos+MAX_EXCERPT) {
    if(flags.length>=MAX_FLAGS){truncated=true;return;}
@@ -40,7 +46,7 @@ export function inspectLatex(source) {
    const t=m[0],pos=m.index;
    if(m[1]==='begin'){
      const name=m[2];
-     if(MATH_ENV.test(name)||name.endsWith('*')&&CLAIM_ENV.test(name)){
+     if((MATH_ENV.test(name)&&!(name==='aligned'&&stack.some(x=>x.kind==='bracket'||x.kind==='display'||x.kind==='dollar-display')))||name.endsWith('*')&&CLAIM_ENV.test(name)){
        flag(MATH_ENV.test(name)?'UNSUPPORTED_DISPLAY_ENVIRONMENT':'UNSUPPORTED_CLAIM_ENVIRONMENT',
          'This environment is not extracted by the current inventory.',pos);
      }
@@ -61,7 +67,7 @@ export function inspectLatex(source) {
      const kind=t==='\\['?'bracket':t==='$$'?'dollar-display':t==='\\('?'inline-paren':'inline-dollar';
      // A closing $ is indistinguishable from opening $; toggle when on stack.
      if(t==='$'&&stack.at(-1)?.kind==='inline-dollar'){
-       const x=stack.pop();flag('INLINE_MATH_NOT_INVENTORIED','Inline dollar mathematics is not included in displayed equations.',x.pos,pos+1);
+       const x=stack.pop();inventoryInline(x,pos+1,'inline-dollar');
      }else if(t==='$$'&&stack.at(-1)?.kind==='dollar-display'){
        const x=stack.pop();flag('UNSUPPORTED_DOLLAR_DISPLAY','A $ display is not inventoried by this structural parser.',x.pos,pos+2);
      }else{
@@ -77,7 +83,7 @@ export function inspectLatex(source) {
      }else{
        const x=stack.pop();
        if(expected==='bracket'&&!x.invalid)display.push({start:x.pos,end:pos+2,content:text.slice(x.contentStart,pos),line:lineno(x.pos),kind:'bracket',source_anchor:sourceAnchor(source,x.pos,pos+2,source_sha256)});
-       else if(expected==='inline-paren')flag('INLINE_MATH_NOT_INVENTORIED','Inline mathematics is not included in the displayed equation count.',x.pos,pos+2);
+       else if(expected==='inline-paren')inventoryInline(x,pos+2,'inline-paren');
      }
    }
  }
@@ -86,9 +92,10 @@ export function inspectLatex(source) {
    flag(code,'Opening LaTeX delimiter/environment has no matching closure.',x.pos);
  }
  display.sort((a,b)=>a.start-b.start);
+ inline.sort((a,b)=>a.start-b.start);
  flags.sort((a,b)=>a.line-b.line);
- for(const item of [...flags,...display])if(!verifySourceAnchor(source,item.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
- return {text,source_sha256,display,flags,flags_truncated:truncated,
+ for(const item of [...flags,...display,...inline])if(!verifySourceAnchor(source,item.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
+ return {text,source_sha256,display,inline,flags,flags_truncated:truncated,
    status:flags.length?'REVIEW_REQUIRED':'EXTRACTION_NOT_EXHAUSTIVELY_VERIFIED',
    note:'Heuristic check only: no flags does not prove complete LaTeX parsing.'};
 }
