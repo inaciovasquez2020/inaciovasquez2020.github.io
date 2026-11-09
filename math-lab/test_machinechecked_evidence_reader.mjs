@@ -77,3 +77,13 @@ test('real upstream pinned audit: Shape.decided reports Lean-checked but corresp
  assert(result.issues.some(x=>x.code==='SOURCE_NOT_VERIFIED'));
  assert(result.issues.some(x=>x.code==='CORRESPONDENCE_NOT_REVIEWED'));
 });
+
+test('forged precomputed integrity metadata cannot be displayed as locally checked',()=>{
+ const raw={schema:'vasquez.math-lab.machinechecked-evidence@1',
+  mode:'READ_ONLY_UNTRUSTED_EXTERNAL_REPORT',claims:[{
+    claim_id:'FAKE',reported_status_code:'link.checked',lean_declaration:'False.elim',
+    verification_verdict:'NOT_VERIFIED_BY_ADAPTER',
+    local_integrity:{state:'NO_INTEGRITY_CONFLICT_FOUND',correspondence:'NOT_ESTABLISHED_BY_ADAPTER'},
+    issues:[]}]};
+ assert.throws(()=>normalizeReport(raw),/precomputed|untrusted|unsupported/i);
+});
