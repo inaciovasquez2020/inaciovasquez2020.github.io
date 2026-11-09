@@ -70,11 +70,11 @@ window.addEventListener('load',async()=>{
     if(!$('field-confirm').checked)fail('language switch reset field confirmation');
     $('claim-form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
     const manuscriptError=message();
-    if(lang!=='en'&&manuscriptError.includes('Manuscript must contain 1'))fail('manuscript error untranslated: '+lang);
+    if(lang!=='en'&&manuscriptError.includes('Paste LaTeX manuscript text before analyzing.'))fail('manuscript error untranslated: '+lang);
     if(!title())fail('manuscript error missing');
     if($('equation').value!=='')fail('empty manuscript source unexpectedly changed');
     change('en');
-    if(!message().includes('Manuscript must contain 1'))fail('manuscript English restoration failed');
+    if(!message().includes('Paste LaTeX manuscript text before analyzing.'))fail('manuscript English restoration failed');
     // Accepted manuscript with unsupported inline mathematics: translate the explanation, never the excerpt.
     const source=String.raw`\(x\)`;
     $('equation').value=source;

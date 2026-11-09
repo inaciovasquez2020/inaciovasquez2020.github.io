@@ -69,3 +69,10 @@ test('LaTeX comments are not matching evidence and BibTeX escapes publisher symb
  assert.deepEqual(suggestCitations('% SAT-hardness and computational complexity'),[]);
  assert.ok(formatBibtex(REFERENCES.find(x=>x.key==='CoverThomas2006')).includes('Wiley \\& Sons'));
 });
+
+test('citation and arXiv identifiers are scanned past the former 64 KiB limit',()=>{
+ const source='x'.repeat(75000)+' SAT-hardness arXiv:2601.00113v2';
+ assert.ok(suggestCitations(source).some(x=>x.key==='Cook1971'));
+ const ids=detectArxivIdentifiers(source);
+ assert.equal(ids.length,1);assert.equal(ids[0].id,'2601.00113v2');
+});

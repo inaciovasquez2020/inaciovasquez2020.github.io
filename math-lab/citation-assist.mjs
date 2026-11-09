@@ -1,6 +1,7 @@
 /* Offline curated metadata checked against original publisher or DOI landing pages.
  * Relevance matching is not a claim-support assessment or proof certificate.
  */
+import {MAX_MANUSCRIPT_BYTES} from './source-limits.mjs';
 export const CITE_LIBRARY_VERSION='vasquez.citation-assist.v0.2';
 export const REFERENCES=Object.freeze([
  {key:'EinsteinRosen1935',authors:'Albert Einstein and Nathan Rosen',title:'The Particle Problem in the General Theory of Relativity',journal:'Physical Review',year:1935,volume:'48',pages:'73--77',doi:'10.1103/PhysRev.48.73',
@@ -57,7 +58,7 @@ export function formatBibtex(ref){
 }
 export function suggestCitations(source){
  if(typeof source!=='string'||!source.trim())return [];
- const trimmed=stripLatexComments(source.slice(0,65536));
+ const trimmed=stripLatexComments(source.slice(0,MAX_MANUSCRIPT_BYTES));
  // Bibliography entries are not, by themselves, relevance evidence.
  const body=trimmed.replace(/\\begin\{thebibliography\}(?:\{[^}]*\})?[\s\S]*?\\end\{thebibliography\}/g,' ')
     .replace(/\\bibliography\{[^}]*\}/g,' ');
@@ -73,7 +74,7 @@ export function suggestCitations(source){
 }
 export function detectArxivIdentifiers(source){
  if(typeof source!=='string')return [];
- const text=source.slice(0,65536),seen=new Set(),out=[];
+ const text=source.slice(0,MAX_MANUSCRIPT_BYTES),seen=new Set(),out=[];
  const pattern=/(?:arXiv:\s*|https?:\/\/(?:www\.)?arxiv\.org\/(?:abs|pdf)\/)(\d{4}\.\d{4,5}(?:v[1-9]\d*)?)(?![A-Za-z0-9.])/gi;
  for(const match of text.matchAll(pattern)){
    const id=match[1],yy=Number(id.slice(0,2)),month=Number(id.slice(2,4)),digits=id.split('.')[1].match(/^\d+/)[0].length;
