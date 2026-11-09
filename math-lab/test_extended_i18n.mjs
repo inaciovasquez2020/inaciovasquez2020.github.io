@@ -230,7 +230,7 @@ test('nine extraction warning explanations translate without touching code, exce
   assert.deepEqual(Object.keys(FLAG_REASONS[lang]),Object.keys(FLAG_REASONS.en));
   assert.ok(Object.values(FLAG_REASONS[lang]).every(x=>typeof x==='string'&&x.length>0));
  }
- const raw=String.raw`\\begin{theorem}x\\end{theorem} $x$`;
+ const raw=String.raw`\\begin{theorem}x\\end{theorem} \begin{split}a=b\end{split}`;
  const result=inspectLatex(raw);
  assert.ok(result.flags.length);
  for(const flag of result.flags){
