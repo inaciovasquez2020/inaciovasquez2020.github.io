@@ -61,7 +61,7 @@ function lex(s) {
   const out=[]; for(let i=0;i<s.length;) {
     let c=s[i];if(/\s/.test(c)){i++;continue;}
     if(/[0-9]/.test(c)){let j=i+1;while(j<s.length&&/[0-9]/.test(s[j]))j++;
-      const t=s.slice(i,j);if(out.at(-1)?.type==='num')fail('Adjacent numeric literals require an explicit operator.');const val=BigInt(t);if(val>MAX_LITERAL)fail('Integer literal exceeds 1,000,000.');
+      const t=s.slice(i,j);if(out.at(-1)?.type==='num')fail('Unsupported LaTeX/Python syntax. Allowed: integer literals, x, +, -, multiplication, parentheses, and literal powers.');const val=BigInt(t);if(val>MAX_LITERAL)fail('Integer literal exceeds 1,000,000.');
       out.push({type:'num',value:val});i=j;continue;}
     if(c==='x'){out.push({type:'x'});i++;continue;}
     if('+-*^()'.includes(c)){out.push({type:c});i++;continue;}
