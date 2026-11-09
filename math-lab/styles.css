@@ -97,3 +97,12 @@ html[data-theme=blueprint]{--canvas:#eef3f9;--paper:#fff;--ink:#132c52;--muted:#
 .citation-check{display:flex;gap:10px;align-items:center;margin-top:11px;font-size:12px}
 /* Standalone formal request beta. Reuses existing guide styling. */
 .formal-request-form .field{margin:15px 0}.formal-request-form textarea{width:100%;max-width:100%;box-sizing:border-box}.formal-request-form input:not([type=checkbox]),.formal-request-form select{width:100%;max-width:100%;box-sizing:border-box}
+
+/* GitHub-hosted feedback: only navigates after a user click. */
+.feedback-panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:25px;margin:28px 0;max-width:900px}
+.feedback-panel h2{font:400 27px Georgia,serif;margin:7px 0 13px}
+.feedback-panel p{font-size:13px;line-height:1.75;color:var(--muted);max-width:780px}
+.feedback-link{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:11px 15px;margin:4px 0 7px;font-weight:650;font-size:13px;color:var(--ink);background:var(--canvas);text-decoration:underline;text-underline-offset:3px}
+.feedback-link:hover,.feedback-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.feedback-panel .feedback-note{font-size:12px}
+@media(max-width:700px){.feedback-panel{padding:17px}.feedback-panel h2{font-size:23px}.feedback-link{max-width:100%;box-sizing:border-box}}
