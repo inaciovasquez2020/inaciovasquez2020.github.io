@@ -70,3 +70,41 @@ test('malformed display environment is rejected by structural scanner',()=>{
  assert.equal(r.extraction.status,'REVIEW_REQUIRED');
  assert.ok(r.extraction.flags.some(x=>x.code==='MISMATCHED_ENVIRONMENT'));
 });
+
+test('comment masking preserves original offsets and exact anchor digest',async()=>{
+ const {verifySourceAnchor,sha256Utf8}=await import('./source-location.mjs');
+ const src=String.raw`% \begin{theorem} fake \end{theorem}
+\begin{theorem} Valid 😀π \end{theorem}
+\(x+y\) % comment
+\begin{equation}x=x\end{equation}`;
+ const r=auditManuscript(src);
+ assert.equal(r.counts.theorems,1);
+ assert.equal(r.claims[0].source_anchor.start_utf16,src.indexOf('\\begin{theorem}',src.indexOf('\\begin{theorem}')+1));
+ for(const item of [...r.claims,...r.displayed_equations,...r.extraction.flags]){
+  assert.equal(verifySourceAnchor(src,item.source_anchor),true);
+  assert.equal(verifySourceAnchor(src+' ',item.source_anchor),false);
+ }
+ assert.equal(r.extraction.source_sha256,sha256Utf8(src));
+});
+test('source positions survive CRLF and escaped percent comments',async()=>{
+ const {verifySourceAnchor}=await import('./source-location.mjs');
+ const src=String.raw`\% retained percent`+'\r\n'+String.raw`% comment \begin{lemma} false \end{lemma}`+'\r\n'+String.raw`\begin{lemma} actual \end{lemma}`;
+ const r=auditManuscript(src);
+ assert.equal(r.counts.lemmas,1);
+ assert.equal(r.claims[0].line,3);
+ assert.equal(r.claims[0].source_anchor.line_start,3);
+ assert.equal(verifySourceAnchor(src,r.claims[0].source_anchor),true);
+});
+test('source location anchor rejects stale offsets, digests and repeated-text relocation',async()=>{
+ const {sourceAnchor,verifySourceAnchor,sha256Utf8}=await import('./source-location.mjs');
+ assert.equal(sha256Utf8('abc'),'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
+ assert.equal(sha256Utf8('café\n'),'7b49b9e063bd91a4f9252b413261f5557b9c570aa61516989499f64a62dbcdd6');
+ const src='prefix\n\\(x=x\\)\n\\(x=x\\)';
+ const first=src.indexOf('\\(x=x\\)'),second=src.lastIndexOf('\\(x=x\\)');
+ const a=sourceAnchor(src,first,first+7);
+ assert.ok(verifySourceAnchor(src,a));
+ assert.equal(verifySourceAnchor(src,{...a,start_utf16:second,end_utf16:second+7}),false);
+ assert.equal(verifySourceAnchor(src,{...a,source_sha256:'0'.repeat(64)}),false);
+ assert.equal(verifySourceAnchor('x'+src,a),false);
+ assert.throws(()=>sourceAnchor(src,0,src.length+1),RangeError);
+});
