@@ -36,10 +36,12 @@ function refreshFieldConfirmation(){
   const state=missing?'missing':confirmed?'confirmed':'review';
   $('field-confirm-panel').dataset.status=state;
   $('field-confirm-title').textContent=localMessage(missing?'confirmMissing':confirmed?'confirmYes':'confirmReview',currentLanguage());
-  $('field-confirm-summary').textContent=localMessage('selection',currentLanguage(),{
-    field:fieldLabel(chosen.field_label,currentLanguage()),subcategory:fieldLabel(chosen.subcategory_label,currentLanguage()),
-    origin:localMessage(classificationOrigin==='AUTO'?'autoOrigin':'selectedOrigin',currentLanguage()),
-    method:localMessage(method.value==='manuscript-audit'?'manuscript':'exact',currentLanguage())});
+  $('field-confirm-summary').textContent=missing
+    ? localMessage('confirmMissingHelp',currentLanguage())
+    : localMessage('selection',currentLanguage(),{
+        field:fieldLabel(chosen.field_label,currentLanguage()),subcategory:fieldLabel(chosen.subcategory_label,currentLanguage()),
+        origin:localMessage(classificationOrigin==='AUTO'?'autoOrigin':'selectedOrigin',currentLanguage()),
+        method:localMessage(method.value==='manuscript-audit'?'manuscript':'exact',currentLanguage())});
   return !missing&&confirmed;
 }
 for(const id of ['claim-id','source-reference','assumptions']){
@@ -158,7 +160,10 @@ function updateCoverage(){
   $('coverage-description').textContent=localMessage(c.status==='EXACT_SUPPORTED'?'coverageExact':c.status==='STRUCTURAL_ONLY'?'coverageStructural':'coverageMissing',currentLanguage(),{field:fieldLabel(selected.field_label,currentLanguage()),subcategory:fieldLabel(selected.subcategory_label,currentLanguage())});
   const confirmed=refreshFieldConfirmation();
   $('run').disabled=!c.can_run||!confirmed;
-  $('run').title=!c.can_run?localMessage('runUnsupported',currentLanguage()):!confirmed?localMessage('runConfirm',currentLanguage()):'';
+  const missing=fieldSelect.value==='other'||subcategorySelect.value==='unclassified';
+  $('run').title=missing?localMessage('runMissing',currentLanguage()):
+    !c.can_run?localMessage('runUnsupported',currentLanguage()):
+    !confirmed?localMessage('runConfirm',currentLanguage()):'';
 }
 for(const f of TAXONOMY){const option=document.createElement('option');option.value=f.id;option.textContent=fieldLabel(f.label,currentLanguage());fieldSelect.append(option);}
 fieldSelect.value='algebra';fillSubcategories('polynomial-identities');
