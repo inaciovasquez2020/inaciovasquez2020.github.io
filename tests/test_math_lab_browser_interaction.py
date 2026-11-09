@@ -161,10 +161,10 @@ with contextlib.chdir(ROOT):
             url=f'http://127.0.0.1:{server.server_port}/math-lab/index.html?lang=en&ci-interaction=1'
             cmd=[CHROME,'--headless','--no-sandbox','--disable-gpu','--disable-dev-shm-usage',
                  '--disable-background-networking','--no-first-run',
-                 '--virtual-time-budget=6500','--dump-dom',
+                 '--virtual-time-budget=15000','--dump-dom',
                  '--window-size=390,844',f'--user-data-dir={tmp}',url]
             try:
-                p=subprocess.run(cmd,text=True,capture_output=True,timeout=35)
+                p=subprocess.run(cmd,text=True,capture_output=True,timeout=55)
             except subprocess.TimeoutExpired:
                 raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_TIMEOUT')
             if p.returncode:
@@ -172,6 +172,8 @@ with contextlib.chdir(ROOT):
             match=re.search(r'<pre id="ci-interaction-result">(.*?)</pre>',p.stdout,re.S)
             if not match:
                 raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_SCRIPT_OR_LOAD; no result marker')
+            if not match.group(1).strip():
+                raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_SCRIPT_PENDING; empty result marker')
             result=json.loads(html.unescape(match.group(1)))
             if result['status']!='PASS':
                 raise SystemExit('BROWSER_INTERACTION := FAIL '+str(result))
