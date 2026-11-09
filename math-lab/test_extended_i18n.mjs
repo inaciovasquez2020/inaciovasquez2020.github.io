@@ -220,3 +220,24 @@ test('nine extraction warning explanations translate without touching code, exce
  assert.ok(src.includes("flagText(flag.reason,currentLanguage())"));
  assert.ok(src.includes("flag.source_excerpt"));
 });
+
+test('typed manuscript findings relocalize without altering JSON source objects',async()=>{
+ const {findingUI,FINDING_UI}=await import('./manuscript-findings-i18n.mjs');
+ const {auditManuscript}=await import('./manuscript.mjs');
+ const input=String.raw`\\begin{theorem}A\\end{theorem} \\mathcal{O}(n) \\Rightarrow B`;
+ const result=auditManuscript(input,{sourceName:'test.tex'});
+ const record=JSON.stringify(result);
+ const required=['SCOPE','PROOF_SURFACE','ASYMPTOTIC_CLAIM','IMPLICATION'];
+ for(const type of required)assert.ok(result.findings.some(f=>f.type===type),type);
+ for(const locale of ['en','es','pt-BR','zh-Hans','fr','de']){
+  assert.deepEqual(Object.keys(FINDING_UI[locale]),Object.keys(FINDING_UI.en));
+  for(const finding of result.findings){
+   const localized=findingUI(finding,locale);
+   assert.ok(localized.label&&localized.detail,locale+': '+finding.type);
+   if(locale==='en')assert.deepEqual(localized,{label:finding.label,detail:finding.detail});
+  }
+  assert.equal(JSON.stringify(result),record,'localization altered manuscript record');
+ }
+ const source=await (await import('node:fs/promises')).readFile(new URL('ui.mjs',import.meta.url),'utf8');
+ assert.ok(source.includes('findingUI(f,currentLanguage())'));
+});
