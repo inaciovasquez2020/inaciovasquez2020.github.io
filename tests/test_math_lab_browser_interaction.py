@@ -69,7 +69,34 @@ window.addEventListener('load',async()=>{
       throw Error('mathematical input or classification IDs changed');
     if(!$('field-confirm').checked||$('run').disabled)throw Error('confirmation state lost');
     if(document.querySelector('#result-area .evidence-table')?.textContent!==table)throw Error('exact evaluation table changed');
-    out.textContent=JSON.stringify({status:'PASS',languages:['en','pt-BR','es','en'],exact_status:'EXACT_CERTIFICATE_PASS',certificate_bytes:evidence.length});
+    // Citation flow after the exact-evidence preservation test: independent of verification.
+    $('equation').value='Shannon entropy and mutual information';
+    $('equation').dispatchEvent(new Event('input',{bubbles:true}));
+    $('check-citations').click();
+    const reference=document.querySelector('#citation-results .citation-item');
+    if(!reference||!reference.textContent.includes('Shannon'))throw Error('curated citation suggestion absent');
+    const citationCheck=reference.querySelector('input[type=checkbox]');
+    if(!citationCheck)throw Error('citation checkbox absent');
+    citationCheck.click();
+    if($('citation-export').disabled)throw Error('citation export disabled after confirmation');
+    async function bibtex(){
+      let blob=null;
+      const create=URL.createObjectURL,click=HTMLAnchorElement.prototype.click;
+      try{URL.createObjectURL=b=>{blob=b;return 'blob:ci-bibtex';};HTMLAnchorElement.prototype.click=function(){};$('citation-export').click();}
+      finally{URL.createObjectURL=create;HTMLAnchorElement.prototype.click=click;}
+      if(!blob)throw Error('BibTeX export did not produce a blob');
+      return blob.text();
+    }
+    const bib=await bibtex();
+    if(!bib.includes('@article{Shannon1948PartI')||!bib.includes('10.1002/j.1538-7305.1948.tb01338.x'))throw Error('BibTeX source metadata wrong');
+    for(const lang of ['pt-BR','es','de','zh-Hans','fr','en']){
+      change(lang);
+      if(!$('citation-results').querySelector('input[type=checkbox]:checked'))throw Error('citation consent lost: '+lang);
+      if($('citation-export').disabled)throw Error('citation export disabled: '+lang);
+      if(await bibtex()!==bib)throw Error('BibTeX changed: '+lang);
+    }
+    if($('equation').value!=='Shannon entropy and mutual information')throw Error('citation source changed');
+    out.textContent=JSON.stringify({status:'PASS',languages:['en','pt-BR','es','en'],exact_status:'EXACT_CERTIFICATE_PASS',certificate_bytes:evidence.length,bibtex_bytes:bib.length,citation_languages:6});
   }catch(e){out.textContent=JSON.stringify({status:'FAIL',error:String(e.stack||e)});}
 });
 """
