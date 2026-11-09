@@ -59,6 +59,15 @@ window.addEventListener('load',async()=>{
     $('field-confirm').click();
     if(!$('field-confirm').checked)fail('manuscript field confirmation failed');
     change(lang);
+    // Method presentation must update in the selected locale without touching text or confirmation.
+    const methodCaption=$('run').textContent;
+    const sourceCaption=$('source-label').textContent;
+    if(lang==='pt-BR'&&!methodCaption.includes('Analisar a estrutura'))fail('Portuguese method caption missing');
+    if(lang==='es'&&!methodCaption.includes('Analizar la estructura'))fail('Spanish method caption missing');
+    if(lang==='de'&&!sourceCaption.includes('Manuskript'))fail('German manuscript input label missing');
+    if(lang!=='en'&&sourceCaption==='LaTeX manuscript · paste entire source')fail('manuscript label untranslated');
+    if($('equation').value!=='')fail('language switch altered empty manuscript input');
+    if(!$('field-confirm').checked)fail('language switch reset field confirmation');
     $('claim-form').dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));
     const manuscriptError=message();
     if(lang!=='en'&&manuscriptError.includes('Manuscript must contain 1'))fail('manuscript error untranslated: '+lang);
