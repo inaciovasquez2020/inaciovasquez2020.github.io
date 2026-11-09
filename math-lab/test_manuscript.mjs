@@ -139,17 +139,17 @@ test('display inventory beyond 150 explicitly reports truncation',()=>{
 
 test('4D quantum Hall worksheet inline math and aligned display are inventoried without proof',async()=>{
  const {verifySourceAnchor}=await import('./source-location.mjs');
- const source=String.raw`\\title{Independent Mathematical Audit Worksheet: Four-Dimensional Quantum Hall Analogues}
-Let $T^4=T^2_x\\times T^2_y$ and $c_2(L)=0$.
-\\begin{proposition}[Chern character] Let $c_1(L)$ be specified. \\[\\begin{aligned}A&=B\\\\C&=D\\end{aligned}\\]\\end{proposition}
-\\begin{proof} Conditional proof.\\end{proof}`;
+ const source=String.raw`\title{Independent Mathematical Audit Worksheet: Four-Dimensional Quantum Hall Analogues}
+Let $T^4=T^2_x\times T^2_y$ and $c_2(L)=0$.
+\begin{proposition}[Chern character] Let $c_1(L)$ be specified. \[\begin{aligned}A&=B\\C&=D\end{aligned}\]\end{proposition}
+\begin{proof} Conditional proof.\end{proof}`;
  const result=auditManuscript(source);
  assert.equal(result.counts.propositions,1);
  assert.equal(result.counts.proof_environments,1);
  assert.equal(result.counts.displayed_math,1);
  assert.equal(result.counts.inline_math,3);
  assert.equal(result.extraction.flags.some(f=>f.code==='UNSUPPORTED_DISPLAY_ENVIRONMENT'),false);
- assert.equal(result.inline_equations[0].latex,String.raw`T^4=T^2_x\\times T^2_y`);
+ assert.equal(result.inline_equations[0].latex,String.raw`T^4=T^2_x\times T^2_y`);
  assert.equal(result.status,'NOT_VERIFIED');
  assert.equal(result.formal_kernel_verified,false);
  assert.equal(result.mathematical_truth_assessed,false);
