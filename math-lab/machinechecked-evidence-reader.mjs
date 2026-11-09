@@ -47,17 +47,6 @@ export function fromPublishedClaim(raw){
 export function normalizeReport(raw){
  object(raw,'report');
  if(raw.schema===CLAIM_SCHEMA)return fromPublishedClaim(raw);
- if(raw.schema!==LAB_SCHEMA||raw.mode!=='READ_ONLY_UNTRUSTED_EXTERNAL_REPORT')
-   throw new TypeError('Unsupported report schema');
- const claims=arr(raw.claims,'claims').map((c,i)=>{
-   object(c,'claim '+i);str(c.claim_id,'claim ID');
-   arr(c.issues,'issues',256).forEach(x=>object(x,'issue'));
-   if(c.verification_verdict!=='NOT_VERIFIED_BY_ADAPTER'||
-      c.local_integrity?.correspondence!=='NOT_ESTABLISHED_BY_ADAPTER')
-     throw new TypeError('Untrusted report contains unsupported verification verdict');
-   if(c.reported_status_code!==null&&typeof c.reported_status_code!=='string')
-     throw new TypeError('Malformed external status');
-   return c;
- });
- return {...raw,claims};
+ // Derived adapter summaries are not authoritative inputs. Import upstream raw claims only.
+ throw new TypeError('Untrusted precomputed adapter reports are unsupported; import a MachineChecked claim record.');
 }
