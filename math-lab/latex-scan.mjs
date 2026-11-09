@@ -46,7 +46,7 @@ export function inspectLatex(source) {
    const t=m[0],pos=m.index;
    if(m[1]==='begin'){
      const name=m[2];
-     if((MATH_ENV.test(name)&&!(name==='aligned'&&stack.some(x=>x.kind==='bracket'||x.kind==='display'||x.kind==='dollar-display')))||name.endsWith('*')&&CLAIM_ENV.test(name)){
+     if((MATH_ENV.test(name)&&!(name==='aligned'&&stack.some(x=>x.kind==='bracket'||x.kind==='dollar-display'||(x.kind==='env'&&DISPLAY.has(x.name)))))||name.endsWith('*')&&CLAIM_ENV.test(name)){
        flag(MATH_ENV.test(name)?'UNSUPPORTED_DISPLAY_ENVIRONMENT':'UNSUPPORTED_CLAIM_ENVIRONMENT',
          'This environment is not extracted by the current inventory.',pos);
      }
