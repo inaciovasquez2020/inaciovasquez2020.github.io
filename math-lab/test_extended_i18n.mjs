@@ -2,6 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DICTIONARIES,uiText,uiFormat,tourPosition,applyExtended} from './extended-i18n.mjs';
 
+test('all presentation shell labels are localized and machine codes are not rewritten',async()=>{
+ const {COPY}=await import('./runtime-copy-i18n.mjs');
+ const keys=["USER GUIDE","01 / INPUT","02 / EVIDENCE","03 / IMPROVEMENT LOOP","04 / VERIFICATION BOUNDARY","ENGINE SCOPE IS ENFORCED","QUICK EXAMPLES","NO AUTOMATIC LEARNING","OPTIONAL / REFERENCE REMINDER","APPEARANCE","EXPERIMENTAL","VASQUEZ RESEARCH / EXACT MATHEMATICS","EXACT POLYNOMIAL CERTIFICATE ≠ LEAN PROOF","EXACT POLYNOMIAL ARITHMETIC","MANUSCRIPT STRUCTURE ONLY","OPTIONAL USER WALKTHROUGH","VASQUEZ RESEARCH · EXPERIMENTAL","Session casebook cleared by user. No data was uploaded.","Last record: {kind} · {status}. {probes} follow-up probes; {passed} passed; {skipped} skipped. Python replay NOT RUN."];
+ for(const locale of ['en','es','pt-BR','zh-Hans','fr','de']){
+  assert.equal(Object.keys(DICTIONARIES[locale]).length,Object.keys(DICTIONARIES.en).length,locale);
+  for(const key of keys)assert.ok(DICTIONARIES[locale][key],locale+': '+key);
+ }
+ assert.equal(COPY.fr['Run exact verification →'],'Exécuter la vérification exacte →');
+ assert.notEqual(COPY.fr['Run exact verification →'],COPY.de['Run exact verification →']);
+ assert.equal(DICTIONARIES.en['EXACT_SUPPORTED'],undefined);
+});
 test('six language dictionaries have identical keys',()=>{
  const languages=['en','es','pt-BR','zh-Hans','fr','de'];
  assert.deepEqual(Object.keys(DICTIONARIES),languages);
