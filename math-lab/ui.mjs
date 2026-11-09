@@ -4,6 +4,7 @@ import {message as localMessage} from './runtime-messages-i18n.mjs';
 import {errorText,explainError} from './runtime-errors-i18n.mjs';
 import {flagText} from './manuscript-flags-i18n.mjs';
 import {findingUI} from './manuscript-findings-i18n.mjs';
+import {copyText} from './runtime-copy-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -86,7 +87,7 @@ function renderManuscript(r,entry){
   const top=el('div','verdict-top'); top.append(el('span','status-symbol','◇'),el('span','',r.status));
   verdict.append(top,el('div','verdict-title',uiText('Manuscript structure reviewed; mathematical claims not verified.')),
     el('div','verdict-desc',uiFormat('{title} · {source}. The Lab has not proved or refuted any theorem. Review questions below are heuristic.',{title:r.title,source:r.source_name})));root.append(verdict);
-  const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : classificationOrigin === 'AUTO' ? 'AUTO-SUGGESTED · USER CONFIRMED' : 'USER CONFIRMED'}`));root.append(el('p','classification-line',uiText('METHOD APPLIED: LaTeX manuscript structure inventory · STRUCTURAL_ONLY · NO MATHEMATICAL CLAIMS VERIFIED')));root.append(el('p','result-disclaimer','INPUT WARNING — UNCERTIFIED SOURCE: LaTeX extraction can miss statements or misread notation, proofs and assumptions. Subject classification is heuristic or user-declared, and this report is not a mathematical or scientific validation.'));
+  const c=category(entry.manifest.field,entry.manifest.subcategory);root.append(el('p','classification-line',`SUBJECT FIELD: ${c.field_label} / ${c.subcategory_label} · ${classificationOrigin === 'MANUAL' ? 'MANUALLY SELECTED · USER CONFIRMED' : classificationOrigin === 'AUTO' ? 'AUTO-SUGGESTED · USER CONFIRMED' : 'USER CONFIRMED'}`));root.append(el('p','classification-line',uiText('METHOD APPLIED: LaTeX manuscript structure inventory · STRUCTURAL_ONLY · NO MATHEMATICAL CLAIMS VERIFIED')));root.append(el('p','result-disclaimer',copyText('INPUT WARNING — UNCERTIFIED SOURCE: LaTeX extraction can miss statements or misread notation, proofs and assumptions. Subject classification is heuristic or user-declared, and this report is not a mathematical or scientific validation.',currentLanguage())));
   const stats=el('div','auditor-grid');
   for(const [name,count] of [[uiText('Definitions'),r.counts.definitions],[uiText('Lemmas'),r.counts.lemmas],[uiText('Theorems'),r.counts.theorems],[uiText('Corollaries'),r.counts.corollaries],[uiText('Proof blocks'),r.counts.proof_environments],[uiText('Math blocks'),r.counts.displayed_math]]){
     const div=el('div');div.append(el('strong','',String(count)),el('span','',name));stats.append(div);
@@ -94,8 +95,8 @@ function renderManuscript(r,entry){
   const extraction=r.extraction;
   root.append(el('h3','section-title',uiText('EQUATION EXTRACTION COVERAGE')));
   root.append(el('p','result-disclaimer',extraction.status==='REVIEW_REQUIRED'?
-    'EXTRACTION REVIEW REQUIRED: Some displayed or inline mathematics was not included in the extracted equation inventory. Review the flagged source below.':
-    'EXTRACTION NOT EXHAUSTIVELY VERIFIED: No suspicious patterns detected by these bounded checks. This does not guarantee that every equation was recovered.'));
+    copyText('EXTRACTION REVIEW REQUIRED: Some displayed or inline mathematics was not included in the extracted equation inventory. Review the flagged source below.',currentLanguage()):
+    copyText('EXTRACTION NOT EXHAUSTIVELY VERIFIED: No suspicious patterns detected by these bounded checks. This does not guarantee that every equation was recovered.',currentLanguage())));
   const flagList=el('div','audit-claims');
   for(const flag of extraction.flags){
     const block=el('div','audit-item review');
@@ -121,17 +122,21 @@ function renderManuscript(r,entry){
   const actions=el('div','report-actions');const save=el('button','',uiText('Download structural audit JSON'));save.type='button';save.onclick=()=>downloadJSON(r,'vasquez-manuscript-audit.json');actions.append(save);root.append(actions);
   root.append(el('p','scope-note',`Casebook entry: ${entry.status}; no manuscript text was retained in the regression casebook. No AI model is connected, and this parser provides no theorem-level verdict.`));area.append(root);
 }
+function updateMethodPresentation(){
+ const isMs=method.value==='manuscript-audit',lang=currentLanguage();
+ $('evidence-method-tag').textContent=isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC';
+ $('source-label').textContent=isMs?copyText('LaTeX manuscript · paste entire source',lang):uiText('Equation · LaTeX or ASCII');
+ $('equation-help').textContent=isMs?copyText('Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.',lang):copyText('Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.',lang);
+ $('run').textContent=isMs?copyText('Analyze manuscript structure →',lang):copyText('Run exact verification →',lang);
+}
 function updateMethod(){const isMs=method.value==='manuscript-audit';
-  $('evidence-method-tag').textContent=isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC';
+  updateMethodPresentation();
   classificationLocked=false;classificationOrigin=isMs?'UNCLASSIFIED':'ENGINE_SCOPE';
-  $('source-label').textContent=isMs?'LaTeX manuscript · paste entire source':'Equation · LaTeX or ASCII';
-  $('equation-help').textContent=isMs?'Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.':'Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.';
-  $('run').textContent=isMs?'Analyze manuscript structure →':'Run exact verification →';
   $('presets').hidden=isMs;
   equation.classList.toggle('manuscript-copy',isMs);
   if(isMs){equation.value='';}else{equation.value='(x+1)^2 = x^2 + 2x + 1';}
   candidateControl.hidden=true;candidates=[];sourceName='manual input';
-  area.replaceChildren(el('div','empty-state',isMs?'Paste or drop LaTeX to inventory statements and review questions; no theorem verdict will be produced.':'Enter a polynomial equality and run exact verification.'));
+  area.replaceChildren(el('div','empty-state',copyText(isMs?'Paste or drop LaTeX to inventory statements and review questions; no theorem verdict will be produced.':'Enter a polynomial equality and run exact verification.',currentLanguage())));
   if(isMs){fieldSelect.value='other';fillSubcategories('unclassified');}else{fieldSelect.value='algebra';fillSubcategories('polynomial-identities');}
   invalidateFieldConfirmation();updateProvenance();updateCoverage();
 }
@@ -238,6 +243,7 @@ function refreshTaxonomyDisplay(){
   const sub=subs.find(s=>s.id===option.value);
   if(sub)option.textContent=fieldLabel(sub.label,lang);
  }
+ updateMethodPresentation();
  refreshFieldConfirmation();
  updateProvenance();
  updateCoverage();
