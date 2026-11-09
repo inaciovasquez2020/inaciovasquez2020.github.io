@@ -39,6 +39,7 @@ f.addEventListener('change',async()=>{
   const generation=++importGeneration;
   const file=f.files?.[0];
   area.replaceChildren();
+  message.textContent='Loading report…';
   if(!file){message.textContent='No report loaded.';return}
   if(file.size>2097152){message.textContent='Import rejected: JSON exceeds 2 MiB.';return}
   try{
@@ -50,13 +51,14 @@ f.addEventListener('change',async()=>{
 demo.addEventListener('click',async()=>{
   const generation=++importGeneration;
   area.replaceChildren();
+  message.textContent='Loading report…';
   try{
     const r=await fetch('./fixtures/machinechecked-shape-decided.json',{credentials:'omit'});
     if(generation!==importGeneration)return;
     if(!r.ok)throw Error('HTTP '+r.status);
     const body=await r.text();
     if(generation!==importGeneration)return;
-    if(body.length>2097152)throw Error('Fixture too large');
+    if(new TextEncoder().encode(body).length>2097152)throw Error('Fixture too large');
     show(JSON.parse(body));
   }catch(e){if(generation===importGeneration)error(e)}
 });

@@ -87,3 +87,17 @@ test('forged precomputed integrity metadata cannot be displayed as locally check
     issues:[]}]};
  assert.throws(()=>normalizeReport(raw),/precomputed|untrusted|unsupported/i);
 });
+
+test('viewer uses shared generation guard, pending status, and UTF-8 fixture byte limits',async()=>{
+ const {readFileSync}=await import('node:fs');
+ const {fileURLToPath}=await import('node:url');
+ const {join,dirname}=await import('node:path');
+ const html=readFileSync(join(dirname(fileURLToPath(import.meta.url)),'machinechecked-evidence.html'),'utf8');
+ assert.equal((html.match(/\+\+importGeneration/g)||[]).length,2);
+ assert.equal((html.match(/message\.textContent='Loading report…'/g)||[]).length,2);
+ assert.equal((html.match(/generation!==importGeneration/g)||[]).length,3);
+ assert.match(html,/new TextEncoder\(\)\.encode\(body\)\.length>2097152/);
+ const unicode='😀'.repeat(600000);
+ assert.ok(unicode.length<2097152);
+ assert.ok(new TextEncoder().encode(unicode).length>2097152);
+});
