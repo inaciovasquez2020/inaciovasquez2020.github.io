@@ -13,6 +13,14 @@ test('all presentation shell labels are localized and machine codes are not rewr
  assert.notEqual(COPY.fr['Run exact verification →'],COPY.de['Run exact verification →']);
  assert.equal(DICTIONARIES.en['EXACT_SUPPORTED'],undefined);
 });
+test('feedback translations exist in all six locales with machine codes unchanged',()=>{
+ const keys=["HELP IMPROVE THE LAB","Suggest an improvement or ask a question","What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.","Open suggestion and inquiry form","Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data."];
+ for(const language of ['en','es','pt-BR','zh-Hans','fr','de']){
+  for(const key of keys)assert.ok(DICTIONARIES[language][key],language+': '+key);
+  if(language!=='en')assert.notEqual(DICTIONARIES[language][keys[1]],keys[1],language);
+ }
+ assert.equal(DICTIONARIES.en['EXACT_SUPPORTED'],undefined);
+});
 test('six language dictionaries have identical keys',()=>{
  const languages=['en','es','pt-BR','zh-Hans','fr','de'];
  assert.deepEqual(Object.keys(DICTIONARIES),languages);

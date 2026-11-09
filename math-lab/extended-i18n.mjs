@@ -133,6 +133,55 @@ for(const key of Object.keys(SHELL_TRANSLATIONS.en)){
  if(Object.hasOwn(DICTIONARIES.en,key))throw new Error('Duplicate translation key: '+key);
 }
 for(const [locale,entries] of Object.entries(SHELL_TRANSLATIONS))Object.assign(DICTIONARIES[locale],entries);
+
+const FEEDBACK_TRANSLATIONS={
+  "en": {
+    "HELP IMPROVE THE LAB": "HELP IMPROVE THE LAB",
+    "Suggest an improvement or ask a question": "Suggest an improvement or ask a question",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.",
+    "Open suggestion and inquiry form": "Open suggestion and inquiry form",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data."
+  },
+  "es": {
+    "HELP IMPROVE THE LAB": "AYUDE A MEJORAR EL LABORATORIO",
+    "Suggest an improvement or ask a question": "Sugiera una mejora o haga una pregunta",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "¿Qué problema de investigación debería ayudarle a comprobar el laboratorio? Sugiera un método, informe de un fallo reproducible o pregunte por los límites de verificación.",
+    "Open suggestion and inquiry form": "Abrir formulario de sugerencias y consultas",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "Se abre GitHub (requiere iniciar sesión). Las incidencias enviadas son públicas. No incluya manuscritos privados, pruebas inéditas, datos personales ni credenciales. Esta página no envía sus datos."
+  },
+  "pt-BR": {
+    "HELP IMPROVE THE LAB": "AJUDE A MELHORAR O LABORATÓRIO",
+    "Suggest an improvement or ask a question": "Sugira uma melhoria ou faça uma pergunta",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "Qual problema de pesquisa este laboratório deveria ajudar a verificar? Sugira um método, relate um problema reproduzível ou pergunte sobre os limites da verificação.",
+    "Open suggestion and inquiry form": "Abrir formulário de sugestões e perguntas",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "Abre o GitHub (é necessário entrar na conta). As solicitações enviadas são públicas. Não inclua manuscritos privados, provas inéditas, dados pessoais ou credenciais. Esta página não envia seus dados."
+  },
+  "zh-Hans": {
+    "HELP IMPROVE THE LAB": "帮助改进实验室",
+    "Suggest an improvement or ask a question": "提出改进建议或咨询问题",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "您希望实验室下一步帮助检查什么研究问题？可以建议验证方法、报告可复现的问题，或询问验证范围。",
+    "Open suggestion and inquiry form": "打开建议与咨询表单",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "将打开 GitHub（需要登录）。提交的问题将公开。请勿包含私人文稿、未发表的证明、个人信息或凭据。此页面不会提交您的数据。"
+  },
+  "fr": {
+    "HELP IMPROVE THE LAB": "CONTRIBUEZ À AMÉLIORER LE LABORATOIRE",
+    "Suggest an improvement or ask a question": "Proposer une amélioration ou poser une question",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "Quel problème de recherche ce laboratoire devrait-il aider à vérifier ? Proposez une méthode, signalez un problème reproductible ou demandez des précisions sur les limites de vérification.",
+    "Open suggestion and inquiry form": "Ouvrir le formulaire de suggestions et de questions",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "Ouvre GitHub (connexion requise). Les demandes soumises sont publiques. Ne partagez pas de manuscrits privés, de preuves inédites, de données personnelles ou d’identifiants. Cette page n’envoie pas vos données."
+  },
+  "de": {
+    "HELP IMPROVE THE LAB": "HELFEN SIE, DAS LABOR ZU VERBESSERN",
+    "Suggest an improvement or ask a question": "Verbesserung vorschlagen oder Frage stellen",
+    "What research problem should this Lab help you check next? Suggest a method, report a reproducible problem, or ask about a verification boundary.": "Welches Forschungsproblem soll dieses Labor künftig prüfen helfen? Schlagen Sie eine Methode vor, melden Sie ein reproduzierbares Problem oder fragen Sie nach Verifikationsgrenzen.",
+    "Open suggestion and inquiry form": "Formular für Vorschläge und Fragen öffnen",
+    "Opens GitHub (sign-in required). Submitted issues are public. Do not include private manuscripts, unpublished proofs, personal information, or credentials. This page does not submit your data.": "Öffnet GitHub (Anmeldung erforderlich). Eingereichte Issues sind öffentlich. Geben Sie keine privaten Manuskripte, unveröffentlichten Beweise, personenbezogenen Daten oder Zugangsdaten an. Diese Seite sendet keine Daten."
+  }
+};
+for(const label of Object.keys(FEEDBACK_TRANSLATIONS.en))
+ if(Object.hasOwn(DICTIONARIES.en,label))throw new Error('Duplicate feedback key: '+label);
+for(const [language,items] of Object.entries(FEEDBACK_TRANSLATIONS))
+ Object.assign(DICTIONARIES[language],items);
 const select=typeof document!=='undefined'?document.getElementById('ui-language'):null;
 const originals=new WeakMap();
 const attributeOriginals=new WeakMap();
