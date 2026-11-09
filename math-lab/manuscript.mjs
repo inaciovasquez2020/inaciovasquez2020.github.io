@@ -1,5 +1,6 @@
 import {inspectLatex} from './latex-scan.mjs';
 import {sourceAnchor,verifySourceAnchor} from './source-location.mjs';
+import {reviewTranscriptManuscript} from './research-guards.mjs';
 /**
  * Structural LaTeX manuscript inventory. No theorem prover, no LLM, no source upload.
  * This parser does not execute LaTeX or establish theorem correctness.
@@ -58,6 +59,12 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
   if (/\\(?:Rightarrow|implies)\b/.test(text)) {
     findings.push({type: 'IMPLICATION', severity: 'review', label: 'Displayed implication requires a derivation',
       detail: 'Check that the conclusion follows from its stated assumptions and that the implication is not vacuous. This is a generic syntactic flag, not a refutation.'});
+  }
+  for(const item of reviewTranscriptManuscript(text)){
+    const {start,end,...review}=item;
+    review.source_anchor=sourceAnchor(source,start,end,scanned.source_sha256);
+    if(!verifySourceAnchor(source,review.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
+    findings.push(review);
   }
   const extraction={status:scanned.status,source_sha256:scanned.source_sha256,flags:scanned.flags,flags_truncated:scanned.flags_truncated,extracted_display_blocks:math.length,note:scanned.note};
   if(extraction.flags.length)findings.push({type:'EXTRACTION_COVERAGE',severity:'review',label:'Source equations may be omitted',detail:extraction.flags.length+' flagged source fragments with line numbers require manual inspection.'});

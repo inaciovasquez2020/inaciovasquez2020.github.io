@@ -2,6 +2,7 @@
 """Browser interaction test in local headless Chrome: translation must not change exact evidence."""
 from __future__ import annotations
 import contextlib
+import os
 import html
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -14,8 +15,34 @@ import threading
 from urllib.parse import urlsplit, parse_qs
 
 ROOT=Path(__file__).resolve().parents[1]
-CHROME=next((p for name in ('google-chrome','google-chrome-stable','chromium','chromium-browser')
-             if (p:=shutil.which(name))),None)
+@contextlib.contextmanager
+def _chdir_compat(path):
+    previous = os.getcwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(previous)
+
+def _working_chrome():
+    # Prefer actual macOS bundles over broken Homebrew/shim launchers.
+    applications = [
+        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+        '/Applications/Chromium.app/Contents/MacOS/Chromium',
+        str(Path.home() / 'Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),
+    ]
+    commands = ('google-chrome','google-chrome-stable','chromium','chromium-browser')
+    for path in applications + [shutil.which(name) for name in commands]:
+        if not path or not Path(path).is_file() or not os.access(path, os.X_OK):
+            continue
+        try:
+            probe = subprocess.run([path,'--version'],capture_output=True,text=True,timeout=5)
+        except (OSError,subprocess.TimeoutExpired):
+            continue
+        if probe.returncode==0 and re.search(r'chrome|chromium', probe.stdout + probe.stderr, re.I):
+            return path
+    return None
+CHROME=_working_chrome()
 if not CHROME:
     raise SystemExit('BROWSER_INTERACTION := INCOMPLETE_NO_INSTALLED_CHROME')
 
@@ -190,7 +217,7 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(output)
 
-with contextlib.chdir(ROOT):
+with _chdir_compat(ROOT):
     server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
     threading.Thread(target=server.serve_forever,daemon=True).start()
     try:

@@ -1,4 +1,5 @@
 /** Explicit research taxonomy and method coverage. Data labels are not proof claims. */
+import {classifyComplexityManuscript} from './research-guards.mjs';
 export const TAXONOMY = Object.freeze([
   {id:'algebra',label:'Algebra',subcategories:[
     {id:'polynomial-identities',label:'Polynomial identities over R',exact:true},
@@ -62,6 +63,8 @@ export function coverage(field,subcategory,method){
  */
 export function suggestCategory(source){
   const t=String(source??'').slice(0,65536);
+  const primary=classifyComplexityManuscript(t);
+  if(primary)return primary;
   if(!t.trim())return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',
     reason:'No source text to classify. Choose the subject manually.'};
   const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
