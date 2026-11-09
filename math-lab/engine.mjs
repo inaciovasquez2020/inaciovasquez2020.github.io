@@ -62,7 +62,7 @@ function lex(s) {
     let c=s[i];if(/\s/.test(c)){i++;continue;}
     if(/[0-9]/.test(c)){let j=i+1;while(j<s.length&&/[0-9]/.test(s[j]))j++;
       const t=s.slice(i,j);if(out.at(-1)?.type==='num')fail('Unsupported LaTeX/Python syntax. Allowed: integer literals, x, +, -, multiplication, parentheses, and literal powers.');const val=BigInt(t);if(val>MAX_LITERAL)fail('Integer literal exceeds 1,000,000.');
-      out.push({type:'num',value:val});i=j;continue;}
+      out.push({type:'num',value:val,digits:t.length});i=j;continue;}
     if(c==='x'){out.push({type:'x'});i++;continue;}
     if('+-*^()'.includes(c)){out.push({type:c});i++;continue;}
     fail('Unsupported expression character.');
@@ -79,7 +79,7 @@ export function parseExpression(text){const tokens=lex(translateLatex(text));let
     if(peek()==='('){take('(');let a=sum();take(')');return a;}
     fail(`Expected a polynomial term, received '${peek()}'.`);});}
   function power(){let a=atom();if(peek()==='^'){take('^');let exp;
-    if(peek()==='('){take('(');exp=take('num').value;take(')');}else exp=take('num').value;
+    if(peek()==='('){take('(');exp=take('num').value;take(')');}else {const token=take('num');if(token.digits>1)fail('Unsupported LaTeX/Python syntax. Allowed: integer literals, x, +, -, multiplication, parentheses, and literal powers.');exp=token.value;}
     if(exp>BigInt(MAX_POWER))fail('Only integer powers 0..16 are supported.');
     a=node({type:'pow',left:a,exp:Number(exp),degree:bound(a.degree*Number(exp))});}
     return a;}
