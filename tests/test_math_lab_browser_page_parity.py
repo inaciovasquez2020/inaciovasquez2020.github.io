@@ -28,7 +28,7 @@ window.addEventListener('load',async()=>{
   if(!dict)throw Error('unknown locale '+lang);
   const original=await fetch(location.pathname+'?reference=1',{cache:'no-store'}).then(r=>r.text());
   const dom=new DOMParser().parseFromString(original,'text/html');
-  const excluded='textarea,input,code,pre,script,style,select,title,[contenteditable],#result-area,#citation-results,#quality-last';
+  const excluded='textarea,input,code,pre,script,style,select,title,[contenteditable],#result-area,#citation-results,#quality-last,#run,#equation-help,#source-label,#evidence-method-tag';
   const walker=dom.createTreeWalker(dom.body,NodeFilter.SHOW_TEXT);
   const standard=Object.fromEntries(Object.entries(LOCALES.en).map(([key,text])=>[text,LOCALES[lang][key]]));
   const seen=new Set();

@@ -43,6 +43,8 @@ window.addEventListener('load',async()=>{
   if(document.getElementById('quality-last')?.textContent!==dictionary[expectedIdle.quality])problems.push('casebook idle state not localized');
   if(document.querySelector('#citation-results p')?.textContent!==dictionary[expectedIdle.citation])problems.push('citation idle state not localized');
   const selector=document.getElementById('ui-language');
+  const helpKey='Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.';
+  if(document.getElementById('equation-help')?.textContent!==COPY[lang][helpKey])problems.push('runtime equation help not translated');
   const sourceValue=document.getElementById('equation')?.value;
   for(const switchTo of ['de','fr','zh-Hans','es','pt-BR','en',lang]){
    selector.value=switchTo;selector.dispatchEvent(new Event('change',{bubbles:true}));
