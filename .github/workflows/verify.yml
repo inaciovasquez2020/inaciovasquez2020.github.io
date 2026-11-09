@@ -35,6 +35,8 @@ jobs:
         run: python3 tests/test_math_lab_browser_translation.py
       - name: Browser main-page translated prose across five languages
         run: python3 tests/test_math_lab_browser_content.py
+      - name: Rendered four-page translation parity across five languages
+        run: python3 tests/test_math_lab_browser_page_parity.py
       - name: Browser interactive locale round-trip (mobile viewport)
         run: python3 tests/test_math_lab_browser_interaction.py
       - name: Browser localized negative paths (12 cases)
