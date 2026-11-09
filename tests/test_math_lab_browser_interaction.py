@@ -136,8 +136,13 @@ window.addEventListener('load',async()=>{
       drop.dispatchEvent(event);
     };
     upload(new File([new Uint8Array([0xc3,0x28])],'rejected.tex'));
-    await new Promise(done=>setTimeout(done,0));
-    if($('source-preflight-status').dataset.state!=='BLOCKED')throw Error('invalid UTF-8 accepted');
+    // File.arrayBuffer resolves asynchronously; require bounded completion, not one tick.
+    let blocked=false;
+    for(let attempt=0;attempt<100;attempt++){
+      if($('source-preflight-status').dataset.state==='BLOCKED'){blocked=true;break;}
+      await new Promise(done=>setTimeout(done,20));
+    }
+    if(!blocked)throw Error('INCOMPLETE_PRECHECK_TIMEOUT: '+$('source-preflight-status').dataset.state);
     if($('source-reference').value!=='Manual entry'||$('equation').value!=='')throw Error('blocked input preserved stale provenance');
     if(!$('run').disabled||$('field-confirm').checked)throw Error('blocked upload left verification enabled');
     $('equation').value='x=x';$('equation').dispatchEvent(new Event('input',{bubbles:true}));
