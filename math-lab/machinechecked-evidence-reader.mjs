@@ -48,5 +48,5 @@ export function normalizeReport(raw){
  object(raw,'report');
  if(raw.schema===CLAIM_SCHEMA)return fromPublishedClaim(raw);
  // Derived adapter summaries are not authoritative inputs. Import upstream raw claims only.
- throw new TypeError('Untrusted precomputed adapter reports are unsupported; import a MachineChecked claim record.');
+ throw new TypeError('Unsupported report schema or untrusted precomputed adapter verdict; import a raw MachineChecked claim record.');
 }
