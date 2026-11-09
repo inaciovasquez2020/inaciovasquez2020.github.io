@@ -25,7 +25,7 @@ test('reject complex grammar, unsupported macros, and fake identities',()=>{
  }
 });
 test('exact arithmetic on large integers under cap',()=>{
- check('999999^16=999999^15*999999','EXACT_CERTIFICATE_PASS');
+ check('999999^{16}=999999^{15}*999999','EXACT_CERTIFICATE_PASS');
 });
 test('source equation extraction and candidate limits',()=>{
  const latex=String.raw`\documentclass{article}
