@@ -1,6 +1,7 @@
 import {uiText,uiFormat} from './extended-i18n.mjs';
 import {fieldLabel,currentLanguage} from './runtime-taxonomy-i18n.mjs';
 import {message as localMessage} from './runtime-messages-i18n.mjs';
+import {errorText,explainError} from './runtime-errors-i18n.mjs';
 import {verifyEquation,extractEquations,UnsupportedClaim} from './engine.mjs';
 import {auditManuscript} from './manuscript.mjs';
 import {TAXONOMY,subcategoriesFor,category,coverage,suggestCategory} from './taxonomy.mjs';
@@ -11,6 +12,7 @@ const theme=$('theme'),picker=$('file-picker'),drop=$('drop-area'),method=$('met
 const candidateControl=$('candidate-control'),candidateSelect=$('candidate-select'),fileStatus=$('file-status');
 let last=null,candidates=[],sourceName='manual input';
 let lastRendered=null; // presentation cache only; never rerun mathematical verification
+let lastErrorRaw=null;
 let classificationOrigin='ENGINE_SCOPE', classificationLocked=false, classificationLastInput='';
 const casebook=new SessionCasebook();
 const fieldConfirmation=$('field-confirm');
@@ -60,9 +62,9 @@ $('quality-export').addEventListener('click',()=>downloadJSON(casebook.export(),
 $('quality-clear').addEventListener('click',()=>{casebook.clear();$('quality-cases').textContent='0';$('quality-probes').textContent='0';$('quality-review').textContent='0';$('quality-export').disabled=true;$('quality-clear').disabled=true;$('quality-last').textContent='Session casebook cleared by user. No data was uploaded.';});
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function downloadJSON(data,name){const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function renderError(message){area.replaceChildren();const box=el('div','error-block');box.append(el('strong','', 'NOT VERIFIED — UNSUPPORTED INPUT'),el('p','',message));box.append(el('p','result-disclaimer','Input may be incomplete, mistranscribed, unsupported or incorrectly classified; no mathematical verdict has been established.'));area.append(box);last=null;lastRendered=null;}
+function renderError(message){lastErrorRaw=message;area.replaceChildren();const box=el('div','error-block');box.append(el('strong','',errorText('unsupported',currentLanguage())),el('p','',explainError(message,currentLanguage())));box.append(el('p','result-disclaimer',errorText('disclaimer',currentLanguage())));area.append(box);last=null;lastRendered=null;}
 function addRow(container,k,v){let row=el('div','meta-row');row.append(el('span','',k),el('span','result-code',v));container.append(row);}
-function renderResult(r,entry){area.replaceChildren();last=r;lastRendered={kind:'exact',record:r,entry};const ok=r.status==='EXACT_CERTIFICATE_PASS';
+function renderResult(r,entry){lastErrorRaw=null;area.replaceChildren();last=r;lastRendered={kind:'exact',record:r,entry};const ok=r.status==='EXACT_CERTIFICATE_PASS';
   const root=el('div','result-content');const verdict=el('div',`verdict ${ok?'good':'bad'}`);const head=el('div','verdict-top');head.append(el('span','status-symbol',ok?'✓':'×'),el('span','',r.status));verdict.append(head);
   verdict.append(el('div','verdict-title',ok?uiText('Identity established within polynomial scope.'):uiText('Counterexample found.')));
   verdict.append(el('div','verdict-desc',ok?uiFormat('All {count} exact evaluations agree. The degree bound proves equality for every real x.',{count:r.degree_upper_bound+1}):uiFormat('At x = {x}, the two sides differ. The universal equality is false.',{x:r.certificate.at(-1).x})));
@@ -77,7 +79,7 @@ function renderResult(r,entry){area.replaceChildren();last=r;lastRendered={kind:
   buttons.append(certificate,python,replay);root.append(buttons);root.append(el('p','scope-note',uiText('Browser-side certificate only. The evidence JSON is not a Python-generated certificate; download the claim and run the authoritative Python checker independently.')));area.append(root);
 }
 function renderManuscript(r,entry){
-  area.replaceChildren(); last=r;lastRendered={kind:'manuscript',record:r,entry}; const root=el('div','result-content');
+  lastErrorRaw=null;area.replaceChildren(); last=r;lastRendered={kind:'manuscript',record:r,entry}; const root=el('div','result-content');
   const verdict=el('div','verdict unverified');
   const top=el('div','verdict-top'); top.append(el('span','status-symbol','◇'),el('span','',r.status));
   verdict.append(top,el('div','verdict-title',uiText('Manuscript structure reviewed; mathematical claims not verified.')),
@@ -180,7 +182,7 @@ $('suggest-category').addEventListener('click',()=>{classificationLocked=false;c
 updateProvenance();updateCoverage();
 method.addEventListener('change',updateMethod);
 function setExample(kind){invalidateFieldConfirmation();let texts={identity:'(x+1)^2 = x^2 + 2x + 1',false:'(x+1)^2 = x^2 + 1',latex:'\\left(x+1\\right)^2 = x^2 + 2\\cdot x + 1'};equation.value=texts[kind]||texts.identity;sourceName='manual input';candidates=[];candidateControl.hidden=true;area.replaceChildren(el('div','empty-state','Ready to verify the selected example.'));equation.focus();}
-form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory();if(!refreshFieldConfirmation()){renderError('FIELD MISSING / CONFIRMATION REQUIRED: choose a specific field and subcategory, then confirm this choice before continuing.');return;}let m;
+form.addEventListener('submit',e=>{e.preventDefault();if(method.value==='manuscript-audit'&&!classificationLocked)applySuggestedCategory();if(!refreshFieldConfirmation()){renderError(errorText('fieldRequired','en'));return;}let m;
   try{
     m=claimManifest();
     const c=coverage(m.field,m.subcategory,method.value);
@@ -242,7 +244,7 @@ function refreshTaxonomyDisplay(){
 // Never invoke verifyEquation, auditManuscript or change casebook state on localization.
 $('ui-language')?.addEventListener('change',()=>{
  refreshTaxonomyDisplay();
- if(!lastRendered)return;
+ if(!lastRendered){if(lastErrorRaw!==null)renderError(lastErrorRaw);return;}
  const {kind,record,entry}=lastRendered;
  if(kind==='exact')renderResult(record,entry);
  else if(kind==='manuscript')renderManuscript(record,entry);
