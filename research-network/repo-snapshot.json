@@ -201,8 +201,9 @@
   "nodes": 27,
   "edges": 65,
   "meaning_of_edges": {
-    "solid": "mathematical/methodological relation or documented workflow",
-    "dashed": "unverified project-specific transfer"
+    "primary": "solid teal; central mathematical or methodological backbone, not a new cross-domain proof",
+    "secondary": "dotted gray; documented relationship outside the primary focus, not a transfer theorem",
+    "proposal": "dotted amber; speculative or draft project-specific bridge, not established"
   },
   "not_checked": [
     "local Mac git state",
