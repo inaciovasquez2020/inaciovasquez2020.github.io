@@ -399,7 +399,7 @@
       "name": "Locality → fixed FO⁴ constraints",
       "boundary": "Need a proved interpretation preserving four-variable budget and constraints.",
       "evidence": "FO⁴ repository explicitly limits itself to constraint isolation.",
-      "source_url": "https://github.com/inaciovasquez2020/cslib-fmt/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/fo4-constraint-isolation/blob/main/README.md"
     },
     {
       "id": "e15",
@@ -459,7 +459,7 @@
       "name": "Effective physics → null-test observable",
       "boundary": "Need an apparatus-dependent prediction distinguishable from known 4D physics and real measurements.",
       "evidence": "The null-test repository states no measured anomaly or new physics.",
-      "source_url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test/blob/main/README.md"
     },
     {
       "id": "e21",
