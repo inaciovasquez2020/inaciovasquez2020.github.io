@@ -1,214 +1,97 @@
 {
-  "captured_utc": "2026-11-10T00:38:18Z",
-  "source": "GitHub connector: main branch and PR metadata",
-  "repositories": {
-    "inaciovasquez2020/poincare-new-derivation": {
-      "sha": "dd75527f0958d0dcf5e9d0fe1d480ec793b12d38",
-      "prs": [
-        [
-          166,
-          "MERGED",
-          "Fixed43 conditional Lean certificates"
-        ],
-        [
-          170,
-          "MERGED",
-          "Move32 common-link filtration"
-        ],
-        [
-          171,
-          "OPEN",
-          "Pachner 3\u21922 generator correction; CI queued"
-        ],
-        [
-          169,
-          "OPEN",
-          "104-tetrahedron finite replay"
-        ]
-      ]
+  "schema_version": "public-repository-index-v2",
+  "status": "SUPERSEDED",
+  "note": "The former research graph inventory is superseded by the public-only connection snapshot. No historical private-repository metadata is published here.",
+  "canonical_snapshot": "./public-connection-snapshot.json",
+  "captured_date_utc": "2026-11-10",
+  "public_repositories": [
+    {
+      "id": "urf-core",
+      "url": "https://github.com/inaciovasquez2020/urf-core"
     },
-    "inaciovasquez2020/chronos-urf-rr": {
-      "sha": "3ce354779eb9039aef4d1153317f2535ed39fecd",
-      "prs": [
-        [
-          1340,
-          "DRAFT",
-          "Conditional FMT\u2013holonomy bridge; CI in progress"
-        ],
-        [
-          1341,
-          "DRAFT",
-          "URF-AI integration; security review open"
-        ],
-        [
-          1333,
-          "DRAFT",
-          "GfE angular reduction receipts"
-        ]
-      ]
+    {
+      "id": "poincare-new-derivation",
+      "url": "https://github.com/inaciovasquez2020/poincare-new-derivation"
     },
-    "inaciovasquez2020/dfm-mkc-cosmology": {
-      "sha": "8a7e26a72fe58663ed4d974840535cd25c3ac535",
-      "prs": [
-        [
-          334,
-          "MERGED",
-          "Conditional scalar\u2013matter EFT and BBN receipts"
-        ],
-        [
-          332,
-          "DRAFT",
-          "Optical-profile conditional no-go"
-        ]
-      ]
+    {
+      "id": "cslib-fmt",
+      "url": "https://github.com/inaciovasquez2020/cslib-fmt"
     },
-    "inaciovasquez2020/urf-core": {
-      "sha": "f03a5ad38ccd307d3f2e79996e1884b0eaa7a92d",
-      "prs": [
-        [
-          591,
-          "MERGED",
-          "Reconstruction framework schema"
-        ],
-        [
-          590,
-          "DRAFT",
-          "Finite transport / holonomy experiments; CI success"
-        ],
-        [
-          592,
-          "DRAFT",
-          "Holonomy\u2013locality\u2013information transfer; 2 jobs queued"
-        ]
-      ]
+    {
+      "id": "fo4-constraint-isolation",
+      "url": "https://github.com/inaciovasquez2020/fo4-constraint-isolation"
     },
-    "inaciovasquez2020/cslib-fmt": {
-      "sha": "aa2e7d0fce8c59ef1309605695115e4b6f193e08",
-      "prs": [
-        [
-          194,
-          "MERGED",
-          "Locality frontier status and proof docs"
-        ],
-        [
-          193,
-          "MERGED",
-          "Left-cancellation core lemma"
-        ]
-      ]
+    {
+      "id": "overlap-rigidity-oracle-release",
+      "url": "https://github.com/inaciovasquez2020/overlap-rigidity-oracle-release"
     },
-    "inaciovasquez2020/biological-friction-framework": {
-      "sha": "89134c3d97f0dcff82ede0ba77e9dac4dde0837f",
-      "prs": [
-        [
-          109,
-          "DRAFT",
-          "Observation quotient factorization; Lean job in progress"
-        ]
-      ]
+    {
+      "id": "urf-11-translation-subproblem-registry",
+      "url": "https://github.com/inaciovasquez2020/urf-11-translation-subproblem-registry"
     },
-    "inaciovasquez2020/pachner-invariant": {
-      "sha": "c38f516be7943f44100517d872f9cc9cc2cae81c",
-      "prs": [
-        [
-          64,
-          "MERGED",
-          "Counterexample to unconditional theta descent"
-        ],
-        [
-          65,
-          "MERGED",
-          "Conditional theta descent"
-        ],
-        [
-          69,
-          "DRAFT",
-          "2\u21923 vertex-degree formula"
-        ]
-      ]
+    {
+      "id": "zero_day_restricted_closures",
+      "url": "https://github.com/inaciovasquez2020/zero_day_restricted_closures"
     },
-    "inaciovasquez2020/inaciovasquez2020.github.io": {
-      "sha": "f864682f4108456381e489a826689214e189c62e",
-      "prs": [
-        [
-          29,
-          "MERGED",
-          "Input quarantine"
-        ],
-        [
-          32,
-          "MERGED",
-          "Transcript/source guards"
-        ],
-        [
-          35,
-          "MERGED",
-          "Inline mathematical inventory"
-        ],
-        [
-          30,
-          "MERGED",
-          "MachineChecked evidence reader"
-        ]
-      ]
+    {
+      "id": "chronos-urf-rr",
+      "url": "https://github.com/inaciovasquez2020/chronos-urf-rr"
     },
-    "inaciovasquez2020/urf-textbook": {
-      "sha": "e92857b6916b55dae3ee295497be5d84bb5286be",
-      "prs": [
-        [
-          177,
-          "MERGED",
-          "Exact polynomial checker and replayable certificates"
-        ],
-        [
-          176,
-          "MERGED",
-          "Bibliography repair and verification precedents"
-        ]
-      ]
+    {
+      "id": "dfm-mkc-cosmology",
+      "url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology"
     },
-    "inaciovasquez2020/scientific-infrastructure": {
-      "sha": "70049035093fed52dfd4e4adda20f0c1e102e1b6",
-      "prs": [
-        [
-          24,
-          "DRAFT",
-          "Pinned finite-holonomy replay; CI success, stale source pin"
-        ]
-      ]
+    {
+      "id": "biological-friction-framework",
+      "url": "https://github.com/inaciovasquez2020/biological-friction-framework"
     },
-    "inaciovasquez2020/urf-axioms": {
-      "sha": "16391e0b6cb5830f554fee0410ea4161a313eae2",
-      "prs": [
-        [
-          44,
-          "DRAFT",
-          "Cayley graph vs group reconstruction counterexample"
-        ]
-      ]
+    {
+      "id": "darkness-region-dynamics-null-test",
+      "url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test"
     },
-    "inaciovasquez2020/overlap-rigidity-counterexamples": {
-      "sha": "de59979cbb5a9652ccdd2721a922985d7aeeee9c",
-      "prs": [
-        [
-          10,
-          "MERGED",
-          "Free-coordinate reconstruction upper bound"
-        ]
-      ]
+    {
+      "id": "chronos-curated-release",
+      "url": "https://github.com/inaciovasquez2020/chronos-curated-release"
+    },
+    {
+      "id": "urf-verifier",
+      "url": "https://github.com/inaciovasquez2020/urf-verifier"
+    },
+    {
+      "id": "theorem-closure-classifier",
+      "url": "https://github.com/inaciovasquez2020/theorem-closure-classifier"
+    },
+    {
+      "id": "urf-spine-public",
+      "url": "https://github.com/inaciovasquez2020/urf-spine-public"
+    },
+    {
+      "id": "urf-templates",
+      "url": "https://github.com/inaciovasquez2020/urf-templates"
+    },
+    {
+      "id": "urf-textbook",
+      "url": "https://github.com/inaciovasquez2020/urf-textbook"
+    },
+    {
+      "id": "frontier-status-dashboard",
+      "url": "https://github.com/inaciovasquez2020/frontier-status-dashboard"
+    },
+    {
+      "id": "vasquez-index",
+      "url": "https://github.com/inaciovasquez2020/vasquez-index"
+    },
+    {
+      "id": "inaciovasquez2020",
+      "url": "https://github.com/inaciovasquez2020/inaciovasquez2020"
+    },
+    {
+      "id": "inaciovasquez2020.github.io",
+      "url": "https://github.com/inaciovasquez2020/inaciovasquez2020.github.io"
     }
-  },
-  "nodes": 27,
-  "edges": 65,
-  "meaning_of_edges": {
-    "primary": "solid teal; central mathematical or methodological backbone, not a new cross-domain proof",
-    "secondary": "dotted gray; documented relationship outside the primary focus, not a transfer theorem",
-    "proposal": "dotted amber; speculative or draft project-specific bridge, not established"
-  },
-  "not_checked": [
-    "local Mac git state",
-    "full Lean builds on current main",
-    "independent mathematical review of draft #592",
-    "global theorem status beyond cited repository claims"
-  ]
+  ],
+  "nodes_public_repository_count": 21,
+  "connection_edges_count": 28,
+  "five_dimensional_proposals_count": 6,
+  "research_status": "CONDITIONAL_5D_PROPOSAL_GLOBAL_PROOF_OPEN"
 }
