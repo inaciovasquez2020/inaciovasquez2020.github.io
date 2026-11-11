@@ -89,7 +89,7 @@
       "id": "chronos-urf-rr",
       "name": "Chronos / URF–RR",
       "category": "physics",
-      "description": "Physics-facing conditional local/finite reductions and open global obligations.",
+      "description": "Finite-event spacetime research: a restricted four-dimensional conformal family has a nonsingular two-statistic response Jacobian; global event emergence, covariance uncertainty and 5D uplift remain OPEN.",
       "readme_blob": "6c180a9eec1798fcea3fcc166819e3ec49efe949",
       "url": "https://github.com/inaciovasquez2020/chronos-urf-rr",
       "x": 223.17,
@@ -125,7 +125,7 @@
       "description": "Conditional experiment schema, not a measured discovery of new physics.",
       "readme_blob": "07b9b072fc8c416ac55c235640d2cb7760069184",
       "url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test",
-      "x": 355.0,
+      "x": 355,
       "y": 1.06,
       "z": -35.48
     },
@@ -235,9 +235,9 @@
       "description": "Public research website and mathematical status navigation.",
       "readme_blob": "a15eef329b4f09ebfeef5769415eb2f50eadb956",
       "url": "https://github.com/inaciovasquez2020/inaciovasquez2020.github.io",
-      "x": -370.0,
+      "x": -370,
       "y": -0.64,
-      "z": 106.0
+      "z": 106
     },
     {
       "id": "five-dimensional-hypothesis",
@@ -487,7 +487,7 @@
       "target": "chronos-urf-rr",
       "kind": "five_d",
       "name": "5D metric → 4D spacetime model",
-      "boundary": "Need a complete, consistent reduction matching field equations and required coefficients, not just a formal metric ansatz.",
+      "boundary": "Need a 5D parent action, reduction and field-equation match. The restricted 4D event-statistic response Jacobian is nonsingular, but is not evidence for a fifth dimension.",
       "evidence": "A possible KK metric does not validate the physical theory.",
       "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/main/README.md"
     },
@@ -537,6 +537,68 @@
     "Full 5D-to-4D model uplift",
     "Unrestricted Poincaré descent",
     "General physical or computation transfer",
-    "Public URL on iPhone Safari"
-  ]
+    "Public URL on iPhone Safari",
+    "Restricted Chronos 4D local identifiability does not verify 5D emergence",
+    "Three-statistic covariance improvement"
+  ],
+  "research_updates": {
+    "status": "RESEARCH_CHECKPOINT_REPORTED_NOT_INDEPENDENTLY_REVERIFIED",
+    "captured_date_utc": "2026-11-10",
+    "chronos": {
+      "repo": "https://github.com/inaciovasquez2020/chronos-urf-rr",
+      "pr": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1347",
+      "reported_head": "abef2b3e61dcb24a3ebb65ad0df7a76f63d4869f",
+      "scope": "Restricted four-dimensional conformal metric family; two-chain and three-chain response Jacobian",
+      "jacobian_rationals": [
+        [
+          "1/25",
+          "0"
+        ],
+        [
+          "9/3500",
+          "16/165375"
+        ]
+      ],
+      "determinant": "16/4134375",
+      "established_in_report": "Nonsingular local response Jacobian within the restricted family",
+      "not_established": [
+        "5D physical necessity",
+        "5D-to-4D derivation",
+        "joint covariance or variance reduction of a third statistic",
+        "fundamental spacetime emergence",
+        "unrestricted gravitational dynamics"
+      ],
+      "independent_reverification": "NOT_RUN"
+    }
+  },
+  "five_d_connection_audit": {
+    "direct_candidate_count": 6,
+    "public_repo_count": 21,
+    "coverage_definition": "Direct explicit five_d edges from the hypothesis hub; a documentation metric only",
+    "candidate_status": "OPEN",
+    "unconnected_repo_ids": [
+      "fo4-constraint-isolation",
+      "overlap-rigidity-oracle-release",
+      "urf-11-translation-subproblem-registry",
+      "zero_day_restricted_closures",
+      "biological-friction-framework",
+      "chronos-curated-release",
+      "urf-verifier",
+      "theorem-closure-classifier",
+      "urf-spine-public",
+      "urf-templates",
+      "urf-textbook",
+      "frontier-status-dashboard",
+      "vasquez-index",
+      "inaciovasquez2020",
+      "inaciovasquez2020.github.io"
+    ],
+    "open_obligations": [
+      "Specify a common finite observation/transport structure and an explicit circle-bundle connection construction.",
+      "Prove a functorial transfer theorem preserving declared observables and boundary assumptions.",
+      "Derive complete 5D-to-4D field equations with coefficients, not merely a geometric ansatz.",
+      "Give 5D-specific predictions distinguishable from conventional 4D gauge models.",
+      "Establish any topology, logic, computation, biology or cosmology transfer separately with nonvacuous hypotheses."
+    ]
+  }
 }
