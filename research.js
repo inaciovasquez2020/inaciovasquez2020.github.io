@@ -7,7 +7,7 @@ const PROJECTS = {
     name: "Poincaré proof program",
     summary: "An independent Lean-assisted program studying combinatorial moves and 3-manifold topology. Classical Poincaré is proved; the independent global derivation remains open.",
     status: "OPEN · intermediate verified work is not global closure",
-    frontier: "Universal stabilized descent, cyclic/reentry control and global JIID remain unresolved.",
+    frontier: "Merged positional 1→4 insertion preserves list order around the selected tetrahedron. Positional closed-core preservation and global descent remain open.",
     source: "Inspect theorem hypotheses, exact revision, build logs and axiom dependencies before citing an intermediate result.",
     url: "https://github.com/inaciovasquez2020/poincare-new-derivation"
   },
@@ -16,7 +16,7 @@ const PROJECTS = {
     name: "Chronos / URF–RR",
     summary: "Executable finite and conditional spectral investigations, with explicit distinction between bounded certificates and global operator claims.",
     status: "CONDITIONAL · bounded certificates do not close spectral questions",
-    frontier: "Uniformity, global spectral closure and other separately tracked operator obligations remain open.",
+    frontier: "The merged finite-holonomy note records a bounded-locality observation model with independently gauge-quotiented restrictions. Global spectral closure remains open.",
     source: "Review exact source artifacts, assumptions and reproducibility receipts in the reference implementation.",
     url: "https://github.com/inaciovasquez2020/chronos-urf-rr"
   },
