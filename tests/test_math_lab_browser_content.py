@@ -3,7 +3,7 @@
 Runs in installed Chrome; checks all five non-English locales against actual UI dictionaries.
 No mathematical source or verification exports are translated."""
 from __future__ import annotations
-import contextlib, html, json, re, shutil, subprocess, tempfile, threading
+import html, json, re, shutil, subprocess, tempfile, threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -99,8 +99,7 @@ class Handler(SimpleHTTPRequestHandler):
   self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8')
   self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
 
-with contextlib.chdir(ROOT):
- server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+with ThreadingHTTPServer(('127.0.0.1',0),Handler) as server:
  threading.Thread(target=server.serve_forever,daemon=True).start()
  try:
   with tempfile.TemporaryDirectory(prefix='lab-content-') as directory:
@@ -118,4 +117,4 @@ with contextlib.chdir(ROOT):
     if result['status']!='PASS':raise SystemExit(f'FULL_TEXT_SMOKE := FAIL {result}')
     print(f'FULL_TEXT_{language} := PASS')
    print('FULL_TEXT_SMOKE := PASS main-page priority paragraphs in 5 non-English locales')
- finally:server.shutdown();server.server_close()
+ finally:server.shutdown()

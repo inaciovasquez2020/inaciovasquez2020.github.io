@@ -4,7 +4,7 @@ No browser installation or external network. Preserve source/code, inspect trans
 This is a rendered coverage gate, not an independent linguistic quality certificate.
 """
 from __future__ import annotations
-import contextlib, html, json, re, shutil, subprocess, tempfile, threading
+import html, json, re, shutil, subprocess, tempfile, threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qs
@@ -82,8 +82,7 @@ class Handler(SimpleHTTPRequestHandler):
   self.send_header('Content-Type','text/html; charset=utf-8')
   self.send_header('Content-Length',str(len(data)))
   self.end_headers();self.wfile.write(data)
-with contextlib.chdir(ROOT):
- server=ThreadingHTTPServer(("127.0.0.1",0),Handler)
+with ThreadingHTTPServer(("127.0.0.1",0),Handler) as server:
  threading.Thread(target=server.serve_forever,daemon=True).start()
  try:
   with tempfile.TemporaryDirectory(prefix="math-lab-parity-") as folder:
@@ -104,4 +103,4 @@ with contextlib.chdir(ROOT):
      total+=result['static_translations_tested']
      print(f"RENDERED_TRANSLATION_{page}_{lang} := PASS checked={result['static_translations_tested']}")
    print(f"RENDERED_TRANSLATION_PARITY := PASS 20 page×locale states; translated_fragments_checked={total}")
- finally:server.shutdown();server.server_close()
+ finally:server.shutdown()
