@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Real Chromium/Chrome DOM smoke test; no browser downloads or proof-status inference."""
 from __future__ import annotations
-import contextlib
+
 import html
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -35,9 +35,8 @@ def fragment(dom: str, id_value: str) -> str:
         raise AssertionError(f"missing rendered node {id_value}")
     return html.unescape(re.sub(r'<[^>]*>', "", match.group(1))).strip()
 
-with contextlib.chdir(ROOT):
-    server = ThreadingHTTPServer(("127.0.0.1", 0),
-                                 lambda *args, **kwargs: QuietHandler(*args, directory=str(ROOT), **kwargs))
+with ThreadingHTTPServer(("127.0.0.1", 0),
+                                 lambda *args, **kwargs: QuietHandler(*args, directory=str(ROOT), **kwargs)) as server:
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
@@ -75,4 +74,3 @@ with contextlib.chdir(ROOT):
         print("BROWSER_TRANSLATION_SMOKE := PASS (initial render, 6 languages)")
     finally:
         server.shutdown()
-        server.server_close()

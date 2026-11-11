@@ -2,7 +2,7 @@
 """Rendered layout checks at narrow and wide browser windows, with actual viewport receipts.
 No dependencies or Chrome downloads. Does NOT establish human visual quality."""
 from __future__ import annotations
-import contextlib, html, json, re, shutil, subprocess, tempfile, threading
+import html, json, re, shutil, subprocess, tempfile, threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit, parse_qs
@@ -59,8 +59,7 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_header('Content-Length',str(len(content)))
         self.end_headers();self.wfile.write(content)
 
-with contextlib.chdir(ROOT):
-    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+with ThreadingHTTPServer(('127.0.0.1',0),Handler) as server:
     threading.Thread(target=server.serve_forever,daemon=True).start()
     try:
         with tempfile.TemporaryDirectory(prefix='lab-layout-') as temp:
@@ -87,4 +86,4 @@ with contextlib.chdir(ROOT):
                         raise SystemExit(f'BROWSER_LAYOUT := INCOMPLETE_BAD_NARROW_VIEWPORT {result}')
                     print(f'BROWSER_LAYOUT_{label}_{lang} := PASS viewport={result["viewport"]} document={result["document_width"]}')
             print('BROWSER_LAYOUT := PASS 12 desktop/narrow-window renderings; phone-sized 390px NOT_RUN')
-    finally:server.shutdown();server.server_close()
+    finally:server.shutdown()

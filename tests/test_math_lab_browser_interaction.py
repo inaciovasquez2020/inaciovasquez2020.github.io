@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Browser interaction test in local headless Chrome: translation must not change exact evidence."""
 from __future__ import annotations
-import contextlib
+
 import os
 import html
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -15,14 +15,6 @@ import threading
 from urllib.parse import urlsplit, parse_qs
 
 ROOT=Path(__file__).resolve().parents[1]
-@contextlib.contextmanager
-def _chdir_compat(path):
-    previous = os.getcwd()
-    os.chdir(path)
-    try:
-        yield
-    finally:
-        os.chdir(previous)
 
 def _working_chrome():
     # Prefer actual macOS bundles over broken Homebrew/shim launchers.
@@ -217,8 +209,7 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(output)
 
-with _chdir_compat(ROOT):
-    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+with ThreadingHTTPServer(('127.0.0.1',0),Handler) as server:
     threading.Thread(target=server.serve_forever,daemon=True).start()
     try:
         with tempfile.TemporaryDirectory(prefix='lab-ci-interactive-') as tmp:
@@ -244,4 +235,3 @@ with _chdir_compat(ROOT):
             print('BROWSER_INTERACTION := PASS '+json.dumps(result,sort_keys=True))
     finally:
         server.shutdown()
-        server.server_close()

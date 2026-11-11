@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Six-language browser negative-path smoke; no downloads, no claims of proof."""
 from __future__ import annotations
-import contextlib
+
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import html, json, re, shutil, subprocess, tempfile, threading
@@ -113,8 +113,7 @@ class Handler(SimpleHTTPRequestHandler):
   self.send_response(200);self.send_header('Content-Type','text/html; charset=utf-8')
   self.send_header('Content-Length',str(len(data)));self.end_headers();self.wfile.write(data)
 
-with contextlib.chdir(ROOT):
- server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+with ThreadingHTTPServer(('127.0.0.1',0),Handler) as server:
  threading.Thread(target=server.serve_forever,daemon=True).start()
  try:
   with tempfile.TemporaryDirectory(prefix='lab-negative-') as root:
@@ -134,4 +133,4 @@ with contextlib.chdir(ROOT):
      if result['status']!='PASS':raise SystemExit(f'BROWSER_NEGATIVE := FAIL {path} {lang} {result}')
      print(f'BROWSER_NEGATIVE_{path}_{lang} := PASS')
    print('BROWSER_NEGATIVE := PASS (12 rendered cases)')
- finally:server.shutdown();server.server_close()
+ finally:server.shutdown()
