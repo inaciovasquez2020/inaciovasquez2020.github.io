@@ -530,6 +530,26 @@
       "boundary": "Need a predicted observable that differs from competing 4D gauge models, then controlled real-data falsification.",
       "evidence": "The present null-test is schema-only; no anomaly measured.",
       "source_url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test/blob/main/README.md"
+    },
+    {
+      "id": "e28",
+      "source": "biological-friction-framework",
+      "target": "urf-core",
+      "kind": "documented",
+      "name": "Merged BFF–URF observation-quotient interface",
+      "boundary": "The merged isolated observation-factorization candidate is abstract; it does not prove a biological observation-map theorem or clinical validity. README's CI status requires independent rechecking.",
+      "evidence": "BFF PR #109 merged; its public observation-bridge README explicitly relates exact quotient decoding to URF Core while retaining biological and verification boundaries.",
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/109"
+    },
+    {
+      "id": "e29",
+      "source": "chronos-urf-rr",
+      "target": "cslib-fmt",
+      "kind": "documented",
+      "name": "Merged Chronos–FMT candidate locality research note",
+      "boundary": "Documentation-only link. The FMT radius-ball and game semantics have not been shown equivalent to independently gauge-quotiented proper-path observations; no general locality or 5D theorem.",
+      "evidence": "Chronos PR #1340 merged at 250b85478a116c7608fdb7bc7def29fc36cb5eed, introducing a conditional finite-holonomy/FMT interface note.",
+      "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1340"
     }
   ],
   "not_verified": [
@@ -600,5 +620,43 @@
       "Give 5D-specific predictions distinguishable from conventional 4D gauge models.",
       "Establish any topology, logic, computation, biology or cosmology transfer separately with nonvacuous hypotheses."
     ]
+  },
+  "merged_connection_updates": {
+    "captured_date_utc": "2026-11-11",
+    "status": "MERGED_SOURCE_RELATION_NOT_NEW_5D_THEOREM",
+    "entries": [
+      {
+        "pr": 109,
+        "repo": "biological-friction-framework",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/109"
+      },
+      {
+        "pr": 1340,
+        "repo": "chronos-urf-rr",
+        "merged": true,
+        "merge_sha": "250b85478a116c7608fdb7bc7def29fc36cb5eed",
+        "evidence_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1340"
+      }
+    ],
+    "pending_prs": [
+      {
+        "repo": "urf-core",
+        "pr": 590
+      },
+      {
+        "repo": "urf-core",
+        "pr": 592
+      },
+      {
+        "repo": "chronos-urf-rr",
+        "pr": 1346
+      },
+      {
+        "repo": "scientific-infrastructure",
+        "pr": 24
+      }
+    ],
+    "interpretation": "Documented graph edges are routing/methodology, never automatic physics or theorem transfer"
   }
 }
