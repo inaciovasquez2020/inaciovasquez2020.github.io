@@ -32,10 +32,18 @@ class ReplayTest(unittest.TestCase):
             with self.subTest(field=field):
                 with self.assertRaises(ReplayError): replay(doc)
     def test_adversarial_inputs(self):
-        for eq in ['x=x=x','x/x=1','x**2=x*x','x^2^2=x^4','x^(2)=x*x','x**y=x','x^9=x^9','a=a','x + 1=1+x;print(1)']:
+        for eq in ['1 2=12','1 000000=1000000','x=x=x','x/x=1','x**2=x*x','x^2^2=x^4','x^(2)=x*x','x**y=x','x^9=x^9','a=a','x + 1=1+x;print(1)']:
             doc=from_js('x=x');doc['equation']=eq
             with self.subTest(eq=eq):
                 with self.assertRaises(ReplayError): replay(doc)
+    def test_spaces_are_not_erased_from_tokens(self):
+        valid=from_js('x ^ 2 + y = x * x + y')
+        self.assertEqual(replay(valid)['status'],'REPLAY_PASS')
+        for malformed in ['1 2=12','1 000000=1000000']:
+            forged=from_js('12=12')
+            forged['equation']=malformed
+            with self.assertRaises(ReplayError): replay(forged)
+
     def test_deterministic_sweep(self):
         for a in range(1,11):
             for b in range(1,11):
