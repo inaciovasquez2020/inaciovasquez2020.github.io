@@ -78,6 +78,31 @@ class ReplayTest(unittest.TestCase):
             self.assertEqual(report['status'],expected,expression)
             self.assertEqual(replay(report)['status'],'REPLAY_PASS',expression)
 
+    def test_exact_token_alphabet_and_unicode_whitespace(self):
+        original=from_js('1=1')
+        forged=copy.deepcopy(original)
+        forged['equation']='\u0661=1'  # Arabic-Indic digit rejected by JavaScript.
+        with self.assertRaises(ReplayError):
+            replay(forged)
+        for eq in ['x\ufeff+1=x+1', 'x\u00a0+1=x+1']:
+            self.assertEqual(replay(from_js(eq))['status'], 'REPLAY_PASS')
+
+    def test_nested_numeric_types_reject_bool(self):
+        original=from_js('x=x')
+        forged=copy.deepcopy(original)
+        forged['degree_upper_bounds']['x']=True
+        with self.assertRaises(ReplayError):
+            replay(forged)
+        false=from_js('x=0')
+        forged=copy.deepcopy(false)
+        forged['counterexample']['x']=True
+        with self.assertRaises(ReplayError):
+            replay(forged)
+
+    def test_deep_parentheses_match_js(self):
+        eq='('*32+'x'+')'*32+'=x'
+        self.assertEqual(replay(from_js(eq))['status'], 'REPLAY_PASS')
+
     def test_deterministic_sweep(self):
         for a in range(1,11):
             for b in range(1,11):

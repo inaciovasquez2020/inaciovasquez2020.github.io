@@ -14,7 +14,8 @@ def require(p, msg):
 
 LIMIT = 2048
 MAX_SIZE = 8192
-TOKEN = re.compile(r'\s+|\d+|[xy+*^()\-]')
+JS_SPACE = r'[\u0009-\u000d \u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+'
+TOKEN = re.compile(JS_SPACE + r'|[0-9]+|[xy+*^()\-]')
 
 def parse(source):
     """Build an AST from the browser grammar, not Python's power precedence."""
@@ -24,7 +25,7 @@ def parse(source):
     for m in TOKEN.finditer(source):
         require(m.start() == offset, 'unsupported expression character')
         offset = m.end()
-        if not m.group().isspace():
+        if not re.fullmatch(JS_SPACE, m.group()):
             items.append(m.group())
     require(offset == len(source) and len(items) <= 100, 'unsupported expression / tokens')
     for item in items:
@@ -76,16 +77,12 @@ def parse(source):
         return base
 
     def unary():
-        nonlocal depth
-        depth += 1
-        require(depth <= 64, 'expression nesting')
-        try:
-            if peek() in ('+', '-'):
-                op = ast.UAdd() if take() == '+' else ast.USub()
-                return ast.UnaryOp(op=op, operand=unary())
-            return power()
-        finally:
-            depth -= 1
+        # Match JavaScript: only atom() contributes to the expression nesting cap.
+        # The 100-token limit separately bounds unary recursion.
+        if peek() in ('+', '-'):
+            op = ast.UAdd() if take() == '+' else ast.USub()
+            return ast.UnaryOp(op=op, operand=unary())
+        return power()
 
     def product():
         value = unary()
@@ -200,8 +197,20 @@ def replay(report):
               'formal_kernel_verified':False,'python_replay_performed':False,
               'website_integrated':False}
     require((lp == rp) == (mismatch is None),'coefficient-grid disagreement')
+    def exact_json_equal(actual, expected):
+        # Python's bool is an int subclass; JSON true must not equal numeric 1.
+        if type(actual) is not type(expected):
+            return False
+        if isinstance(expected, dict):
+            return actual.keys() == expected.keys() and all(
+                exact_json_equal(actual[k], value) for k, value in expected.items())
+        if isinstance(expected, list):
+            return len(actual) == len(expected) and all(
+                exact_json_equal(a, b) for a, b in zip(actual, expected))
+        return actual == expected
+
     for key,value in expected.items():
-        require(type(report.get(key)) == type(value) and report.get(key)==value,'report mismatch: '+key)
+        require(exact_json_equal(report.get(key), value), 'report mismatch: '+key)
     return {'status':'REPLAY_PASS','equation':eq,'grid_checks':checks}
 
 def reject_duplicate_keys(pairs):
