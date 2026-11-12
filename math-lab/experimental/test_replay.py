@@ -58,19 +58,24 @@ class ReplayTest(unittest.TestCase):
                     load_report(raw)
 
     def test_unary_power_precedence_and_forged_pass(self):
-        # JavaScript parses -x^2 as (-x)^2, unlike native Python.
-        valid=from_js('-x^2=x^2')
-        self.assertEqual(valid['status'],'EXACT_CERTIFICATE_PASS')
-        self.assertEqual(replay(valid)['status'],'REPLAY_PASS')
-        false=from_js('-x^2=-(x*x)')
+        # Both JS and Python parse -x^2 as -(x^2), not (-x)^2.
+        false=from_js('-x^2=x^2')
         self.assertEqual(false['status'],'REFUTED')
         self.assertEqual(replay(false)['status'],'REPLAY_PASS')
-        forged=copy.deepcopy(valid)
-        forged['equation']='-x^2=-(x*x)'
+        valid=from_js('-x^2=-(x*x)')
+        self.assertEqual(valid['status'],'EXACT_CERTIFICATE_PASS')
+        self.assertEqual(replay(valid)['status'],'REPLAY_PASS')
+        forged=copy.deepcopy(false)
+        forged['status']='EXACT_CERTIFICATE_PASS'
         with self.assertRaises(ReplayError):
             replay(forged)
-        for expression in ['-2^2=4', '-(2^2)=-4', '--x^2=x^2']:
+        for expression, expected in [
+            ('-2^2=4','REFUTED'),
+            ('-(2^2)=-4','EXACT_CERTIFICATE_PASS'),
+            ('--x^2=x^2','EXACT_CERTIFICATE_PASS'),
+            ('(-x)^2=x^2','EXACT_CERTIFICATE_PASS')]:
             report=from_js(expression)
+            self.assertEqual(report['status'],expected,expression)
             self.assertEqual(replay(report)['status'],'REPLAY_PASS',expression)
 
     def test_deterministic_sweep(self):
