@@ -116,7 +116,8 @@ export function verifyBivariate(equation){
  }
  if(coefficientEqual===(counterexample!==null))throw Error('INTERNAL CHECKER DISAGREEMENT: no verdict.');
  return {
-  schema:'vasquez.math-lab.bivariate.experimental.v0.1',engine:BIVARIATE_VERSION,
+  schema:'vasquez.math-lab.bivariate.experimental.v0.2',engine:BIVARIATE_VERSION,
+  equation,
   status:counterexample?'REFUTED':'EXACT_CERTIFICATE_PASS',domain:'Z[x,y]',
   degree_upper_bounds:{x:dx,y:dy},grid_checks:gridChecks,
   coefficient_terms:lhs.size+rhs.size, counterexample,
