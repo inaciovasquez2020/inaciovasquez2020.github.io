@@ -13,7 +13,7 @@ def from_js(expr):
     return json.loads(p.stdout)
 
 sys.path.insert(0,str(ROOT))
-from replay_bivariate import replay,ReplayError
+from replay_bivariate import replay,ReplayError,load_report
 
 class ReplayTest(unittest.TestCase):
     def test_truths_and_counterexamples(self):
@@ -43,6 +43,19 @@ class ReplayTest(unittest.TestCase):
             forged=from_js('12=12')
             forged['equation']=malformed
             with self.assertRaises(ReplayError): replay(forged)
+
+    def test_duplicate_json_keys_rejected_before_replay(self):
+        original=from_js('(x+y)^2=x^2+2*x*y+y^2')
+        serialized=json.dumps(original)
+        self.assertEqual(replay(load_report(serialized))['status'],'REPLAY_PASS')
+        # Ambiguous root-level and nested evidence metadata must be rejected.
+        forged_root=serialized.replace('"status": "EXACT_CERTIFICATE_PASS"',
+            '"status": "REFUTED", "status": "EXACT_CERTIFICATE_PASS"',1)
+        forged_nested=serialized.replace('"x": 2', '"x": 1, "x": 2',1)
+        for raw in [forged_root,forged_nested]:
+            with self.subTest(raw=raw[:120]):
+                with self.assertRaisesRegex(ReplayError,'duplicate JSON key'):
+                    load_report(raw)
 
     def test_deterministic_sweep(self):
         for a in range(1,11):
