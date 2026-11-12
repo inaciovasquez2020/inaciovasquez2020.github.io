@@ -26,7 +26,7 @@ class ReplayTest(unittest.TestCase):
             'counterexample':{'x':0,'y':0,'lhs':'0','rhs':'1'},
             'degree_upper_bounds':{'x':0,'y':0},'formal_kernel_verified':True,
             'schema':'v0','engine':'other','equation':'x=x','website_integrated':True,
-            'python_replay_performed':True}
+            'python_replay_performed':True,'method':'fake proof','domain':'R'}
         for field,value in modifications.items():
             doc=copy.deepcopy(original);doc[field]=value
             with self.subTest(field=field):
