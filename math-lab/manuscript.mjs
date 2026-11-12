@@ -32,15 +32,38 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
   const titleMatch = /\\title\s*\{([^{}]{1,500})\}/.exec(text);
   const title = titleMatch ? concise(titleMatch[1], 180) : 'Untitled manuscript';
   const claims = [];
-  const re = /\\begin\{(definition|lemma|theorem|corollary|proposition)\}(?:\[([^\]]{0,180})\])?([\s\S]*?)\\end\{\1\}/g;
-  for (const m of text.matchAll(re)) {
-    if (!CLAIM_TYPES.has(m[1])) continue;
-    if (claims.length >= 150) throw new TypeError('Too many theorem environments (maximum 150).');
-    claims.push({ number: claims.length + 1, kind: m[1], name: concise(m[2] || '', 150),
-      excerpt: concise(m[3]), line: lineno(text, m.index),
-      source_anchor:sourceAnchor(source,m.index,m.index+m[0].length,scanned.source_sha256),
-      status: 'NOT_VERIFIED', verification_engine: null });
+  // Inventory nested theorem-like environments in source order, not with a
+  // non-greedy regex (which silently drops nested environments).
+  const claimStack = [];
+  let malformedClaimNesting = false;
+  const claimTokens = /\\(begin|end)\{(definition|lemma|theorem|corollary|proposition)\}(?:\[([^\]]{0,180})\])?/g;
+  for(const m of text.matchAll(claimTokens)){
+    const [,action,kind,name=''] = m;
+    if(!CLAIM_TYPES.has(kind))continue;
+    if(action==='begin'){
+      if(claims.length+claimStack.length>=150)
+        throw new TypeError('Too many theorem environments (maximum 150).');
+      claimStack.push({kind,name,start:m.index,bodyStart:m.index+m[0].length});
+    }else if(claimStack.at(-1)?.kind===kind){
+      const opened=claimStack.pop();
+      claims.push({kind,name:concise(opened.name,150),
+        excerpt:concise(text.slice(opened.bodyStart,m.index)),
+        line:lineno(text,opened.start),
+        source_anchor:sourceAnchor(source,opened.start,m.index+m[0].length,scanned.source_sha256),
+        status:'NOT_VERIFIED',verification_engine:null});
+    }else{
+      malformedClaimNesting=true;
+      claimStack.length=0;
+    }
   }
+  // Any malformed enclosing environment invalidates the inventory. The
+  // structural scanner supplies these flags; this is NOT a theorem check.
+  const malformedEnvironment=scanned.flags.some(f=>
+    f.code==='MISMATCHED_ENVIRONMENT'||f.code==='UNTERMINATED_ENVIRONMENT'||
+    f.code==='UNTERMINATED_DISPLAY');
+  if(malformedClaimNesting||claimStack.length||malformedEnvironment)claims.length=0;
+  claims.sort((a,b)=>a.source_anchor.start_utf16-b.source_anchor.start_utf16);
+  for(let i=0;i<claims.length;i++)claims[i].number=i+1;
   const proofs = [...text.matchAll(/\\begin\{proof\}/g)].length;
   const math=scanned.display.slice(0,150).map(x=>({line:x.line,latex:concise(x.content,380),source_anchor:x.source_anchor,status:'NOT_VERIFIED',reason:'No compatible mathematical proof engine selected.'}));
   for(const item of [...claims,...math,...scanned.flags])if(!verifySourceAnchor(source,item.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
