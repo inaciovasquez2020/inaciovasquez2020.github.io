@@ -31,6 +31,11 @@ jobs:
           python3 tests/test_math_lab_navigation.py
           python3 -m py_compile math-lab/replay_casebook.py
 
+      - name: Experimental Math Lab bivariate exact and independent replay tests
+        run: |
+          node --test math-lab/experimental/test_bivariate.mjs
+          python3 -m unittest discover -s math-lab/experimental -p 'test_replay.py' -v
+
       - name: Browser localization smoke (installed Chrome, no downloads)
         run: python3 tests/test_math_lab_browser_translation.py
       - name: Browser main-page translated prose across five languages
