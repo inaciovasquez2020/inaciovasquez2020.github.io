@@ -164,3 +164,38 @@ test('inline overflow remains a review-required truncation, not a silent PASS',(
  assert.ok(result.extraction.flags.some(f=>f.code==='INLINE_INVENTORY_TRUNCATED'));
  assert.equal(result.status,'NOT_VERIFIED');
 });
+
+
+test('nested claims preserve order, source anchors, and non-proof status',async()=>{
+ const {verifySourceAnchor}=await import('./source-location.mjs');
+ const src=String.raw`\begin{theorem}[Outer]\begin{lemma}[Inner] B. \end{lemma} A.\end{theorem}`;
+ const r=auditManuscript(src);
+ assert.deepEqual(r.claims.map(c=>[c.number,c.kind,c.name]),[[1,'theorem','Outer'],[2,'lemma','Inner']]);
+ assert.deepEqual([r.counts.theorems,r.counts.lemmas],[1,1]);
+ assert.equal(r.status,'NOT_VERIFIED');
+ for(const c of r.claims){
+  assert.equal(c.status,'NOT_VERIFIED');
+  assert.equal(verifySourceAnchor(src,c.source_anchor),true);
+ }
+});
+test('identical nested theorem environments are both inventoried',()=>{
+ const r=auditManuscript(String.raw`\begin{theorem} A \begin{theorem} B \end{theorem} C \end{theorem}`);
+ assert.equal(r.counts.theorems,2);
+ assert.deepEqual(r.claims.map(c=>c.number),[1,2]);
+});
+test('cross-nested theorem environments fail closed',()=>{
+ const r=auditManuscript(String.raw`\begin{theorem}\begin{lemma} B \end{theorem}\end{lemma}`);
+ assert.equal(r.claims.length,0);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+ assert.equal(r.status,'NOT_VERIFIED');
+});
+test('malformed non-theorem container cannot produce trusted inventory',()=>{
+ const r=auditManuscript(String.raw`\begin{document}\begin{theorem} A \end{theorem}\end{center}`);
+ assert.equal(r.claims.length,0);
+ assert.equal(r.extraction.status,'REVIEW_REQUIRED');
+});
+test('nested claim cap is enforced independently of nesting depth',()=>{
+ const src=Array.from({length:150},()=>String.raw`\begin{lemma} A \end{lemma}`).join('\n');
+ assert.equal(auditManuscript(src).claims.length,150);
+ assert.throws(()=>auditManuscript(src+String.raw`\begin{lemma} B \end{lemma}`),/Too many theorem environments/);
+});
