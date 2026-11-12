@@ -17,6 +17,7 @@ MAX_SIZE = 8192
 TOKEN = re.compile(r'\s+|\d+|[xy+*^()\-]')
 
 def parse(source):
+    """Build an AST from the browser grammar, not Python's power precedence."""
     require(isinstance(source, str) and len(source) <= 512, 'expression length')
     items = []
     offset = 0
@@ -26,18 +27,83 @@ def parse(source):
         if not m.group().isspace():
             items.append(m.group())
     require(offset == len(source) and len(items) <= 100, 'unsupported expression / tokens')
-    require(not any(items[i] == '*' and items[i+1] == '*' for i in range(len(items)-1)), 'unsupported power spelling')
-    require(not any(items[i] == '^' and (i+1 == len(items) or not items[i+1].isdigit()) for i in range(len(items))), 'nonliteral exponent')
     for item in items:
         if item[0].isdigit():
             require(int(item) <= 1000000, 'literal too large')
-    # Preserve whitespace: discarding it would turn invalid '1 2' into '12'.
-    expr = source.strip().replace('^', '**')
-    try:
-        tree = ast.parse(expr, mode='eval')
-    except (SyntaxError, ValueError, RecursionError) as exc:
-        raise ReplayError('invalid expression') from exc
-    return tree.body
+    pos = 0
+    depth = 0
+
+    def peek():
+        return items[pos] if pos < len(items) else None
+
+    def take(expected=None):
+        nonlocal pos
+        got = peek()
+        require(got is not None and (expected is None or got == expected),
+                'unexpected expression token')
+        pos += 1
+        return got
+
+    def atom():
+        nonlocal depth
+        depth += 1
+        require(depth <= 64, 'expression nesting')
+        try:
+            token = peek()
+            if token is None:
+                raise ReplayError('missing atom')
+            if token[0].isdigit():
+                return ast.Constant(value=int(take()))
+            if token in ('x', 'y'):
+                return ast.Name(id=take(), ctx=ast.Load())
+            if token == '(':
+                take('(')
+                expression = summation()
+                take(')')
+                return expression
+            raise ReplayError('invalid atom')
+        finally:
+            depth -= 1
+
+    def power():
+        base = atom()
+        if peek() == '^':
+            take('^')
+            exponent = take()
+            require(exponent[0].isdigit() and int(exponent) <= 8, 'literal exponent')
+            return ast.BinOp(left=base, op=ast.Pow(),
+                             right=ast.Constant(value=int(exponent)))
+        return base
+
+    def unary():
+        nonlocal depth
+        depth += 1
+        require(depth <= 64, 'expression nesting')
+        try:
+            if peek() in ('+', '-'):
+                op = ast.UAdd() if take() == '+' else ast.USub()
+                return ast.UnaryOp(op=op, operand=unary())
+            return power()
+        finally:
+            depth -= 1
+
+    def product():
+        value = unary()
+        while peek() == '*':
+            take('*')
+            value = ast.BinOp(left=value, op=ast.Mult(), right=unary())
+        return value
+
+    def summation():
+        value = product()
+        while peek() in ('+', '-'):
+            op = ast.Add() if take() == '+' else ast.Sub()
+            value = ast.BinOp(left=value, op=op, right=product())
+        return value
+
+    root = summation()
+    require(pos == len(items), 'unconsumed expression tokens')
+    return root
 
 def bits(n):
     require(abs(n).bit_length() <= LIMIT, 'integer resource limit')
