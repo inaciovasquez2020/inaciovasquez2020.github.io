@@ -1,6 +1,6 @@
 {
   "schema_version": "public-5d-repository-boundaries-v1",
-  "captured_date_utc": "2026-11-10",
+  "captured_date_utc": "2026-11-12",
   "inventory_source": "GitHub connector owner inventory and 21 verified public README files; no private repository names included",
   "interpretation": {
     "documented": "Publicly documented source or methodological routing, NOT a new theorem",
@@ -111,7 +111,7 @@
       "id": "biological-friction-framework",
       "name": "Biological friction",
       "category": "physics",
-      "description": "Biological evidence/certificate surfaces; no clinical or universal transfer result.",
+      "description": "Public five-coordinate dissipative toy model and exact 5D face-count/metric-identifiability obstructions; physical and clinical mapping OPEN.",
       "readme_blob": "3bdc9fecf20f4f72fd56f16302b8aed681204001",
       "url": "https://github.com/inaciovasquez2020/biological-friction-framework",
       "x": 387.5,
@@ -438,8 +438,8 @@
       "kind": "future",
       "name": "Observation quotients → biological systems",
       "boundary": "Need a defined measurable biological observation map and experimentally testable discriminant.",
-      "evidence": "Abstract quotient factorization does not validate biological models.",
-      "source_url": "https://github.com/inaciovasquez2020/urf-core/blob/main/README.md"
+      "evidence": "BFF public PRs #110–#113 verify state-space and exact geometric/mathematical identifiability restrictions; no empirical biological observation map.",
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113"
     },
     {
       "id": "e19",
@@ -550,6 +550,16 @@
       "boundary": "Documentation-only link. The FMT radius-ball and game semantics have not been shown equivalent to independently gauge-quotiented proper-path observations; no general locality or 5D theorem.",
       "evidence": "Chronos PR #1340 merged at 250b85478a116c7608fdb7bc7def29fc36cb5eed, introducing a conditional finite-holonomy/FMT interface note.",
       "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1340"
+    },
+    {
+      "id": "e30",
+      "source": "five-dimensional-hypothesis",
+      "target": "biological-friction-framework",
+      "kind": "five_d",
+      "name": "5D face/metric constraints → biological identification boundary",
+      "boundary": "Five-state coordinates, 5D simplicial dimension and physical extra dimensions are distinct. Need calibrated metric/biological observation map, matched 4D null model and independent data.",
+      "evidence": "Merged BFF PRs #111 (Dehn–Sommerville rank ≤3), #112 (rational relaxation not realizable triangulation path) and #113 (metric-scale nonidentifiability); physical and biological interpretation OPEN.",
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113"
     }
   ],
   "not_verified": [
@@ -559,11 +569,14 @@
     "General physical or computation transfer",
     "Public URL on iPhone Safari",
     "Restricted Chronos 4D local identifiability does not verify 5D emergence",
-    "Three-statistic covariance improvement"
+    "Three-statistic covariance improvement",
+    "Five state-space coordinates do not imply physical fifth dimension",
+    "Unweighted 5D combinatorics cannot uniquely determine metric scale",
+    "No empirical biological geometric coupling established"
   ],
   "research_updates": {
     "status": "RESEARCH_CHECKPOINT_REPORTED_NOT_INDEPENDENTLY_REVERIFIED",
-    "captured_date_utc": "2026-11-10",
+    "captured_date_utc": "2026-11-12",
     "chronos": {
       "repo": "https://github.com/inaciovasquez2020/chronos-urf-rr",
       "pr": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1347",
@@ -589,10 +602,23 @@
         "unrestricted gravitational dynamics"
       ],
       "independent_reverification": "NOT_RUN"
+    },
+    "public_biological_five_d": {
+      "captured_date_utc": "2026-11-12",
+      "repo": "https://github.com/inaciovasquez2020/biological-friction-framework",
+      "source_main_commit": "4c18c5d528b97e38b8abc2e83327fd185fe2f8ec",
+      "merged_prs": [
+        110,
+        111,
+        112,
+        113
+      ],
+      "established": "Exact toy state/5-sphere face count and metric-identifiability results; not physical fifth dimension",
+      "open": "5D field dynamics and empirical biological metric couplings unverified"
     }
   },
   "five_d_connection_audit": {
-    "direct_candidate_count": 6,
+    "direct_candidate_count": 7,
     "public_repo_count": 21,
     "coverage_definition": "Direct explicit five_d edges from the hypothesis hub; a documentation metric only",
     "candidate_status": "OPEN",
@@ -601,7 +627,6 @@
       "overlap-rigidity-oracle-release",
       "urf-11-translation-subproblem-registry",
       "zero_day_restricted_closures",
-      "biological-friction-framework",
       "chronos-curated-release",
       "urf-verifier",
       "theorem-closure-classifier",
@@ -622,8 +647,8 @@
     ]
   },
   "merged_connection_updates": {
-    "captured_date_utc": "2026-11-11",
-    "status": "MERGED_SOURCE_RELATION_NOT_NEW_5D_THEOREM",
+    "captured_date_utc": "2026-11-12",
+    "status": "PUBLIC_SOURCE_CHECKPOINTS_VERIFIED_PHYSICAL_5D_OPEN",
     "entries": [
       {
         "pr": 109,
@@ -637,6 +662,34 @@
         "merged": true,
         "merge_sha": "250b85478a116c7608fdb7bc7def29fc36cb5eed",
         "evidence_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1340"
+      },
+      {
+        "pr": 110,
+        "repo": "biological-friction-framework",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/110",
+        "scope": "Five-coordinate dissipative toy dynamics"
+      },
+      {
+        "pr": 111,
+        "repo": "biological-friction-framework",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/111",
+        "scope": "Global 5-sphere face-count rank at most three"
+      },
+      {
+        "pr": 112,
+        "repo": "biological-friction-framework",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/112",
+        "scope": "Rational contraction need not be a realizable triangulation"
+      },
+      {
+        "pr": 113,
+        "repo": "biological-friction-framework",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113",
+        "scope": "Metric-scale nonidentifiability on identical incidence data"
       }
     ],
     "pending_prs": [
