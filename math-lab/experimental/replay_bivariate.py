@@ -106,6 +106,9 @@ def eval_poly(coeffs,x,y):
 
 def replay(report):
     require(type(report) is dict, 'report object')
+    require(set(report)=={'schema','engine','equation','status','domain','degree_upper_bounds','grid_checks','coefficient_terms','counterexample','method','formal_kernel_verified','python_replay_performed','website_integrated'},'unexpected or missing report field')
+    require(report['domain']=='Z[x,y]','domain')
+    require(report['method']=='Independent exact sparse coefficient comparison and integer-grid evaluation; grid sizes are syntactic bidegree bounds plus one.','method')
     require(report.get('schema') == 'vasquez.math-lab.bivariate.experimental.v0.2','schema')
     require(report.get('engine') == 'vr-bivariate-experimental-v0.1','engine')
     eq=report.get('equation')
