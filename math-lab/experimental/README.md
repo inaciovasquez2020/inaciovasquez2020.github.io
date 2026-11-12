@@ -30,12 +30,26 @@ including 250 generated identities and 250 mutated false identities.
 An earlier independent SymPy 1.14.0 reference audit reported 300 matches.
 Neither result constitutes Lean kernel verification.
 
-The emitted JSON is **NOT an independently replayable proof certificate**:
-it does not include original equation or all grid values. It is currently
-an in-process exact verification result only. Do **not** feed it to the
-univariate casebook/Python replay workflow. This file intentionally
-does not advertise a deployed feature, and `website_integrated` must
-remain false until an independently checked export/replay protocol
-and browser integration are both validated.
+Reports now embed the submitted equation and can be independently replayed
+with the standard-library Python checker:
+
+```sh
+node --test math-lab/experimental/test_bivariate.mjs
+python3 -m unittest discover -s math-lab/experimental -p 'test_replay.py' -v
+python3 math-lab/experimental/replay_bivariate.py report.json
+```
+
+The Python checker independently reconstructs polynomial coefficients, degree
+bounds and exact counterexample data and rejects altered report fields.
+A replay result is `REPLAY_PASS` only for a report consistent with its
+embedded equation; **this does not authenticate the original source or turn
+a browser result into a Lean proof**. The experimental output is still not
+connected to the public browser interface, its casebook, or univariate replay.
+The source and result must be archived together by the operator.
+
+Do **not** feed these reports to the univariate casebook/Python replay.
+The `website_integrated` field must remain false until separate browser
+validation and review. No public feature is advertised.
+
 
 No theorem outside the supported polynomial ring is established.
