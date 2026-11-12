@@ -57,6 +57,22 @@ class ReplayTest(unittest.TestCase):
                 with self.assertRaisesRegex(ReplayError,'duplicate JSON key'):
                     load_report(raw)
 
+    def test_unary_power_precedence_and_forged_pass(self):
+        # JavaScript parses -x^2 as (-x)^2, unlike native Python.
+        valid=from_js('-x^2=x^2')
+        self.assertEqual(valid['status'],'EXACT_CERTIFICATE_PASS')
+        self.assertEqual(replay(valid)['status'],'REPLAY_PASS')
+        false=from_js('-x^2=-(x*x)')
+        self.assertEqual(false['status'],'REFUTED')
+        self.assertEqual(replay(false)['status'],'REPLAY_PASS')
+        forged=copy.deepcopy(valid)
+        forged['equation']='-x^2=-(x*x)'
+        with self.assertRaises(ReplayError):
+            replay(forged)
+        for expression in ['-2^2=4', '-(2^2)=-4', '--x^2=x^2']:
+            report=from_js(expression)
+            self.assertEqual(replay(report)['status'],'REPLAY_PASS',expression)
+
     def test_deterministic_sweep(self):
         for a in range(1,11):
             for b in range(1,11):
