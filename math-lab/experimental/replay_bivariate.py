@@ -138,6 +138,16 @@ def replay(report):
         require(type(report.get(key)) == type(value) and report.get(key)==value,'report mismatch: '+key)
     return {'status':'REPLAY_PASS','equation':eq,'grid_checks':checks}
 
+def reject_duplicate_keys(pairs):
+    output = {}
+    for key, value in pairs:
+        require(key not in output, 'duplicate JSON key: '+key)
+        output[key] = value
+    return output
+
+def load_report(raw):
+    return json.loads(raw, object_pairs_hook=reject_duplicate_keys)
+
 def main():
     if len(sys.argv)!=2:
         print('usage: replay_bivariate.py report.json',file=sys.stderr)
@@ -146,7 +156,7 @@ def main():
         with open(sys.argv[1],'rb') as f:
             raw=f.read(MAX_SIZE+1)
         require(len(raw)<=MAX_SIZE,'report size')
-        receipt=replay(json.loads(raw))
+        receipt=replay(load_report(raw))
     except (OSError,ValueError,TypeError,OverflowError,RecursionError) as exc:
         print('REPLAY_REJECT: '+str(exc),file=sys.stderr)
         return 1
