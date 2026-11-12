@@ -31,7 +31,8 @@ def parse(source):
     for item in items:
         if item[0].isdigit():
             require(int(item) <= 1000000, 'literal too large')
-    expr = ''.join('**' if token == '^' else token for token in items)
+    # Preserve whitespace: discarding it would turn invalid '1 2' into '12'.
+    expr = source.replace('^', '**')
     try:
         tree = ast.parse(expr, mode='eval')
     except (SyntaxError, ValueError, RecursionError) as exc:
