@@ -1,9 +1,9 @@
 {
   "schema_version": "public-repository-index-v2",
   "status": "SUPERSEDED",
-  "note": "The former research graph inventory is superseded by the public-only connection snapshot. No historical private-repository metadata is published here.",
+  "note": "The former research graph inventory is superseded by the public-only connection snapshot. No historical private-repository metadata is published here. The 2026-11-12 update covers public sources only; private repositories are excluded even where they contain verified internal research.",
   "canonical_snapshot": "./public-connection-snapshot.json",
-  "captured_date_utc": "2026-11-10",
+  "captured_date_utc": "2026-11-12",
   "public_repositories": [
     {
       "id": "urf-core",
@@ -91,7 +91,7 @@
     }
   ],
   "nodes_public_repository_count": 21,
-  "connection_edges_count": 28,
-  "five_dimensional_proposals_count": 6,
-  "research_status": "CONDITIONAL_5D_PROPOSAL_GLOBAL_PROOF_OPEN"
+  "connection_edges_count": 31,
+  "five_dimensional_proposals_count": 7,
+  "research_status": "PUBLIC_EVIDENCE_LINKS_UPDATED_FULL_5D_PHYSICAL_AND_GEOMETRIC_TRANSFER_OPEN"
 }
