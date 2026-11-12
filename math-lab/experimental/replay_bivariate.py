@@ -26,6 +26,8 @@ def parse(source):
         if not m.group().isspace():
             items.append(m.group())
     require(offset == len(source) and len(items) <= 100, 'unsupported expression / tokens')
+    require(not any(items[i] == '*' and items[i+1] == '*' for i in range(len(items)-1)), 'unsupported power spelling')
+    require(not any(items[i] == '^' and (i+1 == len(items) or not items[i+1].isdigit()) for i in range(len(items))), 'nonliteral exponent')
     for item in items:
         if item[0].isdigit():
             require(int(item) <= 1000000, 'literal too large')
