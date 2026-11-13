@@ -43,3 +43,12 @@ The **primary** category describes a *chosen project architecture*, not an asser
 - No general Poincaré descent, emergent spacetime, physical extra dimension, empirical anomaly, clinical efficacy or universal cross-domain transfer is asserted.
 - Do not count private research repositories in the public inventory. A private source can be independently audited without publicly naming or linking it.
 - PR merge/CI is evidence only for its particular checked artifact; do not substitute website publication for a theorem, Lean axiom audit, or physical experiment.
+
+## Observation-level non-identifiability lemma
+
+**PROVED (conditional mathematical statement, not a fifth-dimension discovery).**
+Let `(D,g,μ,≺)` be the four-dimensional observed event domain, sampling probability measure and causal order. Suppose a five-dimensional parent theory and a purely four-dimensional effective theory induce **the same** probability law on finite observable event samples and the same causal relation. Then for every measurable statistic `T` built solely from these sampled events and their causal order (in particular, the pair- and triple-chain frequencies), the two theories induce the **same law of T**.
+
+**Proof.** Denote by `P_5` and `P_4` the resulting probability measures on each finite sample space. The hypothesis says `P_5=P_4`. The distribution of an observable `T` is its pushforward measure `T_*P_i`, so `T_*P_5=T_*P_4`. No test using only `T` can distinguish the two hypotheses. This statement is measure-theoretic and does not require finite sampling to be approximated by a continuum limit.
+
+The hypothesis is not asserted to hold for all Kaluza–Klein models. **What remains OPEN** is to exhibit a physically admissible observable (for example, a radion/KK-mode signature or a genuinely differing correlation) for which the competing four-dimensional model cannot reproduce the five-dimensional prediction under matched assumptions and uncertainties. This is the decisive criterion for *empirical* distinction; it does not make a mathematical fifth-dimensional reformulation logically necessary.
