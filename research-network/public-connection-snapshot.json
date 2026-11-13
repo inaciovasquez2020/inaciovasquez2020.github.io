@@ -479,7 +479,9 @@
       "name": "Finite holonomy → geometric lift",
       "boundary": "Need an explicit functor/representation from finite observation and transport data to a circle bundle with connection, preserving stated invariants.",
       "evidence": "Holonomy can already exist in four-dimensional gauge theory; a fifth dimension is not forced.",
-      "source_url": "https://github.com/inaciovasquez2020/urf-core/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/urf-core/blob/main/README.md",
+      "five_d_priority": "supporting",
+      "priority_reason": "Finite S3 observability and gauge-orbit obstructions provide optional mathematical diagnostics; they do not imply a physical circle bundle."
     },
     {
       "id": "e23",
@@ -489,7 +491,9 @@
       "name": "5D metric → 4D spacetime model",
       "boundary": "Need a 5D parent action, reduction and field-equation match. The restricted 4D event-statistic response Jacobian is nonsingular, but is not evidence for a fifth dimension.",
       "evidence": "A possible KK metric does not validate the physical theory.",
-      "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/main/README.md",
+      "five_d_priority": "primary",
+      "priority_reason": "Chronos is the selected event-first 4D target for a proposed 5D-to-4D transfer. This is a research dependency, not established necessity."
     },
     {
       "id": "e24",
@@ -499,7 +503,9 @@
       "name": "Geometric lift → effective action",
       "boundary": "Need a complete 5D parent action and reduction reproducing all specified 4D terms with correct coefficients.",
       "evidence": "Coefficient-level overlap is conditional; full uplift remains OPEN.",
-      "source_url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology/blob/main/README.md",
+      "five_d_priority": "primary",
+      "priority_reason": "Cosmology supplies the explicit 5D metric/action and compactification/radion obstruction. A stabilized phenomenological model is still OPEN."
     },
     {
       "id": "e25",
@@ -509,7 +515,9 @@
       "name": "Holonomy invariants → topology",
       "boundary": "Need a nonabelian/global invariant and an independent theorem linking it to 3D recognition/descent.",
       "evidence": "Abelian H¹/holonomy alone cannot resolve the Poincaré homology-sphere obstruction.",
-      "source_url": "https://github.com/inaciovasquez2020/poincare-new-derivation/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/poincare-new-derivation/blob/main/README.md",
+      "five_d_priority": "background",
+      "priority_reason": "Independent 3-manifold topology program; no 5D derivation requires global Poincare descent."
     },
     {
       "id": "e26",
@@ -519,7 +527,9 @@
       "name": "Geometric locality ↔ logical locality",
       "boundary": "Need a semantics-preserving interpretation between geometric bounded observations and finite-model-theoretic formulas.",
       "evidence": "These notions of locality are not automatically equivalent.",
-      "source_url": "https://github.com/inaciovasquez2020/cslib-fmt/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/cslib-fmt/blob/main/README.md",
+      "five_d_priority": "background",
+      "priority_reason": "Finite-model-theoretic locality is a useful analogy, not needed to derive or test a 5D action."
     },
     {
       "id": "e27",
@@ -529,7 +539,9 @@
       "name": "5D-specific measurable signature",
       "boundary": "Need a predicted observable that differs from competing 4D gauge models, then controlled real-data falsification.",
       "evidence": "The present null-test is schema-only; no anomaly measured.",
-      "source_url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test/blob/main/README.md"
+      "source_url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test/blob/main/README.md",
+      "five_d_priority": "background",
+      "priority_reason": "Darkness null-test schema is not presently a 5D-specific observable; do not treat it as the empirical 5D test."
     },
     {
       "id": "e28",
@@ -559,7 +571,9 @@
       "name": "5D face/metric constraints → biological identification boundary",
       "boundary": "Five-state coordinates, 5D simplicial dimension and physical extra dimensions are distinct. Need calibrated metric/biological observation map, matched 4D null model and independent data.",
       "evidence": "Merged BFF PRs #111 (Dehn–Sommerville rank ≤3), #112 (rational relaxation not realizable triangulation path) and #113 (metric-scale nonidentifiability); physical and biological interpretation OPEN.",
-      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113"
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113",
+      "five_d_priority": "background",
+      "priority_reason": "Five biological state coordinates and 5D combinatorics are not a physical compact dimension. Optional downstream analogy."
     },
     {
       "id": "e31",
@@ -583,7 +597,8 @@
     "Three-statistic covariance improvement",
     "Five state-space coordinates do not imply physical fifth dimension",
     "Unweighted 5D combinatorics cannot uniquely determine metric scale",
-    "No empirical biological geometric coupling established"
+    "No empirical biological geometric coupling established",
+    "Research priority classification is a project decision, not proof of 5D necessity or sufficiency."
   ],
   "research_updates": {
     "status": "RESEARCH_CHECKPOINT_REPORTED_NOT_INDEPENDENTLY_REVERIFIED",
@@ -655,7 +670,32 @@
       "Derive complete 5D-to-4D field equations with coefficients, not merely a geometric ansatz.",
       "Give 5D-specific predictions distinguishable from conventional 4D gauge models.",
       "Establish any topology, logic, computation, biology or cosmology transfer separately with nonvacuous hypotheses."
-    ]
+    ],
+    "primary_repo_ids": [
+      "chronos-urf-rr",
+      "dfm-mkc-cosmology"
+    ],
+    "supporting_repo_ids": [
+      "urf-core"
+    ],
+    "background_repo_ids": [
+      "poincare-new-derivation",
+      "cslib-fmt",
+      "darkness-region-dynamics-null-test",
+      "biological-friction-framework"
+    ],
+    "primary_direct_count": 2,
+    "supporting_direct_count": 1,
+    "background_direct_count": 4,
+    "priority_basis": "Project-specific minimal implementation path for event-first 5D-to-4D reduction; not a theorem that only these repos are mathematically necessary.",
+    "next_connection": {
+      "source": "chronos-urf-rr",
+      "target": "dfm-mkc-cosmology",
+      "existing_edge_id": "e19",
+      "required_object": "An exact coefficient-and-variable dictionary between the 5D parent metric/action, reduced Einstein-frame radion/gauge/scalar field equations, and a declared event-first 4D observable, compared to a matched 4D null model.",
+      "status": "OPEN",
+      "avoid": "No new 5D edge or claim of physical compactification before matching derivations and distinctive observable."
+    }
   },
   "merged_connection_updates": {
     "captured_date_utc": "2026-11-13",
