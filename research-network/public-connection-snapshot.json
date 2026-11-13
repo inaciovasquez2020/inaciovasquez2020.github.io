@@ -1,7 +1,7 @@
 {
   "schema_version": "public-5d-repository-boundaries-v1",
-  "captured_date_utc": "2026-11-12",
-  "inventory_source": "GitHub connector owner inventory and 21 verified public README files; no private repository names included",
+  "captured_date_utc": "2026-11-13",
+  "inventory_source": "Dated 21-public-repository network catalogue; public GitHub PR merge status rechecked 2026-11-13. Private repositories excluded.",
   "interpretation": {
     "documented": "Publicly documented source or methodological routing, NOT a new theorem",
     "future": "Explicit hypothetical transfer requiring a new proof/counterexample",
@@ -560,6 +560,17 @@
       "boundary": "Five-state coordinates, 5D simplicial dimension and physical extra dimensions are distinct. Need calibrated metric/biological observation map, matched 4D null model and independent data.",
       "evidence": "Merged BFF PRs #111 (Dehn–Sommerville rank ≤3), #112 (rational relaxation not realizable triangulation path) and #113 (metric-scale nonidentifiability); physical and biological interpretation OPEN.",
       "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113"
+    },
+    {
+      "id": "e31",
+      "source": "urf-core",
+      "target": "chronos-urf-rr",
+      "kind": "documented",
+      "name": "Nonabelian loop observation → finite holonomy comparison",
+      "boundary": "Both projects verify a bounded S3 model of independently conjugacy-quotiented loop observations. The URF information-fiber audit and Chronos orbit collision share a finite algebraic model, not a Lean-verified graph transfer or a physical 5D lift.",
+      "evidence": "Public merged URF Core #594 and Chronos #1357; two independent executable finite-model certificates with different scopes.",
+      "source_url": "https://github.com/inaciovasquez2020/urf-core/pull/594",
+      "related_source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1357"
     }
   ],
   "not_verified": [
@@ -576,7 +587,7 @@
   ],
   "research_updates": {
     "status": "RESEARCH_CHECKPOINT_REPORTED_NOT_INDEPENDENTLY_REVERIFIED",
-    "captured_date_utc": "2026-11-12",
+    "captured_date_utc": "2026-11-13",
     "chronos": {
       "repo": "https://github.com/inaciovasquez2020/chronos-urf-rr",
       "pr": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1347",
@@ -647,8 +658,8 @@
     ]
   },
   "merged_connection_updates": {
-    "captured_date_utc": "2026-11-12",
-    "status": "PUBLIC_SOURCE_CHECKPOINTS_VERIFIED_PHYSICAL_5D_OPEN",
+    "captured_date_utc": "2026-11-13",
+    "status": "PUBLIC_MERGES_VERIFIED_2026_11_13_PHYSICAL_5D_OPEN",
     "entries": [
       {
         "pr": 109,
@@ -690,26 +701,62 @@
         "merged": true,
         "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/113",
         "scope": "Metric-scale nonidentifiability on identical incidence data"
+      },
+      {
+        "repo": "dfm-mkc-cosmology",
+        "pr": 335,
+        "merge_sha": "6d5af8e8623caac48f1da94dceae4e39f5a44f2b",
+        "scope": "Explicit 5D Einstein expanding-circle solution and reduction certificate; radion not stabilized; 5D necessity OPEN",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology/pull/335"
+      },
+      {
+        "repo": "urf-core",
+        "pr": 590,
+        "merge_sha": "ccab01211a0dbd92329b2f987d36fe20775ac07a",
+        "scope": "Finite transport/holonomy research verifier suite; no global theorem transfer",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/urf-core/pull/590"
+      },
+      {
+        "repo": "urf-core",
+        "pr": 594,
+        "merge_sha": "bc814fb29df8109b6b5090ef4abc144b2ae133ca",
+        "scope": "Finite S3 information-fiber accounting and exact optimal decoder success under uniform global-class prior",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/urf-core/pull/594"
+      },
+      {
+        "repo": "chronos-urf-rr",
+        "pr": 1346,
+        "merge_sha": "b2fb932dd9bb63957200578a3b113fad34b649a1",
+        "scope": "Merged Chronos source; not newly classified as a completed 5D theorem",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1346"
+      },
+      {
+        "repo": "chronos-urf-rr",
+        "pr": 1357,
+        "merge_sha": "2ad482cfc2ae7ee633f6baf3aa530d3fbdd7eed7",
+        "scope": "Finite S3 relative-conjugation holonomy counterexample; not Lean-verified",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1357"
+      },
+      {
+        "repo": "biological-friction-framework",
+        "pr": 114,
+        "merge_sha": "27da717b3e6dadb86fe98d3a3f1acf5532471430",
+        "scope": "Evidence-path traversal and symlink-containment verifier repair; no clinical validation",
+        "merged": true,
+        "evidence_url": "https://github.com/inaciovasquez2020/biological-friction-framework/pull/114"
       }
     ],
     "pending_prs": [
       {
         "repo": "urf-core",
-        "pr": 590
-      },
-      {
-        "repo": "urf-core",
         "pr": 592
-      },
-      {
-        "repo": "chronos-urf-rr",
-        "pr": 1346
-      },
-      {
-        "repo": "scientific-infrastructure",
-        "pr": 24
       }
     ],
-    "interpretation": "Documented graph edges are routing/methodology, never automatic physics or theorem transfer"
+    "interpretation": "Public source and CI attest only to scoped finite certificates and documentation, never automatic mathematical/physical 5D transfer. Private research repositories are not listed."
   }
 }
