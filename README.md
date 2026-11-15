@@ -9,6 +9,7 @@ This repository hosts the canonical root page for the public research surface.
 2. [URF core](https://github.com/inaciovasquez2020/urf-core)
 3. [Chronos executable artifact](https://github.com/inaciovasquez2020/chronos-urf-rr)
 4. [Vasquez Index](https://inaciovasquez2020.github.io/vasquez-index/)
+5. [Public Research Spiderweb](https://inaciovasquez2020.github.io/research-network/)
 
 ## Canonical identity
 - [ORCID 0009-0008-8459-3400](https://orcid.org/0009-0008-8459-3400)
