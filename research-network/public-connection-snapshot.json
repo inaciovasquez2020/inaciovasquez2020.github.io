@@ -33,7 +33,7 @@
     {
       "id": "cslib-fmt",
       "name": "CSLIB FMT",
-      "category": "mathematics",
+      "category": "computer-science",
       "description": "Lean finite-model theory: locality, EF games and bounded-variable interfaces.",
       "readme_blob": "e21cad68c997159057210cf11aa1abaa3dbf38bf",
       "url": "https://github.com/inaciovasquez2020/cslib-fmt",
@@ -44,7 +44,7 @@
     {
       "id": "fo4-constraint-isolation",
       "name": "FO⁴ constraints",
-      "category": "mathematics",
+      "category": "computer-science",
       "description": "Isolates four-variable logic constraints; no unrestricted graph rigidity theorem.",
       "readme_blob": "6e25662da19b2610865d41e2c0188d538b6d42cf",
       "url": "https://github.com/inaciovasquez2020/fo4-constraint-isolation",
@@ -55,7 +55,7 @@
     {
       "id": "overlap-rigidity-oracle-release",
       "name": "Overlap oracle",
-      "category": "mathematics",
+      "category": "computer-science",
       "description": "Hidden-assignment oracle information bound; not a general SAT lower bound.",
       "readme_blob": "c2ec9022e551a61aae3fcc936b8a6043f6623d01",
       "url": "https://github.com/inaciovasquez2020/overlap-rigidity-oracle-release",
@@ -446,9 +446,9 @@
       "source": "chronos-urf-rr",
       "target": "dfm-mkc-cosmology",
       "kind": "future",
-      "name": "Spacetime reduction → effective cosmology",
-      "boundary": "Need a consistent field/action map with matching coefficients, predictions and uncertainty.",
-      "evidence": "Bounded computational agreement is not a universal physical identification.",
+      "name": "Chronos–Cosmology observable match",
+      "boundary": "Map the reduced fields and coefficients to the named Chronos comparable-pair and three-chain observables, then compare their predicted distributions with a matched 4D model.",
+      "evidence": "Cosmology specifies a 5D circle action and a scoped 4D zero-mode reduction. Chronos has a separate local identifiability result for a restricted 4D causal-diamond family. The map between them remains open.",
       "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/main/README.md"
     },
     {
@@ -488,9 +488,9 @@
       "source": "five-dimensional-hypothesis",
       "target": "chronos-urf-rr",
       "kind": "five_d",
-      "name": "5D metric → 4D spacetime model",
-      "boundary": "Need a 5D parent action, reduction and field-equation match. The restricted 4D event-statistic response Jacobian is nonsingular, but is not evidence for a fifth dimension.",
-      "evidence": "A possible KK metric does not validate the physical theory.",
+      "name": "Reduced 5D model → Chronos observables",
+      "boundary": "Map the reduced fields and coefficients to the named Chronos comparable-pair and three-chain observables, then compare their predicted distributions with a matched 4D model.",
+      "evidence": "Cosmology specifies a 5D circle action and a scoped 4D zero-mode reduction. Chronos has a separate local identifiability result for a restricted 4D causal-diamond family. The map between them remains open.",
       "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/main/README.md",
       "five_d_priority": "primary",
       "priority_reason": "Chronos is the selected event-first 4D target for a proposed 5D-to-4D transfer. This is a research dependency, not established necessity."
