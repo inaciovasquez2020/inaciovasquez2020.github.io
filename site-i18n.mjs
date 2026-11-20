@@ -1,5 +1,5 @@
 /* Homepage interface and curated research translations. Canonical theorem sources remain unchanged. */
-const translations={
+export const translations={
   "en": {
     "research": "Research",
     "verification": "Verification",
@@ -1111,11 +1111,101 @@ export const extraRows = [
     "研究进展 · 2026-11-15",
     "ACTUALITÉ DE RECHERCHE · 2026-11-15",
     "FORSCHUNGSSTAND · 2026-11-15"
+  ],
+  [
+    "Skip to content",
+    "Ir para o conteúdo",
+    "Saltar al contenido",
+    "跳至内容",
+    "Aller au contenu",
+    "Zum Inhalt springen"
+  ],
+  [
+    "Vasquez Research home",
+    "Página inicial da Vasquez Research",
+    "Inicio de Vasquez Research",
+    "Vasquez Research 首页",
+    "Accueil de Vasquez Research",
+    "Startseite von Vasquez Research"
+  ],
+  [
+    "Primary navigation",
+    "Navegação principal",
+    "Navegación principal",
+    "主导航",
+    "Navigation principale",
+    "Hauptnavigation"
+  ],
+  [
+    "Website language",
+    "Idioma do site",
+    "Idioma del sitio",
+    "网站语言",
+    "Langue du site",
+    "Sprache der Website"
+  ],
+  [
+    "Illustration of linked foundations, formal verification and open research frontiers",
+    "Ilustração das conexões entre fundamentos, verificação formal e fronteiras abertas da pesquisa",
+    "Ilustración de conexiones entre fundamentos, verificación formal y fronteras abiertas de investigación",
+    "基础、形式化验证与开放研究前沿之间联系的示意图",
+    "Illustration des liens entre fondements, vérification formelle et frontières ouvertes de la recherche",
+    "Darstellung der Verbindungen zwischen Grundlagen, formaler Verifikation und offenen Forschungsfrontieren"
+  ],
+  [
+    "Research subject filters",
+    "Filtros por área de pesquisa",
+    "Filtros por área de investigación",
+    "研究主题筛选",
+    "Filtres par domaine de recherche",
+    "Forschungsgebietsfilter"
+  ],
+  [
+    "Search projects",
+    "Buscar projetos",
+    "Buscar proyectos",
+    "搜索项目",
+    "Rechercher des projets",
+    "Projekte suchen"
+  ],
+  [
+    "Vasquez Research — Mathematics, Computer Science & Physics",
+    "Vasquez Research — Matemática, Ciência da Computação e Física",
+    "Vasquez Research — Matemáticas, Informática y Física",
+    "Vasquez Research — 数学、计算机科学与物理",
+    "Vasquez Research — Mathématiques, informatique et physique",
+    "Vasquez Research — Mathematik, Informatik und Physik"
+  ],
+  [
+    "A repository-based attempt to derive and formally check a Poincaré result through combinatorial topology. The classical Poincaré theorem is established; this independent global derivation remains open.",
+    "Uma tentativa baseada em repositório de derivar e verificar formalmente um resultado de Poincaré por meio da topologia combinatória. O teorema clássico de Poincaré está estabelecido; esta derivação global independente continua em aberto.",
+    "Un intento basado en un repositorio de derivar y verificar formalmente un resultado de Poincaré mediante la topología combinatoria. El teorema clásico de Poincaré está establecido; esta derivación global independiente sigue abierta.",
+    "基于代码仓库，通过组合拓扑推导并形式化验证庞加莱相关结果的尝试。经典庞加莱定理已确立；此独立全局推导仍未完成。",
+    "Une tentative fondée sur un dépôt de dérivation et de vérification formelle d’un résultat de Poincaré par la topologie combinatoire. Le théorème classique de Poincaré est établi ; cette dérivation globale indépendante reste ouverte.",
+    "Ein repositorygestützter Versuch, mittels kombinatorischer Topologie ein Poincaré-Ergebnis herzuleiten und formal zu prüfen. Der klassische Satz von Poincaré ist etabliert; diese unabhängige globale Herleitung bleibt offen."
+  ],
+  [
+    "OPEN · intermediate checks do not establish a global theorem",
+    "EM ABERTO · verificações intermediárias não estabelecem um teorema global",
+    "ABIERTO · las comprobaciones intermedias no establecen un teorema global",
+    "未解决 · 中间检查不能确立全局定理",
+    "OUVERT · les vérifications intermédiaires n’établissent pas un théorème global",
+    "OFFEN · Zwischenprüfungen begründen kein globales Theorem"
+  ],
+  [
+    "Inspect the theorem declarations, hypotheses, exact revision and build/axiom receipts in the repository.",
+    "Examine as declarações dos teoremas, hipóteses, revisão exata e registros de compilação e axiomas no repositório.",
+    "Examine las declaraciones de teoremas, hipótesis, revisión exacta y registros de compilación y axiomas del repositorio.",
+    "检查仓库中的定理声明、假设、精确版本与构建及公理记录。",
+    "Examinez les déclarations de théorèmes, les hypothèses, la révision exacte et les justificatifs de compilation et d’axiomes dans le dépôt.",
+    "Prüfen Sie Theoremdeklarationen, Voraussetzungen, genaue Revision sowie Build- und Axiomnachweise im Repository."
   ]
 ];
 const languages=['en','pt-BR','es','zh-Hans','fr','de'];
 const maps=Object.fromEntries(languages.map((lang,i)=>[lang,new Map(extraRows.map(row=>[row[0],row[i]]))]));
 const originals=new WeakMap();
+const attributeSources=new WeakMap();
+const sourceTitle=document.title;
 const selector=document.getElementById('site-language');
 const label=document.querySelector('.site-language-label');
 const params=new URLSearchParams(location.search);
@@ -1123,7 +1213,7 @@ let chosen='en';
 function translateText(){
  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
  for(let node=walker.nextNode();node;node=walker.nextNode()){
-  if(node.parentElement.closest('script,style,select,[data-site-i18n],.site-language-label'))continue;
+  if(node.parentElement.closest('script,style,select,[data-site-i18n],.site-language-label,.wordmark'))continue;
   const current=node.nodeValue;
   const original=originals.get(node);
   const source=original && current.trim()===maps[chosen].get(original.trim())?original:current;
@@ -1151,8 +1241,16 @@ function apply(lang){
  if(label)label.firstChild.textContent=translations[chosen].language+' ';
  document.documentElement.lang=chosen;
  if(selector)selector.value=chosen;
- const search=document.getElementById('project-search');
- if(search)search.placeholder=maps[chosen].get('Search research projects');
+ document.title=maps[chosen].get(sourceTitle)||sourceTitle;
+ for(const node of document.querySelectorAll('[aria-label],[placeholder]')){
+  if(!attributeSources.has(node))attributeSources.set(node,{});
+  const original=attributeSources.get(node);
+  for(const attr of ['aria-label','placeholder']){
+   if(!node.hasAttribute(attr))continue;
+   if(!Object.hasOwn(original,attr))original[attr]=node.getAttribute(attr);
+   node.setAttribute(attr,maps[chosen].get(original[attr])||original[attr]);
+  }
+ }
  translateText();
  for(const link of document.querySelectorAll('a[href]')){
   const href=link.getAttribute('href');
