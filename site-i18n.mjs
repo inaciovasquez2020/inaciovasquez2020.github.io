@@ -1,4 +1,4 @@
-/* Static site interface translation. Mathematical claims, status codes and evidence stay in source language. */
+/* Homepage interface and curated research translations. Canonical theorem sources remain unchanged. */
 const translations={
   "en": {
     "research": "Research",
@@ -711,6 +711,406 @@ export const extraRows = [
     "本站是索引与文档界面，不独立证明数学论断。",
     "Ce site est un index et un espace documentaire. Il ne démontre pas indépendamment les affirmations mathématiques.",
     "Diese Website ist eine Index- und Dokumentationsoberfläche. Sie beweist mathematische Aussagen nicht eigenständig."
+  ],
+  [
+    "TOPOLOGY / FORMAL METHODS",
+    "TOPOLOGIA / MÉTODOS FORMAIS",
+    "TOPOLOGÍA / MÉTODOS FORMALES",
+    "拓扑学 / 形式化方法",
+    "TOPOLOGIE / MÉTHODES FORMELLES",
+    "TOPOLOGIE / FORMALE METHODEN"
+  ],
+  [
+    "An independent Lean-assisted program studying combinatorial moves and 3-manifold topology. Classical Poincaré is proved; the independent global derivation remains open.",
+    "Programa independente assistido por Lean que estuda movimentos combinatórios e topologia de variedades tridimensionais. O teorema clássico de Poincaré está provado; a derivação global independente continua em aberto.",
+    "Programa independiente asistido por Lean que estudia movimientos combinatorios y topología de variedades tridimensionales. El teorema clásico de Poincaré está demostrado; la derivación global independiente sigue abierta.",
+    "借助 Lean 的独立研究计划，研究组合移动与三维流形拓扑。经典庞加莱定理已获证明；独立全局推导仍未完成。",
+    "Programme indépendant assisté par Lean étudiant les mouvements combinatoires et la topologie des variétés de dimension trois. Le théorème classique de Poincaré est démontré ; la dérivation globale indépendante reste ouverte.",
+    "Unabhängiges Lean-gestütztes Programm zu kombinatorischen Zügen und der Topologie dreidimensionaler Mannigfaltigkeiten. Der klassische Satz von Poincaré ist bewiesen; die unabhängige globale Herleitung bleibt offen."
+  ],
+  [
+    "OPEN · intermediate verified work is not global closure",
+    "EM ABERTO · resultados intermediários verificados não encerram o problema global",
+    "ABIERTO · los resultados intermedios verificados no resuelven el problema global",
+    "未解决 · 已验证的中间结果不等于全局证明",
+    "OUVERT · les résultats intermédiaires vérifiés ne résolvent pas le problème global",
+    "OFFEN · verifizierte Zwischenergebnisse sind kein globaler Abschluss"
+  ],
+  [
+    "Merged positional 1→4 insertion preserves list order around the selected tetrahedron. Positional closed-core preservation and global descent remain open.",
+    "A inserção posicional 1→4 integrada preserva a ordem da lista ao redor do tetraedro selecionado. A preservação posicional do núcleo fechado e a descida global continuam em aberto.",
+    "La inserción posicional 1→4 integrada preserva el orden de la lista alrededor del tetraedro seleccionado. La preservación posicional del núcleo cerrado y el descenso global siguen abiertos.",
+    "已合并的位置式 1→4 插入保持所选四面体周围的列表顺序。位置式闭核保持与全局下降仍未解决。",
+    "L’insertion positionnelle 1→4 intégrée préserve l’ordre de la liste autour du tétraèdre choisi. La préservation positionnelle du noyau fermé et la descente globale restent ouvertes.",
+    "Die integrierte positionelle 1→4-Einfügung erhält die Listenreihenfolge um das gewählte Tetraeder. Positionelle Erhaltung des geschlossenen Kerns und globaler Abstieg bleiben offen."
+  ],
+  [
+    "Inspect theorem hypotheses, exact revision, build logs and axiom dependencies before citing an intermediate result.",
+    "Examine as hipóteses do teorema, a revisão exata, os registros de compilação e as dependências de axiomas antes de citar um resultado intermediário.",
+    "Examine las hipótesis del teorema, la revisión exacta, los registros de compilación y las dependencias de axiomas antes de citar un resultado intermedio.",
+    "引用中间结果前，请检查定理假设、精确版本、构建日志与公理依赖。",
+    "Examinez les hypothèses du théorème, la révision exacte, les journaux de compilation et les dépendances axiomatiques avant de citer un résultat intermédiaire.",
+    "Prüfen Sie Theoremvoraussetzungen, genaue Revision, Buildprotokolle und Axiomabhängigkeiten vor dem Zitieren eines Zwischenergebnisses."
+  ],
+  [
+    "MATHEMATICAL PHYSICS / COMPUTATION",
+    "FÍSICA MATEMÁTICA / COMPUTAÇÃO",
+    "FÍSICA MATEMÁTICA / COMPUTACIÓN",
+    "数学物理 / 计算",
+    "PHYSIQUE MATHÉMATIQUE / CALCUL",
+    "MATHEMATISCHE PHYSIK / BERECHNUNG"
+  ],
+  [
+    "Executable finite and conditional spectral investigations, with explicit distinction between bounded certificates and global operator claims.",
+    "Investigações espectrais finitas e condicionais executáveis, distinguindo explicitamente certificados limitados de afirmações sobre operadores globais.",
+    "Investigaciones espectrales finitas y condicionales ejecutables, distinguiendo explícitamente certificados acotados de afirmaciones sobre operadores globales.",
+    "可执行的有限及条件谱研究，明确区分有界证书与全局算子论断。",
+    "Études spectrales finies et conditionnelles exécutables, distinguant explicitement certificats bornés et affirmations globales sur les opérateurs.",
+    "Ausführbare endliche und bedingte spektrale Untersuchungen mit klarer Trennung beschränkter Zertifikate von globalen Operatoraussagen."
+  ],
+  [
+    "CONDITIONAL · bounded certificates do not close spectral questions",
+    "CONDICIONAL · certificados limitados não resolvem questões espectrais",
+    "CONDICIONAL · los certificados acotados no resuelven cuestiones espectrales",
+    "条件性 · 有界证书不能解决谱问题",
+    "CONDITIONNEL · les certificats bornés ne résolvent pas les questions spectrales",
+    "BEDINGT · beschränkte Zertifikate lösen keine Spektralfragen abschließend"
+  ],
+  [
+    "The merged finite-holonomy note records a bounded-locality observation model with independently gauge-quotiented restrictions. Global spectral closure remains open.",
+    "A nota integrada sobre holonomia finita registra um modelo de observação de localidade limitada com restrições submetidas independentemente ao quociente de calibre. O fechamento espectral global continua em aberto.",
+    "La nota integrada sobre holonomía finita registra un modelo de observación de localidad acotada con restricciones sometidas independientemente al cociente de calibre. El cierre espectral global sigue abierto.",
+    "已合并的有限和乐笔记记录了有界局部观测模型，各限制独立取规范商。全局谱闭合仍未解决。",
+    "La note intégrée sur l’holonomie finie décrit un modèle d’observation à localité bornée avec restrictions quotientées indépendamment par jauge. La clôture spectrale globale reste ouverte.",
+    "Die integrierte Notiz zur endlichen Holonomie dokumentiert ein Beobachtungsmodell beschränkter Lokalität mit unabhängig nach Eichsymmetrie quotientierten Einschränkungen. Der globale spektrale Abschluss bleibt offen."
+  ],
+  [
+    "Review exact source artifacts, assumptions and reproducibility receipts in the reference implementation.",
+    "Examine os artefatos exatos, hipóteses e registros de reprodutibilidade na implementação de referência.",
+    "Examine los artefactos exactos, las hipótesis y los registros de reproducibilidad en la implementación de referencia.",
+    "检查参考实现中的精确源工件、假设和复现记录。",
+    "Examinez les artefacts sources exacts, les hypothèses et les justificatifs de reproductibilité dans l’implémentation de référence.",
+    "Prüfen Sie genaue Quellartefakte, Annahmen und Reproduzierbarkeitsnachweise in der Referenzimplementierung."
+  ],
+  [
+    "FOUNDATIONS / PROVENANCE",
+    "FUNDAMENTOS / PROVENIÊNCIA",
+    "FUNDAMENTOS / PROCEDENCIA",
+    "基础 / 来源",
+    "FONDEMENTS / PROVENANCE",
+    "GRUNDLAGEN / HERKUNFT"
+  ],
+  [
+    "Schemas, trusted definitions, certificate interfaces and claim-status boundaries across research workstreams.",
+    "Esquemas, definições confiáveis, interfaces de certificados e limites de status das afirmações nas linhas de pesquisa.",
+    "Esquemas, definiciones confiables, interfaces de certificados y límites de estado de las afirmaciones en las líneas de investigación.",
+    "各研究方向的模式、可信定义、证书接口和论断状态边界。",
+    "Schémas, définitions fiables, interfaces de certificats et limites de statut des affirmations dans les axes de recherche.",
+    "Schemata, vertrauenswürdige Definitionen, Zertifikatschnittstellen und Statusgrenzen für Aussagen in den Forschungsbereichen."
+  ],
+  [
+    "INFRASTRUCTURE · a framework is not an unrestricted theorem",
+    "INFRAESTRUTURA · um arcabouço não é um teorema irrestrito",
+    "INFRAESTRUCTURA · un marco no es un teorema sin restricciones",
+    "基础设施 · 框架不等于无约束定理",
+    "INFRASTRUCTURE · un cadre n’est pas un théorème sans restriction",
+    "INFRASTRUKTUR · ein Rahmenwerk ist kein uneingeschränktes Theorem"
+  ],
+  [
+    "Any substantive mathematical claim must be discharged in its own theorem or evidence source.",
+    "Toda afirmação matemática substantiva deve ser demonstrada em seu próprio teorema ou fonte de evidência.",
+    "Toda afirmación matemática sustantiva debe demostrarse en su propio teorema o fuente de evidencia.",
+    "任何实质性数学论断都必须在其自身定理或证据来源中得到证实。",
+    "Toute affirmation mathématique substantielle doit être établie dans son propre théorème ou sa source de preuve.",
+    "Jede substanzielle mathematische Aussage muss im eigenen Theorem oder Beleg nachgewiesen werden."
+  ],
+  [
+    "Inspect declarations, schema definitions, revision metadata and certificate governance.",
+    "Examine declarações, definições de esquemas, metadados de revisão e governança de certificados.",
+    "Examine declaraciones, definiciones de esquemas, metadatos de revisión y gobernanza de certificados.",
+    "检查声明、模式定义、版本元数据和证书治理。",
+    "Examinez les déclarations, définitions de schémas, métadonnées de révision et règles de gouvernance des certificats.",
+    "Prüfen Sie Deklarationen, Schemadefinitionen, Revisionsmetadaten und Zertifikatsregeln."
+  ],
+  [
+    "VERIFICATION / REPRODUCIBILITY",
+    "VERIFICAÇÃO / REPRODUTIBILIDADE",
+    "VERIFICACIÓN / REPRODUCIBILIDAD",
+    "验证 / 可复现性",
+    "VÉRIFICATION / REPRODUCTIBILITÉ",
+    "VERIFIKATION / REPRODUZIERBARKEIT"
+  ],
+  [
+    "Deterministic infrastructure for checking certificates, provenance and reproducible evidence under explicit validation rules.",
+    "Infraestrutura determinística para verificar certificados, proveniência e evidências reproduzíveis segundo regras explícitas de validação.",
+    "Infraestructura determinista para comprobar certificados, procedencia y evidencias reproducibles bajo reglas explícitas de validación.",
+    "按明确验证规则检查证书、来源和可复现证据的确定性基础设施。",
+    "Infrastructure déterministe pour vérifier certificats, provenance et preuves reproductibles selon des règles de validation explicites.",
+    "Deterministische Infrastruktur zur Prüfung von Zertifikaten, Herkunft und reproduzierbaren Belegen nach expliziten Validierungsregeln."
+  ],
+  [
+    "TOOLING · certificates verify only the properties they encode",
+    "FERRAMENTAS · certificados verificam apenas as propriedades que codificam",
+    "HERRAMIENTAS · los certificados solo verifican las propiedades que codifican",
+    "工具 · 证书仅验证其编码的性质",
+    "OUTILS · les certificats ne vérifient que les propriétés qu’ils encodent",
+    "WERKZEUGE · Zertifikate verifizieren nur die kodierten Eigenschaften"
+  ],
+  [
+    "Certificate acceptance must not be presented as proof of unstated hypotheses or global mathematical claims.",
+    "A aceitação de um certificado não deve ser apresentada como prova de hipóteses não declaradas ou afirmações matemáticas globais.",
+    "La aceptación de un certificado no debe presentarse como prueba de hipótesis no declaradas o afirmaciones matemáticas globales.",
+    "证书通过不得被表述为未声明假设或全局数学论断的证明。",
+    "L’acceptation d’un certificat ne doit pas être présentée comme preuve d’hypothèses non énoncées ou d’affirmations mathématiques globales.",
+    "Die Annahme eines Zertifikats darf nicht als Beweis unausgesprochener Annahmen oder globaler mathematischer Aussagen dargestellt werden."
+  ],
+  [
+    "Review validation rules and reproducible tests; a website display is not a verification receipt.",
+    "Examine regras de validação e testes reproduzíveis; a exibição de um site não é um registro de verificação.",
+    "Examine reglas de validación y pruebas reproducibles; una pantalla web no es un registro de verificación.",
+    "检查验证规则和可复现测试；网页显示不是验证记录。",
+    "Examinez les règles de validation et les tests reproductibles ; un affichage web n’est pas un justificatif de vérification.",
+    "Prüfen Sie Validierungsregeln und reproduzierbare Tests; eine Websiteanzeige ist kein Verifikationsnachweis."
+  ],
+  [
+    "LOGIC / FINITE-MODEL THEORY",
+    "LÓGICA / TEORIA DE MODELOS FINITOS",
+    "LÓGICA / TEORÍA DE MODELOS FINITOS",
+    "逻辑 / 有限模型论",
+    "LOGIQUE / THÉORIE DES MODÈLES FINIS",
+    "LOGIK / ENDLICHE MODELLTHEORIE"
+  ],
+  [
+    "Formal investigations of locality, EF games and extension invariants under explicitly scoped hypotheses.",
+    "Investigações formais de localidade, jogos EF e invariantes de extensão sob hipóteses de escopo explícito.",
+    "Investigaciones formales de localidad, juegos EF e invariantes de extensión bajo hipótesis de alcance explícito.",
+    "在明确范围的假设下形式化研究局部性、EF 博弈和扩展不变量。",
+    "Études formelles de la localité, des jeux EF et des invariants d’extension sous hypothèses de portée explicite.",
+    "Formale Untersuchungen zu Lokalität, EF-Spielen und Erweiterungsinvarianten unter explizit begrenzten Voraussetzungen."
+  ],
+  [
+    "OPEN · local bridge results do not prove general locality",
+    "EM ABERTO · resultados de pontes locais não provam localidade geral",
+    "ABIERTO · los resultados de conexiones locales no prueban localidad general",
+    "未解决 · 局部桥梁结果不证明一般局部性",
+    "OUVERT · les résultats de liens locaux ne prouvent pas la localité générale",
+    "OFFEN · lokale Brückenresultate beweisen keine allgemeine Lokalität"
+  ],
+  [
+    "General positive-rank locality and geometric extension obligations require separate proof.",
+    "A localidade geral de posto positivo e as obrigações de extensão geométrica exigem provas separadas.",
+    "La localidad general de rango positivo y las obligaciones de extensión geométrica requieren pruebas separadas.",
+    "一般正秩局部性和几何扩展义务需要单独证明。",
+    "La localité générale de rang positif et les obligations d’extension géométrique nécessitent des preuves distinctes.",
+    "Allgemeine Lokalität positiven Rangs und geometrische Erweiterungspflichten erfordern separate Beweise."
+  ],
+  [
+    "Inspect declarations and exact hypotheses in the Lean support library.",
+    "Examine as declarações e hipóteses exatas na biblioteca de suporte Lean.",
+    "Examine las declaraciones e hipótesis exactas en la biblioteca de soporte Lean.",
+    "检查 Lean 支持库中的声明和精确假设。",
+    "Examinez les déclarations et hypothèses exactes dans la bibliothèque Lean de support.",
+    "Prüfen Sie Deklarationen und genaue Voraussetzungen in der Lean-Unterstützungsbibliothek."
+  ],
+  [
+    "PHYSICS / CONSISTENCY TESTS",
+    "FÍSICA / TESTES DE CONSISTÊNCIA",
+    "FÍSICA / PRUEBAS DE CONSISTENCIA",
+    "物理 / 一致性检验",
+    "PHYSIQUE / TESTS DE COHÉRENCE",
+    "PHYSIK / KONSISTENZTESTS"
+  ],
+  [
+    "Numerical and symbolic consistency-check surface for model assumptions, with unverified computations explicitly separated.",
+    "Ambiente de testes numéricos e simbólicos de consistência das hipóteses do modelo, separando explicitamente cálculos não verificados.",
+    "Entorno de pruebas numéricas y simbólicas de consistencia de las hipótesis del modelo, separando explícitamente los cálculos no verificados.",
+    "模型假设的数值与符号一致性检查界面，明确区分未验证计算。",
+    "Surface de tests numériques et symboliques de cohérence des hypothèses du modèle, séparant explicitement les calculs non vérifiés.",
+    "Oberfläche für numerische und symbolische Konsistenzprüfungen von Modellannahmen mit expliziter Trennung unverifizierter Berechnungen."
+  ],
+  [
+    "BOUNDED CHECKS · no general cosmological result is established here",
+    "TESTES LIMITADOS · nenhum resultado cosmológico geral é estabelecido aqui",
+    "PRUEBAS ACOTADAS · aquí no se establece ningún resultado cosmológico general",
+    "有界检查 · 此处未确立一般宇宙学结论",
+    "TESTS BORNÉS · aucun résultat cosmologique général n’est établi ici",
+    "BESCHRÄNKTE PRÜFUNGEN · hier wird kein allgemeines kosmologisches Ergebnis bewiesen"
+  ],
+  [
+    "Numerical predictions require pinned solvers, independent reruns, raw outputs and convergence checks.",
+    "Previsões numéricas exigem solvers com versões fixadas, reexecuções independentes, saídas brutas e testes de convergência.",
+    "Las predicciones numéricas requieren solucionadores de versión fijada, reejecuciones independientes, salidas brutas y pruebas de convergencia.",
+    "数值预测需要固定版本的求解器、独立重运行、原始输出与收敛检查。",
+    "Les prédictions numériques nécessitent des solveurs à version fixée, des réexécutions indépendantes, des sorties brutes et des tests de convergence.",
+    "Numerische Vorhersagen erfordern festgelegte Solverversionen, unabhängige Wiederholungen, Rohdaten und Konvergenzprüfungen."
+  ],
+  [
+    "Use the repository's precise test receipts; do not infer field-equation solutions from its dashboard.",
+    "Use os registros exatos de testes do repositório; não deduza soluções das equações de campo a partir do painel.",
+    "Use los registros exactos de pruebas del repositorio; no deduzca soluciones de las ecuaciones de campo a partir del panel.",
+    "使用仓库中的精确测试记录；不得从仪表板推断场方程的解。",
+    "Utilisez les justificatifs de tests précis du dépôt ; ne déduisez pas de solutions des équations de champ à partir de son tableau de bord.",
+    "Nutzen Sie die genauen Testnachweise des Repositorys; leiten Sie keine Lösungen der Feldgleichungen aus seinem Dashboard ab."
+  ],
+  [
+    "GLOBAL OPEN",
+    "GLOBAL EM ABERTO",
+    "GLOBAL ABIERTO",
+    "全局未解决",
+    "GLOBAL OUVERT",
+    "GLOBAL OFFEN"
+  ],
+  [
+    "CONDITIONAL",
+    "CONDICIONAL",
+    "CONDICIONAL",
+    "条件性",
+    "CONDITIONNEL",
+    "BEDINGT"
+  ],
+  [
+    "INFRASTRUCTURE",
+    "INFRAESTRUTURA",
+    "INFRAESTRUCTURA",
+    "基础设施",
+    "INFRASTRUCTURE",
+    "INFRASTRUKTUR"
+  ],
+  [
+    "GENERAL OPEN",
+    "GERAL EM ABERTO",
+    "GENERAL ABIERTO",
+    "一般问题未解决",
+    "GÉNÉRAL OUVERT",
+    "ALLGEMEIN OFFEN"
+  ],
+  [
+    "BOUNDED CHECKS",
+    "TESTES LIMITADOS",
+    "PRUEBAS ACOTADAS",
+    "有界检查",
+    "TESTS BORNÉS",
+    "BESCHRÄNKTE PRÜFUNGEN"
+  ],
+  [
+    "01 / TOPOLOGY",
+    "01 / TOPOLOGIA",
+    "01 / TOPOLOGÍA",
+    "01 / 拓扑学",
+    "01 / TOPOLOGIE",
+    "01 / TOPOLOGIE"
+  ],
+  [
+    "02 / PHYSICS",
+    "02 / FÍSICA",
+    "02 / FÍSICA",
+    "02 / 物理",
+    "02 / PHYSIQUE",
+    "02 / PHYSIK"
+  ],
+  [
+    "03 / FOUNDATIONS",
+    "03 / FUNDAMENTOS",
+    "03 / FUNDAMENTOS",
+    "03 / 基础",
+    "03 / FONDEMENTS",
+    "03 / GRUNDLAGEN"
+  ],
+  [
+    "04 / TOOLING",
+    "04 / FERRAMENTAS",
+    "04 / HERRAMIENTAS",
+    "04 / 工具",
+    "04 / OUTILS",
+    "04 / WERKZEUGE"
+  ],
+  [
+    "05 / LOGIC",
+    "05 / LÓGICA",
+    "05 / LÓGICA",
+    "05 / 逻辑",
+    "05 / LOGIQUE",
+    "05 / LOGIK"
+  ],
+  [
+    "06 / COMPUTATION",
+    "06 / COMPUTAÇÃO",
+    "06 / COMPUTACIÓN",
+    "06 / 计算",
+    "06 / CALCUL",
+    "06 / BERECHNUNG"
+  ],
+  [
+    "01 / RESEARCH",
+    "01 / PESQUISA",
+    "01 / INVESTIGACIÓN",
+    "01 / 研究",
+    "01 / RECHERCHE",
+    "01 / FORSCHUNG"
+  ],
+  [
+    "02 / METHODOLOGY",
+    "02 / METODOLOGIA",
+    "02 / METODOLOGÍA",
+    "02 / 方法论",
+    "02 / MÉTHODOLOGIE",
+    "02 / METHODIK"
+  ],
+  [
+    "03 / OPEN RESEARCH",
+    "03 / PESQUISA ABERTA",
+    "03 / INVESTIGACIÓN ABIERTA",
+    "03 / 开放研究",
+    "03 / RECHERCHE OUVERTE",
+    "03 / OFFENE FORSCHUNG"
+  ],
+  [
+    "SUPPORT / OPEN RESEARCH",
+    "APOIO / PESQUISA ABERTA",
+    "APOYO / INVESTIGACIÓN ABIERTA",
+    "支持 / 开放研究",
+    "SOUTIEN / RECHERCHE OUVERTE",
+    "UNTERSTÜTZUNG / OFFENE FORSCHUNG"
+  ],
+  [
+    "OPEN",
+    "ABERTA",
+    "ABIERTA",
+    "开放",
+    "OUVERTE",
+    "OFFEN"
+  ],
+  [
+    "RESEARCH",
+    "PESQUISA",
+    "INVESTIGACIÓN",
+    "研究",
+    "RECHERCHE",
+    "FORSCHUNG"
+  ],
+  [
+    "VERIFIABLE",
+    "VERIFICÁVEL",
+    "VERIFICABLE",
+    "可验证",
+    "VÉRIFIABLE",
+    "VERIFIZIERBAR"
+  ],
+  [
+    "BY DESIGN",
+    "POR PROJETO",
+    "POR DISEÑO",
+    "按设计",
+    "PAR CONCEPTION",
+    "DURCH DESIGN"
+  ],
+  [
+    "RESEARCH UPDATE · 2026-11-15",
+    "ATUALIZAÇÃO DE PESQUISA · 2026-11-15",
+    "ACTUALIZACIÓN DE INVESTIGACIÓN · 2026-11-15",
+    "研究进展 · 2026-11-15",
+    "ACTUALITÉ DE RECHERCHE · 2026-11-15",
+    "FORSCHUNGSSTAND · 2026-11-15"
   ]
 ];
 const languages=['en','pt-BR','es','zh-Hans','fr','de'];
@@ -767,6 +1167,7 @@ function apply(lang){
  history.replaceState(history.state,'',current.href);
 }
 if(selector){
+ document.addEventListener('research:selection',translateText);
  selector.addEventListener('change',()=>apply(selector.value));
  apply(params.get('lang')||'en');
 }
