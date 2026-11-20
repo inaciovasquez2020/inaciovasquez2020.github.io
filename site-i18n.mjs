@@ -447,6 +447,270 @@ export const extraRows = [
     "联系",
     "Contact",
     "Kontakt"
+  ],
+  [
+    "Finite-stage causal-set growth obstruction",
+    "Obstrução ao crescimento de conjuntos causais em estágio finito",
+    "Obstrucción al crecimiento de conjuntos causales en etapa finita",
+    "因果集有限阶段增长障碍",
+    "Obstruction à la croissance des ensembles causaux à étape finie",
+    "Wachstumshindernis kausaler Mengen in endlicher Stufe"
+  ],
+  [
+    "CHRONOS · SOURCE-LINKED RESEARCH UPDATE · NOVEMBER 2026",
+    "CHRONOS · ATUALIZAÇÃO DE PESQUISA COM FONTES · NOVEMBRO DE 2026",
+    "CHRONOS · ACTUALIZACIÓN DE INVESTIGACIÓN CON FUENTES · NOVIEMBRE DE 2026",
+    "CHRONOS · 附来源的研究进展 · 2026 年 11 月",
+    "CHRONOS · ACTUALITÉ DE RECHERCHE SOURCÉE · NOVEMBRE 2026",
+    "CHRONOS · QUELLENBELEGTER FORSCHUNGSSTAND · NOVEMBER 2026"
+  ],
+  [
+    "Exact finite-box computation proves a five-event pair-chain density above 0.19 for every nonnegative fifth coupling, versus a four-event target of 0.10. The unrestricted claim depends on a global-uniqueness certificate still awaiting complete replay; Lean verification and novelty remain OPEN.",
+    "O cálculo exato em uma região finita prova uma densidade de cadeias de pares de cinco eventos superior a 0,19 para todo quinto acoplamento não negativo, frente à meta de 0,10 para quatro eventos. A afirmação irrestrita depende de um certificado de unicidade global ainda não reproduzido integralmente; a verificação em Lean e a originalidade continuam em aberto.",
+    "El cálculo exacto en una caja finita prueba una densidad de cadenas de pares de cinco eventos superior a 0,19 para todo quinto acoplamiento no negativo, frente al objetivo de 0,10 para cuatro eventos. La afirmación sin restricciones depende de un certificado de unicidad global pendiente de reproducción completa; la verificación en Lean y la originalidad siguen abiertas.",
+    "有限参数盒的精确计算证明，对任意非负第五耦合，五事件二元链密度高于 0.19，四事件目标为 0.10。无约束结论依赖尚未完整复现的全局唯一性证书；Lean 验证与原创性仍待解决。",
+    "Le calcul exact dans une boîte finie prouve une densité de chaînes de paires à cinq événements supérieure à 0,19 pour tout cinquième couplage non négatif, contre une cible à quatre événements de 0,10. L’affirmation sans restriction dépend d’un certificat d’unicité globale dont la reproduction complète reste à faire ; la vérification Lean et l’originalité restent ouvertes.",
+    "Die exakte Berechnung in einem endlichen Parameterbereich beweist für jede nichtnegative fünfte Kopplung eine Paarkettendichte bei fünf Ereignissen über 0,19 gegenüber dem Zielwert 0,10 bei vier Ereignissen. Die uneingeschränkte Aussage hängt von einem noch nicht vollständig reproduzierten globalen Eindeutigkeitszertifikat ab; Lean-Verifikation und Originalität bleiben offen."
+  ],
+  [
+    "Read the conditional theorem and evidence",
+    "Ler o teorema condicional e as evidências",
+    "Leer el teorema condicional y las evidencias",
+    "阅读条件定理及证据",
+    "Lire le théorème conditionnel et les preuves",
+    "Bedingtes Theorem und Belege lesen"
+  ],
+  [
+    "Melanoma CD36: reproducible exploratory negative result",
+    "Melanoma CD36: resultado exploratório negativo reproduzível",
+    "Melanoma CD36: resultado exploratorio negativo reproducible",
+    "黑色素瘤 CD36：可复现的探索性阴性结果",
+    "Mélanome CD36 : résultat exploratoire négatif reproductible",
+    "Melanom CD36: reproduzierbares exploratives Negativergebnis"
+  ],
+  [
+    "Matched baseline single-cell analyses of 12 patients reproduced the original CD36 tests and corrected 17 known malignant-cell overlaps in candidate myeloid clusters. No statistically significant CD36–response association or clinical predictor was established. Independent replication and definitive macrophage annotation remain open.",
+    "Análises pareadas de células individuais na linha de base de 12 pacientes reproduziram os testes originais de CD36 e corrigiram 17 sobreposições conhecidas de células malignas em grupos mieloides candidatos. Não foi estabelecida associação estatisticamente significativa entre CD36 e resposta, nem um preditor clínico. A replicação independente e a anotação definitiva de macrófagos continuam em aberto.",
+    "Los análisis basales emparejados de células individuales de 12 pacientes reprodujeron las pruebas originales de CD36 y corrigieron 17 solapamientos conocidos con células malignas en grupos mieloides candidatos. No se estableció una asociación CD36–respuesta estadísticamente significativa ni un predictor clínico. La replicación independiente y la anotación definitiva de macrófagos siguen abiertas.",
+    "12 名患者的匹配基线单细胞分析复现了原始 CD36 检验，并纠正候选髓系细胞簇中 17 个已知恶性细胞重叠。未确立统计显著的 CD36 与疗效关联或临床预测因子。独立复现和巨噬细胞最终注释仍待完成。",
+    "Les analyses unicellulaires appariées à l’inclusion de 12 patients ont reproduit les tests CD36 initiaux et corrigé 17 chevauchements connus avec des cellules malignes dans les groupes myéloïdes candidats. Aucune association CD36–réponse statistiquement significative ni aucun prédicteur clinique n’a été établi. La réplication indépendante et l’annotation définitive des macrophages restent ouvertes.",
+    "Abgeglichene Einzelzellanalysen zu Studienbeginn bei 12 Patienten reproduzierten die ursprünglichen CD36-Tests und korrigierten 17 bekannte Überschneidungen mit malignen Zellen in myeloischen Kandidatenclustern. Weder ein statistisch signifikanter CD36-Ansprechzusammenhang noch ein klinischer Prädiktor wurde festgestellt. Unabhängige Replikation und definitive Makrophagenannotation bleiben offen."
+  ],
+  [
+    "Read methods and exact statistical results",
+    "Ler métodos e resultados estatísticos exatos",
+    "Leer métodos y resultados estadísticos exactos",
+    "阅读方法和精确统计结果",
+    "Lire les méthodes et les résultats statistiques exacts",
+    "Methoden und exakte statistische Ergebnisse lesen"
+  ],
+  [
+    "Use the subject filters to find a project, then inspect its scope, source and unresolved boundary.",
+    "Use os filtros de área para encontrar um projeto e examine seu escopo, fonte e limites em aberto.",
+    "Use los filtros temáticos para encontrar un proyecto y examine su alcance, fuente y límites abiertos.",
+    "使用主题筛选查找项目，并检查其范围、来源和未解决边界。",
+    "Utilisez les filtres thématiques pour trouver un projet, puis examinez son périmètre, sa source et ses limites ouvertes.",
+    "Nutzen Sie die Themenfilter, um ein Projekt zu finden und dessen Umfang, Quelle und offene Grenzen zu prüfen."
+  ],
+  [
+    "Complete research index",
+    "Índice completo de pesquisa",
+    "Índice completo de investigación",
+    "完整研究索引",
+    "Index complet de recherche",
+    "Vollständiger Forschungsindex"
+  ],
+  [
+    "Explore evidence and open obligations",
+    "Explorar evidências e obrigações em aberto",
+    "Explorar evidencias y obligaciones abiertas",
+    "查看证据与未完成义务",
+    "Explorer les preuves et les obligations ouvertes",
+    "Belege und offene Verpflichtungen erkunden"
+  ],
+  [
+    "Inspect source and scope",
+    "Examinar fonte e escopo",
+    "Examinar fuente y alcance",
+    "检查来源与范围",
+    "Examiner la source et le périmètre",
+    "Quelle und Umfang prüfen"
+  ],
+  [
+    "Poincaré proof program",
+    "Programa de prova de Poincaré",
+    "Programa de demostración de Poincaré",
+    "庞加莱证明计划",
+    "Programme de preuve de Poincaré",
+    "Poincaré-Beweisprogramm"
+  ],
+  [
+    "Triangulations, Pachner moves and formally checked intermediate results.",
+    "Triangulações, movimentos de Pachner e resultados intermediários verificados formalmente.",
+    "Triangulaciones, movimientos de Pachner y resultados intermedios verificados formalmente.",
+    "三角剖分、Pachner 移动与形式化验证的中间结果。",
+    "Triangulations, mouvements de Pachner et résultats intermédiaires vérifiés formellement.",
+    "Triangulierungen, Pachner-Züge und formal geprüfte Zwischenergebnisse."
+  ],
+  [
+    "Executable reductions and bounded spectral investigations.",
+    "Reduções executáveis e investigações espectrais limitadas.",
+    "Reducciones ejecutables e investigaciones espectrales acotadas.",
+    "可执行归约与有界谱研究。",
+    "Réductions exécutables et études spectrales bornées.",
+    "Ausführbare Reduktionen und beschränkte spektrale Untersuchungen."
+  ],
+  [
+    "URF core",
+    "Núcleo URF",
+    "Núcleo URF",
+    "URF 核心",
+    "Noyau URF",
+    "URF-Kern"
+  ],
+  [
+    "Definitions, schemas and auditable certificate boundaries.",
+    "Definições, esquemas e limites auditáveis de certificados.",
+    "Definiciones, esquemas y límites auditables de certificados.",
+    "定义、模式与可审计的证书边界。",
+    "Définitions, schémas et limites auditables des certificats.",
+    "Definitionen, Schemata und prüfbare Zertifikatsgrenzen."
+  ],
+  [
+    "URF verifier",
+    "Verificador URF",
+    "Verificador URF",
+    "URF 验证器",
+    "Vérificateur URF",
+    "URF-Verifikator"
+  ],
+  [
+    "Deterministic certificate and provenance validation tooling.",
+    "Ferramentas determinísticas de validação de certificados e proveniência.",
+    "Herramientas deterministas de validación de certificados y procedencia.",
+    "确定性证书与来源验证工具。",
+    "Outils déterministes de validation des certificats et de la provenance.",
+    "Deterministische Werkzeuge zur Zertifikats- und Herkunftsprüfung."
+  ],
+  [
+    "Finite-model theory",
+    "Teoria de modelos finitos",
+    "Teoría de modelos finitos",
+    "有限模型论",
+    "Théorie des modèles finis",
+    "Endliche Modelltheorie"
+  ],
+  [
+    "Ehrenfeucht–Fraïssé games and locality bridge formalizations.",
+    "Jogos de Ehrenfeucht–Fraïssé e formalizações de pontes de localidade.",
+    "Juegos de Ehrenfeucht–Fraïssé y formalizaciones de conexiones de localidad.",
+    "Ehrenfeucht–Fraïssé 博弈与局部性桥梁形式化。",
+    "Jeux d’Ehrenfeucht–Fraïssé et formalisation des liens de localité.",
+    "Ehrenfeucht–Fraïssé-Spiele und Formalisierung von Lokalitätsbrücken."
+  ],
+  [
+    "DFM–MKC cosmology",
+    "Cosmologia DFM–MKC",
+    "Cosmología DFM–MKC",
+    "DFM–MKC 宇宙学",
+    "Cosmologie DFM–MKC",
+    "DFM–MKC-Kosmologie"
+  ],
+  [
+    "Executable consistency tests and numerical claims under audit.",
+    "Testes executáveis de consistência e afirmações numéricas sob auditoria.",
+    "Pruebas ejecutables de consistencia y afirmaciones numéricas en auditoría.",
+    "可执行一致性检验与审计中的数值论断。",
+    "Tests exécutables de cohérence et affirmations numériques en cours d’audit.",
+    "Ausführbare Konsistenztests und numerische Aussagen in Prüfung."
+  ],
+  [
+    "A reproducible claim must identify its source, assumptions and actual validation level.",
+    "Uma afirmação reproduzível deve identificar sua fonte, hipóteses e nível real de validação.",
+    "Una afirmación reproducible debe identificar su fuente, hipótesis y nivel real de validación.",
+    "可复现论断必须指明来源、假设和实际验证级别。",
+    "Une affirmation reproductible doit préciser sa source, ses hypothèses et son niveau réel de validation.",
+    "Eine reproduzierbare Aussage muss Quelle, Annahmen und tatsächliches Validierungsniveau benennen."
+  ],
+  [
+    "Define the theorem, computational question or scientific hypothesis with its exact hypotheses.",
+    "Defina o teorema, a questão computacional ou a hipótese científica com suas hipóteses exatas.",
+    "Defina el teorema, la cuestión computacional o la hipótesis científica con sus hipótesis exactas.",
+    "明确给出定理、计算问题或科学假设的精确前提。",
+    "Définissez le théorème, la question computationnelle ou l’hypothèse scientifique avec ses hypothèses exactes.",
+    "Definieren Sie das Theorem, die Rechenfrage oder wissenschaftliche Hypothese mit ihren genauen Voraussetzungen."
+  ],
+  [
+    "Reference a revision, declaration, executable certificate, test inputs and reproducible commands.",
+    "Referencie uma revisão, declaração, certificado executável, entradas de teste e comandos reproduzíveis.",
+    "Referencie una revisión, declaración, certificado ejecutable, entradas de prueba y comandos reproducibles.",
+    "引用版本、声明、可执行证书、测试输入和可复现命令。",
+    "Référencez une révision, une déclaration, un certificat exécutable, les entrées de test et les commandes reproductibles.",
+    "Verweisen Sie auf Revision, Deklaration, ausführbares Zertifikat, Testeingaben und reproduzierbare Befehle."
+  ],
+  [
+    "Distinguish Lean verification, bounded computation, conditional results and what remains open.",
+    "Distinga verificação em Lean, computação limitada, resultados condicionais e o que permanece em aberto.",
+    "Distinga la verificación en Lean, el cálculo acotado, los resultados condicionales y lo que sigue abierto.",
+    "区分 Lean 验证、有界计算、条件结果与开放问题。",
+    "Distinguez vérification Lean, calcul borné, résultats conditionnels et questions ouvertes.",
+    "Unterscheiden Sie Lean-Verifikation, beschränkte Berechnungen, bedingte Ergebnisse und offene Fragen."
+  ],
+  [
+    "Verification boundary.",
+    "Limites da verificação.",
+    "Límites de la verificación.",
+    "验证边界。",
+    "Limites de la vérification.",
+    "Verifikationsgrenze."
+  ],
+  [
+    "A green build or a dashboard badge is not itself a proof of an unrestricted theorem. Formal status inherits from the exact theorem, assumptions, revision and axiom audit.",
+    "Uma compilação bem-sucedida ou um selo no painel não é, por si só, prova de um teorema irrestrito. O status formal deriva do teorema exato, das hipóteses, da revisão e da auditoria de axiomas.",
+    "Una compilación exitosa o una insignia del panel no constituye por sí sola una prueba de un teorema sin restricciones. El estado formal deriva del teorema exacto, las hipótesis, la revisión y la auditoría de axiomas.",
+    "构建成功或仪表板徽章本身不是无约束定理的证明。形式化状态取决于精确定理、假设、版本和公理审计。",
+    "Une compilation réussie ou un badge de tableau de bord ne prouve pas à lui seul un théorème sans restriction. Le statut formel découle du théorème exact, des hypothèses, de la révision et de l’audit des axiomes.",
+    "Ein erfolgreicher Build oder ein Dashboard-Abzeichen ist für sich kein Beweis eines uneingeschränkten Theorems. Der formale Status ergibt sich aus dem genauen Theorem, den Annahmen, der Revision und der Axiomprüfung."
+  ],
+  [
+    "Read the formal boundary",
+    "Ler os limites formais",
+    "Leer los límites formales",
+    "阅读形式化边界",
+    "Lire les limites formelles",
+    "Formale Grenzen lesen"
+  ],
+  [
+    "Voluntary GitHub sponsorships help sustain publicly accessible mathematical verification tools, Lean formalization, and reproducible scientific computing. Contributions support ongoing work, not guaranteed research outcomes.",
+    "Patrocínios voluntários no GitHub ajudam a manter ferramentas públicas de verificação matemática, formalização em Lean e computação científica reproduzível. As contribuições apoiam o trabalho em curso, não resultados garantidos.",
+    "Los patrocinios voluntarios en GitHub ayudan a mantener herramientas públicas de verificación matemática, formalización en Lean y computación científica reproducible. Las contribuciones apoyan el trabajo en curso, no resultados garantizados.",
+    "GitHub 自愿赞助支持公开数学验证工具、Lean 形式化与可复现科学计算。捐助支持持续研究，不保证研究成果。",
+    "Les parrainages volontaires GitHub soutiennent les outils publics de vérification mathématique, la formalisation Lean et le calcul scientifique reproductible. Les contributions soutiennent les travaux en cours, sans garantir de résultats.",
+    "Freiwilliges GitHub-Sponsoring unterstützt öffentliche mathematische Verifikationswerkzeuge, Lean-Formalisierung und reproduzierbares wissenschaftliches Rechnen. Beiträge fördern laufende Arbeiten, nicht garantierte Forschungsergebnisse."
+  ],
+  [
+    "Independent criticism is useful when it identifies a theorem declaration, concrete counterexample, missing hypothesis or reproducible failure.",
+    "A crítica independente é útil quando identifica uma declaração de teorema, contraexemplo concreto, hipótese ausente ou falha reproduzível.",
+    "La crítica independiente es útil cuando identifica una declaración de teorema, contraejemplo concreto, hipótesis faltante o fallo reproducible.",
+    "独立批评在指出定理声明、具体反例、缺失假设或可复现失败时具有价值。",
+    "La critique indépendante est utile lorsqu’elle identifie une déclaration de théorème, un contre-exemple concret, une hypothèse manquante ou un échec reproductible.",
+    "Unabhängige Kritik ist nützlich, wenn sie eine Theoremdeklaration, ein konkretes Gegenbeispiel, eine fehlende Voraussetzung oder einen reproduzierbaren Fehler benennt."
+  ],
+  [
+    "Independent research · Inacio F. Vasquez",
+    "Pesquisa independente · Inacio F. Vasquez",
+    "Investigación independiente · Inacio F. Vasquez",
+    "独立研究 · Inacio F. Vasquez",
+    "Recherche indépendante · Inacio F. Vasquez",
+    "Unabhängige Forschung · Inacio F. Vasquez"
+  ],
+  [
+    "This site is an index and documentation surface. It does not independently prove mathematical claims.",
+    "Este site é um índice e espaço de documentação. Ele não prova afirmações matemáticas de forma independente.",
+    "Este sitio es un índice y espacio de documentación. No demuestra afirmaciones matemáticas de forma independiente.",
+    "本站是索引与文档界面，不独立证明数学论断。",
+    "Ce site est un index et un espace documentaire. Il ne démontre pas indépendamment les affirmations mathématiques.",
+    "Diese Website ist eine Index- und Dokumentationsoberfläche. Sie beweist mathematische Aussagen nicht eigenständig."
   ]
 ];
 const languages=['en','pt-BR','es','zh-Hans','fr','de'];
@@ -492,9 +756,9 @@ function apply(lang){
  translateText();
  for(const link of document.querySelectorAll('a[href]')){
   const href=link.getAttribute('href');
-  if(!href||href.startsWith('#')||/^(?:[a-z]+:|\/\/)/i.test(href))continue;
+  if(!href||href.startsWith('#'))continue;
   const url=new URL(href,location.href);
-  if(url.origin!==location.origin)continue;
+  if(url.origin!==location.origin||!/^https?:$/.test(url.protocol))continue;
   url.searchParams.set('lang',chosen);
   link.href=url.href;
  }
