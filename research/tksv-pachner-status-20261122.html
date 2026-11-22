@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="TKSV Pachner move research certificate ledger: conditional Poincare equivalence, explicit infinite-family normalization and open global descent.">
+<title>TKSV Pachner Research — Conditional Boundary · Vasquez Research</title>
+<style>
+:root{color-scheme:dark}body{margin:0;background:#0b1522;color:#e7f0f6;font:16px/1.65 system-ui,-apple-system,sans-serif}
+main{max-width:860px;margin:auto;padding:38px 22px 70px}a{color:#8ee3dd}h1,h2{line-height:1.25}h1{font-size:clamp(1.8rem,4vw,2.6rem)}h2{margin-top:2rem}table{border-collapse:collapse;width:100%}td,th{padding:.65rem;border-bottom:1px solid #385064;text-align:left}th{color:#b7d0df}.muted{color:#b8c9d5}.scope{border-left:3px solid #e8bf77;padding:12px 16px;background:#182637}code{overflow-wrap:anywhere}footer{margin-top:3rem;border-top:1px solid #385064;padding-top:1rem}
+</style>
+</head>
+<body><main>
+<p><a href="../index.html">Vasquez Research</a> / Mathematical research</p>
+<h1>TKSV Pachner research: verified families and the global boundary</h1>
+<p class="muted">Research status snapshot · 22 November 2026</p>
+<p class="scope"><strong>Independent global Poincaré derivation: OPEN.</strong> The universal strict net vertex-descent hypothesis G is equivalent to the classical Poincaré statement under Moise and Pachner connectivity. A conditional proof using G is not an independent solution.</p>
+<h2>The precise conditional theorem</h2>
+<p>For a finite connected closed simply connected combinatorial three-manifold K, define G to assert that whenever K has more than five vertices, some finite legal Pachner path leads to a triangulation with strictly fewer vertices. Under G, strong induction and the five-vertex classification give |K| homeomorphic to S<sup>3</sup>. Conversely, classical Poincaré recognition, Moise's PL uniqueness, and Pachner connectivity imply G. Thus G is a reformulation, not a weaker auxiliary lemma.</p>
+<h2>Exact move-count evidence</h2>
+<p>Define g<sub>2</sub>(K) = f<sub>1</sub>(K) − 4f<sub>0</sub>(K) + 10. Any normalization sequence to the boundary of the four-simplex satisfies N<sub>41</sub>−N<sub>14</sub> = f<sub>0</sub>(K)−5 and N<sub>32</sub>−N<sub>23</sub> = g<sub>2</sub>(K).</p>
+<p>For joins of cycles C<sub>m</sub>*C<sub>n</sub> (m,n ≥ 4), a proven paper lower bound is <strong>(m−2)(n−2)+3</strong> Pachner moves. The explicit C<sub>4</sub>*C<sub>n</sub> construction attains the bound <strong>2n−1</strong>.</p>
+<h2>Finite Mac-reported certificates</h2>
+<table><thead><tr><th>Certificate scope</th><th>Cases</th><th>Legal moves</th></tr></thead><tbody>
+<tr><td>Suspended-cycle target removal</td><td>153</td><td>3,213</td></tr>
+<tr><td>Global-blocker preparation</td><td>45</td><td>747</td></tr>
+<tr><td>Stacked g<sub>2</sub>=0 complete descents</td><td>640</td><td>20,800</td></tr>
+<tr><td>First positive-g<sub>2</sub> complete-descent batch</td><td>298</td><td>5,181</td></tr>
+<tr><td>Additional g<sub>2</sub>=2 construction</td><td>148</td><td>3,700</td></tr>
+<tr><td>Optimal C<sub>4</sub>*C<sub>n</sub> normalization</td><td>97</td><td>9,991</td></tr>
+</tbody></table>
+<p>These counts record specific completed finite checks; they are not exhaustive over all triangulations. No new Lean compilation or kernel axiom audit is claimed for this status page.</p>
+<h2>Counterexamples and safeguards</h2>
+<p>A six-vertex stacked sphere refutes universal zero-cost removal of an arbitrary edge while retaining all original vertices and a protected star. An independent example shows that an induced suspended link cycle does not force the suspension edge to be absent elsewhere. These conditions must remain visible in any claimed local-to-global proof.</p>
+<h2>Source and continuing obligations</h2>
+<p><a href="https://github.com/inaciovasquez2020/poincare-new-derivation/blob/research/tksv-conditional-equivalence-audit-20261122/docs/research/TKSV_CONDITIONAL_POINCARE_EQUIVALENCE_2026-11-22.md">Source-linked detailed research note</a> · <a href="https://github.com/inaciovasquez2020/poincare-new-derivation/tree/work/first-nonzero-reentry-20261027">Poincaré proof repository checkpoint branch</a>.</p>
+<p><strong>OPEN:</strong> noncircular global net vertex descent; full unrestricted ambient blocker-recovery theory; independent Lean proof of global Poincaré. The repo's geometric G2 face-cycle program is separate from the numerical g<sub>2</sub> invariant discussed here.</p>
+<footer><small>This page is a research status ledger, not a mathematical proof certificate or announcement of Poincaré resolution.</small></footer>
+</main></body></html>

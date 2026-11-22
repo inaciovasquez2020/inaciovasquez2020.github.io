@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Source-linked exploratory melanoma CD36 analysis: exact permutation tests, corrected cell contamination, negative result and open validation boundaries.">
+<title>Melanoma CD36 — exploratory negative evidence | Vasquez Research</title>
+<link rel="stylesheet" href="research.css"><link rel="stylesheet" href="research-pages.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><div class="topbar-inner wrap"><a class="wordmark" href="index.html">VASQUEZ RESEARCH</a><nav aria-label="Primary navigation"><a href="index.html#projects">Research</a><a href="publications.html">Publications</a><a href="research-network/index.html">Research Network</a></nav></div></header>
+<section class="document-hero wrap"><p class="eyebrow">COMPUTATIONAL BIOLOGY · EXPLORATORY NEGATIVE RESULT · 2026-11-15</p><h1>Melanoma CD36: matched baseline evidence</h1>
+<p>In a secondary single-cell RNA-seq analysis of 12 baseline melanoma patients (4 responders, 8 nonresponders), exact patient-level response-label permutation tests did not establish a statistically significant CD36–immunotherapy-response association.</p></section>
+<main class="document-main wrap" id="main">
+<div class="document-notice"><strong>Scope boundary:</strong> This is an exploratory computational record, not a clinically validated biomarker, treatment recommendation, mechanistic proof or independently replicated finding. Candidate myeloid clusters have not been definitively annotated as macrophages.</div>
+<section><h2>What was checked</h2><p>The analysis matched malignant and tumor-microenvironment samples from the same 12 pretreatment patients. An exact cell-ID overlap audit identified 17 known malignant cells among 941 initial cluster-10/13 myeloid candidates, leaving 924 corrected primary candidates. An extended cluster-10/13/16 definition retained 1,137 candidates.</p>
+<p>The original analysis averaged <code>log1p(10,000 × CD36 count / RNA library size)</code> over cells within each patient and tested the between-group mean difference by enumerating all 495 assignments of four responders among 12 patients.</p></section>
+<section><h2>Exact permutation results</h2><table><thead><tr><th>Analysis</th><th>Two-sided exact p-value</th></tr></thead><tbody>
+<tr><td>Original malignant-cell CD36</td><td>214/495 (0.4323)</td></tr>
+<tr><td>Original cluster-10/13 candidate myeloid CD36</td><td>346/495 (0.6990)</td></tr>
+<tr><td>Contamination-corrected cluster-10/13 candidate myeloid CD36</td><td>288/495 (0.5818)</td></tr>
+<tr><td>Corrected extended cluster-10/13/16 candidate myeloid CD36</td><td>372/495 (0.7515)</td></tr></tbody></table>
+<p>A separate exploratory test used unlogged library-size-adjusted cell means and patient-level AUROC. For corrected primary myeloid CD36, response-high AUROC was 0.40625, with exact permutation p = 338/495. Because the statistics and transformations differ, these results must not be conflated.</p></section>
+<section><h2>Reproducibility and limitations</h2><p>Both original mean-difference statistics were reproduced from source RDS objects. Six selected repository melanoma regression suites passed on the researcher's Mac before the evidence-only addendum commit. The public branch records aggregate summaries, source attribution, data hashes and methodological reconciliation, but does not redistribute the raw single-cell data or specimen-level records.</p>
+<p>Definitive macrophage annotation, independent cohort validation, source-supplement authenticity assessment and clinical prediction remain open or not established. The frozen melanoma v2 predictor is unchanged; its external validation was not successful.</p>
+<p><a href="https://github.com/inaciovasquez2020/biological-friction-framework/tree/510bc502d67e6ac5289f56d2b73a44f2ba6bd313/research/melanoma/cd36-paired-baseline-2026-11-15">Inspect exact research checkpoint (commit 510bc50)</a> · <a href="https://github.com/inaciovasquez2020/biological-friction-framework/pull/115">Source repository draft PR #115</a> · <a href="publications.html">Research library</a></p></section></main>
+<footer class="document-footer"><div class="wrap document-footer-inner"><span>Vasquez Research · Evidence status: COMPUTATION_PASS / CLINICAL_VALIDATION_OPEN</span><a href="index.html">Research home</a></div></footer></body></html>

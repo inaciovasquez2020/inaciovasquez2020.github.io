@@ -37,6 +37,12 @@ def test_math_lab_navigation():
     assert 'href="how-to.html"' in page
     assert 'href="ai-latex-guide.html"' in page
     assert 'href="formal-request.html"' in page
+    assert 'id="feedback"' in page
+    assert 'issues/new?template=math-lab-feedback.yml' in page
+    assert 'sign-in required' in page and 'issues are public' in page
+    issue_form=(ROOT/'.github/ISSUE_TEMPLATE/math-lab-feedback.yml').read_text(encoding='utf-8')
+    for marker in ('id: request-kind','id: request','id: privacy','This issue will be public','required: true'):
+        assert marker in issue_form,marker
     assert (ROOT/"math-lab/formal-request.html").is_file()
     assert 'id="open-tour"' in page
     assert 'id="lab-tour"' in page
@@ -63,7 +69,10 @@ def test_math_lab_navigation():
     assert 'Previous evidence cleared' in ui
     assert 'EXTRACTION REVIEW REQUIRED' in ui
     assert 'Input and interpretation warning' in page
-    assert 'AUTO-SUGGESTED (UNCONFIRMED)' in ui
+    runtime=(ROOT/'math-lab/runtime-messages-i18n.mjs').read_text(encoding='utf-8')
+    assert 'AUTO-SUGGESTED (UNCONFIRMED)' in runtime
+    assert "localMessage('classification'" in ui
+    assert 'confirmedSelectionKey===selectionKey()' in ui
     assert 'METHOD APPLIED' in ui
     assert 'UNCERTIFIED' in ui
     guide=(ROOT/'math-lab/how-to.html').read_text(encoding='utf-8')

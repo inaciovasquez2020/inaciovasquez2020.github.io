@@ -1,4 +1,5 @@
 /** Explicit research taxonomy and method coverage. Data labels are not proof claims. */
+import {classifyComplexityManuscript} from './research-guards.mjs';
 export const TAXONOMY = Object.freeze([
   {id:'algebra',label:'Algebra',subcategories:[
     {id:'polynomial-identities',label:'Polynomial identities over R',exact:true},
@@ -62,11 +63,15 @@ export function coverage(field,subcategory,method){
  */
 export function suggestCategory(source){
   const t=String(source??'').slice(0,65536);
+  const primary=classifyComplexityManuscript(t);
+  if(primary)return primary;
   if(!t.trim())return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',
     reason:'No source text to classify. Choose the subject manually.'};
   const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
   const rules=[
     ['mathematical-physics','spectral-physics',[
+      /(?:quantum[\s-]*hall|chern (?:number|character|class)|berry curvature|topological (?:band|charge pump)|photonic topological|spectral projector)/i,
+      /(?:four[\s-]*dimensional|4D)[\s\S]{0,120}(?:quantum[\s-]*hall|topolog)|c_\{?1\}?|c_\{?2\}?|\\\\operatorname\{ch\}/i,
       /chiral[\s-]*(?:vibrat|phonon)|circular dichroism|vibrational (?:inverse|IFE)|molecular vibrat|phonon inverse faraday/i,
       /normal[\s-]*mode|mass[\s-]*weight|hessian|DFTB\+?|degenerate vibrat|vibration[\s-]*induced magnetism/i,
       /\\(?:ddot|dot)\b|\\Gamma\b.*\\omega\b/i]],

@@ -1,0 +1,97 @@
+{
+  "schema_version": "public-repository-index-v2",
+  "status": "SUPERSEDED",
+  "note": "The former research graph inventory is superseded by the public-only connection snapshot. No historical private-repository metadata is published here. The 2026-11-12 update covers public sources only; private repositories are excluded even where they contain verified internal research.",
+  "canonical_snapshot": "./public-connection-snapshot.json",
+  "captured_date_utc": "2026-11-12",
+  "public_repositories": [
+    {
+      "id": "urf-core",
+      "url": "https://github.com/inaciovasquez2020/urf-core"
+    },
+    {
+      "id": "poincare-new-derivation",
+      "url": "https://github.com/inaciovasquez2020/poincare-new-derivation"
+    },
+    {
+      "id": "cslib-fmt",
+      "url": "https://github.com/inaciovasquez2020/cslib-fmt"
+    },
+    {
+      "id": "fo4-constraint-isolation",
+      "url": "https://github.com/inaciovasquez2020/fo4-constraint-isolation"
+    },
+    {
+      "id": "overlap-rigidity-oracle-release",
+      "url": "https://github.com/inaciovasquez2020/overlap-rigidity-oracle-release"
+    },
+    {
+      "id": "urf-11-translation-subproblem-registry",
+      "url": "https://github.com/inaciovasquez2020/urf-11-translation-subproblem-registry"
+    },
+    {
+      "id": "zero_day_restricted_closures",
+      "url": "https://github.com/inaciovasquez2020/zero_day_restricted_closures"
+    },
+    {
+      "id": "chronos-urf-rr",
+      "url": "https://github.com/inaciovasquez2020/chronos-urf-rr"
+    },
+    {
+      "id": "dfm-mkc-cosmology",
+      "url": "https://github.com/inaciovasquez2020/dfm-mkc-cosmology"
+    },
+    {
+      "id": "biological-friction-framework",
+      "url": "https://github.com/inaciovasquez2020/biological-friction-framework"
+    },
+    {
+      "id": "darkness-region-dynamics-null-test",
+      "url": "https://github.com/inaciovasquez2020/darkness-region-dynamics-null-test"
+    },
+    {
+      "id": "chronos-curated-release",
+      "url": "https://github.com/inaciovasquez2020/chronos-curated-release"
+    },
+    {
+      "id": "urf-verifier",
+      "url": "https://github.com/inaciovasquez2020/urf-verifier"
+    },
+    {
+      "id": "theorem-closure-classifier",
+      "url": "https://github.com/inaciovasquez2020/theorem-closure-classifier"
+    },
+    {
+      "id": "urf-spine-public",
+      "url": "https://github.com/inaciovasquez2020/urf-spine-public"
+    },
+    {
+      "id": "urf-templates",
+      "url": "https://github.com/inaciovasquez2020/urf-templates"
+    },
+    {
+      "id": "urf-textbook",
+      "url": "https://github.com/inaciovasquez2020/urf-textbook"
+    },
+    {
+      "id": "frontier-status-dashboard",
+      "url": "https://github.com/inaciovasquez2020/frontier-status-dashboard"
+    },
+    {
+      "id": "vasquez-index",
+      "url": "https://github.com/inaciovasquez2020/vasquez-index"
+    },
+    {
+      "id": "inaciovasquez2020",
+      "url": "https://github.com/inaciovasquez2020/inaciovasquez2020"
+    },
+    {
+      "id": "inaciovasquez2020.github.io",
+      "url": "https://github.com/inaciovasquez2020/inaciovasquez2020.github.io"
+    }
+  ],
+  "nodes_public_repository_count": 21,
+  "connection_edges_count": 31,
+  "five_dimensional_proposals_count": 7,
+  "research_status": "PUBLIC_EVIDENCE_LINKS_UPDATED_FULL_5D_PHYSICAL_AND_GEOMETRIC_TRANSFER_OPEN"
+}

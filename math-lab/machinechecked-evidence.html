@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Experimental Lean evidence reader | Math Verification Lab</title><link rel="stylesheet" href="styles.css">
+<style>main{max-width:1000px;margin:auto;padding:24px;line-height:1.6}article{border:1px solid #8885;border-radius:9px;margin:1.25rem 0;padding:1rem}pre{overflow-wrap:anywhere;white-space:pre-wrap}dl{display:grid;grid-template-columns:minmax(150px,250px) 1fr;gap:.25rem 1rem}dt{font-weight:bold}dd{margin:0}input,button{margin:1rem .5rem 1rem 0}li{overflow-wrap:anywhere}p{max-width:85ch}</style>
+</head><body><main><p><a href="index.html">Math Verification Lab</a> / Experimental evidence import</p>
+<h1>Lean evidence reader</h1>
+<p><strong>External evidence, not a new mathematical proof.</strong> Displays MachineChecked reports as untrusted, read-only data. Does not compile Lean, prove manuscript correspondence, authenticate reviewers, or change the Lab's verification statuses.</p>
+<p><label for="file"><strong>Open a JSON report from this device:</strong></label> <input id="file" type="file" accept=".json,application/json"></p>
+<button id="demo" type="button">Show pinned public MachineChecked example</button>
+<p>The demo uses the actual MachineChecked fixture for the small Lean theorem <code>Shape.decided</code>. The mathematical example is synthetic, but its audit record is not fabricated. This website does not independently rerun its proof.</p>
+<p id="message" role="status" aria-live="polite">No report loaded.</p><section id="claims" aria-label="Claim evidence"></section>
+</main><script type="module">
+import {normalizeReport} from './machinechecked-evidence-reader.mjs';
+const f=document.getElementById('file'),demo=document.getElementById('demo'),message=document.getElementById('message'),area=document.getElementById('claims');
+let importGeneration=0; // Shared across file and demo: latest user action wins.
+function node(tag,txt,parent){const x=document.createElement(tag);x.textContent=String(txt??'Not reported');parent.appendChild(x);return x}
+function show(raw){
+  const report=normalizeReport(raw);if(!report.claims.length)throw new Error('No claims available');
+  area.replaceChildren();
+  for(const c of report.claims){
+    const a=document.createElement('article');node('h2',c.claim_id,a);
+    const dl=document.createElement('dl');a.appendChild(dl);
+    for(const [name,value] of [['Reported MachineChecked status',c.reported_status_code],
+      ['Lean declaration',c.lean_declaration],['Local integrity result',c.local_integrity?.state],
+      ['Manuscript correspondence',c.local_integrity?.correspondence],['Review authentication',c.local_integrity?.review],
+      ['Independent Lean replay',c.local_integrity?.independent_kernel_replay],['Lab verdict','NOT_VERIFIED_BY_ADAPTER']]){
+      node('dt',name,dl);node('dd',value,dl)}
+    if(c.manuscript_text){node('h3','Manuscript excerpt (untrusted)',a);node('pre',c.manuscript_text,a)}
+    if(c.lean_statement){node('h3','Lean statement (untrusted)',a);node('pre',c.lean_statement,a)}
+    node('h3','Findings',a);
+    if(c.issues.length){const ul=document.createElement('ul');a.appendChild(ul);for(const issue of c.issues)node('li',String(issue.code)+': '+String(issue.detail),ul)}
+    else node('p','No consistency conflict found. This does not establish correspondence.',a);
+    area.appendChild(a)
+  }
+  message.textContent='External report loaded. No mathematical claim was independently verified by the Lab.';
+}
+function error(e){area.replaceChildren();message.textContent='Import rejected: '+String(e.message)}
+f.addEventListener('change',async()=>{
+  const generation=++importGeneration;
+  const file=f.files?.[0];
+  area.replaceChildren();
+  message.textContent='Loading report…';
+  if(!file){message.textContent='No report loaded.';return}
+  if(file.size>2097152){message.textContent='Import rejected: JSON exceeds 2 MiB.';return}
+  try{
+    const body=await file.text();
+    if(generation!==importGeneration)return;
+    show(JSON.parse(body));
+  }catch(e){if(generation===importGeneration)error(e)}
+});
+demo.addEventListener('click',async()=>{
+  const generation=++importGeneration;
+  area.replaceChildren();
+  message.textContent='Loading report…';
+  try{
+    const r=await fetch('./fixtures/machinechecked-shape-decided.json',{credentials:'omit'});
+    if(generation!==importGeneration)return;
+    if(!r.ok)throw Error('HTTP '+r.status);
+    const body=await r.text();
+    if(generation!==importGeneration)return;
+    if(new TextEncoder().encode(body).length>2097152)throw Error('Fixture too large');
+    show(JSON.parse(body));
+  }catch(e){if(generation===importGeneration)error(e)}
+});
+</script></body></html>

@@ -10,8 +10,8 @@ let page=0;
 function render(){
   for(let i=0;i<slides.length;i++)slides[i].hidden=i!==page;
   back.disabled=page===0;
-  next.textContent=page===slides.length-1?'Finish':'Next';
-  position.textContent='Step '+(page+1)+' of '+slides.length;
+  next.textContent=globalThis.MathLabTranslations?.uiText?.(page===slides.length-1?'Finish':'Next') ?? (page===slides.length-1?'Finish':'Next');
+  position.textContent=globalThis.MathLabTranslations?.tourPosition?.(page,slides.length) ?? ('Step '+(page+1)+' of '+slides.length);
   dialog.setAttribute('aria-labelledby','tour-step-title-'+(page+1));
 }
 launch.addEventListener('click',()=>{
@@ -27,3 +27,6 @@ next.addEventListener('click',()=>{
 close.addEventListener('click',()=>dialog.close());
 dialog.addEventListener('close',()=>launch.focus());
 dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+
+// Refresh the visible tour position and button captions when the language changes.
+document.getElementById('ui-language')?.addEventListener('change',()=>render());

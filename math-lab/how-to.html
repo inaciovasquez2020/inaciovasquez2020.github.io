@@ -7,13 +7,13 @@
  <meta name="description" content="How to use Vasquez Research Math Verification Lab: choose a method, enter claims, interpret verification records and protect manuscript privacy.">
  <title>How to Use Math Verification Lab | Vasquez Research</title>
  <link rel="stylesheet" href="styles.css">
-</head>
+<script type="module" src="extended-i18n.mjs"></script></head>
 <body>
  <a class="skip" href="#guide-main">Skip to guide</a>
  <div class="lab-shell">
   <header class="topbar">
    <a class="brand" href="../index.html" aria-label="Vasquez Research home"><span class="mark" aria-hidden="true">∑</span><span class="brand-copy"><strong class="site-brand">VASQUEZ RESEARCH</strong><small>MATHEMATICAL INSTRUMENTS / LAB 001</small></span></a>
-   <div class="top-actions"><a class="site-link" href="index.html">Open the Lab</a><a class="site-link" href="../index.html">Research home</a><span class="phase">EXPERIMENTAL</span></div>
+   <div class="top-actions"><a class="site-link" href="index.html">Open the Lab</a><a class="site-link" href="../index.html">Research home</a><span class="phase">EXPERIMENTAL</span><label for="ui-language" class="theme-label">Language</label><select id="ui-language" aria-label="Interface language"><option value="en">English</option><option value="es">Español</option><option value="pt-BR">Português (Brasil)</option><option value="zh-Hans">简体中文</option><option value="fr">Français</option><option value="de">Deutsch</option></select></div>
   </header>
   <main id="guide-main" class="guide-main">
    <div class="eyebrow"><span class="rule"></span> DOCUMENTATION / VERSION 0.1</div>
@@ -37,6 +37,8 @@
    <section id="exact" class="guide-card">
     <span class="serial">02 / EXACT ALGEBRA</span><h2>Verify an equation, not a whole paper</h2>
     <p>Choose <strong>Exact polynomial identity</strong>, with field <strong>Algebra</strong> and subcategory <strong>Polynomial identities over R</strong>. The engine handles <strong>integer coefficients, one variable <code>x</code>, powers 0–16, and syntactic degree at most 32</strong>. It accepts a limited LaTeX subset such as <code>\left</code>, <code>\right</code>, <code>\cdot</code> and braces in exponents. It does not support general division, calculus, multivariable equations, inequalities or arbitrary LaTeX macros.</p>
+    <p>For one-digit powers, x^2 and x^{2} are accepted. Multi-digit exponents require braces: x^{12} is accepted, but bare x^12 is unsupported to avoid LaTeX ambiguity. ASCII x^(12) is accepted by this limited expression parser but is not faithful LaTeX notation.</p>
+    <p><a href="PARSER_GRAMMAR.md">Parser grammar and compatibility contract</a></p>
     <div class="guide-example"><h3>Expected PASS</h3><pre>(x+1)^2 = x^2 + 2x + 1</pre><p>Expected <code>EXACT_CERTIFICATE_PASS</code>. For the degree-2 bound, evaluations at 0, 1 and 2 establish an identity between these polynomials over the reals.</p></div>
     <div class="guide-example"><h3>Expected refutation</h3><pre>(x+1)^2 = x^2 + 1</pre><p>Expected <code>REFUTED</code>: at <code>x = 1</code>, the left side is 4 and the right side is 2.</p></div>
     <p>On this mode, dropping a <code>.tex</code> document extracts <em>candidate displayed equalities</em>. Select one equation to evaluate. Unrecognized mathematics must be explicitly rejected as unsupported.</p>

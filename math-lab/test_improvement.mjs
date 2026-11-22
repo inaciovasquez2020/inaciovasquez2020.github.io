@@ -35,7 +35,7 @@ test('refuted identity preserves first witness across four transformations',()=>
   assert.ok(entry.probes.every(x=>x.witness_x===1));
 });
 test('high-degree inputs lead to explicit SKIPPED rather than false PASS',()=>{
-  const a=exact('x^16*x^16=x^16*x^16');
+  const a=exact('x^{16}*x^{16}=x^{16}*x^{16}');
   assert.equal(a.expected_status,'EXACT_CERTIFICATE_PASS');
   assert.equal(a.status,'REGRESSION_CANDIDATE');
   assert.equal(a.probes_passed+a.probes_skipped,a.probes.length);
