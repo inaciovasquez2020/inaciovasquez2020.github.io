@@ -49,3 +49,30 @@ test('unsafe metadata is displayed as plain text and BibTeX escaped',async()=>{
  const bib=reviewedBibtex(r.record,{confirmed:true});
  assert.ok(!bib.includes('<script>'));assert.match(bib,/\\&/);assert.match(bib,/\\\{/);
 });
+
+test('nested or malformed HTML cannot regenerate a script tag',async()=>{
+ const examples=[
+  '<scr<script>ipt>alert(1)</script>',
+  '<script><script>alert(2)</script></script>',
+  '<script', 
+  'ordinary <b>text</b> content'
+ ];
+ for(const title of examples){
+  const payload={message:{...cr.message,title:[title]}};
+  const r=await lookupDOI(doi,{fetchImpl:async()=>answer(payload)});
+  if(title==='<script'){assert.equal(r.status,'INCOMPLETE');continue;}
+  assert.equal(r.status,'METADATA_FOUND_UNREVIEWED');
+  assert.ok(!r.record.title.includes('<'),'markup residue');
+  assert.ok(!r.record.title.includes('<script'),'tag regenerated');
+ }
+});
+test('BibTeX escape is one pass even with backslash and TeX metacharacters',async()=>{
+ const title=String.raw`A\\B {C} & % _ # $ ^ ~`;
+ const r=await lookupDOI(doi,{fetchImpl:async()=>answer({message:{...cr.message,title:[title]}})});
+ assert.equal(r.status,'METADATA_FOUND_UNREVIEWED');
+ const bib=reviewedBibtex(r.record,{confirmed:true});
+ assert.ok(bib.includes(String.raw`A\textbackslash{}B`),'literal backslash encoded once');
+ assert.ok(bib.includes(String.raw`\{C\}`),'braces escaped');
+ assert.ok(bib.includes(String.raw`\&`),'ampersand escaped');
+ assert.ok(!bib.includes(String.raw`A\\B`),'unescaped backslash removed');
+});
