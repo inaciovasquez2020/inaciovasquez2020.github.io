@@ -88,6 +88,7 @@ function selectProject(id) {
     button.setAttribute("aria-pressed", String(active));
   });
   panel.querySelector(".panel-corners").textContent = "⌗ " + String(buttons.findIndex(b => b.dataset.project === id) + 1).padStart(3, "0");
+  document.dispatchEvent(new Event("research:selection"));
 }
 function refresh() {
   const q = search.value.trim().toLowerCase();
