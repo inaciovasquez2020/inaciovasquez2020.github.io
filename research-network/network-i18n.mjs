@@ -880,6 +880,11 @@ export const rows=[
     "Langue du site",
     "Sprache der Website"
   ]
+  ["DFM–MKC 5D radion evidence · 2026-11-22:","Evidências do radion 5D DFM–MKC · 2026-11-22:","Evidencia del radion 5D DFM–MKC · 2026-11-22:","DFM–MKC 5D 径向模证据 · 2026-11-22：","Éléments sur le radion 5D DFM–MKC · 2026-11-22 :","DFM–MKC-5D-Radionbefunde · 2026-11-22:"],
+  ["boson-only one-loop no-go #342","resultado de impossibilidade apenas bosônico a um laço #342","resultado de imposibilidad solo bosónico a un bucle #342","仅玻色子单圈不可能性结果 #342","résultat d’impossibilité bosonique à une boucle #342","rein bosonisches Ein-Schleifen-No-go #342"],
+  ["conditional mixed-spectrum threshold #347","limiar condicional do espectro misto #347","umbral condicional del espectro mixto #347","混合谱条件阈值 #347","seuil conditionnel du spectre mixte #347","bedingte Mischspektrum-Schwelle #347"],
+  ["Read the source-pinned evidence and open obligations","Consultar evidências vinculadas às fontes e questões em aberto","Consultar las pruebas vinculadas a fuentes y las cuestiones abiertas","查看有来源链接的证据及未解决问题","Consulter les preuves liées aux sources et les questions ouvertes","Quellengebundene Belege und offene Fragen lesen"],
+  ["no new graph edge","nenhuma nova aresta no grafo","ninguna nueva arista en el grafo","不增加新的图边","aucune nouvelle arête dans le graphe","keine neue Graphkante"],
 ];
 export const languages=['en','pt-BR','es','zh-Hans','fr','de'];
 const maps=Object.fromEntries(languages.map((l,i)=>[l,new Map(rows.map(r=>[r[0],r[i]]))]));

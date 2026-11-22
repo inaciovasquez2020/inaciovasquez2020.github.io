@@ -113,6 +113,31 @@ export const translations={
 // Exact text-node translations preserve nested markup and source URLs.
 export const extraRows = [
   [
+    "TKSV Pachner research — conditional status (22 November 2026)",
+    "Pesquisa TKSV de Pachner — situação condicional (22 de novembro de 2026)",
+    "Investigación TKSV de Pachner — estado condicional (22 de noviembre de 2026)",
+    "TKSV Pachner 研究——条件性状态（2026年11月22日）",
+    "Recherche TKSV sur les mouvements de Pachner — état conditionnel (22 novembre 2026)",
+    "TKSV-Pachner-Forschung — bedingter Status (22. November 2026)"
+  ],
+  [
+    "The exact cycle-join Pachner certificates and a conditional induction theorem are documented. Universal strict net vertex descent is equivalent to Poincaré under established PL theorems; the independent global derivation remains",
+    "Os certificados exatos de junção de ciclos de Pachner e um teorema de indução condicional estão documentados. A descida universal estrita do número líquido de vértices é equivalente à conjectura de Poincaré pelos teoremas PL estabelecidos; a derivação global independente permanece",
+    "Se documentan los certificados exactos de unión de ciclos de Pachner y un teorema de inducción condicional. El descenso neto estricto universal de vértices equivale a la conjetura de Poincaré bajo teoremas PL establecidos; la derivación global independiente sigue",
+    "已记录精确的 Pachner 循环连接证书及一项条件归纳定理。依据既有分段线性拓扑定理，普遍严格净顶点下降与庞加莱猜想等价；独立的全局推导仍然",
+    "Les certificats exacts de jonction de cycles de Pachner et un théorème d'induction conditionnel sont documentés. La décroissance nette strictement universelle du nombre de sommets équivaut à la conjecture de Poincaré selon les théorèmes PL établis ; la dérivation globale indépendante reste",
+    "Die exakten Pachner-Zyklenverbindungszertifikate und ein bedingter Induktionssatz sind dokumentiert. Der universelle strikte Netto-Abstieg der Eckpunktzahl ist nach etablierten PL-Sätzen äquivalent zur Poincaré-Vermutung; die unabhängige globale Herleitung bleibt"
+  ],
+  [
+    "Read the certificate ledger and precise proof boundary",
+    "Consultar o registro dos certificados e a delimitação precisa da demonstração",
+    "Consultar el registro de certificados y el límite preciso de la demostración",
+    "查看证书清单及精确的证明边界",
+    "Consulter le registre des certificats et la frontière précise de la preuve",
+    "Zertifikatverzeichnis und präzise Beweisgrenze lesen"
+  ],
+
+  [
     "Research Network",
     "Rede de pesquisa",
     "Red de investigación",
