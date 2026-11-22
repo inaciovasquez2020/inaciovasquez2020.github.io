@@ -67,7 +67,7 @@ test('nested or malformed HTML cannot regenerate a script tag',async()=>{
  }
 });
 test('BibTeX escape is one pass even with backslash and TeX metacharacters',async()=>{
- const title=String.raw`A\\B {C} & % _ # $ ^ ~`;
+ const title=String.raw`A\B {C} & % _ # $ ^ ~`;
  const r=await lookupDOI(doi,{fetchImpl:async()=>answer({message:{...cr.message,title:[title]}})});
  assert.equal(r.status,'METADATA_FOUND_UNREVIEWED');
  const bib=reviewedBibtex(r.record,{confirmed:true});
