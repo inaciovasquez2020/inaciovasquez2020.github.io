@@ -17,8 +17,19 @@ export function lookupURL(provider,doi){
  if(!Object.hasOwn(HOSTS,provider))throw new LookupInputError('Unknown provider.');
  return HOSTS[provider]+normalizeDOI(doi).split('/').map(encodeURIComponent).join('/');
 }
+function stripMarkup(raw){
+ // Consume entire angle-delimited runs, including nested '<', in one pass.
+ // A malformed/unclosed tag is discarded to the end instead of exposing markup.
+ let result='',inside=false;
+ for(const ch of raw){
+  if(ch==='<'){inside=true;continue;}
+  if(ch==='>'){if(inside){inside=false;continue;}result+=ch;continue;}
+  if(!inside)result+=ch;
+ }
+ return result;
+}
 function clean(raw,max=360){
- return typeof raw==='string'?raw.replace(/<[^>]*>/g,'').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().slice(0,max):'';
+ return typeof raw==='string'?stripMarkup(raw).replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().slice(0,max):'';
 }
 function fromCrossref(payload){
  const r=payload?.message;if(!r||typeof r!=='object')throw Error('Missing Crossref record.');
@@ -79,9 +90,13 @@ export async function lookupDOI(raw,{fetchImpl=globalThis.fetch,timeoutMs=6000}=
  return {status:attempts.every(x=>x.status==='NOT_FOUND')?'NOT_FOUND':'INCOMPLETE',doi,attempts,
   reason:'No complete matching record retrieved. This does not prove that the DOI does not exist.'};
 }
+const BIB_ESCAPES=Object.freeze({
+ '\\':'\\textbackslash{}','{':'\\{','}':'\\}','%':'\\%','&':'\\&',
+ '#':'\\#','_':'\\_','$':'\\$','^':'\\^{}','~':'\\~{}'
+});
 function bibEscape(value){
- return String(value).replace(/\\/g,'\\textbackslash{}').replace(/[{}%&#_$^~]/g,c=>({
- '{':'\\{','}':'\\}','%':'\\%','&':'\\&','#':'\\#','_':'\\_','$':'\\$','^':'\\^{}','~':'\\~{}'}[c]));
+ // Single-pass escaping: replacement backslashes are never scanned again.
+ return String(value).replace(/[\\{}%&#_$^~]/g,ch=>BIB_ESCAPES[ch]);
 }
 export function reviewedBibtex(record,{confirmed=false}={}){
  if(!confirmed||record?.metadata_status!=='RETRIEVED_UNREVIEWED')
