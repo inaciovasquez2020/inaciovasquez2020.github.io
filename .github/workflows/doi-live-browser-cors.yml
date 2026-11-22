@@ -1,0 +1,28 @@
+name: DOI live browser CORS beta
+
+on:
+  pull_request:
+    paths:
+      - "math-lab/doi-lookup.mjs"
+      - "math-lab/doi-live-cors.mjs"
+      - ".github/workflows/doi-live-browser-cors.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-browser-cors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check preinstalled Chrome and script syntax
+        run: |
+          command -v google-chrome || command -v chromium
+          node --check math-lab/doi-live-cors.mjs
+      - name: Test browser CORS from live GitHub Pages origin
+        run: node math-lab/doi-live-cors.mjs
