@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {auditStaticFlatSpatialMetric as audit} from './metric-audit.mjs';
+const jet=(r,alpha,alphaPrime,alphaSecond)=>({metric:'static-spherical-flat-spatial',r,alpha,alphaPrime,alphaSecond});
+test('Minkowski',()=>{const a=audit(jet('1','1','0','0'));assert.deepEqual(a.scaledStressEnergy,{rho:'0',radialPressure:'0',tangentialPressure:'0'});assert.equal(a.nullEnergyCondition,'SATISFIED_AT_POINT')});
+test('outward optical gradient forces radial NEC violation',()=>{const a=audit(jet('2','3','-4','5'));assert.equal(a.scaledStressEnergy.radialPressure,'-2/3');assert.equal(a.scaledStressEnergy.tangentialPressure,'1/18');assert.equal(a.nullEnergyCondition,'VIOLATED');assert.equal(a.opticalIndexGradient,'POSITIVE')});
+test('tangential violation despite positive radial pressure',()=>{const a=audit(jet('1','1','1','-4'));assert.equal(a.radialNEC,'POSITIVE');assert.equal(a.tangentialNEC,'NEGATIVE')});
+test('constant lapse rescaling preserves stresses',()=>{assert.deepEqual(audit(jet('2','3','-4','5')).scaledStressEnergy,audit(jet('2','21','-28','35')).scaledStressEnergy)});
+test('exhaustive bounded rational sign and lapse scaling',()=>{let count=0;for(let r=1;r<=5;r++)for(let a=1;a<=5;a++)for(let p=-5;p<=5;p++)for(let q=-5;q<=5;q++){const j=jet(String(r),String(a),String(p),String(q));const x=audit(j);assert.equal(x.radialNEC,p<0?'NEGATIVE':p>0?'POSITIVE':'ZERO');const t=2*r*a*q-r*p*p+2*a*p;assert.equal(x.tangentialNEC,t<0?'NEGATIVE':t>0?'POSITIVE':'ZERO');assert.deepEqual(x.scaledStressEnergy,audit(jet(String(r),String(3*a),String(3*p),String(3*q))).scaledStressEnergy);count++}assert.equal(count,3025)});
+test('reject unsupported and malformed inputs',()=>{for(const x of [jet('0','1','0','0'),jet('1','0','0','0'),jet('1','1','1/0','0'),jet('1','1','1e2','0'),jet('1','1','1'.repeat(65),'0'),{...jet('1','1','0','0'),metric:'Schwarzschild'}])assert.throws(()=>audit(x))});
+test('no global or formal proof claims',()=>{const a=audit(jet('1','1','-1','0'));assert.equal(a.globalDeflection,'NOT_ASSESSED');assert.equal(a.physicalRealizability,'NOT_ASSESSED');assert.equal(a.formalKernelVerified,false)});
