@@ -68,6 +68,15 @@ export function suggestCategory(source){
   if(primary)return primary;
   if(!t.trim())return {field:'other',subcategory:'unclassified',confidence:'NO_MATCH',
     reason:'No source text to classify. Choose the subject manually.'};
+  // Primary gravitational subject requires independent title/body evidence.
+  const latexTitle=/\\title\s*\{([^{}]{1,500})\}/.exec(t);
+  const plainHeader=/^\s*([\s\S]{1,1000}?)\babstract\b/i.exec(t);
+  const header=latexTitle?.[1]??plainHeader?.[1]??'';
+  const body=latexTitle?t.slice(latexTitle.index+latexTitle[0].length):plainHeader?t.slice(plainHeader[0].length):'';
+  if(/\b(?:general relativity|BMS|Bondi|spacetime|gravitational)\b/i.test(header)
+    && [/\b(?:Bondi|BMS|Metzner.Sachs)\b/i,/\b(?:Lee.Wald|Iyer.Wald|covariant phase.space|presymplectic)\b/i,/\b(?:Einstein.Hilbert|Einstein equations|vacuum spacetime|null infinity|news tensor)\b/i].filter(re=>re.test(body)).length>=2
+    && !/\b(?:mutual information|entropy|information capacity|complexity)\b/i.test(header))
+    return {field:'mathematical-physics',subcategory:'field-equations',confidence:'HEURISTIC_ONLY',reason:'Gravitational title and corroborating body signals; confirm the subject manually.'};
   const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
   const rules=[
     ['mathematical-physics','observational-science',[

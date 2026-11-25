@@ -1,5 +1,6 @@
 import {extractEquations,UnsupportedClaim} from './engine.mjs';
 import {inspectLatex} from './latex-scan.mjs';
+import {isPlainManuscript} from './plain-manuscript.mjs';
 import {sha256Utf8} from './source-location.mjs';
 import {MAX_EXACT_BYTES,MAX_MANUSCRIPT_BYTES,utf8Size} from './source-limits.mjs';
 /** Local bounded text admission; does not execute TeX, upload, or prove claims. */
@@ -27,9 +28,15 @@ export async function preflightFile(file,method){
  if(method!=='exact-polynomial'&&method!=='manuscript-audit')reject('INVALID_METHOD');
  const limit=method==='manuscript-audit'?MAX_MANUSCRIPT_BYTES:MAX_EXACT_BYTES;
  if(!Number.isSafeInteger(file.size)||file.size<1||file.size>limit)reject('FILE_SIZE');
- if(typeof file.arrayBuffer!=='function')reject('FILE_READ_FAILED');
  let buffer;
- try{buffer=await file.arrayBuffer();}catch(_error){reject('FILE_READ_FAILED');}
+ try{
+  if(typeof file.arrayBuffer==='function')buffer=await file.arrayBuffer();
+  else if(typeof FileReader!=='undefined')buffer=await new Promise((resolve,rejectRead)=>{
+   const reader=new FileReader();reader.onload=()=>resolve(reader.result);
+   reader.onerror=reader.onabort=()=>rejectRead(Error('read failed'));reader.readAsArrayBuffer(file);
+  });
+  else reject('FILE_READ_FAILED');
+ }catch(_error){reject('FILE_READ_FAILED');}
  if(!(buffer instanceof ArrayBuffer)||buffer.byteLength!==file.size||buffer.byteLength>limit)reject('BYTE_COUNT_MISMATCH');
  let text;
  try{text=new TextDecoder('utf-8',{fatal:true}).decode(buffer);}
@@ -43,7 +50,7 @@ export async function preflightFile(file,method){
  }else{
   const scan=inspectLatex(text);
   extraction_flags=scan.flags.length;
-  if(scan.status==='REVIEW_REQUIRED'||scan.flags_truncated||scan.display.length>150)status='REVIEW_REQUIRED';
+  if(isPlainManuscript(text)||scan.status==='REVIEW_REQUIRED'||scan.flags_truncated||scan.display.length>150)status='REVIEW_REQUIRED';
  }
  return {schema:SOURCE_PREFLIGHT_SCHEMA,status,method,text,candidates,
   filename:file.name,byte_length:buffer.byteLength,source_sha256:sha256Utf8(text),

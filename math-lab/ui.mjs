@@ -140,6 +140,16 @@ function renderManuscript(r,entry){
   for(const [name,count] of [[uiText('Definitions'),r.counts.definitions],[uiText('Lemmas'),r.counts.lemmas],[uiText('Theorems'),r.counts.theorems],[uiText('Corollaries'),r.counts.corollaries],[uiText('Proof blocks'),r.counts.proof_environments],[uiText('Math blocks'),r.counts.displayed_math]]){
     const div=el('div');div.append(el('strong','',String(count)),el('span','',name));stats.append(div);
   }root.append(stats);
+  if(r.plain_text_inventory){
+    const inventory=r.plain_text_inventory;
+    const panel=el('div','audit-item review');
+    panel.append(el('h4','','PLAIN_TEXT_HEADING_INVENTORY · NOT_VERIFIED'));
+    panel.append(el('p','',JSON.stringify({assumption_headings:inventory.headings.filter(x=>x.kind==='assumption').length,proposition_headings:inventory.headings.filter(x=>x.kind==='proposition').length,proof_headings:inventory.proofs.length,equation_candidates:inventory.equations.length,truncated:inventory.truncated})));
+    for(const item of [...inventory.headings,...inventory.proofs,...inventory.equations].sort((a,b)=>a.line-b.line)){
+      panel.append(el('p','audit-item-meta',item.kind.toUpperCase()+' · LINE '+item.line+' · NOT_VERIFIED'),el('pre','flagged-source',item.source_anchor.exact_excerpt));
+    }
+    root.append(panel);
+  }
   const extraction=r.extraction;
   root.append(el('h3','section-title',uiText('EQUATION EXTRACTION COVERAGE')));
   root.append(el('p','result-disclaimer',extraction.status==='REVIEW_REQUIRED'?
@@ -282,7 +292,7 @@ async function readFile(f){
   $('source-reference').value=result.filename;importedName=result.filename;
   if(methodAtStart==='manuscript-audit'){
    equation.value=result.text;candidateControl.hidden=true;fileStatus.textContent='';
-   classificationLastInput='';applySuggestedCategory();
+   classificationLastInput='';classificationLocked=false;applySuggestedCategory({force:true});
    renderEmptyState('File loaded locally. Select Analyze manuscript structure.');
   }else showCandidates(result.candidates,result.filename);
   invalidateFieldConfirmation();showAdmission();updateCoverage();
@@ -296,11 +306,15 @@ async function readFile(f){
   invalidateFieldConfirmation();showAdmission();updateCoverage();
  }
 }
-picker.addEventListener('change',()=>readFile(picker.files?.[0]));
+picker.addEventListener('change',()=>{const file=picker.files?.[0];picker.value='';if(file)readFile(file);});
 candidateSelect.addEventListener('change',()=>{invalidateFieldConfirmation();equation.value=candidates[Number(candidateSelect.value)]||'';last=null;renderEmptyState('Equation selected. Review before checking.');});
 for(const type of ['dragenter','dragover'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragover');});
 for(const type of ['dragleave','drop'])drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragover');});
-drop.addEventListener('drop',e=>readFile(e.dataTransfer?.files?.[0]));
+drop.addEventListener('drop',e=>{
+ const files=e.dataTransfer?.files;
+ if(files?.length===1){readFile(files[0]);return;}
+ quarantineFile();admission='BLOCKED';admissionReason='DROP_SINGLE_FILE_REQUIRED';showAdmission();updateCoverage();
+});
 
 function refreshTaxonomyDisplay(){
  const lang=currentLanguage();
