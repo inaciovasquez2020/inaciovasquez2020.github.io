@@ -204,6 +204,17 @@ for(const label of Object.keys(FEEDBACK_TRANSLATIONS.en))
  if(Object.hasOwn(DICTIONARIES.en,label))throw new Error('Duplicate feedback key: '+label);
 for(const [language,items] of Object.entries(FEEDBACK_TRANSLATIONS))
  Object.assign(DICTIONARIES[language],items);
+// Standalone metric checker is currently English-only; translate its navigation label.
+const METRIC_AUDIT_LINK_TRANSLATIONS={
+  "en": "Exact local metric audit (EN)",
+  "es": "Auditoría métrica local exacta (en inglés)",
+  "pt-BR": "Auditoria métrica local exata (em inglês)",
+  "zh-Hans": "精确局部度规审查（英语）",
+  "fr": "Audit métrique local exact (en anglais)",
+  "de": "Exakte lokale Metrikprüfung (Englisch)"
+};
+for(const [language,label] of Object.entries(METRIC_AUDIT_LINK_TRANSLATIONS))
+ DICTIONARIES[language]['Exact local metric audit (EN)']=label;
 const select=typeof document!=='undefined'?document.getElementById('ui-language'):null;
 const originals=new WeakMap();
 const attributeOriginals=new WeakMap();
