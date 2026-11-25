@@ -1,4 +1,5 @@
 import {inspectLatex} from './latex-scan.mjs';
+import {isPlainManuscript,inspectPlainManuscript} from './plain-manuscript.mjs';
 import {sourceAnchor,verifySourceAnchor} from './source-location.mjs';
 import {MAX_MANUSCRIPT_BYTES,utf8Size} from './source-limits.mjs';
 import {reviewTranscriptManuscript,reviewScientificManuscript} from './research-guards.mjs';
@@ -32,6 +33,7 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
   const titleMatch = /\\title\s*\{([^{}]{1,500})\}/.exec(text);
   const plainTitle=!titleMatch && /^\s*([^\r\n]{10,220})\r?\n[\s\S]{0,1000}?\bABSTRACT\b/i.exec(source);
   const title=titleMatch?concise(titleMatch[1],180):plainTitle?concise(plainTitle[1].replace(/\d+$/,'').trim(),180):'Untitled manuscript';
+  const plain=isPlainManuscript(source)?inspectPlainManuscript(source,scanned.source_sha256):null;
   const claims = [];
   // Inventory nested theorem-like environments in source order, not with a
   // non-greedy regex (which silently drops nested environments).
@@ -63,6 +65,12 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
     f.code==='MISMATCHED_ENVIRONMENT'||f.code==='UNTERMINATED_ENVIRONMENT'||
     f.code==='UNTERMINATED_DISPLAY');
   if(malformedClaimNesting||claimStack.length||malformedEnvironment)claims.length=0;
+  if(plain&&!malformedClaimNesting&&!claimStack.length&&!malformedEnvironment){
+    for(const h of plain.headings.filter(h=>CLAIM_TYPES.has(h.kind))){
+      claims.push({kind:h.kind,name:'',excerpt:concise(h.source_anchor.exact_excerpt),line:h.line,
+        source_anchor:h.source_anchor,source_kind:'PLAIN_TEXT_HEADING',status:'NOT_VERIFIED',verification_engine:null});
+    }
+  }
   claims.sort((a,b)=>a.source_anchor.start_utf16-b.source_anchor.start_utf16);
   for(let i=0;i<claims.length;i++)claims[i].number=i+1;
   const proofs = [...text.matchAll(/\\begin\{proof\}/g)].length;
@@ -94,10 +102,10 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
     if(!verifySourceAnchor(source,review.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
     findings.push(review);
   }
-  if(plainTitle) {
+  if(plainTitle||plain) {
     findings.push({type:'PLAIN_TEXT_MANUSCRIPT_REVIEW',severity:'review',label:'Extracted manuscript text detected',detail:'PDF reading order and equation layout may be corrupted. No complete equation reconstruction is claimed.'});
   }
-  const extraction={status:displayTruncated?'REVIEW_REQUIRED':scanned.status,source_sha256:scanned.source_sha256,flags:scanned.flags,flags_truncated:scanned.flags_truncated,display_blocks_truncated:displayTruncated,total_display_blocks:scanned.display.length,extracted_display_blocks:math.length,total_inline_blocks:scanned.inline.length,extracted_inline_blocks:inline.length,note:scanned.note};
+  const extraction={status:displayTruncated||plain?'REVIEW_REQUIRED':scanned.status,source_sha256:scanned.source_sha256,flags:scanned.flags,flags_truncated:scanned.flags_truncated,display_blocks_truncated:displayTruncated,total_display_blocks:scanned.display.length,extracted_display_blocks:math.length,total_inline_blocks:scanned.inline.length,extracted_inline_blocks:inline.length,note:scanned.note};
   if(extraction.flags.length)findings.push({type:'EXTRACTION_COVERAGE',severity:'review',label:'Source equations may be omitted',detail:extraction.flags.length+' flagged source fragments with line numbers require manual inspection.'});
   return {schema: MANUSCRIPT_SCHEMA, status: 'NOT_VERIFIED', extraction, title, source_name: sourceName,
     source_characters: source.length, counts: {
@@ -107,7 +115,7 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
       corollaries: claims.filter(c => c.kind === 'corollary').length,
       propositions: claims.filter(c => c.kind === 'proposition').length,
       proof_environments: proofs, displayed_math: math.length,inline_math:inline.length },
-    claims, displayed_equations: math, inline_equations:inline, findings,
+    claims, displayed_equations: math, inline_equations:inline, findings, plain_text_inventory:plain,
     formal_kernel_verified: false, mathematical_truth_assessed: false,
     source_uploaded: false,
     caveat: 'Automated structural/heuristic audit only; NOT_VERIFIED does not mean false.'};

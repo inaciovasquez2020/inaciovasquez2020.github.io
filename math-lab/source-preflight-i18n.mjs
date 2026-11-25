@@ -44,7 +44,8 @@ const MESSAGES={
   }
 };
 const REASONS={
-  "INVALID_EXTENSION_OR_NAME": "Only safe .tex/.txt filenames are accepted.",
+  "INVALID_EXTENSION_OR_NAME": "Only safe .tex/.txt filenames are accepted. PDF files require text extraction first.",
+  "DROP_SINGLE_FILE_REQUIRED": "Drop exactly one .tex or .txt file.",
   "FILE_SIZE": "Exact files: 1–65,536 bytes; manuscript files: 1–131,072 bytes.",
   "FILE_READ_FAILED": "Unable to read the file.",
   "BYTE_COUNT_MISMATCH": "Declared file size does not match read bytes.",
