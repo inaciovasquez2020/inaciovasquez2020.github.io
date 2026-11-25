@@ -15,8 +15,8 @@ export function inspectPlainManuscript(source,digest){
  for(const raw of source.split('\n')){
   line++;const s=raw.replace(/\r$/,'');const start=offset;offset+=raw.length+1;
   if(/^[ \t]*(?:references|bibliography)[ \t]*$/i.test(s))break;
-  const m=/^[ \t]*(Assumption|Definition|Lemma|Theorem|Corollary|Proposition)[ \t]+(\d+(?:\.\d+)*)(?:[ \t]*\([^)\n]{1,180}\))?[.:](?:[ \t]|$)/.exec(s);
-  if(m){record(headings,m[1].toLowerCase(),line,start,start+s.length);continue;}
+  const m=/^[ \t]*(Assumption|Definition|Lemma|Theorem|Corollary|Proposition)[ \t]*(\d+(?:\.\d+)*)(?:[ \t]*\(([^)\n]{1,180})\))?[.:](?:[ \t]|$)/.exec(s);
+  if(m){const before=headings.length;record(headings,m[1].toLowerCase(),line,start,start+s.length);if(headings.length>before){headings.at(-1).name=m[3]??'';headings.at(-1).source_number=m[2];}continue;}
   if(/^[ \t]*Proof[.:](?:[ \t]|$)/.test(s)){record(proofs,'proof',line,start,start+s.length);continue;}
   if(s.trim()&&s.length<=500&&(/[∂∇∫∑⇒⇔≠≤≥∧]/u.test(s)||/^[ \t]*[\p{L}\p{N}(){}[\]_.,+*/^−\- \t]{1,100}=[^=\n]{1,200}$/u.test(s)))
    record(equations,'equation_candidate',line,start,start+s.length);
