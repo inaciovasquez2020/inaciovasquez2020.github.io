@@ -72,6 +72,24 @@ export function reviewTranscriptManuscript(source) {
     });
     break; // One bounded report per concern; avoid flooding the interface.
   }
+  // These prompts require contextual evidence, not just a mathematical symbol.
+  const prefix=/\btranscript prefix\b/i.exec(text);
+  const prefixBound=/\bI\s*\(?\s*T\s*_?\{?t\s*\+\s*1\}?\s*;\s*T\s*_?\{?t\}?\s*\)?\s*(?:≤|\\leq?|<=)\s*b\b/.exec(text);
+  if(prefix&&prefixBound){
+    findings.push({type:'TRANSCRIPT_PREFIX_ENTROPY_REVIEW',severity:'review',
+      label:'Distinguish nested prefix entropy from new information',
+      detail:'If the earlier transcript is determined by the later prefix, their mutual information equals the entropy of the earlier prefix. Check whether the bound is intended for a conditional increment instead. Review prompt only.',
+      start:prefixBound.index,end:prefixBound.index+prefixBound[0].length});
+  }
+  const accumulated=/\b(?:full|complete|accumulated)\s+transcript\b/i.exec(text);
+  const perStep=/\bper[\s-]+step\b/i.exec(text);
+  const ceiling=/\bTC\s*\(\s*A\s*,\s*n\s*\)\s*(?:≤|\\leq?|<=)\s*C(?:_?\{?\d+\}?)?\s*\(?\s*(?:\\log|log)\s+n\s*\)/.exec(text);
+  if(accumulated&&perStep&&ceiling){
+    findings.push({type:'TRANSCRIPT_ACCUMULATED_CAPACITY_REVIEW',severity:'review',
+      label:'Check accumulated transcript capacity',
+      detail:'A bound on new input information per step does not by itself bound the entropy of the complete transcript by a polylogarithm. Account for the number of steps, initial information, and internal randomness; state any independent compression theorem. Review prompt only.',
+      start:ceiling.index,end:ceiling.index+ceiling[0].length});
+  }
   return findings;
 }
 

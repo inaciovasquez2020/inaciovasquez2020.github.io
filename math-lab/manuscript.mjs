@@ -67,7 +67,7 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
   if(malformedClaimNesting||claimStack.length||malformedEnvironment)claims.length=0;
   if(plain&&!malformedClaimNesting&&!claimStack.length&&!malformedEnvironment){
     for(const h of plain.headings.filter(h=>CLAIM_TYPES.has(h.kind))){
-      claims.push({kind:h.kind,name:'',excerpt:concise(h.source_anchor.exact_excerpt),line:h.line,
+      claims.push({kind:h.kind,name:concise(h.name??'',150),source_number:h.source_number,excerpt:concise(h.source_anchor.exact_excerpt),line:h.line,
         source_anchor:h.source_anchor,source_kind:'PLAIN_TEXT_HEADING',status:'NOT_VERIFIED',verification_engine:null});
     }
   }

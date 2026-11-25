@@ -30,3 +30,20 @@ test('heading inventory caps and preserves source offsets with CRLF',()=>{
  const s='Synthetic paper\r\nAbstract\r\n'+Array.from({length:151},(_,i)=>'Lemma '+(i+1)+'. Test.').join('\r\n');
  const r=auditManuscript(s);assert.equal(r.plain_text_inventory.truncated,true);assert.equal(r.claims.length,150);assert.ok(verifySourceAnchor(s,r.claims[149].source_anchor));
 });
+
+test('compressed heading preserves literal name and number without inventing spaces',()=>{
+ const s='Synthetic paper\nAbstract\nTheorem1(Capacityceiling). A claim.\nDefinition 2 (Ordinary name). A statement.\nTheoremology3. Not a heading.\nTheorem1abc. Not a heading.';
+ const r=auditManuscript(s);
+ assert.deepEqual(r.claims.map(x=>[x.kind,x.name,x.source_number]),[['theorem','Capacityceiling','1'],['definition','Ordinary name','2']]);
+ assert.ok(r.claims.every(x=>verifySourceAnchor(s,x.source_anchor)&&x.status==='NOT_VERIFIED'));
+});
+test('prefix and accumulated capacity prompts have literal anchors and no verdict',()=>{
+ const s='Synthetic paper\nAbstract\nThe transcript prefix through step t is Tt. Assume I Tt+1; Tt ≤b.\nThe complete transcript has a per-step information bound. TC(A, n) ≤ C1(log n)k.';
+ const r=auditManuscript(s);
+ for(const kind of ['TRANSCRIPT_PREFIX_ENTROPY_REVIEW','TRANSCRIPT_ACCUMULATED_CAPACITY_REVIEW']){
+  const f=r.findings.find(x=>x.type===kind);assert.ok(f,kind);assert.ok(verifySourceAnchor(s,f.source_anchor));assert.equal(f.severity,'review');
+ }
+ assert.equal(r.status,'NOT_VERIFIED');
+ const innocent=auditManuscript('Synthetic paper\nAbstract\nI Tt+1; Tt ≤b. TC(A, n) ≤ C1(log n)k.');
+ assert.ok(!innocent.findings.some(x=>x.type==='TRANSCRIPT_PREFIX_ENTROPY_REVIEW'||x.type==='TRANSCRIPT_ACCUMULATED_CAPACITY_REVIEW'));
+});
