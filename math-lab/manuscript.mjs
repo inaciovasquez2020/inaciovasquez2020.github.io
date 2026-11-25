@@ -1,7 +1,7 @@
 import {inspectLatex} from './latex-scan.mjs';
 import {sourceAnchor,verifySourceAnchor} from './source-location.mjs';
 import {MAX_MANUSCRIPT_BYTES,utf8Size} from './source-limits.mjs';
-import {reviewTranscriptManuscript} from './research-guards.mjs';
+import {reviewTranscriptManuscript,reviewScientificManuscript} from './research-guards.mjs';
 /**
  * Structural LaTeX manuscript inventory. No theorem prover, no LLM, no source upload.
  * This parser does not execute LaTeX or establish theorem correctness.
@@ -30,7 +30,8 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
   const scanned=inspectLatex(source);
   const text=scanned.text;
   const titleMatch = /\\title\s*\{([^{}]{1,500})\}/.exec(text);
-  const title = titleMatch ? concise(titleMatch[1], 180) : 'Untitled manuscript';
+  const plainTitle=!titleMatch && /^\s*([^\r\n]{10,220})\r?\n[\s\S]{0,1000}?\bABSTRACT\b/i.exec(source);
+  const title=titleMatch?concise(titleMatch[1],180):plainTitle?concise(plainTitle[1].replace(/\d+$/,'').trim(),180):'Untitled manuscript';
   const claims = [];
   // Inventory nested theorem-like environments in source order, not with a
   // non-greedy regex (which silently drops nested environments).
@@ -87,11 +88,14 @@ export function auditManuscript(source, { sourceName = 'pasted LaTeX' } = {}) {
       detail: 'Check that the conclusion follows from its stated assumptions and that the implication is not vacuous. This is a generic syntactic flag, not a refutation.'});
   }
   if(displayTruncated)findings.push({type:'DISPLAY_INVENTORY_TRUNCATED',severity:'review',label:'Displayed mathematics inventory truncated',detail:'Only the first '+math.length+' of '+scanned.display.length+' display blocks were included; no complete inventory is claimed.'});
-  for (const item of reviewTranscriptManuscript(text)) {
+  for (const item of [...reviewTranscriptManuscript(text),...reviewScientificManuscript(text)]) {
     const {start,end,...review}=item;
     review.source_anchor=sourceAnchor(source,start,end,scanned.source_sha256);
     if(!verifySourceAnchor(source,review.source_anchor))throw new Error('SOURCE_ANCHOR_INVALID');
     findings.push(review);
+  }
+  if(plainTitle) {
+    findings.push({type:'PLAIN_TEXT_MANUSCRIPT_REVIEW',severity:'review',label:'Extracted manuscript text detected',detail:'PDF reading order and equation layout may be corrupted. No complete equation reconstruction is claimed.'});
   }
   const extraction={status:displayTruncated?'REVIEW_REQUIRED':scanned.status,source_sha256:scanned.source_sha256,flags:scanned.flags,flags_truncated:scanned.flags_truncated,display_blocks_truncated:displayTruncated,total_display_blocks:scanned.display.length,extracted_display_blocks:math.length,total_inline_blocks:scanned.inline.length,extracted_inline_blocks:inline.length,note:scanned.note};
   if(extraction.flags.length)findings.push({type:'EXTRACTION_COVERAGE',severity:'review',label:'Source equations may be omitted',detail:extraction.flags.length+' flagged source fragments with line numbers require manual inspection.'});

@@ -173,7 +173,7 @@ function renderManuscript(r,entry){
 function updateMethodPresentation(){
  const isMs=method.value==='manuscript-audit',lang=currentLanguage();
  $('evidence-method-tag').textContent=uiText(isMs?'MANUSCRIPT STRUCTURE ONLY':'EXACT POLYNOMIAL ARITHMETIC');
- $('source-label').textContent=isMs?copyText('LaTeX manuscript · paste entire source',lang):uiText('Equation · LaTeX or ASCII');
+ $('source-label').textContent=isMs?({en:'Manuscript · LaTeX or extracted plain text',es:'Manuscrito · LaTeX o texto extraído','pt-BR':'Manuscrito · LaTeX ou texto extraído',fr:'Manuscrit · LaTeX ou texte extrait',de:'Manuskript · LaTeX oder extrahierter Text','zh-Hans':'文稿 · LaTeX 或提取的纯文本'}[lang]||'Manuscript · LaTeX or extracted plain text'):uiText('Equation · LaTeX or ASCII');
  $('equation-help').textContent=isMs?copyText('Paste a .tex document, including theorem environments. All content is processed in-browser. Findings are structural, not mathematical proof.',lang):copyText('Supported examples: (x+1)^2=x^2+2x+1, or \\left(x+1\\right)^2=x^2+2\\cdot x+1.',lang);
  $('run').textContent=isMs?copyText('Analyze manuscript structure →',lang):copyText('Run exact verification →',lang);
 }
