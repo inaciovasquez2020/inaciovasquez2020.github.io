@@ -109,7 +109,11 @@ export function extractEquations(tex){
  const found=[];
  for(const block of audit.display){
    for(const line of block.content.split(/\\\\/)){
-     const candidate=line.replace(/&/g,'').trim();
+     // Admit only a single alignment marker adjacent to equality in align/align*.
+     if(line.includes('&')&&(!['align','align*'].includes(block.kind)||
+       (line.match(/&/g)||[]).length!==1||! /&\s*=|=\s*&/.test(line)))
+       fail('SOURCE_REVIEW_REQUIRED: Unsupported equation alignment.');
+     const candidate=line.replace('&',' ').trim();
      if(candidate.includes('=')){
        if(candidate.length>MAX_EXPR*2)fail('Displayed equation exceeds the maximum supported length.');
        found.push(candidate);

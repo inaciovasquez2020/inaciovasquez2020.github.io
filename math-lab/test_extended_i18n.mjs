@@ -185,7 +185,10 @@ test('bounded diagnostic translations cover all six locales and preserve tokens'
  const locales=['en','es','pt-BR','zh-Hans','fr','de'];
  const keys=Object.keys(ERROR_MESSAGES.en);
  assert.ok(keys.length>=50);
- assert.equal(Object.keys(DIAGNOSTIC_SOURCES).length,40);
+ assert.equal(Object.keys(DIAGNOSTIC_SOURCES).length,41);
+ assert.equal(DIAGNOSTIC_SOURCES['SOURCE_REVIEW_REQUIRED: Unsupported equation alignment.'],'diag41');
+ for(const locale of locales)
+  assert.equal(explainError('SOURCE_REVIEW_REQUIRED: Unsupported equation alignment.',locale),ERROR_MESSAGES[locale].diag41);
  for(const locale of locales){
   assert.deepEqual(Object.keys(ERROR_MESSAGES[locale]),keys);
   for(const key of keys)assert.ok(ERROR_MESSAGES[locale][key],locale+' '+key);

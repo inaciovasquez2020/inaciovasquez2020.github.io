@@ -66,3 +66,20 @@ test('exact source extraction is ordered and refuses mismatched environments',()
   String.raw`\begin{theorem*}The claim is $x=x$.\end{theorem*}`
  ])assert.throws(()=>extractEquations(bad),UnsupportedClaim);
 });
+
+test('alignment extraction preserves tokens and refuses ambiguous columns',()=>{
+ for(const body of ['1&2=12','x&&=x','x=1&2','x&+1=x+1','x^1&2=x^{12}']){
+   assert.throws(()=>extractEquations('\\begin{align}'+body+'\\end{align}'),UnsupportedClaim);
+ }
+ for(const env of ['equation','gather']){
+   assert.throws(()=>extractEquations('\\begin{'+env+'}x&=x\\end{'+env+'}'),UnsupportedClaim);
+ }
+ for(const env of ['align','align*']){
+   for(const body of ['x&=x','x=&x','x& = x']){
+     const candidates=extractEquations('\\begin{'+env+'}'+body+'\\end{'+env+'}');
+     assert.equal(candidates.length,1);
+     check(candidates[0],'EXACT_CERTIFICATE_PASS');
+   }
+ }
+ assert.throws(()=>extractEquations('\\[x&=x\\]'),UnsupportedClaim);
+});
