@@ -33,7 +33,8 @@ export const TAXONOMY = Object.freeze([
   {id:'mathematical-physics',label:'Mathematical physics',subcategories:[
     {id:'field-equations',label:'Field equations'},
     {id:'spectral-physics',label:'Spectral theory and operators'},
-    {id:'cosmology',label:'Cosmology'}]},
+    {id:'cosmology',label:'Cosmology'},
+    {id:'observational-science',label:'Observational and computational science'}]},
   {id:'other',label:'Other / not classified',subcategories:[
     {id:'unclassified',label:'Unclassified claim'}]}
 ]);
@@ -69,6 +70,10 @@ export function suggestCategory(source){
     reason:'No source text to classify. Choose the subject manually.'};
   const paper=/\\(?:documentclass|begin\{document\}|begin\{(?:theorem|lemma|definition)\})/.test(t);
   const rules=[
+    ['mathematical-physics','observational-science',[
+      /\b(?:NEOWISE|AllWISE|astronomical survey|infrared survey)\b/i,
+      /\b(?:tracklets?|ephemerides|moving.object detections)\b/i,
+      /\b(?:ADQL|Table Access Protocol|catalog.based discovery)\b/i]],
     ['mathematical-physics','spectral-physics',[
       /(?:quantum[\s-]*hall|chern (?:number|character|class)|berry curvature|topological (?:band|charge pump)|photonic topological|spectral projector)/i,
       /(?:four[\s-]*dimensional|4D)[\s\S]{0,120}(?:quantum[\s-]*hall|topolog)|c_\{?1\}?|c_\{?2\}?|\\\\operatorname\{ch\}/i,

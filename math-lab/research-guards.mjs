@@ -105,3 +105,64 @@ export function reviewFindingUI(f, lang='en') {
   const pair = translations[lang]?.[f.type] ?? translations.en[f.type];
   return pair ? {label: pair[0], detail: pair[1]} : null;
 }
+
+// Source-located reproducibility prompts, not empirical or mathematical verdicts.
+export function reviewScientificManuscript(source) {
+ const text=String(source??'');
+ if(text.length>MAX_MANUSCRIPT_BYTES||utf8Size(text)>MAX_MANUSCRIPT_BYTES)throw new RangeError('Scientific review source exceeds limit.');
+ if(!/\b(?:survey|catalog|experiment|observational|dataset)\b/i.test(text)||!/\b(?:data|measurements?|detections?|simulation)\b/i.test(text))return [];
+ const rules=[
+  [
+    "QUERY_PLACEHOLDER",
+    "Resolve database placeholders",
+    "Validate table and column identifiers against the archive schema.",
+    "(?:FROM\\s*<[a-z_][^>\\n]{0,100}>|<[a-z_][a-z_ ]{2,80}>\\s+IS\\s+NULL)"
+  ],
+  [
+    "QUERY_PARAMETERS",
+    "Bind query parameters",
+    "Record concrete parameter values and the query submission mechanism.",
+    ":\\s*(?:START|END)_[A-Z0-9_]+"
+  ],
+  [
+    "PROXY_REVIEW",
+    "Justify measurement proxy",
+    "Specify units, calibration and relation to the claimed quantity.",
+    "information\\s+proxy"
+  ],
+  [
+    "DEDUPLICATION_REVIEW",
+    "Specify deduplication",
+    "Check metric, clustering transitivity, tie-breaking and radius sensitivity.",
+    "\\b(?:deduplication|dedup)\\b"
+  ],
+  [
+    "TRACKLET_REVIEW",
+    "Specify tracklet construction",
+    "Check residual tolerance, time ordering, uniqueness and false positives.",
+    "\\btracklets?\\b"
+  ],
+  [
+    "ASSOCIATION_REVIEW",
+    "Validate object association",
+    "Record ephemeris version, observer, time scale and matching uncertainties.",
+    "\\b(?:ephemerides|ephemeris)\\b"
+  ],
+  [
+    "DISCOVERY_REVIEW",
+    "Distinguish candidates from discoveries",
+    "Unmatched tracklets alone do not establish confirmed new objects.",
+    "true\\s+new.object\\s+yield|confirmed\\s+discoveries"
+  ],
+  [
+    "SATURATION_REVIEW",
+    "Define saturation criterion",
+    "Check threshold, exposure normalization, uncertainty and alternative explanations.",
+    "discovery\\s+saturation"
+  ]
+];
+ return rules.flatMap(([type,label,detail,pattern])=>{
+  const m=new RegExp(pattern,'i').exec(text);
+  return m?[{type:'SCIENCE_'+type,label,detail,severity:'review',start:m.index,end:m.index+m[0].length}]:[];
+ });
+}

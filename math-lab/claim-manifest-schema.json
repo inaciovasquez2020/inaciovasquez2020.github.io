@@ -66,6 +66,7 @@
         "field-equations",
         "spectral-physics",
         "cosmology",
+        "observational-science",
         "unclassified"
       ]
     },
@@ -278,7 +279,8 @@
             "enum": [
               "field-equations",
               "spectral-physics",
-              "cosmology"
+              "cosmology",
+              "observational-science"
             ]
           }
         }
