@@ -233,12 +233,12 @@ export const rows=[
     "explizite Verbindungen"
   ],
   [
-    "Updated 2026-11-13",
-    "Atualizado em 2026-11-13",
-    "Actualizado el 2026-11-13",
-    "更新于 2026-11-13",
-    "Mis à jour le 2026-11-13",
-    "Aktualisiert am 2026-11-13"
+    "Updated 2026-11-27",
+    "Atualizado em 2026-11-27",
+    "Actualizado el 2026-11-27",
+    "更新于 2026-11-27",
+    "Mis à jour le 2026-11-27",
+    "Aktualisiert am 2026-11-27"
   ],
   [
     "Labels:",
@@ -329,12 +329,12 @@ export const rows=[
     "Alle öffentlichen Repository-Quellenlinks (ohne JavaScript)"
   ],
   [
-    "All 32 connection boundaries (readable without JavaScript)",
-    "Todos os 32 limites de conexão (legíveis sem JavaScript)",
-    "Los 32 límites de conexión (legibles sin JavaScript)",
-    "全部 32 条连接边界（无需 JavaScript）",
-    "Les 32 limites de connexion (lisibles sans JavaScript)",
-    "Alle 32 Verbindungsgrenzen (ohne JavaScript lesbar)"
+    "All 35 connection boundaries (readable without JavaScript)",
+    "Todos os 35 limites de conexão (legíveis sem JavaScript)",
+    "Los 35 límites de conexión (legibles sin JavaScript)",
+    "全部 35 条连接边界（无需 JavaScript）",
+    "Les 35 limites de connexion (lisibles sans JavaScript)",
+    "Alle 35 Verbindungsgrenzen (ohne JavaScript lesbar)"
   ],
   [
     "mathematics",
@@ -898,6 +898,25 @@ export const rows=[
   ["— Recorded 2,170 reachable six/seven-vertex states with no qualifying witness; eight-vertex search INCOMPLETE. Universal descent and independent global Poincaré derivation OPEN.","— Registrados 2.170 estados alcançáveis com seis/sete vértices sem testemunho qualificado; busca com oito vértices INCOMPLETA. Descida universal e derivação global independente de Poincaré EM ABERTO.","— Registrados 2.170 estados alcanzables de seis/siete vértices sin testigo válido; búsqueda de ocho vértices INCOMPLETA. Descenso universal y derivación global independiente de Poincaré ABIERTOS.","— 记录了 2,170 个可达的六或七顶点状态，未发现符合条件的见证；八顶点搜索未完成。普遍下降与独立的全局庞加莱推导仍未解决。","— 2 170 états accessibles à six/sept sommets recensés sans témoin satisfaisant les critères ; recherche à huit sommets INCOMPLÈTE. Descente universelle et dérivation globale indépendante de Poincaré OUVERTES.","— 2.170 erreichbare Zustände mit sechs/sieben Ecken ohne passenden Zeugen erfasst; Suche mit acht Ecken UNVOLLSTÄNDIG. Universeller Abstieg und unabhängige globale Poincaré-Herleitung OFFEN."],
   ["Melanoma CD36 negative evidence (PR #115)","Evidência negativa de CD36 no melanoma (PR #115)","Evidencia negativa de CD36 en melanoma (PR #115)","黑色素瘤 CD36 阴性证据（PR #115）","Résultats négatifs sur CD36 dans le mélanome (PR #115)","Negative Evidenz zu CD36 beim Melanom (PR #115)"],
   ["— Merged exploratory matched-baseline evidence and method reconciliation; no clinical prediction or causal mechanism established.","— Evidências exploratórias com dados basais pareados e reconciliação metodológica integradas; nenhuma previsão clínica ou mecanismo causal estabelecido.","— Evidencia exploratoria con datos basales emparejados y reconciliación metodológica integradas; sin predicción clínica ni mecanismo causal establecidos.","— 已合并匹配基线的探索性证据与方法协调结果；尚未确立临床预测或因果机制。","— Données exploratoires à mesures initiales appariées et rapprochement méthodologique intégrés ; aucune prédiction clinique ni mécanisme causal établi.","— Explorative Evidenz mit abgeglichenen Ausgangsdaten und Methodenabgleich integriert; keine klinische Vorhersage und kein Kausalmechanismus nachgewiesen."],
+  ["Cross-domain information recovery · 27 November 2026 UTC","Recuperação de informação entre domínios · 27 de novembro de 2026 UTC","Recuperación de información entre dominios · 27 de noviembre de 2026 UTC","跨领域信息恢复 · 2026年11月27日 UTC","Récupération d’information interdomaines · 27 novembre 2026 UTC","Domänenübergreifende Informationsrekonstruktion · 27. November 2026 UTC"],
+  ["52 distinct audited Lean theorem declarations","52 declarações distintas de teoremas Lean auditadas","52 declaraciones distintas de teoremas Lean auditadas","52 条不同的已审计 Lean 定理声明","52 déclarations distinctes de théorèmes Lean auditées","52 verschiedene auditierte Lean-Theoremdeklarationen"],
+  ["across two standalone certificates: 41 merged and 11 at a verified PR revision (the original 33 are counted once). Three scoped connections, not 52 independent discoveries.","em dois certificados autônomos: 41 integradas e 11 em uma revisão de PR verificada (as 33 originais são contadas uma única vez). Três conexões de escopo delimitado, não 52 descobertas independentes.","en dos certificados autónomos: 41 integradas y 11 en una revisión de PR verificada (las 33 originales se cuentan una sola vez). Tres conexiones de alcance delimitado, no 52 descubrimientos independientes.","分属两个独立证书：41 条已合并，11 条位于已验证的 PR 修订版本中（原有 33 条仅计一次）。这是三项范围限定的联系，而非 52 项独立发现。","dans deux certificats autonomes : 41 intégrées et 11 dans une révision de PR vérifiée (les 33 initiales ne sont comptées qu’une fois). Trois liens de portée délimitée, et non 52 découvertes indépendantes.","in zwei eigenständigen Zertifikaten: 41 integriert und 11 in einer verifizierten PR-Revision (die ursprünglichen 33 werden einmal gezählt). Drei klar begrenzte Verbindungen, nicht 52 unabhängige Entdeckungen."],
+  ["Chronos–Biology · merged:","Chronos–Biologia · integrado:","Chronos–Biología · integrado:","Chronos–生物学 · 已合并：","Chronos–Biologie · intégré :","Chronos–Biologie · integriert:"],
+  ["BFF #116, pinned source","BFF #116, fonte fixada","BFF #116, fuente fijada","BFF #116，固定版本源代码","BFF #116, source épinglée","BFF #116, fixierte Quelle"],
+  ["— hidden entropy production and sharp minimax estimation in specified cyclic Markov models; 33/33 audited, fresh Linux PASS.","— produção oculta de entropia e estimação minimax exata nos modelos cíclicos de Markov especificados; 33/33 auditadas, nova execução no Linux aprovada.","— producción oculta de entropía y estimación minimax exacta en los modelos cíclicos de Markov especificados; 33/33 auditadas, nueva ejecución en Linux aprobada.","— 指定循环马尔可夫模型中的隐藏熵产生与精确极小极大估计；33/33 条通过审计，Linux 重新验证通过。","— production d’entropie cachée et estimation minimax exacte dans les modèles de Markov cycliques spécifiés ; 33/33 auditées, nouvelle vérification Linux réussie.","— verborgene Entropieproduktion und scharfe Minimax-Schätzung in den spezifizierten zyklischen Markov-Modellen; 33/33 auditiert, erneute Linux-Prüfung bestanden."],
+  ["Biology–Cosmology · merged:","Biologia–Cosmologia · integrado:","Biología–Cosmología · integrado:","生物学–宇宙学 · 已合并：","Biologie–Cosmologie · intégré :","Biologie–Kosmologie · integriert:"],
+  ["BFF #117, pinned source","BFF #117, fonte fixada","BFF #117, fuente fijada","BFF #117，固定版本源代码","BFF #117, source épinglée","BFF #117, fixierte Quelle"],
+  ["— eight additional declarations; generator-square recovery of squared current and entropy production and restricted mode-coefficient inversion; cumulative 41/41 audited, fresh Linux PASS.","— oito declarações adicionais; recuperação do quadrado da corrente e da produção de entropia pelo quadrado do gerador, e inversão restrita do coeficiente modal; auditoria cumulativa 41/41, nova execução no Linux aprovada.","— ocho declaraciones adicionales; recuperación del cuadrado de la corriente y de la producción de entropía mediante el cuadrado del generador, e inversión restringida del coeficiente modal; auditoría acumulada 41/41, nueva ejecución en Linux aprobada.","— 新增八条声明；利用生成元平方恢复电流平方及熵产生，并对限定的模态系数求逆；累计审计 41/41，Linux 重新验证通过。","— huit déclarations supplémentaires ; récupération du carré du courant et de la production d’entropie par le carré du générateur, et inversion restreinte du coefficient modal ; audit cumulatif 41/41, nouvelle vérification Linux réussie.","— acht weitere Deklarationen; Rekonstruktion des Stromquadrats und der Entropieproduktion aus dem Generatorquadrat sowie eingeschränkte Inversion des Modenkoeffizienten; insgesamt 41/41 auditiert, erneute Linux-Prüfung bestanden."],
+  ["Cosmology–Chronos · verified PR revision:","Cosmologia–Chronos · revisão de PR verificada:","Cosmología–Chronos · revisión de PR verificada:","宇宙学–Chronos · 已验证的 PR 修订版本：","Cosmologie–Chronos · révision de PR vérifiée :","Kosmologie–Chronos · verifizierte PR-Revision:"],
+  ["Chronos #1392, pinned source","Chronos #1392, fonte fixada","Chronos #1392, fuente fijada","Chronos #1392，固定版本源代码","Chronos #1392, source épinglée","Chronos #1392, fixierte Quelle"],
+  ["— causal projection collision, strip-area algebra and optimal pointwise decision loss; Mac 11/11 and dedicated Linux Lean CI PASS, broader integration CI pending at this checkpoint.","— colisão de projeção causal, álgebra da área da faixa e perda de decisão pontual ótima; Mac 11/11 e CI Lean específica no Linux aprovados, CI de integração mais ampla pendente neste marco.","— colisión de proyección causal, álgebra del área de la franja y pérdida de decisión puntual óptima; Mac 11/11 y CI específica de Lean en Linux aprobadas, CI de integración más amplia pendiente en este punto.","— 因果投影碰撞、条带面积代数与最优逐点决策损失；Mac 11/11 和专用 Linux Lean CI 通过，此检查点的更广泛集成 CI 尚未完成。","— collision de projection causale, algèbre de l’aire de bande et perte de décision ponctuelle optimale ; Mac 11/11 et CI Lean Linux dédiée réussis, CI d’intégration plus large en attente à ce jalon.","— kausale Projektionskollision, Streifenflächenalgebra und optimaler punktweiser Entscheidungsverlust; Mac 11/11 und dedizierte Linux-Lean-CI bestanden, breitere Integrations-CI an diesem Prüfpunkt noch ausstehend."],
+  ["Only permitted standard Lean axioms were audited. Full analytic derivations, continuum measure formalization, empirical validation, physical fifth-dimension detection and independent novelty remain","A auditoria constatou apenas axiomas padrão permitidos de Lean. Derivações analíticas completas, formalização da medida no contínuo, validação empírica, detecção de uma quinta dimensão física e novidade independente permanecem","La auditoría constató únicamente axiomas estándar permitidos de Lean. Las derivaciones analíticas completas, la formalización de la medida continua, la validación empírica, la detección de una quinta dimensión física y la novedad independiente permanecen","审计仅发现允许的 Lean 标准公理。完整解析推导、连续测度形式化、实证验证、物理第五维探测和独立新颖性评估仍","L’audit n’a relevé que les axiomes standard autorisés de Lean. Les dérivations analytiques complètes, la formalisation de la mesure continue, la validation empirique, la détection d’une cinquième dimension physique et la nouveauté indépendante restent","Das Audit ergab ausschließlich zulässige Lean-Standardaxiome. Vollständige analytische Herleitungen, Formalisierung des Kontinuumsmaßes, empirische Validierung, Nachweis einer fünften physikalischen Dimension und unabhängige Neuheitsprüfung bleiben"],
+  [". No physical unification or repository-wide theorem closure is claimed.",". Não se alega unificação física nem resolução global dos teoremas do repositório.",". No se afirma una unificación física ni el cierre global de los teoremas del repositorio.","。不声称实现物理统一或解决整个仓库的定理。",". Aucune unification physique ni clôture globale des théorèmes du dépôt n’est revendiquée.",". Weder eine physikalische Vereinheitlichung noch ein repositoryweiter Theoremabschluss wird beansprucht."],
+  ["ring_observation_minimax","ring_observation_minimax","ring_observation_minimax","ring_observation_minimax","ring_observation_minimax","ring_observation_minimax"],
+  ["entropy_identified_by_curvature","entropy_identified_by_curvature","entropy_identified_by_curvature","entropy_identified_by_curvature","entropy_identified_by_curvature","entropy_identified_by_curvature"],
+  ["mode_identifiable","mode_identifiable","mode_identifiable","mode_identifiable","mode_identifiable","mode_identifiable"],
+  ["no_perfect_visible_decoder","no_perfect_visible_decoder","no_perfect_visible_decoder","no_perfect_visible_decoder","no_perfect_visible_decoder","no_perfect_visible_decoder"],
+  ["strip_optimal_decoder","strip_optimal_decoder","strip_optimal_decoder","strip_optimal_decoder","strip_optimal_decoder","strip_optimal_decoder"]
 ];
 export const languages=['en','pt-BR','es','zh-Hans','fr','de'];
 const maps=Object.fromEntries(languages.map((l,i)=>[l,new Map(rows.map(r=>[r[0],r[i]]))]));

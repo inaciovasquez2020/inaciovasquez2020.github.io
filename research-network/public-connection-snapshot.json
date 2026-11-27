@@ -1,7 +1,7 @@
 {
   "schema_version": "public-5d-repository-boundaries-v1",
-  "captured_date_utc": "2026-11-13",
-  "inventory_source": "Dated 21-public-repository network catalogue; public GitHub PR merge status rechecked 2026-11-13. Private repositories excluded.",
+  "captured_date_utc": "2026-11-27",
+  "inventory_source": "21-public-repository catalogue dated 2026-11-13; three additional source-linked mathematical comparisons checked 2026-11-27. No full inventory re-audit. Private repositories excluded.",
   "interpretation": {
     "documented": "Publicly documented source or methodological routing, NOT a new theorem",
     "future": "Explicit hypothetical transfer requiring a new proof/counterexample",
@@ -585,6 +585,36 @@
       "evidence": "Public merged URF Core #594 and Chronos #1357; two independent executable finite-model certificates with different scopes.",
       "source_url": "https://github.com/inaciovasquez2020/urf-core/pull/594",
       "related_source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/pull/1357"
+    },
+    {
+      "id": "e32",
+      "source": "chronos-urf-rr",
+      "target": "biological-friction-framework",
+      "kind": "documented",
+      "name": "Path-gauge observations and hidden dissipation",
+      "boundary": "Finite cyclic Markov model; independently gauged injective paths, stationary observations and bounded current. No empirical biological or physical equivalence.",
+      "evidence": "BFF #116 merged; 33 audited Lean declarations, Mac and Linux PASS. BFF.HiddenDissipation.ring_observation_minimax.",
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/799b41b4692c71589587cba037f26f0ad4bff7fb/proofs/hidden-dissipation/receipt/HiddenDissipation.lean"
+    },
+    {
+      "id": "e33",
+      "source": "biological-friction-framework",
+      "target": "dfm-mkc-cosmology",
+      "kind": "documented",
+      "name": "Second-order information recovery",
+      "boundary": "Generator-square recovery and restricted coefficient inversion only. Semigroup derivative, covariant action derivation and empirical validation OPEN.",
+      "evidence": "BFF #117 merged; eight additional declarations, cumulative 41/41 audit and fresh Linux PASS. BFF.HiddenDissipation.entropy_identified_by_curvature and mode_identifiable.",
+      "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/c5c8b2f24a0d4de57c764c161ab29c3689bec62f/proofs/hidden-dissipation/receipt/HiddenDissipation.lean"
+    },
+    {
+      "id": "e34",
+      "source": "dfm-mkc-cosmology",
+      "target": "chronos-urf-rr",
+      "kind": "documented",
+      "name": "Causal projection and pointwise decision loss",
+      "boundary": "Flat-coordinate diamond projection and algebraic pointwise loss; continuum measure, physical 5D detection and wider integration OPEN/pending at checkpoint.",
+      "evidence": "Chronos #1392 exact PR revision: Mac 11/11 audit and dedicated Linux Lean CI PASS; broader CI pending. Chronos.CosmologyBridge.no_perfect_visible_decoder.",
+      "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/2ed7df1497824343fce34924501d42a220c3006f/research/certificates/cosmology_causal_projection/receipt/CausalProjection.lean"
     }
   ],
   "not_verified": [
@@ -798,5 +828,32 @@
       }
     ],
     "interpretation": "Public source and CI attest only to scoped finite certificates and documentation, never automatic mathematical/physical 5D transfer. Private research repositories are not listed."
+  },
+  "cross_domain_checkpoint": {
+    "captured_date_utc": "2026-11-27",
+    "unique_audited_declarations": 52,
+    "merged_declarations": 41,
+    "pr_revision_declarations": 11,
+    "entries": [
+      {
+        "id": "e32",
+        "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/799b41b4692c71589587cba037f26f0ad4bff7fb/proofs/hidden-dissipation/receipt/HiddenDissipation.lean",
+        "evidence": "BFF #116 merged; 33 audited Lean declarations, Mac and Linux PASS. BFF.HiddenDissipation.ring_observation_minimax.",
+        "boundary": "Finite cyclic Markov model; independently gauged injective paths, stationary observations and bounded current. No empirical biological or physical equivalence."
+      },
+      {
+        "id": "e33",
+        "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/c5c8b2f24a0d4de57c764c161ab29c3689bec62f/proofs/hidden-dissipation/receipt/HiddenDissipation.lean",
+        "evidence": "BFF #117 merged; eight additional declarations, cumulative 41/41 audit and fresh Linux PASS. BFF.HiddenDissipation.entropy_identified_by_curvature and mode_identifiable.",
+        "boundary": "Generator-square recovery and restricted coefficient inversion only. Semigroup derivative, covariant action derivation and empirical validation OPEN."
+      },
+      {
+        "id": "e34",
+        "source_url": "https://github.com/inaciovasquez2020/chronos-urf-rr/blob/2ed7df1497824343fce34924501d42a220c3006f/research/certificates/cosmology_causal_projection/receipt/CausalProjection.lean",
+        "evidence": "Chronos #1392 exact PR revision: Mac 11/11 audit and dedicated Linux Lean CI PASS; broader CI pending. Chronos.CosmologyBridge.no_perfect_visible_decoder.",
+        "boundary": "Flat-coordinate diamond projection and algebraic pointwise loss; continuum measure, physical 5D detection and wider integration OPEN/pending at checkpoint."
+      }
+    ],
+    "scope": "Dated source-linked mathematical comparisons, not a dependency graph or physical unification. No portfolio-wide replay or novelty claim."
   }
 }
