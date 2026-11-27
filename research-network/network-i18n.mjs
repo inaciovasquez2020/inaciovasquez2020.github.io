@@ -233,12 +233,12 @@ export const rows=[
     "explizite Verbindungen"
   ],
   [
-    "Updated 2026-11-13",
-    "Atualizado em 2026-11-13",
-    "Actualizado el 2026-11-13",
-    "更新于 2026-11-13",
-    "Mis à jour le 2026-11-13",
-    "Aktualisiert am 2026-11-13"
+    "Updated 2026-11-27",
+    "Atualizado em 2026-11-27",
+    "Actualizado el 2026-11-27",
+    "更新于 2026-11-27",
+    "Mis à jour le 2026-11-27",
+    "Aktualisiert am 2026-11-27"
   ],
   [
     "Labels:",
@@ -329,12 +329,12 @@ export const rows=[
     "Alle öffentlichen Repository-Quellenlinks (ohne JavaScript)"
   ],
   [
-    "All 32 connection boundaries (readable without JavaScript)",
-    "Todos os 32 limites de conexão (legíveis sem JavaScript)",
-    "Los 32 límites de conexión (legibles sin JavaScript)",
-    "全部 32 条连接边界（无需 JavaScript）",
-    "Les 32 limites de connexion (lisibles sans JavaScript)",
-    "Alle 32 Verbindungsgrenzen (ohne JavaScript lesbar)"
+    "All 35 connection boundaries (readable without JavaScript)",
+    "Todos os 35 limites de conexão (legíveis sem JavaScript)",
+    "Los 35 límites de conexión (legibles sin JavaScript)",
+    "全部 35 条连接边界（无需 JavaScript）",
+    "Les 35 limites de connexion (lisibles sans JavaScript)",
+    "Alle 35 Verbindungsgrenzen (ohne JavaScript lesbar)"
   ],
   [
     "mathematics",

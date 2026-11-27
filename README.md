@@ -39,3 +39,7 @@ Source-of-truth document:
 - `docs/status/SOURCE_OF_TRUTH_2026_04_27.md`
 
 Formal verification / Lean 4 / reproducible proof artifacts.
+
+## Cross-domain information recovery — 2026-11-27 UTC
+
+[Research network](https://inaciovasquez2020.github.io/research-network/) · [Merged hidden dissipation](https://github.com/inaciovasquez2020/biological-friction-framework/blob/799b41b4692c71589587cba037f26f0ad4bff7fb/proofs/hidden-dissipation/receipt/HiddenDissipation.lean) · [Merged second-order recovery](https://github.com/inaciovasquez2020/biological-friction-framework/blob/c5c8b2f24a0d4de57c764c161ab29c3689bec62f/proofs/hidden-dissipation/receipt/HiddenDissipation.lean) · [Verified causal projection PR revision](https://github.com/inaciovasquez2020/chronos-urf-rr/blob/2ed7df1497824343fce34924501d42a220c3006f/research/certificates/cosmology_causal_projection/receipt/CausalProjection.lean). 52 distinct audited declarations (41 merged + 11 at PR revision). Dedicated Lean CI passed; wider Chronos integration pending at this checkpoint. Three scoped comparisons, not physical unification. Full analytic formalization, empirical validation, physical 5D detection and independent novelty remain OPEN.
