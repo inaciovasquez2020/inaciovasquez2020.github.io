@@ -855,5 +855,24 @@
       }
     ],
     "scope": "Dated source-linked mathematical comparisons, not a dependency graph or physical unification. No portfolio-wide replay or novelty claim."
+  },
+  "universal_recovery_checkpoint": {
+    "captured_date_utc": "2026-11-27",
+    "unique_audited_declarations": 68,
+    "previous_unique_audited_declarations": 52,
+    "additional_declarations": 16,
+    "merged_declarations": 41,
+    "pr_revision_declarations": 27,
+    "recovery_certificate_declarations": 57,
+    "causal_projection_declarations": 11,
+    "source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/76317e758f932638945934bcac2ce9ffa7fa3d31/proofs/hidden-dissipation/recovery/UniversalRecovery.lean",
+    "analytic_source_url": "https://github.com/inaciovasquez2020/biological-friction-framework/blob/76317e758f932638945934bcac2ce9ffa7fa3d31/proofs/hidden-dissipation/recovery/EntropyConvexity.lean",
+    "declarations": [
+      "URF.Transfer.recoverable_iff_pairwise",
+      "URF.Transfer.affine_transfer",
+      "BFF.HiddenDissipation.noisy_ring_curvature_minimax_unconditional"
+    ],
+    "status": "Mac LEAN_VERIFIED; fresh BFF Linux reproduction pending at pinned PR revision; no new network edges.",
+    "scope": "Classical optimal-recovery foundations; scalar affine transfer under specified equivalences; bounded cyclic Markov family. Fundamental physical law, empirical validation and independent novelty OPEN."
   }
 }
